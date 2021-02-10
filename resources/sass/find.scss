@@ -1,0 +1,517 @@
+@charset "UTF-8";
+
+
+
+
+
+
+
+/*=====================================================
+# setting
+=====================================================*/
+/////////_config.scss////////////
+
+
+// 色
+$color-main: #fff;
+$color-text-base: black;
+$color-bg-base: #fff;
+$color-active: #fff;
+$color-btn: #fff;
+
+$color-blue: rgb(0, 132, 255);
+$color-gray:  rgb(233, 231, 231);
+
+
+$hover-opacity: 0.6; 
+
+
+// レイアウト幅
+$layout-width-canvas: 1366px;
+$layout-width-inner: 1088px;
+
+// ブレークポイント 四段階
+$breakpoints: (
+	"sp": "(max-width: 767px)",
+	"tab-only": "(min-width: 768px) and (max-width: #{$layout-width-inner - 1px})",
+	"tab": "(max-width: #{$layout-width-inner - 1px})",
+	"pc": "(min-width: #{$layout-width-inner})",
+);
+
+// ブレークポイント　二段階
+// $breakpoints: (
+// //キー  値
+//  'sm': 'screen and (max-width: 767px)', //767px以下（スマホ）用の表示
+//  'md': 'screen and (min-width: 768px)' //768px以上（タブレット・PC）用の表示
+// ) !default;
+
+// 階層
+$layer: (
+  modal: 100, // モダール
+  burger: 60, // ハンバーガー
+  drawer: 50, // ドロワー
+  overlay: 40, // オーバーレイ
+	floating: 30, // フローティングアイテム
+	header: 25, // ヘッダー
+  footer: 13, // フッター
+	maina: 19,　//より優先　　　（基本的に使わない）
+	zero: 17,　//1より更に優先　（基本的に使わない）
+  one: 15, //6段階　1番目  （に優先）
+  two: 13,　//6段階　2番目
+  three: 11,　//6段階　3番目
+  four: 9,　//6段階 4番目
+	five: 7,　//6段階 5番目
+	six: 5,　//6段階 6番目
+	default: 1,
+);
+
+//z-index: map-get($layer, "header");
+// フォント
+$font-family-default: "游ゴシック体", "Yu Gothic", yugothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", meiryo, "MS Pゴシック", "MS PGothic", sans-serif; // 標準フォント
+$font-family-base: $font-family-default;
+
+$font-size-base: 16px;
+$font-weight-base: 400;
+$line-height-base: 1.6;
+$letter-spacing: 1.1875;
+
+// メディアクエリー　四段階
+@mixin mq($breakpoint: sp) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+// メディアクエリー　二段階
+// @mixin mq($breakpoint: sm) {
+// 	@media #{map-get($breakpoints, $breakpoint)} {
+// 		@content;
+// 	}
+// }
+
+
+/////////_function.scss////////////
+
+/*=====================================================
+# plugins
+=====================================================*/
+////////_swiper.css//////////
+
+/*=====================================================
+# base
+=====================================================*/
+/////// base.scss////////
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	font-weight: $font-weight-base;
+	color: $color-text-base;
+	line-height: $line-height-base;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: $color-bg-base;
+	overflow-x: hidden;
+  overflow-wrap: break-word;
+  
+  &.is-active {
+		overflow: hidden;
+	}
+}
+
+img {
+	width: 100%;
+	height: auto;
+	border: none;
+}
+
+a {
+  color: $color-text-base;
+  text-decoration: none;
+  display: inline-block;
+
+
+  @include mq(pc) {
+		&:hover {
+			opacity: 0.8;
+		}
+		
+	}
+}
+
+
+
+//画面幅によって表示切り替え 四段階
+// PCだけ非表示
+.hidden-pc {
+	@include mq('pc') {
+		display: none;
+	}
+}
+
+// タブレットだけ非表示
+.hidden-tab {
+	@include mq('tab-only') {
+		display: none;
+	}
+}
+
+// スマホだけ非表示
+.hidden-sp {
+	@include mq('sp') {
+		display: none;
+	}
+}
+
+
+
+
+//画面幅によって表示切り替え 二段階
+// .hidden-pc {
+// 	@include mq('md') {
+// 		display: none;
+// 	}
+// }
+
+// .hidden-sp {
+// 	@include mq('sm') {
+//     display: none;
+    
+// 	}
+// }
+
+
+
+
+// テキスト色の強調
+.color-active {
+	color: $color-active;
+}
+
+// テキストサイズの縮小
+.font-size-small {
+	font-size: 0.9em;
+}
+
+// テキストの強調（色と大きさ）
+.font-em {
+	font-weight: 700;
+	color: $color-active;
+	font-size: 1.1em;
+}
+
+
+
+// 共通設定
+input, textarea {
+	resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+
+
+/*=====================================================
+# mixin
+=====================================================*/
+/////////_btn.scss///////////
+
+
+
+/*=====================================================
+# module
+=====================================================*/
+//////////_header.scss///////////
+
+@import "header";
+
+
+
+/*=====================================================
+# page
+=====================================================*/
+///////////_hero.scss///////////
+
+
+
+
+
+
+
+
+
+/* ===================================================
+search
+==================================================== */
+
+.search {
+
+  
+  padding: 30px 40px;
+  @include mq(sp) {
+    padding: 30px 20px;
+  }
+  
+  &-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    background-color: rgb(213, 225, 226);
+    border-radius: 5px;
+
+    @include mq(sp) {
+      padding: 20px 20px;
+    }
+  }
+
+  &-def {
+
+    &-box {
+      display: flex;
+      @include mq(sp) {
+        display: block;
+      }
+
+      & + & {
+        margin-top: 20px;
+      }
+
+    }
+  }
+
+  &-dtit {
+    @include mq(pc) {
+      flex: 0 0 200px;
+    }
+    @include mq(tab-only) {
+      flex: 0 0 200px;
+    }
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &-data {
+    @include mq(pc) {
+      flex: 0 1 100%;
+      margin-left: 40px;
+    }
+    @include mq(tab-only) {
+      flex: 0 1 100%;
+      margin-left: 40px;
+    }
+    
+
+    select {
+      width: 100%;
+      padding: .2em .5em;
+      font-size: 2rem;
+
+      option {
+
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: .2em .5em;
+      font-size: 2rem;
+    }
+  }
+
+  &-button {
+    text-align: right;
+    margin-top: 20px;
+    
+    
+    input {
+      width: 120px;
+      font-weight: bold;
+      // transform: translateX(-50%);
+      padding: 5px;
+    }
+  }
+
+
+
+}
+
+
+
+
+/* ===================================================
+results
+==================================================== */
+
+.results {
+  padding: 0 40px;
+  @include mq(sp) {
+    padding: 0 5px;
+    position: relative;
+  }
+
+  &-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &-list {
+    padding: 20px;
+    // background-color: red;
+    @include mq(sp) {
+      padding: 20px 0px;
+    }
+
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    margin-left: 70px;
+    @include mq(sp) {
+      margin-left: 0;
+      
+    }
+    & + & {
+      margin-top: 20px;
+      @include mq(sp) {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  &-head {
+    flex: 0 0 100px;
+  }
+
+  &-img {
+    width: 100%;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+  }
+
+  &-body {
+    margin-left: 30px;
+    flex: 0 1 100%;
+    @include mq(sp) {
+      margin-left: 15px;
+    }
+
+    &-first {
+      @include mq(pc) {
+        display: flex;
+        align-items: center;
+        
+      }
+      @include mq(tab-only) {
+        display: flex;
+        align-items: center;
+        
+      }
+      &-name {
+
+        input {
+          @include mq(sp) {
+            max-width: 95%;
+          }
+        }
+        
+
+        
+      }
+
+      &-truename {
+        margin-left: 10px;
+        @include mq(sp) {
+          margin-top: 3px;
+          display: inline-block;
+        }
+      }
+
+      &-age {
+        margin-left: 10px;
+        @include mq(sp) {
+          margin-top: 3px;
+          display: inline-block;
+        }
+      }
+
+
+
+      &-follow {
+        margin-left: 40px;
+        @include mq(sp) {
+          margin-left: 0;
+          max-width: 95%;
+          margin-top: 3px;
+        }
+
+        input {
+
+          &.onfollow {
+
+          }
+          &.notfollow {
+            background-color: $color-blue;
+            color: white;
+            font-weight: bold;
+          }
+
+        }
+      }
+    }
+
+    &-second {
+      margin-top: 10px;
+
+      &-team {
+        @include mq(sp) {
+          display: block;
+        }
+      }
+
+    }
+  }
+
+
+  &-nohit {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

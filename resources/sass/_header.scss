@@ -1,0 +1,357 @@
+
+
+
+// 階層
+$layer: (
+  modal: 100, // モダール
+  burger: 60, // ハンバーガー
+  drawer: 50, // ドロワー
+  overlay: 40, // オーバーレイ
+	floating: 30, // フローティングアイテム
+	header: 25, // ヘッダー
+  footer: 13, // フッター
+	maina: 19,　//より優先　　　（基本的に使わない）
+	zero: 17,　//1より更に優先　（基本的に使わない）
+  one: 15, //6段階　1番目  （に優先）
+  two: 13,　//6段階　2番目
+  three: 11,　//6段階　3番目
+  four: 9,　//6段階 4番目
+	five: 7,　//6段階 5番目
+	six: 5,　//6段階 6番目
+	default: 1,
+);
+
+
+
+/* ===================================================
+共通スタイル
+==================================================== */
+
+a {
+  
+  &:hover {
+    text-decoration: none;
+    opacity: 1;
+
+    @include mq(tab-only) {
+      opacity: none;
+    }
+    @include mq(sp) {
+      opacity: none;
+    }
+  }
+
+ 
+}
+
+main {
+  margin-top: 92px;
+}
+
+
+
+
+
+/* ===================================================
+header
+==================================================== */
+
+.header {
+  
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  
+  z-index: 25;
+
+  
+  
+  &-inner {
+    
+    position: relative;
+    padding: 0 40px;
+    display: flex;
+    
+    // justify-content: space-between;
+    // background-color: rgba(14, 241, 241, 0.877);
+    background-color: rgba(14, 241, 241, 1);
+    // background-color: red;
+    // background-color: black;
+
+
+    // background-color: red;
+
+      
+  }
+
+  &-logo {
+    color: red;
+    line-height: 80px;
+    font-size: 3rem;
+    font-weight: bold;
+    width: 150px;
+    img {
+      
+      
+    }
+  }
+
+
+
+  .toggle {
+    // background-color: red;
+    @include mq(sp) {
+      margin-left: auto;
+      margin-right: 70px;
+    }
+
+    &-button {
+      color: gray;
+      height: 30px;
+      padding: 5px 0;
+    }
+
+    &-show {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      transition: all .3s;
+      
+      @include mq(sp) {
+        right: 90px;
+        
+      }
+
+      &.is-active {
+        display: block;
+      }
+      
+      .logout-button {
+        padding: 10px;
+        font-size: 15px;
+        text-align: center;
+      }
+    }
+    
+  }
+
+
+
+
+
+@include mq(sp) {
+  // padding: 0 20px;
+}
+  &-logo {
+    color: red;
+    line-height: 80px;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  &-nav {
+    margin-left: auto;
+
+    &-list {
+      @include mq(pc) {
+        display: flex;
+        
+      }
+      @include mq(tab-only) {
+        display: flex;
+        
+      }
+    }
+
+    &-item {
+
+      & + & {
+        @include mq(pc) {
+          margin-left: 40px;
+          
+        }
+        @include mq(tab-only) {
+          margin-left: 20px;
+          
+        }
+        
+      }
+
+      a {
+        padding: 30px 0 20px;
+        font-size: 2rem;
+
+        &:hover {
+          opacity: 1;
+          text-decoration: none;
+        }
+      }
+
+      &:last-child {
+        margin-right: 30px;
+      }
+    }
+
+  }
+
+  .drawer-burger {
+    display: none;
+// 　   ↑　最初に表示するかどうか
+    height: 80px;
+    width: 60px;
+    // background-color: #fff;
+    position: relative;
+    z-index: 50;
+    transition: all 1s;
+    
+    position: absolute;
+    right: 20px;		
+    top: 0;
+
+  @include mq(sp) {
+    
+    display: inline-block;
+    // ↑　spで表示
+  }
+  
+  
+  
+
+// 　　↓　クリックした時にどこに表示するか
+  &.is-active {
+    position: fixed;
+    right: 20px;
+    top: 0px;
+
+    
+
+  }
+
+
+  &-line {
+    display: inline-block;
+    width: 80%;
+    height: 5px;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    // ここがrightかleftかで決まる
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // transform: translateX(-50%);
+    // transform: translateY(-50%);
+
+    &:nth-child(1) {
+      transform: translate(-50%, calc(-50% + 10px));
+      transition: all 1s;
+
+      
+      &.is-active {
+        transform: translate(-50%, -50%) rotate(45deg);
+
+      }
+    }
+
+    &:nth-child(2) {
+      transform: translate(-50%, -50%);
+      
+      &.is-active {
+        display: none;
+      }
+    }
+
+    &:nth-child(3) {
+      transform: translate(-50%, calc(-50% - 10px));
+      transition: all 1s;
+
+      
+      &.is-active {
+        transform: translate(-50%, -50%) rotate(-45deg);
+        
+      }
+    }
+
+
+  }
+}
+
+
+@include mq(sp) {
+  &-nav {
+    // 　↓　スマートフォンになったら隠れるtransform: translateX(100%)で
+    background: rgba(14, 241, 241, 0.877);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0;
+    z-index: 30;
+    transform: translateX(100%);
+    transition: all 1s;
+
+    &.is-active {
+      //　↓ クリックしたら出てくる
+      transform: translateX(0%);
+      
+    }
+    
+// ↓それぞれのliのcss
+    &-list {
+      // width: 200px;
+      margin-top: 80px;
+    }
+
+    &-item {
+      border-top: 1px solid black;
+      width: 100%;
+      text-align: center;
+
+
+
+      &:last-child {
+        border-bottom: 1px solid black;
+      }
+      
+      a {
+        display: block;
+        padding: 20px;
+        // background-color: red;
+        
+        font-size: 2rem;
+        // color: $color-brown;
+        padding: 25px 0;
+        font-weight: bold;
+      
+  
+       
+      }
+    }
+  }
+  
+}
+
+
+  &-overlay {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: black;
+    opacity: 0.8;
+    z-index: 10;
+    transition: all 4s;
+
+
+    display: none;
+
+    &.is-active {
+      display: block;
+
+    }
+  }
+}
+
+
