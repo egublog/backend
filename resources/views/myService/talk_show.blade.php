@@ -14,16 +14,16 @@
                 <ul class="results-list">
                     @if(isset($talk_lists_accounts))
                     @forelse($talk_lists_accounts as $account)
-                    <form class="results-wrap" action="{{ action('PeopleController@talk_show') }}" method="post">
+                    <form class="results-wrap" action="{{ route('talk_users.contents.index', ['user' => $account->id]) }}" method="get">
                         {{ csrf_field() }}
                         <label>
                             <li class="results-item">
                                 <div class="results-head">
                                     <div class="results-img">
-                                        @if ($account->image == 1)
-                                        <img src="/storage/profile_images/{{ $account->id }}.jpg" alt="">
+                                        @if ($account->image === null)
+                                        <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                                         @else
-                                        <img src="/storage/profile_images/no-image.png" alt="">
+                                        <img src="{{ $account->image }}">
                                         @endif
                                     </div>
                                 </div>
@@ -38,12 +38,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <input name="user_id" type="hidden" value="{{ $account->id }}">
                             <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                            @if($identify_id == 'find')
-                            <input name="team_id" type="hidden" value="{{ $team_id }}">
-                            <input name="era_id" type="hidden" value="{{ $era_id }}">
-                            @endif
                             <input class="button" type="submit" value="">
                         </label>
                     </form>
@@ -61,26 +56,21 @@
 
         <div class="topTalk-wrap">
 
-
             <section class="top">
                 <div class="top-inner">
                     <div class="top-inner-back">
-                        @if ($identify_id == "talk_list")
-                        <form class="" action="{{ action('PeopleController@talk') }}" method="get">
-                            @else
-                            <form class="" action="{{ action('PeopleController@details') }}" method="post">
-                                @if($identify_id == "find")
-                                <input name="team_id" type="hidden" value="{{ $team_id }}">
-                                <input name="era_id" type="hidden" value="{{ $era_id }}">
-                                @endif
-                                <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                                @endif
-                                {{ csrf_field() }}
-                                <input class="top-inner-back-button" type="submit" value="&lt;">
-                            </form>
+                        <form class="" action="{{ route('backs.from_talk_show') }}" method="get">
+                            @if($identify_id == "find")
+                            <input name="team_string" type="hidden" value="{{ $team_string }}">
+                            <input name="era_id" type="hidden" value="{{ $era_id }}">
+                            @endif
+                            <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
+                            <input name="identify_id" type="hidden" value="{{ $identify_id }}">
+                            {{ csrf_field() }}
+                            <input class="top-inner-back-button" type="submit" value="&lt;">
+                        </form>
                     </div>
-                    <p>{{ $hisAccount->user_name }}とのトーク</p>
+                    <p>{{ $hisAccount->name }}とのトーク</p>
                 </div>
             </section>
             <!-- /.top -->
@@ -132,24 +122,19 @@
                     @else
                     <div class="talk-opponent">
                         <div class="talk-opponent-content">
-                            <form class="talk-opponent-content-img" action="{{ action('PeopleController@details') }}" method="post">
+                            <form class="talk-opponent-content-img" action="{{ route('talk_users.show', ['user' => $hisAccount->id]) }}" method="get">
                                 {{ csrf_field() }}
                                 <label>
-                                    @if ($talkData->user->image == 1)
-                                    <img src="/storage/profile_images/{{ $talkData->user->id }}.jpg" alt="">
+                                    @if ($talkData->user->image === null)
+                                    <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                                     @else
-                                    <img src="/storage/profile_images/no-image.png" alt="">
+                                    <img src="{{ $talkData->user->image }}">
                                     @endif
 
-                                    <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
-                                    @if($identify_id == "talk_list")
                                     <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                                    @else
-                                    <input name="identify_id" type="hidden" value="talk_{{ $identify_id }}">
-                                    @endif
 
                                     @if($identify_id == 'find')
-                                    <input name="team_id" type="hidden" value="{{ $team_id }}">
+                                    <input name="team_string" type="hidden" value="{{ $team_string }}">
                                     <input name="era_id" type="hidden" value="{{ $era_id }}">
                                     @endif
                                     <input class="button" type="submit" value="">
@@ -182,17 +167,15 @@
                     @enderror
                 </div>
 
-                <form class="talk-send-form" action="{{ action('SecondController@talk_store') }}" method="post">
+                <form action="{{ route('talk_users.contents.store', ['user' => $hisAccount->id]) }}" method="post">
                     {{ csrf_field() }}
                     <div class="talk-send">
-                        <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
                         <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                         @if($identify_id == 'find')
-                        <input name="team_id" type="hidden" value="{{ $team_id }}">
+                        <input name="team_string" type="hidden" value="{{ $team_string }}">
                         <input name="era_id" type="hidden" value="{{ $era_id }}">
                         @endif
-                        <input type="hidden" name="user_id" value="{{ $user_id }}">
-                        <textarea name="message" id="message" resize="vertical" placeholder="メッセージを入力"></textarea>
+                        <textarea name="message" id="message" placeholder="メッセージを入力"></textarea>
                         <div class="talk-send-button">
                             <input class="" type="submit" value="送信">
                         </div>

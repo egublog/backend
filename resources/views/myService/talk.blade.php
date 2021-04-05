@@ -16,16 +16,16 @@
             <ul class="results-list">
                 @if(isset($talk_lists_accounts))
                 @forelse($talk_lists_accounts as $account)
-                <form class="results-wrap" action="{{ action('PeopleController@talk_show') }}" method="post">
+                <form class="results-wrap" action="{{ route('talk_users.contents.index', ['user' => $account->id]) }}" method="get">
                     {{ csrf_field() }}
                     <label>
                         <li class="results-item">
                             <div class="results-head">
                                 <div class="results-img">
-                                    @if ($account->image == 1)
-                                    <img src="/storage/profile_images/{{ $account->id }}.jpg" alt="">
+                                    @if ($account->image === null)
+                                    <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                                     @else
-                                    <img src="/storage/profile_images/no-image.png" alt="">
+                                    <img src="{{ $account->image }}">
                                     @endif
                                 </div>
                             </div>
@@ -42,23 +42,22 @@
                                     @endif
                                 </div>
                                 <div class="results-body-second">
-                                    @if(isset($account->alls()->first()->team_id))
+                                    <!-- @if(isset($account->alls()->first()->team_id)) -->
                                     @foreach($account->alls()->orderBy('id', 'desc')->get() as $all)
                                     <span class="results-body-second-team">
-                                        @if($all->team->team)
-                                        {{ $all->team->team }}
-                                        @else
-                                        未入力です。
-                                        @endif
+                                        <!-- @if($all->team->team_name) -->
+                                        {{ $all->team->team_name }}
+                                        <!-- @else -->
+                                        <!-- 未入力です。 -->
+                                        <!-- @endif -->
                                         /</span>
                                     @endforeach
                                     <!-- <span></span> -->
-                                    @endif
+                                    <!-- @endif -->
                                 </div>
                             </div>
                         </li>
-                        <input name="user_id" type="hidden" value="{{ $account->id }}">
-                        <input name="identify_id" type="hidden" value="{{ $identify_id }}">
+                        <input name="identify_id" type="hidden" value="talk_list">
                         <input class="button" type="submit" value="">
                     </label>
                 </form>
@@ -74,3 +73,4 @@
 </main>
 
 @endsection
+

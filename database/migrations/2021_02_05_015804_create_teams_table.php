@@ -19,7 +19,7 @@ class CreateTeamsTable extends Migration
         }
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('team');
+            $table->string('team_name');
             $table->timestamps();
         });
     }

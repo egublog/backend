@@ -17,7 +17,7 @@
             <p class="results-tit">フォローワー</p>
             @endif
             <div class="results-back">
-                <a class="back" href="{{ action('PeopleController@home') }}">&lt; back</a>
+                <a class="back" href="{{ route('myhomes.index') }}">&lt; back</a>
             </div>
             <ul class="results-list">
                 @if(isset($accounts))
@@ -25,21 +25,22 @@
                 <li class="results-item">
                     <div class="results-head">
                         <div class="results-img">
-                            @if ($account->image == 1)
-                            <img src="/storage/profile_images/{{ $account->id }}.jpg" alt="">
+                            @if ($account->image === null)
+                            <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                             @else
-                            <img src="/storage/profile_images/no-image.png" alt="">
+                            <img src="{{ $account->image }}">
                             @endif
                         </div>
                     </div>
                     <div class="results-body">
                         <div class="results-body-first">
-                            <form action="{{ action('PeopleController@details') }}" class="results-body-first-name" method="post">
+                            <form action="{{ route('friends.show', ['user' => $account->id]) }}" method="get" class="results-body-first-name">
+                                <!-- ここの$account->idは$accountと省略できる                 ↑↑-->
                                 {{ csrf_field() }}
                                 <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                                <input name="user_id" type="hidden" value="{{ $account->id }}">
                                 <input class="" type="submit" value="{{ $account->name }}">
                             </form>
+
                             @if($account->user_name)
                             <span class="results-body-first-truename">{{ $account->user_name }}</span>
                             @endif
@@ -49,7 +50,7 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             ?>
-                            <form class="results-body-first-follow" action="{{ action('SecondController@follow_switch_list') }}" method="post">
+                            <form action="{{ route('follow_lists.invoke') }}" method="post" class="results-body-first-follow">
                                 @if(isset($follow_check))
                                 <input class="onfollow" type="submit" value="フォロー中">
                                 @else
@@ -61,18 +62,18 @@
                             </form>
                         </div>
                         <div class="results-body-second">
-                            @if(isset($account->alls()->first()->team_id))
+                            <!-- @if(isset($account->alls()->first()->team_id)) -->
                             @foreach($account->alls()->orderBy('id', 'desc')->get() as $all)
                             <span class="hidden-sp results-body-second-team">
-                                @if($all->team->team)
-                                {{ $all->team->team }}
-                                @else
-                                未入力です。
-                                @endif
+                                <!-- @if($all->team->team_name) -->
+                                {{ $all->team->team_name }}
+                                <!-- @else -->
+                                <!-- 未入力です。 -->
+                                <!-- @endif -->
                                 <span class="hidden-sp">/</span></span>
                             @endforeach
                             <span></span>
-                            @endif
+                            <!-- @endif -->
                         </div>
                     </div>
                 </li>

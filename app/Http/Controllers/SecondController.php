@@ -253,11 +253,11 @@ class SecondController extends Controller
         $myId = Auth::id();
         $myAccount = User::find($myId);
         //↓ 最初にimageカラムを0にしているので画像があることを判らせるためにimageカラムに1を入れる
-        $myAccount->image = 1;
-        $myAccount->save();
+        // $myAccount->image = 1;
+        // $myAccount->save();
 
         // ここで画像をasokoへ保存する 尚、元から画像があっても自動でアップデートしてくれる
-        $request->image->storeAs('public/profile_images', Auth::id() . '.jpg');
+        // $request->image->storeAs('public/profile_images', Auth::id() . '.jpg');
 
          // いきなり配列に$○○;を入れたらエラーになったから先に用意、またelseでいちいち書くの面倒臭いから
         $user_name = '';
@@ -265,6 +265,15 @@ class SecondController extends Controller
         $introduction = '';
         $area_id = 1;
 
+        // ↓　ここで画像のデータを表す意味わかんない長い文字列を$imageに入れる
+        $image = $request->file('image');
+        // ↓　ここで画像データをS3に保存(/testにpublicで).  そのS3の中での画像のパスを$pathに保存
+        $path = Storage::disk('s3')->putFile('test', $image, 'public');
+        // こっち側からS3の中のそのファイルまでのフルパスをUserテーブルのimageカラムに保存
+        $myAccount->image = Storage::disk('s3')->url($path);
+        $myAccount->save();
+
+        
     
         if (isset($myAccount->user_name)) {
             $user_name = $myAccount->user_name;

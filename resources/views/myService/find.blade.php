@@ -7,7 +7,7 @@
 
 <main>
     <section class="search">
-        <form class="search-form" method="post" action="{{ action('SecondController@find_return') }}">
+        <form class="search-form" method="get" action="{{ route('results.index') }}">
             {{ csrf_field() }}
             <dl class="search-def">
                 <label class="search-def-box">
@@ -21,10 +21,10 @@
                         </select>
                     </dd>
                 </label>
-                @error('team_id')
+                @error('team_string')
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors->get('team_id') as $error)
+                        @foreach ($errors->get('team_string') as $error)
                         <li>{{ $error }}</li>
                         @endforeach
                     </ul>
@@ -33,7 +33,7 @@
                 <label class="search-def-box">
                     <dt class="search-dtit">所属チーム</dt>
                     <dd class="search-data">
-                        <input type="text" class="" name="team_id" value="{{ old('team_id', $team_id) }}">
+                        <input type="text" class="" name="team_string" value="{{ old('team_string', $team_string) }}">
                     </dd>
                 </label>
             </dl>
@@ -50,26 +50,24 @@
                 @if(isset($searchAllses))
                 @forelse($searchAllses as $searchAlls)
                 @foreach($searchAlls as $searchAll)
-                @if($searchAll->user->id != $myId)
+                @if($searchAll->user->id != $myAccount->id)
 
                 <li class="results-item">
                     <div class="results-head">
                         <div class="results-img">
-                            @if ($searchAll->user->image == 1)
-                            <img src="/storage/profile_images/{{ $searchAll->user->id }}.jpg" alt="">
+                            @if ($searchAll->user->image === null)
+                            <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                             @else
-                            <img src="/storage/profile_images/no-image.png" alt="">
+                            <img src="{{ $searchAll->user->image }}">
                             @endif
                         </div>
                     </div>
                     <div class="results-body">
                         <div class="results-body-first">
-                            <form action="{{ action('PeopleController@details') }}" method="post" class="results-body-first-name">
+                            <form action="{{ route('results.show', ['user' => $searchAll->user->id]) }}" method="get">
                                 {{ csrf_field() }}
-                                <input name="user_id" type="hidden" value="{{ $searchAll->user->id }}">
-                                <input name="team_id" type="hidden" value="{{ $team_id }}">
+                                <input name="team_string" type="hidden" value="{{ $team_string }}">
                                 <input name="era_id" type="hidden" value="{{ $era_id }}">
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                                 <input type="submit" value="{{ $searchAll->user->name }}">
                                 <br>
                             </form>
@@ -82,33 +80,32 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $searchAll->user->id)->first();
                             ?>
-                            <form action="{{ action('SecondController@follow_switch_list') }}" method="post" class="results-body-first-follow">
+                            <form action="{{ route('follow_lists.invoke') }}" method="post" class="results-body-first-follow">
                                 @if(isset($follow_check))
                                 <input class="onfollow" type="submit" value="フォロー中">
                                 @else
                                 <input class="notfollow" type="submit" value="フォローする">
                                 @endif
                                 {{ csrf_field() }}
-                                <input name="team_id" type="hidden" value="{{ $team_id }}">
+                                <input name="team_string" type="hidden" value="{{ $team_string }}">
                                 <input name="era_id" type="hidden" value="{{ $era_id }}">
                                 <input name="user_id" type="hidden" value="{{ $searchAll->user->id }}">
-                                <input name="myId" type="hidden" value="{{ $myId }}">
                                 <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                             </form>
                         </div>
                         <div class="results-body-second">
-                            @if($searchAll->user->alls()->first()->team_id)
+                            <!-- @if($searchAll->user->alls()->first()->team_id) -->
                             @foreach($searchAll->user->alls()->orderBy('id', 'desc')->get() as $all)
                             <span class="results-body-second-team">
-                                @if($all->team->team)
-                                {{ $all->team->team }}
-                                @else
-                                未入力です。
-                                @endif
+                                <!-- @if($all->team->team_name) -->
+                                {{ $all->team->team_name }}
+                                <!-- @else -->
+                                <!-- 未入力です。 -->
+                                <!-- @endif -->
                                 <span class="hidden-sp">/</span></span>
                             @endforeach
                             <!-- <span></span> -->
-                            @endif
+                            <!-- @endif -->
                         </div>
                     </div>
                 </li>

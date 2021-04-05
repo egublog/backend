@@ -41,8 +41,8 @@
         <div class="header-inner">
 
             <!-- <div class="header-logo">players</div> -->
-            <a class="header-logo" href="{{ action('PeopleController@home') }}">
-                <img src="/img/logo (1).png" alt="">
+            <a class="header-logo" href="{{ route('myhomes.index') }}">
+                <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/logo.png" alt="">
             </a>
             <!-- ハンバーガー -->
             <div class="drawer-burger">
@@ -52,10 +52,10 @@
             </div>
             <div class="header-nav">
                 <ul class="header-nav-list">
-                    <li class="header-nav-item"><a href="{{ action('PeopleController@home') }}" class="">ホーム</a></li>
-                    <li class="header-nav-item"><a href="{{ action('PeopleController@find') }}" class="">見つける</a></li>
-                    <li class="header-nav-item"><a href="{{ action('PeopleController@activity') }}" class="">アクティビティ</a></li>
-                    <li class="header-nav-item"><a href="{{ action('PeopleController@talk') }}" class="">トーク画面へ</a></li>
+                    <li class="header-nav-item"><a href="{{ route('myhomes.index') }}">ホーム</a></li>
+                    <li class="header-nav-item"><a href="{{ route('finds.index') }}">見つける</a></li>
+                    <li class="header-nav-item"><a href="{{ route('activities.index') }}">アクティビティ</a></li>
+                    <li class="header-nav-item"><a href="{{ route('talk_users.index') }}">トーク画面へ</a></li>
                 </ul>
             </div>
             <div class="header-overlay"></div>

@@ -19,7 +19,7 @@ class CreateErasTable extends Migration
         }
         Schema::create('eras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('era');
+            $table->string('era_name');
             $table->timestamps();
         });
     }

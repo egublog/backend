@@ -429,9 +429,7 @@ profile
 
 .profile-button-follower {
   margin-right: 30px;
-  background-color: #0084ff;
   flex: 0 0 130px;
-  border-radius: 3px;
 }
 
 @media (min-width: 1088px) {
@@ -440,7 +438,9 @@ profile
   }
 }
 
-.profile-button-follower a {
+.profile-button-follower-input {
+  background-color: #0084ff;
+  border-radius: 3px;
   color: white;
   width: 100%;
   text-align: center;
@@ -448,9 +448,7 @@ profile
 }
 
 .profile-button-follow {
-  background-color: #0084ff;
   flex: 0 0 130px;
-  border-radius: 3px;
 }
 
 @media (min-width: 1088px) {
@@ -460,7 +458,9 @@ profile
   }
 }
 
-.profile-button-follow a {
+.profile-button-follow-input {
+  background-color: #0084ff;
+  border-radius: 3px;
   color: white;
   width: 100%;
   text-align: center;

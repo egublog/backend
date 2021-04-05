@@ -14,19 +14,19 @@ class PositionsTableSeeder extends Seeder
     {
         //
         DB::table('positions')->insert([
-            'position'=>'GK'
+            'position_name'=>'GK'
         ]);
         
         DB::table('positions')->insert([
-            'position'=>'DF'
+            'position_name'=>'DF'
         ]);
         
         DB::table('positions')->insert([
-            'position'=>'MF'
+            'position_name'=>'MF'
         ]);
         
         DB::table('positions')->insert([
-            'position'=>'FW'
+            'position_name'=>'FW'
         ]);
     }
 }

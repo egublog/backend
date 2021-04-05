@@ -12,55 +12,44 @@
         <div class="profile-inner">
 
             <div class="profile-top">
-                @if ($identify_id == 'friend_follow')
-                <form class="" action="{{ action('PeopleController@friend_follow') }}" method="GET">
-                    @elseif ($identify_id == 'friend_follower')
-                    <form class="" action="{{ action('PeopleController@friend_follower') }}" method="GET">
-                        @elseif ($identify_id == 'activity')
-                        <form class="" action="{{ action('PeopleController@activity') }}" method="GET">
-                            @elseif ($identify_id == 'find')
-                            <form class="" action="{{ action('SecondController@find_return') }}" method="post">
-                                <input name="team_id" type="hidden" value="{{ $team_id }}">
-                                <input name="era_id" type="hidden" value="{{ $era_id }}">
-                                @endif
-                                @if($identify_id == 'talk_find' || $identify_id == 'talk_activity' || $identify_id == 'talk_friend_follow' || $identify_id == 'talk_friend_follower' || $identify_id == 'talk_list')
-                                <form class="" action="{{ action('PeopleController@talk_show') }}" method="post">
-                                    @if($identify_id == 'talk_find')
-                                    <input name="team_id" type="hidden" value="{{ $team_id }}">
-                                    <input name="era_id" type="hidden" value="{{ $era_id }}">
-                                    @endif
-                                    <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
-                                    <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                                    @endif
-                                    {{ csrf_field() }}
-                                    <input class="profile-top-button" type="submit" value="&lt; back">
-                                </form>
-                                <p class="profile-top-tit">{{ $hisAccount->name }}</p>
+                <form class="" action="{{ route('backs.from_details') }}" method="GET">
+                    @if ($identify_id == 'talk_find' || $identify_id == 'find')
+                    <input name="team_string" type="hidden" value="{{ $team_string }}">
+                    <input name="era_id" type="hidden" value="{{ $era_id }}">
+                    @endif
+                    <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
+                    <input name="identify_id" type="hidden" value="{{ $identify_id }}">
+                    {{ csrf_field() }}
+                    <input class="profile-top-button" type="submit" value="&lt; back">
+                </form>
+
+                <p class="profile-top-tit">{{ $hisAccount->name }}</p>
             </div>
 
             <div class="profile-img">
-                @if ($hisAccount->image == 1)
-                <img src="/storage/profile_images/{{ $hisAccount->id }}.jpg" alt="">
+                @if ($hisAccount->image === null)
+                <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                 @else
-                <img src="/storage/profile_images/no-image.png" alt="">
+                <img src="{{ $hisAccount->image }}">
                 @endif
             </div>
             <div class="profile-button">
                 @if(isset($follow_check))
-                @if($identify_id == 'find' || $identify_id == 'activity' || $identify_id == 'friend_follow' || $identify_id == 'friend_follower')
-                <form class="profile-button-talk" action="{{ action('PeopleController@talk_show') }}" method="post">
+                <!-- ここの条件は　↓　$identify_id !== talk_list  の方がコンパクトに書けるかも -->
+                @if($identify_id == 'find' || $identify_id == 'activity'|| $identify_id == 'friend_follow' || $identify_id == 'friend_follower')
+                <form class="profile-button-talk" action="{{ route('talk_users.contents.index', ['user' => $hisAccount->id]) }}" method="get">
                     {{ csrf_field() }}
                     @if($identify_id == 'find')
-                    <input name="team_id" type="hidden" value="{{ $team_id }}">
+                    <input name="team_string" type="hidden" value="{{ $team_string }}">
                     <input name="era_id" type="hidden" value="{{ $era_id }}">
                     @endif
-                    <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
                     <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                     <input class="profile-button-talk-button" type="submit" value="メッセージ">
                 </form>
                 @endif
                 @endif
-                <form class="profile-button-follow" action="{{ action('SecondController@follow_switch_details') }}" method="post">
+
+                <form class="profile-button-follow" action="{{ route('follow_details.invoke') }}" method="post">
                     @if(isset($follow_check))
                     <input class="profile-button-follow-input onfollow" type="submit" value="フォロー中">
                     @else
@@ -68,12 +57,13 @@
                     @endif
                     {{ csrf_field() }}
                     @if($identify_id == 'find' || $identify_id == 'talk_find')
-                    <input name="team_id" type="hidden" value="{{ $team_id }}">
+                    <input name="team_string" type="hidden" value="{{ $team_string }}">
                     <input name="era_id" type="hidden" value="{{ $era_id }}">
                     @endif
                     <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
                     <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                 </form>
+
             </div>
             <div class="profile-wrap">
                 <div class="profile-name">
@@ -89,22 +79,22 @@
                             <dd class="profile-data">{{ $hisAccount->age }}</dd>
                         </div>
                         @endif
-                        @if(isset($hisAccount->alls()->first()->era->era))
+                        <!-- @if(isset($hisAccount->alls()->first()->era->era_name)) -->
                         @foreach($hisAccount->alls as $all)
                         <div class="profile-def-box">
-                            <dt class="profile-dtit">{{ $all->era->era }} : </dt>
-                            @if($all->team->team)
-                            <dd class="profile-data">{{ $all->team->team }}</dd>
-                            @else
-                            <dd class="profile-data">未設定です。</dd>
-                            @endif
+                            <dt class="profile-dtit">{{ $all->era->era_name }} : </dt>
+                            <!-- @if($all->team->team_name) -->
+                            <dd class="profile-data">{{ $all->team->team_name }}</dd>
+                            <!-- @else -->
+                            <!-- <dd class="profile-data">未設定です。</dd> -->
+                            <!-- @endif -->
                         </div>
                         @endforeach
-                        @endif
-                        @if(isset($hisAccount->area->area))
+                        <!-- @endif -->
+                        @if($hisAccount->area->area_name != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $hisAccount->area->area }}</dd>
+                            <dd class="profile-data"> {{ $hisAccount->area->area_name }}</dd>
                         </div>
                         @endif
                     </dl>

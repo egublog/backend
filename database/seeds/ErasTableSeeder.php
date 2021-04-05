@@ -14,16 +14,16 @@ class ErasTableSeeder extends Seeder
     {
         //
         DB::table('eras')->insert([
-            'era'=>'小学校'
+            'era_name'=>'小学校'
         ]);
         DB::table('eras')->insert([
-            'era'=>'中学校'
+            'era_name'=>'中学校'
         ]);
         DB::table('eras')->insert([
-            'era'=>'高校'
+            'era_name'=>'高校'
         ]);
         DB::table('eras')->insert([
-            'era'=>'大学'
+            'era_name'=>'大学'
         ]);
     }
 }

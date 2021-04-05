@@ -8,7 +8,7 @@
 
     <section class="profile">
         <div class="profile-top">
-            <a class="back" href="{{ action('PeopleController@home') }}">&lt; back</a>
+            <a class="back" href="{{ route('myhomes.index') }}">&lt; back</a>
             <h2 class="profile-tit">プロフィールを編集</h2>
         </div>
         <div class="profile-inner">
@@ -29,20 +29,25 @@
                 </div>
                 @endif
                 <div class="profile-img-content">
-                    @if ($myAccount->image == 1)
-                    <img src="/storage/profile_images/{{ Auth::id() }}.jpg" alt="">
+                    @if ($myAccount->image === null)
+                    <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                     @else
-                    <img src="/storage/profile_images/no-image.png" alt="">
+                    <img src="{{ $myAccount->image }}">
                     @endif
                 </div>
-                <form method="POST" action="{{ action('SecondController@image_store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('images.update', ['user' => $myAccount->id]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="file" name="image" id="inputImage">
                     <input type="submit" value="登録する" disabled id="btnImage">
+                    <!-- でここにputかpatchかpostかで処理を追加する！！ -->
+                    @method('PUT')
                 </form>
+
             </div>
-            <form action="{{ action('SecondController@profile_store') }}" method="post">
+            <form action="{{ route('profiles.update', ['user' => $myAccount->id]) }}" method="post">
                 {{ csrf_field() }}
+                   <!-- でここにputかpatchかpostかで処理を追加する！！ -->
+                   @method('PUT')
                 <div class="profile-content">
                     <p class="profile-content-tit">プロフィール設定</p>
                     <dl class="profile-def">
@@ -64,8 +69,8 @@
                             <label>
                                 <dt class="profile-dtit">名前</dt>
                                 <dd class="profile-data">
-                                    @if(isset($user_name))
-                                    <input class="" id="name" name="user_name" value="{{ old('user_name', $user_name) }}">
+                                    @if($myAccount->user_name)
+                                    <input class="" id="name" name="user_name" value="{{ old('user_name', $myAccount->user_name) }}">
                                     @else
                                     <input class="" id="name" name="user_name" value="{{ old('user_name') }}">
                                     @endif
@@ -85,15 +90,15 @@
                             <label>
                                 <dt class="profile-dtit">年齢</dt>
                                 <dd class="profile-data">
-                                    @if(isset($age))
-                                    <input class="" id="age" name="age" type='number' value="{{ old('age', $age) }}">
+                                    @if($myAccount->age)
+                                    <input class="" id="age" name="age" type='number' value="{{ old('age', $myAccount->age) }}">
                                     @else
                                     <input class="" id="age" name="age" type='number' value="{{ old('age') }}">
                                     @endif
                                 </dd>
                             </label>
                         </div>
-                       
+
                         @foreach($schools as $school)
                         <div class="profile-wrap">
                             <div class="profile-box">
@@ -109,7 +114,11 @@
                                 <label>
                                     <dt class="profile-dtit">{{ $school[0] }}</dt>
                                     <dd class="profile-data">
+                                        @if($school[3] == '未設定です。')
+                                        <input type="text" name="{{ $school[1] }}" value="" placeholder="未設定です。">
+                                        @else
                                         <input type="text" name="{{ $school[1] }}" value="{{ old($school[1], $school[3] ) }}">
+                                        @endif
                                     </dd>
                                 </label>
                             </div>
@@ -141,8 +150,8 @@
                             <label>
                                 <dt class="profile-dtit">自己紹介</dt>
                                 <dd class="profile-data">
-                                    @if(isset($introduction))
-                                    <textarea id="introduction" name="introduction">{{ old('introduction', $introduction ) }}</textarea>
+                                    @if($myAccount->introduction)
+                                    <textarea id="introduction" name="introduction">{{ old('introduction', $myAccount->introduction ) }}</textarea>
                                     @else
                                     <textarea id="introduction" name="introduction">{{ old('introduction') }}</textarea>
                                     @endif
@@ -156,7 +165,7 @@
                                     <select class="col-8" id="area" name="area_id">
                                         <?php $i = 1; ?>
                                         @foreach($areas as $area)
-                                        <option value="<?php echo $i ?>" @if($area_id==$i) selected @endif>{{ $area->area }}</option>
+                                        <option value="<?php echo $i ?>" @if($area_id==$i) selected @endif>{{ $area->area_name }}</option>
                                         <?php $i++ ?>
                                         @endforeach
                                     </select>

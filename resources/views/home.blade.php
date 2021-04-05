@@ -15,7 +15,7 @@
                     @endif
 
                     You are logged in!
-                    <a class="toapp" href="/players/people/home">to Players</a>
+                    <a class="toapp" href="{{ route('myhomes.index') }}">to Players</a>
                 </div>
             </div>
         </div>

@@ -340,49 +340,49 @@ profile
 
     &-follower {
       margin-right: 30px;
-      background-color: $color-blue;
       flex: 0 0 130px;
-      border-radius: 3px;
       
       @include mq(pc) {
         transform: translateY(-250%);
         
       }
       @include mq(tab-only) {
-      
-    }
-
-
-
-
-      a {
+        
+      }
+      &-input {
+        background-color: $color-blue;
+        border-radius: 3px;
+        
         color: white;
         width: 100%;
         text-align: center;
         padding: .2em .5em;
-
       }
+      
+      
+      
     }
     &-follow {
-      background-color: $color-blue;
+      // background-color: $color-blue;
       flex: 0 0 130px;
-      border-radius: 3px;
+      // border-radius: 3px;
       
       @include mq(pc) {
         transform: translateY(-250%);
         margin-right: 30px;
-      
-    }
-
-
-      a {
+        
+      }
+      &-input {
+        background-color: $color-blue;
+        border-radius: 3px;
+        
         color: white;
         width: 100%;
         text-align: center;
         padding: .2em .5em;
+    }
 
-
-      }
+      
     }
   }
 

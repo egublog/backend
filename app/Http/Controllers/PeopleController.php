@@ -28,10 +28,10 @@ class PeopleController extends Controller
         // ここは登録して初めてのユーザーがきた時にusersテーブルのimageカラムに0を入れる
         // そうしないと確かエラーがでてしまう  (そのユーザが画像を登録してたら1が入る様になっている、登録していなっかったら0を入れる)
         $myAccount = User::find($myId);
-        if ($myAccount->image == null) {
-            $myAccount->image = 0;
-            $myAccount->save();
-        }
+        // if ($myAccount->image == null) {
+        //     $myAccount->image = 0;
+        //     $myAccount->save();
+        // }
 
 
         // 自分のプロフィール表示用に自分のアカウント情報を付ける (myAccount)
@@ -218,7 +218,7 @@ class PeopleController extends Controller
         // $link_attach = 'follow_add_list_follow';
         // $link_detach = 'follow_release_list_follow';
 
-        // 上とはidentify_idが違うだけ
+        // 上とはidentify_idが違うだけ  あと->show_follower()と->show_follow()の違い
         $identify_id = 'friend_follow';
         return view('myService.friend')->with([
             'accounts' => $accounts_follow,
@@ -362,7 +362,7 @@ class PeopleController extends Controller
                 'hisAccount' => $hisAccount,
                 // ↓ 自分が送ったトークか相手が送ったトークかを判断するために
                 'myId' => $myId,
-                'user_id' => $user_id,
+                // 'user_id' => $user_id,⇦これ要らない。hisAccount->idで取れるから3/23
                 'identify_id' => $identify_id,
 
                 'era_id' => $request->era_id,

@@ -25,7 +25,7 @@ class Talk_storeRequest extends FormRequest
     {
         return [
             //
-            'message' => 'string|max:500|nullable',
+            'message' => 'alpha|max:250|nullable',
         ];
     }
 
@@ -34,7 +34,7 @@ class Talk_storeRequest extends FormRequest
         return [
             //
            'message.string' => '↓文字列で入力して下さい。',
-           'message.max' => '↓500文字以内で入力して下さい。',
+           'message.max' => '↓250文字以内で入力して下さい。',
         ];
     }
 }
