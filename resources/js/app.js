@@ -4,9 +4,24 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ import axios from 'axios';
+
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+window.Vue = require('vue');
+window.axios = require('axios');
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
+const token = document.head.querySelector('meta[name="csrf-token"]')
+
+if(token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+}
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +35,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('follow-lists-component', require('./components/FollowListsComponent.vue').default);
+Vue.component('follow-details-component', require('./components/FollowDetailsComponent.vue').default);
+
+Vue.component('follow-button', require('./components/FollowButtonComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

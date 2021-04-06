@@ -34,7 +34,7 @@ class ProfileController extends Controller
 
 
 
-        
+
         $area_id = $myAccount->area_id;
 
 
@@ -49,17 +49,17 @@ class ProfileController extends Controller
 
         // allのチームidがある → つまりチームが登録されていたらそのチーム名を代入して、ポジションも代入する
         // 無かったら空と1を代入する
-            $elementaryTeam = $allEra1->team->team_name;
-            $elementaryPosition = $allEra1->position_id;
-     
-            $juniorHighTeam = $allEra2->team->team_name;
-            $juniorHighPosition = $allEra2->position_id;
+        $elementaryTeam = $allEra1->team->team_name;
+        $elementaryPosition = $allEra1->position_id;
 
-            $highTeam = $allEra3->team->team_name;
-            $highPosition = $allEra3->position_id;
+        $juniorHighTeam = $allEra2->team->team_name;
+        $juniorHighPosition = $allEra2->position_id;
 
-            $universityTeam = $allEra4->team->team_name;
-            $universityPosition = $allEra4->position_id;
+        $highTeam = $allEra3->team->team_name;
+        $highPosition = $allEra3->position_id;
+
+        $universityTeam = $allEra4->team->team_name;
+        $universityPosition = $allEra4->position_id;
 
         //    これはprofile.blade.php側で使うやつbladeで定義はいけてないからここで作る。
         $schools = array(
@@ -88,47 +88,47 @@ class ProfileController extends Controller
     {
         //
         {
-          
+
             $areas = Area::all();
-    
-    
+
+
             // $myId = Auth::id();
             // $myAccount = User::find($myId);
             $myAccount = Auth::user();
 
-    
-    
-            
+
+
+
             $area_id = $myAccount->area_id;
-    
-    
-       
+
+
+
             $allEra1 = $myAccount->alls()->where('era_id', 1)->first();
             $allEra2 = $myAccount->alls()->where('era_id', 2)->first();
             $allEra3 = $myAccount->alls()->where('era_id', 3)->first();
             $allEra4 = $myAccount->alls()->where('era_id', 4)->first();
-    
-       
-                $elementaryTeam = $allEra1->team->team_name;
-                $elementaryPosition = $allEra1->position_id;
-     
-                $juniorHighTeam = $allEra2->team->team_name;
-                $juniorHighPosition = $allEra2->position_id;
-        
-                $highTeam = $allEra3->team->team_name;
-                $highPosition = $allEra3->position_id;
-           
-                $universityTeam = $allEra4->team->team_name;
-                $universityPosition = $allEra4->position_id;
-         
+
+
+            $elementaryTeam = $allEra1->team->team_name;
+            $elementaryPosition = $allEra1->position_id;
+
+            $juniorHighTeam = $allEra2->team->team_name;
+            $juniorHighPosition = $allEra2->position_id;
+
+            $highTeam = $allEra3->team->team_name;
+            $highPosition = $allEra3->position_id;
+
+            $universityTeam = $allEra4->team->team_name;
+            $universityPosition = $allEra4->position_id;
+
             $schools = array(
                 array('小学校の所属チーム', 'elementaryTeam', 'elementaryPosition', $elementaryTeam, $elementaryPosition),
                 array('中学校の所属チーム', 'juniorHighTeam', 'juniorHighPosition', $juniorHighTeam, $juniorHighPosition),
                 array('高校の所属チーム', 'highTeam', 'highPosition', $highTeam, $highPosition),
                 array('大学の所属チーム', 'universityTeam', 'universityPosition', $universityTeam, $universityPosition)
             );
-    
-    
+
+
             return view('myService.profile')->with([
                 'areas' => $areas,
                 'myAccount' => $myAccount,
@@ -136,7 +136,6 @@ class ProfileController extends Controller
                 'schools' => $schools,
             ]);
         }
-    
     }
 
 
@@ -179,7 +178,7 @@ class ProfileController extends Controller
 
                     // 既にteamsテーブルに入力されたチーム名があるかを確認する、なかったらそのチーム名をteamsテーブル新規追加する。
                     // そしてそのidを取ってくる
-                     // あったら既存のそのidを取ってくる
+                    // あったら既存のそのidを取ってくる
                     if ($teamAlready) {
                         $team_id = $teamAlready->id;
                     } else {
@@ -199,11 +198,11 @@ class ProfileController extends Controller
                     //  既に登録していたら上書き していなかったら新しく作って保存
                     $all = All::where('user_id', $myId)->where('era_id', $school[0])->first();
                     // era_idだけだと、チーム名が入力されていなくても登録されるためちゃんとチームidで調べ
-                        $all->team_id = $team_id;
+                    $all->team_id = $team_id;
 
-                        $all->position_id = $school[2];
+                    $all->position_id = $school[2];
 
-                        $all->save();
+                    $all->save();
                 } // if ($school[1])
 
             } // foreach
@@ -222,7 +221,7 @@ class ProfileController extends Controller
                 }
             }
 
-                $area_id = $myAccount->area_id;
+            $area_id = $myAccount->area_id;
 
 
             $allEra1 = $myAccount->alls()->where('era_id', 1)->first();
@@ -231,18 +230,18 @@ class ProfileController extends Controller
             $allEra4 = $myAccount->alls()->where('era_id', 4)->first();
 
 
-                $elementaryTeam = $allEra1->team->team_name;
-                $elementaryPosition = $allEra1->position_id;
+            $elementaryTeam = $allEra1->team->team_name;
+            $elementaryPosition = $allEra1->position_id;
 
-                $juniorHighTeam = $allEra2->team->team_name;
-                $juniorHighPosition = $allEra2->position_id;
+            $juniorHighTeam = $allEra2->team->team_name;
+            $juniorHighPosition = $allEra2->position_id;
 
-                $highTeam = $allEra3->team->team_name;
-                $highPosition = $allEra3->position_id;
-       
-                $universityTeam = $allEra4->team->team_name;
-                $universityPosition = $allEra4->position_id;
-       
+            $highTeam = $allEra3->team->team_name;
+            $highPosition = $allEra3->position_id;
+
+            $universityTeam = $allEra4->team->team_name;
+            $universityPosition = $allEra4->position_id;
+
 
             $schools = array(
                 array('小学校の所属チーム', 'elementaryTeam', 'elementaryPosition', $elementaryTeam, $elementaryPosition),
@@ -264,5 +263,4 @@ class ProfileController extends Controller
             ]);
         }
     }
-
 }

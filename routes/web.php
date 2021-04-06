@@ -139,25 +139,33 @@ Route::resource('friends', 'FriendController')->only([
 // Talk_userController
 Route::resource('talk_users', 'Talk_userController')->only([
   'index', 'show'
-])->parameters([
-  'talk_users' => 'user'
-]);
-
-
-// Talk_userContentController
-Route::resource('talk_users.contents', 'Talk_userContentController')->only([
-  'index', 'store'
-])->parameters([
-  'talk_users' => 'user'
-]);
-
-
+  ])->parameters([
+    'talk_users' => 'user'
+    ]);
+    
+    
+    // Talk_userContentController
+    Route::resource('talk_users.contents', 'Talk_userContentController')->only([
+      'index', 'store'
+      ])->parameters([
+        'talk_users' => 'user'
+        ]);
+        
+        
 
 // Follow_listProfile
-Route::post('follow_lists', 'Follow_listProfile')->name('follow_lists.invoke');
+// Route::post('follow_lists', 'Follow_listProfile')->name('follow_lists.invoke');
 
 // Follow_detailProfile
-Route::post('follow_details', 'Follow_detailProfile')->name('follow_details.invoke');
+// Route::post('follow_details', 'Follow_detailProfile')->name('follow_details.invoke');
+
+
+Route::resource('follows', 'FollowController')->only([
+  'store', 'destroy'
+])->parameters([
+  'follows' => 'user'
+]);
+
 
 
 

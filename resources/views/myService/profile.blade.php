@@ -46,8 +46,8 @@
             </div>
             <form action="{{ route('profiles.update', ['user' => $myAccount->id]) }}" method="post">
                 {{ csrf_field() }}
-                   <!-- でここにputかpatchかpostかで処理を追加する！！ -->
-                   @method('PUT')
+                <!-- でここにputかpatchかpostかで処理を追加する！！ -->
+                @method('PUT')
                 <div class="profile-content">
                     <p class="profile-content-tit">プロフィール設定</p>
                     <dl class="profile-def">

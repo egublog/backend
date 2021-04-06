@@ -50,16 +50,13 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             ?>
-                            <form action="{{ route('follow_lists.invoke') }}" method="post" class="results-body-first-follow">
-                                @if(isset($follow_check))
-                                <input class="onfollow" type="submit" value="フォロー中">
-                                @else
-                                <input class="notfollow" type="submit" value="フォローする">
-                                @endif
-                                {{ csrf_field() }}
-                                <input name="user_id" type="hidden" value="{{ $account->id }}">
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                            </form>
+
+                            <div class="results-body-first-follow">
+                                <follow-button :follow-check="{{ $follow_check }}" :user-id="{{ $account->id }}"></follow-button>
+                            </div>
+
+
+                      
                         </div>
                         <div class="results-body-second">
                             <!-- @if(isset($account->alls()->first()->team_id)) -->
@@ -70,7 +67,8 @@
                                 <!-- @else -->
                                 <!-- 未入力です。 -->
                                 <!-- @endif -->
-                                <span class="hidden-sp">/</span></span>
+                                <span class="hidden-sp">/</span>
+                            </span>
                             @endforeach
                             <span></span>
                             <!-- @endif -->

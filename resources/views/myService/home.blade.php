@@ -8,8 +8,13 @@
 <main>
 
     <section class="profile">
-        <div class="profile-inner" id="app2">
+        <!-- <div class="profile-inner" id="app2"> -->
             <example-component></example-component>
+            <example-component></example-component>
+            <example-component></example-component>
+            <follow-details-component></follow-details-component>
+           
+
             <div class="profile-top">
                 <p class="profile-top-tit">{{ $myAccount->name }}</p>
             </div>
@@ -77,7 +82,7 @@
                     @endif
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </section>
     <!-- /.profile -->
 

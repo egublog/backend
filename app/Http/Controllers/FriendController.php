@@ -25,14 +25,14 @@ class FriendController extends Controller
         // 　それがfollowかfollowerかで処理を分ければ良い。。
         $identify_id = $request->identify_id;
 
-        if($identify_id == 'friend_follow') {
+        if ($identify_id == 'friend_follow') {
             // 自分がフォローしている人を取得
             $accounts = $myAccount->show_follow()->get();
         } elseif ($identify_id == 'friend_follower') {
             // 自分をフォローしている人を取得
             $accounts = $myAccount->show_follower()->get();
         }
-      
+
 
         return view('myService.friend')->with([
             'accounts' => $accounts,
@@ -44,7 +44,7 @@ class FriendController extends Controller
         ]);
     }
 
-    
+
     /**
      * Display the specified resource.
      *
@@ -63,7 +63,7 @@ class FriendController extends Controller
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
         $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
-        
+
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
         $hisAccount = User::find($user_id);
 
@@ -74,5 +74,4 @@ class FriendController extends Controller
             'follow_check' => $follow_check,
         ]);
     }
-
 }
