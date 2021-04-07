@@ -79,7 +79,7 @@ a {
   font-size: 1.1em;
 }
 
-input, textarea {
+input, textarea, button {
   resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -574,7 +574,7 @@ results
   }
 }
 
-.results-body-first-follow input.notfollow {
+.results-body-first-follow button.notfollow {
   background-color: #0084ff;
   color: white;
   font-weight: bold;

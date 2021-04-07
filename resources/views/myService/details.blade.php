@@ -49,20 +49,13 @@
                 @endif
                 @endif
 
-                <form class="profile-button-follow" action="{{ route('follow_details.invoke') }}" method="post">
-                    @if(isset($follow_check))
-                    <input class="profile-button-follow-input onfollow" type="submit" value="フォロー中">
-                    @else
-                    <input class="profile-button-follow-input notfollow" type="submit" value="フォローする">
-                    @endif
-                    {{ csrf_field() }}
-                    @if($identify_id == 'find' || $identify_id == 'talk_find')
-                    <input name="team_string" type="hidden" value="{{ $team_string }}">
-                    <input name="era_id" type="hidden" value="{{ $era_id }}">
-                    @endif
-                    <input name="user_id" type="hidden" value="{{ $hisAccount->id }}">
-                    <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                </form>
+                <div class="profile-button-follow">
+
+                    <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($hisAccount->id) }}"></follow-button>
+                </div>
+
+
+                
 
             </div>
             <div class="profile-wrap">

@@ -80,7 +80,7 @@ a {
   font-size: 1.1em;
 }
 
-input, textarea {
+input, textarea, button {
   resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -500,24 +500,24 @@ profile
   }
 }
 
-.profile-button-follow-input {
+.profile-button-follow button {
   width: 120px;
 }
 
 @media (min-width: 1088px) {
-  .profile-button-follow-input {
+  .profile-button-follow button {
     transform: translateY(-250%);
     border-radius: 3px;
     width: 120px;
     margin-right: 100px;
   }
-  .profile-button-follow-input:hover {
+  .profile-button-follow button:hover {
     opacity: 0.6;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1087px) {
-  .profile-button-follow-input {
+  .profile-button-follow button {
     transform: translateY(-250%);
     border-radius: 3px;
     width: 120px;
@@ -525,12 +525,12 @@ profile
   }
 }
 
-.profile-button-follow-input.onfollow {
+.profile-button-follow button.onfollow {
   outline: 2px solid #0084ff;
   background-color: #e9e7e7;
 }
 
-.profile-button-follow-input.notfollow {
+.profile-button-follow button.notfollow {
   background-color: #0084ff;
   color: white;
   font-weight: bold;

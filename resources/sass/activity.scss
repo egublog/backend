@@ -212,7 +212,7 @@ a {
 
 
 // 共通設定
-input, textarea {
+input, textarea, button {
 	resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -388,7 +388,7 @@ results
       &-follow {
         margin-left: 40px;
 
-        input {
+        button {
 
           &.onfollow {
 

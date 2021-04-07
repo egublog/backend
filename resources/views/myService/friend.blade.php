@@ -50,13 +50,11 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             ?>
-
                             <div class="results-body-first-follow">
-                                <follow-button :follow-check="{{ $follow_check }}" :user-id="{{ $account->id }}"></follow-button>
+                                <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
                             </div>
 
 
-                      
                         </div>
                         <div class="results-body-second">
                             <!-- @if(isset($account->alls()->first()->team_id)) -->

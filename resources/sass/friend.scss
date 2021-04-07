@@ -206,7 +206,7 @@ a {
 
 
 // 共通設定
-input, textarea {
+input, textarea, button {
 	resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -396,7 +396,7 @@ results
           margin-top: 3px;
         }
 
-        input {
+        button {
 
           @include mq(pc) {
             &:hover {
@@ -404,10 +404,13 @@ results
             }
           }
 
-          &.onfollow {
 
 
-          }
+
+
+
+
+        
           &.notfollow {
             background-color: $color-blue;
             color: white;

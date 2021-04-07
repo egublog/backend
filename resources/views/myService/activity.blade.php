@@ -45,16 +45,11 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             ?>
-                            <form class="results-body-second-follow" action="{{ route('follow_lists.invoke') }}" method="post">
-                                @if(isset($follow_check))
-                                <input class="onfollow" type="submit" value="フォロー中">
-                                @else
-                                <input class="notfollow" type="submit" value="フォローする">
-                                @endif
-                                {{ csrf_field() }}
-                                <input name="user_id" type="hidden" value="{{ $account->id }}">
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                            </form>
+                            <div class="results-body-second-follow">
+                                <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
+                            </div>
+
+                            
                         </div>
                     </div>
                 </li>

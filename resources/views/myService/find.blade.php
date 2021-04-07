@@ -80,18 +80,10 @@
                             <?php
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $searchAll->user->id)->first();
                             ?>
-                            <form action="{{ route('follow_lists.invoke') }}" method="post" class="results-body-first-follow">
-                                @if(isset($follow_check))
-                                <input class="onfollow" type="submit" value="フォロー中">
-                                @else
-                                <input class="notfollow" type="submit" value="フォローする">
-                                @endif
-                                {{ csrf_field() }}
-                                <input name="team_string" type="hidden" value="{{ $team_string }}">
-                                <input name="era_id" type="hidden" value="{{ $era_id }}">
-                                <input name="user_id" type="hidden" value="{{ $searchAll->user->id }}">
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                            </form>
+                            <div class="results-body-first-follow">
+                                <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($searchAll->user->id) }}"></follow-button>
+                            </div>
+                            
                         </div>
                         <div class="results-body-second">
                             <!-- @if($searchAll->user->alls()->first()->team_id) -->

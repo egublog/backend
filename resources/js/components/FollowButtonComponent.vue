@@ -1,11 +1,12 @@
 <template>
-  <div>
-      <p>aaajdkajkflsjaskl</p>
-      <p>aaajdkajkflsjaskl</p>
-      <p>aaajdkajkflsjaskl</p>
-      <p>aaajdkajkflsjaskl</p>
-      <p>aaajdkajkflsjaskl</p>
-  </div>
+    <div>
+      <button type="button" v-if="followCheck" class="onfollow" @click="unfollow(userId)">
+        フォロー中
+      </button>
+      <button v-else type="button" class="notfollow" @click="follow(userId)">
+        フォローする
+      </button>
+    </div>
 </template>
 
 <script>
@@ -59,3 +60,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ /* .notfollow {
+   background-color: red;
+
+ } */
+</style>

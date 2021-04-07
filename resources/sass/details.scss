@@ -208,7 +208,7 @@ a {
 
 
 // 共通設定
-input, textarea {
+input, textarea, button {
 	resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -400,7 +400,7 @@ profile
         text-align: right;
       }
 
-       &-input {
+       button {
          // margin-left: 100px;
          width: 120px;
 

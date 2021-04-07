@@ -79,7 +79,7 @@ a {
   font-size: 1.1em;
 }
 
-input, textarea {
+input, textarea, button {
   resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -488,19 +488,19 @@ results
 }
 
 @media (min-width: 1088px) {
-  .results-body-second-follow input.onfollow:hover {
+  .results-body-second-follow button.onfollow:hover {
     opacity: 0.6;
   }
 }
 
-.results-body-second-follow input.notfollow {
+.results-body-second-follow button.notfollow {
   background-color: #0084ff;
   color: white;
   font-weight: bold;
 }
 
 @media (min-width: 1088px) {
-  .results-body-second-follow input.notfollow:hover {
+  .results-body-second-follow button.notfollow:hover {
     opacity: 0.6;
   }
 }

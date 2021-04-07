@@ -27,7 +27,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
     <!-- loginのtoggle用 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
@@ -36,59 +37,59 @@
 </head>
 
 <body>
-<div id="app">
-    <header class="header">
-        <div class="header-inner">
+    <div id="app">
+        <header class="header">
+            <div class="header-inner">
 
-            <!-- <div class="header-logo">players</div> -->
-            <a class="header-logo" href="{{ route('myhomes.index') }}">
-                <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/logo.png" alt="">
-            </a>
-            <!-- ハンバーガー -->
-            <div class="drawer-burger">
-                <span class="drawer-burger-line"></span>
-                <span class="drawer-burger-line"></span>
-                <span class="drawer-burger-line"></span>
-            </div>
-            <div class="header-nav">
-                <ul class="header-nav-list">
-                    <li class="header-nav-item"><a href="{{ route('myhomes.index') }}">ホーム</a></li>
-                    <li class="header-nav-item"><a href="{{ route('finds.index') }}">見つける</a></li>
-                    <li class="header-nav-item"><a href="{{ route('activities.index') }}">アクティビティ</a></li>
-                    <li class="header-nav-item"><a href="{{ route('talk_users.index') }}">トーク画面へ</a></li>
-                </ul>
-            </div>
-            <div class="header-overlay"></div>
-            <!-- ハンバーガー -->
-
-            <!-- ログインのtoggle -->
-            <div class="toggle">
-
-                <a class="toggle-button dropdown-toggle" href="#">
-                    {{ Auth::user()->name }}
+                <!-- <div class="header-logo">players</div> -->
+                <a class="header-logo" href="{{ route('myhomes.index') }}">
+                    <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/logo.png" alt="">
                 </a>
+                <!-- ハンバーガー -->
+                <div class="drawer-burger">
+                    <span class="drawer-burger-line"></span>
+                    <span class="drawer-burger-line"></span>
+                    <span class="drawer-burger-line"></span>
+                </div>
+                <div class="header-nav">
+                    <ul class="header-nav-list">
+                        <li class="header-nav-item"><a href="{{ route('myhomes.index') }}">ホーム</a></li>
+                        <li class="header-nav-item"><a href="{{ route('finds.index') }}">見つける</a></li>
+                        <li class="header-nav-item"><a href="{{ route('activities.index') }}">アクティビティ</a></li>
+                        <li class="header-nav-item"><a href="{{ route('talk_users.index') }}">トーク画面へ</a></li>
+                    </ul>
+                </div>
+                <div class="header-overlay"></div>
+                <!-- ハンバーガー -->
 
-                <div class="toggle-show dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="logout-button dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                <!-- ログインのtoggle -->
+                <div class="toggle">
+
+                    <a class="toggle-button dropdown-toggle" href="#">
+                        {{ Auth::user()->name }}
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                    <div class="toggle-show dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="logout-button dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
+
+                <!-- ログインのtoggle -->
+
             </div>
-
-            <!-- ログインのtoggle -->
-
-        </div>
-    </header>
-    <!-- /.header -->
+        </header>
+        <!-- /.header -->
 
 
 
-    @yield('content')
+        @yield('content')
 
 
     </div>
@@ -100,6 +101,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="/js/banana.js"></script>
 
+    <!-- <script src="{{ mix('js/app.js')}}"></script> -->
+
+    
 </body>
 
 </html>

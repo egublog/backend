@@ -207,7 +207,7 @@ a {
 
 
 // 共通設定
-input, textarea {
+input, textarea, button {
 	resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -460,7 +460,7 @@ results
           margin-top: 3px;
         }
 
-        input {
+        button {
 
           &.onfollow {
 
