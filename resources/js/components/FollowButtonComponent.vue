@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button type="button" v-if="followCheck" class="onfollow" @click="unfollow(userId)">
+      <button type="button" v-if="followOrNot" class="onfollow" @click="unfollow(userId)">
         フォロー中
       </button>
       <button v-else type="button" class="notfollow" @click="follow(userId)">
@@ -22,9 +22,9 @@ export default {
       required: true,
     },
   },
-  data: function () {
+  data() {
     return {
-      followOrNot: false,
+      followOrNot: false
     };
   },
   created() {
@@ -37,10 +37,10 @@ export default {
         .post(follow, {
           user_id: userId,
         })
-        .then((response) => {
+        .then(response => {
           this.followOrNot = true;
         })
-        .catch((error) => {
+        .catch(error => {
           alert(error);
         });
     },
@@ -50,10 +50,10 @@ export default {
         .delete(unfollow, {
           userId: userId,
         })
-        .then((response) => {
+        .then(response => {
           this.followOrNot = false;
         })
-        .catch((error) => {
+        .catch(error => {
           alert(error);
         });
     },
