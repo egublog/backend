@@ -46,7 +46,8 @@
                             $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             ?>
                             <div class="results-body-second-follow">
-                                <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
+
+                                <follow-button :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
                             </div>
 
                             

@@ -10,6 +10,7 @@
     <section class="profile">
         <div class="profile-inner" id="app2">
         <follow-button></follow-button>
+        <example-component></example-component>
             <div class="profile-top">
                 <p class="profile-top-tit">{{ $myAccount->name }}</p>
             </div>

@@ -33,31 +33,9 @@
                 <img src="{{ $hisAccount->image }}">
                 @endif
             </div>
-            <div class="profile-button">
-                @if(isset($follow_check))
-                <!-- ここの条件は　↓　$identify_id !== talk_list  の方がコンパクトに書けるかも -->
-                @if($identify_id == 'find' || $identify_id == 'activity'|| $identify_id == 'friend_follow' || $identify_id == 'friend_follower')
-                <form class="profile-button-talk" action="{{ route('talk_users.contents.index', ['user' => $hisAccount->id]) }}" method="get">
-                    {{ csrf_field() }}
-                    @if($identify_id == 'find')
-                    <input name="team_string" type="hidden" value="{{ $team_string }}">
-                    <input name="era_id" type="hidden" value="{{ $era_id }}">
-                    @endif
-                    <input name="identify_id" type="hidden" value="{{ $identify_id }}">
-                    <input class="profile-button-talk-button" type="submit" value="メッセージ">
-                </form>
-                @endif
-                @endif
+        
+            <follow-details-button :identify-id="{{ json_encode($identify_id) }}" :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($hisAccount->id) }}"></follow-details-button>
 
-                <div class="profile-button-follow">
-
-                    <follow-button :follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($hisAccount->id) }}"></follow-button>
-                </div>
-
-
-                
-
-            </div>
             <div class="profile-wrap">
                 <div class="profile-name">
                     @if($hisAccount->user_name)

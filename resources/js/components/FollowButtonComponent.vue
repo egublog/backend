@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button type="button" v-if="followOrNot" class="onfollow" @click="unfollow(userId)">
+      <button type="button" v-if="followCheck" class="onfollow" @click="unfollow(userId)">
         フォロー中
       </button>
       <button v-else type="button" class="notfollow" @click="follow(userId)">
@@ -8,6 +8,7 @@
       </button>
     </div>
 </template>
+
 
 <script>
 // import { defineComponent } from '@vue/composition-api'
@@ -17,18 +18,19 @@ export default {
     userId: {
       required: true,
     },
-    followCheck: {
+    initialFollowCheck: {
       type: Boolean,
       required: true,
     },
   },
   data() {
     return {
-      followOrNot: false
+      followCheck: false
     };
   },
   created() {
-    this.followOrNot = this.followCheck;
+    this.followCheck = this.initialFollowCheck;
+    // あああああ
   },
   methods: {
     follow(userId) {
@@ -38,11 +40,12 @@ export default {
           user_id: userId,
         })
         .then(response => {
-          this.followOrNot = true;
+          this.followCheck = true;
         })
         .catch(error => {
           alert(error);
         });
+        
     },
     unfollow(userId) {
       let unfollow = `/follows/${userId}`;
@@ -51,7 +54,7 @@ export default {
           userId: userId,
         })
         .then(response => {
-          this.followOrNot = false;
+          this.followCheck = false;
         })
         .catch(error => {
           alert(error);

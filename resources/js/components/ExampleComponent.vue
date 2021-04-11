@@ -4,9 +4,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Example Component</div>
-
+                  
                     <div class="card-body">
-                        I'm an
+                        I'm an moster
                     </div>
                 </div>
             </div>

@@ -41,8 +41,7 @@ if(token) {
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('follow-lists-component', require('./components/FollowListsComponent.vue').default);
-Vue.component('follow-details-component', require('./components/FollowDetailsComponent.vue').default);
-
+Vue.component('follow-details-button', require('./components/FollowDetailsButtonComponent.vue').default);
 Vue.component('follow-button', require('./components/FollowButtonComponent.vue').default);
 
 /**
