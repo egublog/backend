@@ -39,6 +39,8 @@ class BackController extends Controller
                 'user' => $request->user_id,
                 'team_string' => $request->team_string,
                 'era_id' => $request->era_id,
+                'identify_id' => $identify_id,
+                // ↑ このidentify_idは$identify_idがfindの時には要らないがまあついてても良いか
             );
         }
 

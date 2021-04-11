@@ -26,7 +26,8 @@ class ResultController extends Controller
 
   
           // 最初のfindではidentify_idはどうやっても必要ないのでここで初めて定義
-          $identify_id = 'find';
+        //   ここはdetail.blade.phpだら<backボタンで戻って来た時に必要では無いかも
+        //   $identify_id = 'find';
   
           // ここではまず検索して出てくるユーザーのusersテーブルを配列で取ってくるのが目的　↓
   
@@ -63,7 +64,7 @@ class ResultController extends Controller
             //   'myId' => $myId,
                // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
               'myAccount' => $myAccount,
-              'identify_id' => $identify_id,
+            //   'identify_id' => $identify_id,
           ]);
     }
 
