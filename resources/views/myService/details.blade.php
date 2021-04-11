@@ -33,8 +33,12 @@
                 <img src="{{ $hisAccount->image }}">
                 @endif
             </div>
-        
+
+            @if ($identify_id == 'find' || $identify_id == 'find_return')
+            <follow-details-button :identify-id="{{ json_encode($identify_id) }}" :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($hisAccount->id) }}" :era-id="{{ json_encode($era_id) }}" :team-string="{{ json_encode($team_string) }}"></follow-details-button>
+            @else
             <follow-details-button :identify-id="{{ json_encode($identify_id) }}" :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($hisAccount->id) }}"></follow-details-button>
+            @endif
 
             <div class="profile-wrap">
                 <div class="profile-name">

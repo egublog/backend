@@ -96,8 +96,8 @@ export default {
       if (this.initialIdentifyId == "find" || "talk_find") {
         let url = `/talk_users/${userId}/contents?`
          + 'identify_id=' + this.identifyId
-         + '&era_id' + this.eraId
-         + '&team_string' + this.teamString;
+         + '&era_id=' + this.eraId
+         + '&team_string=' + this.teamString;
         window.location.href = url;
       } else {
         let url = `/talk_users/${userId}/contents?`

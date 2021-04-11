@@ -2147,7 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
     talkShow: function talkShow(userId) {
       // findかどうかを条件分岐してそれぞれの渡す値の配列を作る
       if (this.initialIdentifyId == "find" || "talk_find") {
-        var url = "/talk_users/".concat(userId, "/contents?") + 'identify_id=' + this.identifyId + '&era_id' + this.eraId + '&team_string' + this.teamString;
+        var url = "/talk_users/".concat(userId, "/contents?") + 'identify_id=' + this.identifyId + '&era_id=' + this.eraId + '&team_string=' + this.teamString;
         window.location.href = url;
       } else {
         var _url = "/talk_users/".concat(userId, "/contents?") + 'identify_id=' + this.identifyId;
