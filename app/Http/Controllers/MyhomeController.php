@@ -29,6 +29,8 @@ class MyhomeController extends Controller
         //     $myAccount->save();
         // }
 
+        
+
 
         // 自分のプロフィール表示用に自分のアカウント情報を付ける (myAccount)
         // 自分の画像表示用にmyIdを付ける (myId)

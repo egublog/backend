@@ -145,6 +145,9 @@ Route::resource('talk_users', 'Talk_userController')->only([
     
     
     // Talk_userContentController
+    Route::get('/talk_users/{user}/contents/axios', 'Talk_userContentController@axios_get')->name('talk_users.contents.axios_get');
+
+
     Route::resource('talk_users.contents', 'Talk_userContentController')->only([
       'index', 'store'
       ])->parameters([

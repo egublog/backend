@@ -2000,6 +2000,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 // import { defineComponent } from '@vue/composition-api'
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2007,7 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     initialFollowCheck: {
-      type: Boolean,
+      type: '',
       required: true
     }
   },
@@ -2027,7 +2032,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(follow, {
         user_id: userId
       }).then(function (response) {
-        _this.followCheck = true;
+        _this.followCheck = true; // console.log(response);
       })["catch"](function (error) {
         alert(error);
       });
@@ -2157,6 +2162,271 @@ __webpack_require__.r(__webpack_exports__);
       // talk_usersContentsへリダイレクトする
       // window.location.href = '/search?q=' + this.searchData;
 
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { defineComponent } from '@vue/composition-api'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    identifyId: {
+      required: true
+    },
+    initialUserId: {
+      required: true
+    },
+    eraId: {
+      required: false
+    },
+    teamString: {
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      talkDatas: "",
+      hisAccount: "",
+      talkListsAccounts: "",
+      myId: "",
+      talk: "",
+      baseDate: "aaaa"
+    };
+  },
+  filters: {
+    momentDate: function momentDate(date) {
+      return moment(date).format("M/D"); //   07/30
+    },
+    momentDayOfTheWeek: function momentDayOfTheWeek(date) {
+      return moment(date).format("dd"); //   水
+    },
+    momentTime: function momentTime(date) {
+      return moment(date).format("kk:mm"); //   08:24
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    var createdUrl = "/talk_users/".concat(this.initialUserId, "/contents/axios");
+    axios.get(createdUrl).then(function (response) {
+      // console.log(response.data.talkArray);
+      _this.talkDatas = response.data.talkArray.talkDatas;
+      _this.hisAccount = response.data.talkArray.hisAccount;
+      _this.myId = response.data.talkArray.myId;
+      _this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+      _this.baseDate = 'a'; // これで初期値を設定できた
+
+      console.log(_this.baseDate);
+      console.log(response.data.talkArray.talkDatas[0].created_at);
+    })["catch"](function (error) {
+      alert(error);
+    });
+  },
+  methods: {
+    userChange: function userChange(userId) {
+      var _this2 = this;
+
+      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios");
+      axios.get(userChangeUrl).then(function (response) {
+        console.log(response.data.talkArray.talkDatas);
+        _this2.talkDatas = response.data.talkArray.talkDatas;
+        _this2.hisAccount = response.data.talkArray.hisAccount;
+        _this2.baseDate = 'a'; // これで初期値を設定できた
+      })["catch"](function (error) {
+        alert(error);
+      });
+      this.baseDate = 'a'; //   console.log(userId);
+    },
+    back: function back(userId) {
+      if (this.identifyId == "find") {
+        var url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + userId + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
+        window.location.href = url;
+      } else {
+        var _url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + userId;
+
+        window.location.href = _url;
+      }
+    },
+    send: function send(userId, content) {
+      var _this3 = this;
+
+      var url = "/talk_users/".concat(userId, "/contents");
+      axios.post(url, {
+        content: content
+      }).then(function (response) {
+        _this3.talk = "";
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    console: function (_console) {
+      function console(_x) {
+        return _console.apply(this, arguments);
+      }
+
+      console.toString = function () {
+        return _console.toString();
+      };
+
+      return console;
+    }(function (abc) {
+      console.log(abc);
+    }),
+    momentDate: function momentDate(date) {
+      return moment(date).format("M/D"); //   07/30
+    },
+    momentDayOfTheWeek: function momentDayOfTheWeek(date) {
+      return moment(date).format("d"); //   水
+    },
+    momentTime: function momentTime(date) {
+      return moment(date).format("kk:mm"); //   08:24
+    },
+    setBaseDate: function setBaseDate(newDate) {
+      if (this.baseDate != newDate) {
+        this.baseDate = newDate;
+      }
     }
   }
 });
@@ -6617,7 +6887,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n  background-color: red;\n\n} */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
 
 // exports
 
@@ -38618,6 +38888,200 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "pc-wrap" }, [
+    _vm.identifyId == "talk_list"
+      ? _c("section", { staticClass: "results" }, [
+          _c("div", { staticClass: "results-inner" }, [
+            _c(
+              "ul",
+              { staticClass: "results-list" },
+              [
+                _vm.talkListsAccounts !== null
+                  ? [
+                      _vm._l(_vm.talkListsAccounts, function(account) {
+                        return [
+                          _c(
+                            "div",
+                            {
+                              key: account.id,
+                              staticClass: "results-wrap",
+                              on: {
+                                click: function($event) {
+                                  return _vm.userChange(account.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("label", { attrs: { for: "" } }, [
+                                _c("li", { staticClass: "results-item" }, [
+                                  _c("div", { staticClass: "results-head" }, [
+                                    _c("div", { staticClass: "results-img" }, [
+                                      account.image === null
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg",
+                                              alt: ""
+                                            }
+                                          })
+                                        : _c("img", {
+                                            attrs: { src: account.image }
+                                          })
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "results-body" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "results-body-first" },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass:
+                                              "results-body-first-name"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                        " +
+                                                _vm._s(account.name) +
+                                                "\n                      "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        account.user_name
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "results-body-first-truename"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(account.user_name) +
+                                                    "\n                      "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ])
+                            ]
+                          )
+                        ]
+                      }),
+                      _vm._v(" "),
+                      _c("h1", [_vm._v("成功中！！")])
+                    ]
+                  : _c("p", { staticClass: "results-nohit" }, [
+                      _vm._v("見つかりませんでした")
+                    ])
+              ],
+              2
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "topTalk-wrap" }, [
+      _c("section", { staticClass: "top" }, [
+        _c("div", { staticClass: "top-inner" }, [
+          _c("div", { staticClass: "top-inner-back" }, [
+            _c(
+              "div",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.back(_vm.hisAccount.id)
+                  }
+                }
+              },
+              [_c("button", [_vm._v("<")])]
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.hisAccount.name) + "とのトーク")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "talk" }, [
+        _c(
+          "div",
+          { staticClass: "talk-inner", attrs: { id: "talk-inner-scroll" } },
+          [
+            _vm.talkDatas !== []
+              ? [
+                  _vm._l(_vm.talkDatas, function(talkData) {
+                    return [
+                      _c(
+                        "div",
+                        { key: talkData.id },
+                        [
+                          _vm.baseDate != _vm.momentDate(talkData.created_at)
+                            ? [
+                                _c("p", { staticClass: "talk-date" }, [
+                                  _vm._v(
+                                    "\n                  " +
+                                      _vm._s(
+                                        _vm.momentDate(talkData.created_at)
+                                      ) +
+                                      "\n                  "
+                                  ),
+                                  _c("span", {}, [
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(
+                                          _vm.momentDayOfTheWeek(
+                                            talkData.created_at
+                                          )
+                                        ) +
+                                        "\n                  "
+                                    )
+                                  ])
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]
+                  })
+                ]
+              : _vm._e()
+          ],
+          2
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -50823,6 +51287,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 Vue.component('follow-details-button', __webpack_require__(/*! ./components/FollowDetailsButtonComponent.vue */ "./resources/js/components/FollowDetailsButtonComponent.vue")["default"]);
 Vue.component('follow-button', __webpack_require__(/*! ./components/FollowButtonComponent.vue */ "./resources/js/components/FollowButtonComponent.vue")["default"]);
+Vue.component('talk-show', __webpack_require__(/*! ./components/TalkShowComponent.vue */ "./resources/js/components/TalkShowComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51040,15 +51505,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************!*\
   !*** ./resources/js/components/FollowDetailsButtonComponent.vue ***!
   \******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FollowDetailsButtonComponent_vue_vue_type_template_id_3a0f1545_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowDetailsButtonComponent.vue?vue&type=template&id=3a0f1545&scoped=true& */ "./resources/js/components/FollowDetailsButtonComponent.vue?vue&type=template&id=3a0f1545&scoped=true&");
 /* harmony import */ var _FollowDetailsButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FollowDetailsButtonComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/FollowDetailsButtonComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _FollowDetailsButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _FollowDetailsButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _FollowDetailsButtonComponent_vue_vue_type_style_index_0_id_3a0f1545_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FollowDetailsButtonComponent.vue?vue&type=style&index=0&id=3a0f1545&scoped=true&lang=css& */ "./resources/js/components/FollowDetailsButtonComponent.vue?vue&type=style&index=0&id=3a0f1545&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _FollowDetailsButtonComponent_vue_vue_type_style_index_0_id_3a0f1545_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FollowDetailsButtonComponent.vue?vue&type=style&index=0&id=3a0f1545&scoped=true&lang=css& */ "./resources/js/components/FollowDetailsButtonComponent.vue?vue&type=style&index=0&id=3a0f1545&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -51080,7 +51544,7 @@ component.options.__file = "resources/js/components/FollowDetailsButtonComponent
 /*!*******************************************************************************************!*\
   !*** ./resources/js/components/FollowDetailsButtonComponent.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51119,6 +51583,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowDetailsButtonComponent_vue_vue_type_template_id_3a0f1545_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowDetailsButtonComponent_vue_vue_type_template_id_3a0f1545_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TalkShowComponent.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/TalkShowComponent.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TalkShowComponent.vue?vue&type=template&id=c431174e& */ "./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e&");
+/* harmony import */ var _TalkShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TalkShowComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TalkShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TalkShowComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TalkShowComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TalkShowComponent.vue?vue&type=template&id=c431174e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

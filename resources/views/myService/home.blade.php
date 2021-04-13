@@ -10,6 +10,10 @@
     <section class="profile">
         <div class="profile-inner" id="app2">
         <follow-button></follow-button>
+        <form  action="{{ route('logout') }}" method="POST">
+        <input type="submit">
+                            @csrf
+                        </form>
         <example-component></example-component>
             <div class="profile-top">
                 <p class="profile-top-tit">{{ $myAccount->name }}</p>
