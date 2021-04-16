@@ -2554,8 +2554,16 @@ __webpack_require__.r(__webpack_exports__);
       baseDate: "aaaa",
       talkSendDatas: "",
       errorExist: false,
-      errorMessages: ""
+      errorMessages: "",
+      pageNumber: 1,
+      preTalkInnerScrollHeight: 0,
+      nowTalkInnerScrollHeight: 0
     };
+  },
+  computed: {
+    returnTalkDatas: function returnTalkDatas() {
+      return this.talkDatas;
+    }
   },
   filters: {
     momentDate: function momentDate(date) {
@@ -2571,7 +2579,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var createdUrl = "/talk_users/".concat(this.initialUserId, "/contents/axios");
+    var createdUrl = "/talk_users/".concat(this.initialUserId, "/contents/axios?pageNumber=1");
     axios.get(createdUrl).then(function (response) {
       console.log("createdと通りました");
       _this.talkDatas = response.data.talkArray.talkDatas;
@@ -2595,17 +2603,38 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log("beforeMounted");
+    var talkInnerElement = this.$refs.talkInnerScroll;
+    talkInnerElement.addEventListener('scroll', this.scroll); //   this.scroll();
   },
   beforeCreate: function beforeCreate() {
     console.log("beforeCreated");
   },
   updated: function updated() {
     console.log("updated");
-    var talkInnerElement = this.$refs.talkInnerScroll;
-    talkInnerElement.scrollTo({
-      top: talkInnerElement.scrollHeight + 10,
-      behavior: "auto"
-    });
+
+    if (this.pageNumber == 1) {
+      var talkInnerElement = this.$refs.talkInnerScroll;
+      talkInnerElement.scrollTo({
+        top: talkInnerElement.scrollHeight,
+        behavior: "auto"
+      });
+      console.log(talkInnerElement.scrollHeight);
+    } else {
+      var _talkInnerElement = this.$refs.talkInnerScroll;
+      var talkInnerElementNew = this.$refs.talkInnerScroll;
+      this.nowTalkInnerScrollHeight = _talkInnerElement.scrollHeight;
+      var differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
+      talkInnerElementNew.scrollTo({
+        top: differrenceTalkInnerScrollHeight,
+        behavior: "auto"
+      });
+      console.log(2);
+      console.log(this.nowTalkInnerScrollHeight);
+      console.log(this.preTalkInnerScrollHeight);
+      console.log(differrenceTalkInnerScrollHeight);
+    } //     window.addEventListener('scroll', this.console);
+    // this.console(window.scrollY);
+
   },
   beforeUpdate: function beforeUpdate() {
     console.log("beforeUpdate");
@@ -2614,7 +2643,7 @@ __webpack_require__.r(__webpack_exports__);
     userChange: function userChange(userId) {
       var _this2 = this;
 
-      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios");
+      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios?pageNumber=1");
       axios.get(userChangeUrl).then(function (response) {
         //   console.log(response.data.talkArray.talkDatas);
         _this2.talkDatas = response.data.talkArray.talkDatas;
@@ -2622,11 +2651,12 @@ __webpack_require__.r(__webpack_exports__);
         _this2.baseDate = "a";
         _this2.errorExist = false;
         _this2.errorMessages = "";
-        _this2.message = ""; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+        _this2.message = "";
+        _this2.pageNumber = 1; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
 
         var talkInnerElement = _this2.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight + 10,
+          top: talkInnerElement.scrollHeight,
           behavior: "auto"
         }); //   console.log(talkInnerElement);
         //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
@@ -2649,6 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
     talkSend: function talkSend() {
       var _this3 = this;
 
+      this.pageNumber = 1;
       var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
 
       if (this.identifyId == find) {
@@ -2656,12 +2687,14 @@ __webpack_require__.r(__webpack_exports__);
           message: this.message,
           identify_id: this.identifyId,
           era_id: this.eraId,
-          team_string: this.teamString
+          team_string: this.teamString,
+          pageNumber: 1
         };
       } else {
         this.talkSendDatas = {
           message: this.message,
-          identify_id: this.identifyId
+          identify_id: this.identifyId,
+          pageNumber: 1
         };
       }
 
@@ -2674,7 +2707,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.errorMessages = "";
         var talkInnerElement = _this3.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight + 10,
+          top: talkInnerElement.scrollHeight,
           behavior: "auto"
         });
       })["catch"](function (error) {
@@ -2685,7 +2718,7 @@ __webpack_require__.r(__webpack_exports__);
 
         var talkInnerElement = _this3.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight + 10,
+          top: talkInnerElement.scrollHeight,
           behavior: "auto"
         });
       });
@@ -2726,16 +2759,60 @@ __webpack_require__.r(__webpack_exports__);
 
         window.location.href = _url2;
       }
-    } // window: (onload = function () {
+    },
+    // window: (scroll = function () {
     //   //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
     //   //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
     //   let talkInnerElement = this.$refs.talkInnerScroll;
     //   talkInnerElement.scrollTo({
-    //     top: talkInnerElement.scrollHeight + 10,
+    //     top: talkInnerElement.scrollHeight,
     //     behavior: "auto",
     //   });
+    // window.addEventListener('scroll', this.console);
+    // this.scroll();
     // }),
+    scroll: function scroll() {
+      var _this4 = this;
 
+      var talkInnerElement = this.$refs.talkInnerScroll; // this.console(talkInnerElement.scrollTop);
+      // this.console('スクロールされてるよ！');
+
+      this.console(talkInnerElement.scrollTop);
+
+      if (talkInnerElement.scrollTop == 0) {
+        // console.log('oioiooiooiooi');
+        var _talkInnerElement2 = this.$refs.talkInnerScroll;
+        this.preTalkInnerScrollHeight = _talkInnerElement2.scrollHeight; //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
+
+        this.pageNumber++;
+        var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios?pageNumber=").concat(this.pageNumber);
+        axios.get(url).then(function (response) {
+          //   console.log(response.data.talkArray.talkDatas);
+          _this4.talkDatas = response.data.talkArray.talkDatas; //   talkInnerElement = this.$refs.talkInnerScroll;
+          //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+          //   this.hisAccount = response.data.talkArray.hisAccount;
+          //   this.baseDate = "a";
+          //   this.errorExist = false;
+          //   this.errorMessages = "";
+          //   this.message = "";
+          //   this.pageNumber = 1;
+          //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+          //   let talkInnerElement = this.$refs.talkInnerScroll;
+          //   talkInnerElement.scrollTo({
+          //     top: talkInnerElement.scrollHeight,
+          //     behavior: "auto",
+          //   });
+          //   console.log(talkInnerElement);
+          //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
+          // これで初期値を設定できた
+        })["catch"](function (error) {
+          alert(error);
+        });
+      }
+    }
   }
 });
 
@@ -39451,7 +39528,7 @@ var render = function() {
           [
             _vm.talkDatas !== []
               ? [
-                  _vm._l(_vm.talkDatas, function(talkData) {
+                  _vm._l(_vm.returnTalkDatas, function(talkData) {
                     return [
                       _c(
                         "div",

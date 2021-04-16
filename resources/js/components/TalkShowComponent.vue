@@ -103,7 +103,7 @@
       <section class="talk">
         <div class="talk-inner" ref="talkInnerScroll">
           <template v-if="talkDatas !== []">
-            <template v-for="talkData in talkDatas">
+            <template v-for="talkData in returnTalkDatas">
               <div :key="talkData.id" class="">
                 <!-- ↑　これは実際には表示しないやつstyle: noe -->
                 <!-- {{ console(momentDate(talkData.created_at)) }} -->
@@ -296,7 +296,16 @@ export default {
       talkSendDatas: "",
       errorExist: false,
       errorMessages: "",
+      pageNumber: 1,
+      preTalkInnerScrollHeight: 0,
+      nowTalkInnerScrollHeight: 0,
     };
+  },
+  computed: {
+      returnTalkDatas: function() {
+          return this.talkDatas;
+      }
+
   },
   filters: {
     momentDate(date) {
@@ -313,7 +322,7 @@ export default {
     },
   },
   created() {
-    let createdUrl = `/talk_users/${this.initialUserId}/contents/axios`;
+    let createdUrl = `/talk_users/${this.initialUserId}/contents/axios?pageNumber=1`;
     axios
       .get(createdUrl)
       .then((response) => {
@@ -344,18 +353,52 @@ export default {
   mounted() {
       
       console.log("beforeMounted");
+      let talkInnerElement = this.$refs.talkInnerScroll;
+      talkInnerElement.addEventListener('scroll', this.scroll);
+    //   this.scroll();
+
   },
   beforeCreate() {
       console.log("beforeCreated");
   },
   updated() {
     console.log("updated");
-    let talkInnerElement = this.$refs.talkInnerScroll;
 
+    if(this.pageNumber == 1) {
+        
+        
+        let talkInnerElement = this.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight + 10,
+            top: talkInnerElement.scrollHeight,
           behavior: "auto",
         });
+
+        console.log(talkInnerElement.scrollHeight);
+
+    } else {
+        
+        let talkInnerElement = this.$refs.talkInnerScroll;
+        
+        let talkInnerElementNew = this.$refs.talkInnerScroll;
+          this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+        
+                let differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
+
+        talkInnerElementNew.scrollTo({
+            top: differrenceTalkInnerScrollHeight,
+            behavior: "auto",
+          });
+          console.log(2);
+          console.log(this.nowTalkInnerScrollHeight);
+          console.log(this.preTalkInnerScrollHeight);
+          console.log(differrenceTalkInnerScrollHeight);
+    }
+
+
+
+
+    //     window.addEventListener('scroll', this.console);
+    // this.console(window.scrollY);
   },
   beforeUpdate() {
     console.log("beforeUpdate");
@@ -363,7 +406,7 @@ export default {
   },
   methods: {
     userChange(userId) {
-      let userChangeUrl = `/talk_users/${userId}/contents/axios`;
+      let userChangeUrl = `/talk_users/${userId}/contents/axios?pageNumber=1`;
       axios
         .get(userChangeUrl)
         .then((response) => {
@@ -374,12 +417,13 @@ export default {
           this.errorExist = false;
           this.errorMessages = "";
           this.message = "";
+          this.pageNumber = 1;
 
           //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
           let talkInnerElement = this.$refs.talkInnerScroll;
 
           talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight + 10,
+            top: talkInnerElement.scrollHeight,
             behavior: "auto",
           });
           //   console.log(talkInnerElement);
@@ -417,6 +461,10 @@ export default {
       }
     },
     talkSend() {
+
+          this.pageNumber = 1;
+
+
       let url = `/talk_users/${this.hisAccount.id}/contents`;
 
       if (this.identifyId == find) {
@@ -425,11 +473,13 @@ export default {
           identify_id: this.identifyId,
           era_id: this.eraId,
           team_string: this.teamString,
+          pageNumber: 1,
         };
       } else {
-        this.talkSendDatas = {
-          message: this.message,
+          this.talkSendDatas = {
+              message: this.message,
           identify_id: this.identifyId,
+            pageNumber: 1,
         };
       }
 
@@ -442,12 +492,16 @@ export default {
           this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
           this.errorExist = false;
           this.errorMessages = "";
+
+
+
           let talkInnerElement = this.$refs.talkInnerScroll;
 
           talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight + 10,
+            top: talkInnerElement.scrollHeight,
             behavior: "auto",
           });
+
         })
         .catch((error) => {
           console.log(error.response);
@@ -458,7 +512,7 @@ export default {
           let talkInnerElement = this.$refs.talkInnerScroll;
 
           talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight + 10,
+            top: talkInnerElement.scrollHeight,
             behavior: "auto",
           });
         });
@@ -502,7 +556,7 @@ export default {
         window.location.href = url;
       }
     },
-    // window: (onload = function () {
+    // window: (scroll = function () {
     //   //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
 
     //   //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
@@ -510,10 +564,68 @@ export default {
     //   let talkInnerElement = this.$refs.talkInnerScroll;
 
     //   talkInnerElement.scrollTo({
-    //     top: talkInnerElement.scrollHeight + 10,
+    //     top: talkInnerElement.scrollHeight,
     //     behavior: "auto",
     //   });
+    // window.addEventListener('scroll', this.console);
+    // this.scroll();
     // }),
+    scroll() {
+        let talkInnerElement = this.$refs.talkInnerScroll;
+        // this.console(talkInnerElement.scrollTop);
+        // this.console('スクロールされてるよ！');
+        this.console(talkInnerElement.scrollTop);
+
+        if (talkInnerElement.scrollTop == 0) {
+            // console.log('oioiooiooiooi');
+
+            let talkInnerElement = this.$refs.talkInnerScroll;
+            this.preTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
+            this.pageNumber++;
+
+            let url = `/talk_users/${this.hisAccount.id}/contents/axios?pageNumber=${this.pageNumber}`;
+      axios
+        .get(url)
+        .then((response) => {
+          //   console.log(response.data.talkArray.talkDatas);
+          this.talkDatas = response.data.talkArray.talkDatas;
+
+        //   talkInnerElement = this.$refs.talkInnerScroll;
+        //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+
+         
+
+        //   this.hisAccount = response.data.talkArray.hisAccount;
+        //   this.baseDate = "a";
+        //   this.errorExist = false;
+        //   this.errorMessages = "";
+        //   this.message = "";
+        //   this.pageNumber = 1;
+
+          //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
+
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
+          //   console.log(talkInnerElement);
+
+          //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
+          // これで初期値を設定できた
+        })
+        .catch((error) => {
+          alert(error);
+        });
+
+        }
+
+    },
   },
 };
 </script>

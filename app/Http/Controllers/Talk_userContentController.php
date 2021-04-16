@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Talk_list;
 use App\Talk;
 use App\Http\Requests\Talk_storeRequest;
+use GuzzleHttp\Psr7\LimitStream;
 use Validator;
 
 
@@ -110,7 +111,7 @@ class Talk_userContentController extends Controller
         ]);
     }
 
-    public function axios_get(User $user)
+    public function axios_get(User $user, Request $request)
     {
         //                  ↑　ここはネストしたrouteだからパラメータを取れる。
         $myId = Auth::id();
@@ -145,7 +146,17 @@ class Talk_userContentController extends Controller
             }
 
         // ここで自分と相手に関わるtalkテーブルのカラムを全て取得する。
-        $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
+        // $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
+
+
+        $limitNumber = $request->pageNumber * 20;
+
+        $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit($limitNumber)->with('user')->get();
+
+        $talkDatas = $talkDatasDesc->reverse()->values();
+
+
+        // dd($talkDatas);
 
 
 
@@ -302,7 +313,17 @@ class Talk_userContentController extends Controller
 
 
             // 自分と相手のtalkデータを取ってくる
-            $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
+            // $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
+
+
+            $limitNumber = $request->pageNumber * 20;
+
+        $talkDatasDesc = Talk::where('from', 1)->where('to', 2)->orWhere('from', 2)->where('to', 1)->orderBy('created_at', 'desc')->limit($limitNumber)->with('user')->get();
+
+        $talkDatas = $talkDatasDesc->reverse()->values();
+
+
+        // dd($talkDatasAsc);
 
 
 
