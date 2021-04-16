@@ -284,6 +284,8 @@
                     </div>
                     @enderror
                 </div>
+                <!-- /.talk-inner -->
+
 
                 <form action="{{ route('talk_users.contents.store', ['user' => $hisAccount->id]) }}" method="post">
                     {{ csrf_field() }}

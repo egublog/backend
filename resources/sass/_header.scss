@@ -110,10 +110,13 @@ header
       color: gray;
       height: 30px;
       padding: 5px 0;
+      background-color: transparent;
+      outline: none;
     }
 
     &-show {
-      display: none;
+      // display: none;
+      display: block;
       position: absolute;
       top: 30px;
       right: 40px;

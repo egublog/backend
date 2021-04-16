@@ -44,6 +44,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('follow-details-button', require('./components/FollowDetailsButtonComponent.vue').default);
 Vue.component('follow-button', require('./components/FollowButtonComponent.vue').default);
 Vue.component('talk-show', require('./components/TalkShowComponent.vue').default);
+Vue.component('log-out-toggle', require('./components/LogOutToggleComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

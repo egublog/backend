@@ -207,6 +207,7 @@ a {
 
 
 
+
 // 共通設定
 input, textarea, button {
 	resize: none;
@@ -399,6 +400,7 @@ profile
       @include mq(tab-only) {
         text-align: right;
       }
+
 
        button {
          // margin-left: 100px;

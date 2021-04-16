@@ -47,6 +47,12 @@ export default {
         .then((response) => {
           this.followCheck = true;
           // console.log(response);
+         
+        let url = `/login`;
+       
+        window.location.href = url;
+ 
+      
         })
         .catch((error) => {
           alert(error);

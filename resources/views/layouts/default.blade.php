@@ -19,7 +19,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    
     <!-- Scripts -->
+    
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -29,8 +31,6 @@
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-    <!-- loginのtoggle用 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <link rel="stylesheet" href="@yield('css')">
     <!--なんか変更あったかも-->
@@ -63,7 +63,7 @@
                 <!-- ハンバーガー -->
 
                 <!-- ログインのtoggle -->
-                <div class="toggle">
+                <!-- <div class="toggle">
 
                     <a class="toggle-button dropdown-toggle" href="#">
                         {{ Auth::user()->name }}
@@ -80,7 +80,8 @@
                         </form>
                         
                     </div>
-                </div>
+                </div> -->
+                <log-out-toggle></log-out-toggle>
 
                 <!-- ログインのtoggle -->
 
@@ -100,8 +101,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <!-- <script src="/js/banana.js"></script> -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
+
+    <!-- loginのtoggle用 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/banana.js"></script>
+
 
 
     <!-- <script src="{{ mix('js/app.js')}}"></script> -->

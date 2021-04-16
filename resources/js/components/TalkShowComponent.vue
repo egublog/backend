@@ -66,7 +66,7 @@
               method="get"
             > -->
             <!-- ↑ ↓ 上をしたに適用　上は消すやつ -->
-            <div class="" v-on:click="back(hisAccount.id)">
+            <div class="" v-on:click="back()">
               <!-- @if($identify_id == "find")
               <input
                 name="team_string"
@@ -88,7 +88,7 @@
               <!-- {{ csrf_field() }} -->
               <!-- <input class="top-inner-back-button" type="submit" value="&lt;" /> -->
               <!-- ↑ ↓ 上をしたに適用　上は消すやつ -->
-              <button>&lt;</button>
+              <button class="top-inner-back-button">&lt;</button>
 
               <!-- </form> -->
               <!-- ↑ ↓ 上をしたに適用　上は消すやつ -->
@@ -98,32 +98,169 @@
         </div>
       </section>
       <!-- /.top -->
-  <!-- {{ setBaseDate('b') }} -->
+      <!-- {{ setBaseDate('b') }} -->
       <!-- ここにtalk -->
       <section class="talk">
-        <div class="talk-inner" id="talk-inner-scroll">
+        <div class="talk-inner" ref="talkInnerScroll">
           <template v-if="talkDatas !== []">
             <template v-for="talkData in talkDatas">
               <div :key="talkData.id" class="">
                 <!-- ↑　これは実際には表示しないやつstyle: noe -->
                 <!-- {{ console(momentDate(talkData.created_at)) }} -->
-                <template
-                  v-if="baseDate != momentDate(talkData.created_at)"
-                >
-                <!-- ここの中にロジックを埋め込みたい！これはもうvueの使用の問題かも！！！！ -->
+                <template v-if="talkData.talkCheck === 1">
+                  <!-- ここの中にロジックを埋め込みたい！これはもうvueの仕様の問題かも！！！！ -->
                   <!-- {{ setBaseDate(momentDate(talkData.created_at)) }} -->
                   <p class="talk-date">
                     {{ momentDate(talkData.created_at) }}
-                    <span class="">
-                        {{ momentDayOfTheWeek(talkData.created_at) }}
+                    <span
+                      v-if="momentDayOfTheWeek(talkData.created_at) == 0"
+                      class=""
+                    >
+                      (日)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 1"
+                    >
+                      (月)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 2"
+                    >
+                      (火)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 3"
+                    >
+                      (水)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 4"
+                    >
+                      (木)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 5"
+                    >
+                      (金)
+                    </span>
+                    <span
+                      v-else-if="momentDayOfTheWeek(talkData.created_at) == 6"
+                    >
+                      (土)
                     </span>
                   </p>
                 </template>
+
+                <template v-if="talkData.from == myId">
+                  <div class="talk-own">
+                    <div class="talk-own-content">
+                      <div class="talk-own-content-head">
+                        <p
+                          v-if="talkData.yet"
+                          class="talk-own-content-head-yet"
+                        >
+                          既読
+                        </p>
+                        <p class="talk-own-content-head-time">
+                          {{ momentTime(talkData.created_at) }}
+                        </p>
+                      </div>
+                      <div class="talk-own-content-body">
+                        <p class="talk-own-content-body-txt">
+                          {{ talkData.talk_data }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="talk-opponent">
+                    <div
+                      v-on:click="showDetail()"
+                      class="talk-opponent-content"
+                    >
+                      <div class="talk-opponent-content-img">
+                        <label>
+                          <!-- @if ($talkData->user->image === null) -->
+                          <img
+                            v-if="talkData.user.image == null"
+                            src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg"
+                            alt=""
+                          />
+                          <!-- @else -->
+                          <img v-else :src="talkData.user.image" />
+                          <!-- @endif -->
+
+                          <!-- <input name="identify_id" type="hidden" value="{{ $identify_id }}"> -->
+
+                          <!-- @if($identify_id == 'find')
+                                    <input name="team_string" type="hidden" value="{{ $team_string }}">
+                                    <input name="era_id" type="hidden" value="{{ $era_id }}">
+                                    @endif -->
+                          <!-- <input class="button" type="submit" value=""> -->
+                          <!-- ↑ ↓ 上をしたに適用　上は消すやつ -->
+                          <button class="button"></button>
+                        </label>
+                      </div>
+
+                      <div class="talk-opponent-content-body">
+                        <p class="talk-opponent-content-body-txt">
+                          {{ talkData.talk_data }}
+                          <!-- {{ console(talkData.user.id) }}
+                          {{ console("iu") }} -->
+                        </p>
+                      </div>
+                      <div class="talk-opponent-content-footer">
+                        <p class="talk-opponent-content-footer-time">
+                          {{ momentTime(talkData.created_at) }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- @endif -->
+                </template>
               </div>
             </template>
+            <!-- endfor↑ -->
           </template>
+          <!-- endif ↑ -->
+
+          <!-- @error('message') -->
+          <div v-if="errorExist" class="alert alert-danger error-message">
+            <ul>
+              <!-- @foreach ($errors->get('message') as $error) -->
+              <li v-for="errorMessage in errorMessages" :key="errorMessage">
+                {{ errorMessage }}
+              </li>
+              <!-- @endforeach -->
+            </ul>
+          </div>
+          <!-- @enderror -->
+        </div>
+        <!-- talk-inner ↑ -->
+        <div>
+          <!-- ↑ これがformタグの代わり -->
+          <!-- {{ csrf_field() }} -->
+          <div class="talk-send">
+            <!-- <input name="identify_id" type="hidden" value="{{ $identify_id }}"> -->
+            <!-- @if($identify_id == 'find')
+                        <input name="team_string" type="hidden" value="{{ $team_string }}">
+                        <input name="era_id" type="hidden" value="{{ $era_id }}">
+                        @endif -->
+            <textarea
+              v-model="message"
+              name="message"
+              id="message"
+              placeholder="メッセージを入力"
+            ></textarea>
+            <div class="talk-send-button">
+              <!-- <input class="" type="submit" value="送信"> -->
+              <button v-on:click="talkSend()">送信</button>
+            </div>
+          </div>
         </div>
       </section>
+      <!-- talk ↑ -->
     </div>
     <!-- .topTalk-wrap -->
   </div>
@@ -154,8 +291,11 @@ export default {
       hisAccount: "",
       talkListsAccounts: "",
       myId: "",
-      talk: "",
+      message: "",
       baseDate: "aaaa",
+      talkSendDatas: "",
+      errorExist: false,
+      errorMessages: "",
     };
   },
   filters: {
@@ -177,21 +317,49 @@ export default {
     axios
       .get(createdUrl)
       .then((response) => {
-        // console.log(response.data.talkArray);
+        console.log("createdと通りました");
         this.talkDatas = response.data.talkArray.talkDatas;
         this.hisAccount = response.data.talkArray.hisAccount;
         this.myId = response.data.talkArray.myId;
         this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-         this.baseDate = 'a';
+        this.baseDate = "a";
         // これで初期値を設定できた
-      console.log(this.baseDate);
-      console.log(response.data.talkArray.talkDatas[0].created_at);
-
+        // console.log(this.baseDate);
+        // console.log(response.data.talkArray.talkDatas[0].created_at);
+       
       })
       .catch((error) => {
         alert(error);
       });
+  },
+  beforeMount() {
+    // let talkInnerElement = this.$refs.talkInnerScroll;
 
+    // talkInnerElement.scrollTo({
+    //   top: talkInnerElement.scrollHeight,
+    //   behavior: "auto",
+    // });
+    console.log("mounted");
+  },
+  mounted() {
+      
+      console.log("beforeMounted");
+  },
+  beforeCreate() {
+      console.log("beforeCreated");
+  },
+  updated() {
+    console.log("updated");
+    let talkInnerElement = this.$refs.talkInnerScroll;
+
+        talkInnerElement.scrollTo({
+          top: talkInnerElement.scrollHeight + 10,
+          behavior: "auto",
+        });
+  },
+  beforeUpdate() {
+    console.log("beforeUpdate");
+     
   },
   methods: {
     userChange(userId) {
@@ -199,27 +367,40 @@ export default {
       axios
         .get(userChangeUrl)
         .then((response) => {
-          console.log(response.data.talkArray.talkDatas);
+          //   console.log(response.data.talkArray.talkDatas);
           this.talkDatas = response.data.talkArray.talkDatas;
           this.hisAccount = response.data.talkArray.hisAccount;
-          this.baseDate = 'a';
+          this.baseDate = "a";
+          this.errorExist = false;
+          this.errorMessages = "";
+          this.message = "";
 
+          //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+          let talkInnerElement = this.$refs.talkInnerScroll;
+
+          talkInnerElement.scrollTo({
+            top: talkInnerElement.scrollHeight + 10,
+            behavior: "auto",
+          });
+          //   console.log(talkInnerElement);
+
+          //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
           // これで初期値を設定できた
         })
         .catch((error) => {
           alert(error);
         });
-     this.baseDate = 'a';
-    //   console.log(userId);
+      this.baseDate = "a";
+      //   console.log(userId);
     },
-    back(userId) {
+    back() {
       if (this.identifyId == "find") {
         let url =
           "/backs/from_talk_show?" +
           "identify_id=" +
           this.identifyId +
           "&user_id=" +
-          userId +
+          this.hisAccount.id +
           "&era_id=" +
           this.eraId +
           "&team_string=" +
@@ -231,22 +412,55 @@ export default {
           "identify_id=" +
           this.identifyId +
           "&user_id=" +
-          userId;
+          this.hisAccount.id;
         window.location.href = url;
       }
     },
-    send(userId, content) {
-      let url = `/talk_users/${userId}/contents`;
+    talkSend() {
+      let url = `/talk_users/${this.hisAccount.id}/contents`;
+
+      if (this.identifyId == find) {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId,
+          era_id: this.eraId,
+          team_string: this.teamString,
+        };
+      } else {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId,
+        };
+      }
 
       axios
-        .post(url, {
-          content: content,
-        })
+        .post(url, this.talkSendDatas)
         .then((response) => {
-          this.talk = "";
+          console.log("then側！");
+          this.message = "";
+          this.talkDatas = response.data.talkArray.talkDatas;
+          this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+          this.errorExist = false;
+          this.errorMessages = "";
+          let talkInnerElement = this.$refs.talkInnerScroll;
+
+          talkInnerElement.scrollTo({
+            top: talkInnerElement.scrollHeight + 10,
+            behavior: "auto",
+          });
         })
         .catch((error) => {
-          alert(error);
+          console.log(error.response);
+          this.errorExist = true;
+          this.errorMessages = error.response.data.errors.message;
+          //   alert(error);
+          // console.log("エラー");
+          let talkInnerElement = this.$refs.talkInnerScroll;
+
+          talkInnerElement.scrollTo({
+            top: talkInnerElement.scrollHeight + 10,
+            behavior: "auto",
+          });
         });
     },
     console(abc) {
@@ -261,7 +475,7 @@ export default {
       //   水
     },
     momentTime(date) {
-      return moment(date).format("kk:mm");
+      return moment(date).format("HH:mm");
       //   08:24
     },
     setBaseDate(newDate) {
@@ -269,6 +483,37 @@ export default {
         this.baseDate = newDate;
       }
     },
+    showDetail() {
+      if (this.identifyId == "find") {
+        let url =
+          `/talk_users/${this.hisAccount.id}?` +
+          "identify_id=" +
+          this.identifyId +
+          "&era_id=" +
+          this.eraId +
+          "&team_string=" +
+          this.teamString;
+        window.location.href = url;
+      } else {
+        let url =
+          `/talk_users/${this.hisAccount.id}?` +
+          "identify_id=" +
+          this.identifyId;
+        window.location.href = url;
+      }
+    },
+    // window: (onload = function () {
+    //   //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+
+    //   //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
+
+    //   let talkInnerElement = this.$refs.talkInnerScroll;
+
+    //   talkInnerElement.scrollTo({
+    //     top: talkInnerElement.scrollHeight + 10,
+    //     behavior: "auto",
+    //   });
+    // }),
   },
 };
 </script>

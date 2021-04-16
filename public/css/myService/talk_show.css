@@ -79,7 +79,7 @@ a {
   font-size: 1.1em;
 }
 
-input, textarea {
+input, textarea, button {
   resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -159,10 +159,12 @@ header
   color: gray;
   height: 30px;
   padding: 5px 0;
+  background-color: transparent;
+  outline: none;
 }
 
 .header .toggle-show {
-  display: none;
+  display: block;
   position: absolute;
   top: 30px;
   right: 40px;
@@ -609,6 +611,7 @@ talk
   width: 40px;
   border-radius: 50%;
   overflow: hidden;
+  position: relative;
 }
 
 .talk-opponent-content-img label {
@@ -620,6 +623,7 @@ talk
   object-fit: cover;
   width: 100%;
   height: 100%;
+  position: absolute;
 }
 
 .talk-opponent-content-img label input.button {
@@ -682,14 +686,18 @@ talk
   padding-right: 20px;
 }
 
-.talk-send-button input[type="submit"] {
+.talk-send-button button {
   width: 100%;
   background-color: #6293fd;
   color: white;
 }
 
 @media (min-width: 1088px) {
-  .talk-send-button input[type="submit"]:hover {
+  .talk-send-button button:hover {
     opacity: 0.8;
   }
+}
+
+.error-message {
+  margin-top: 20px;
 }

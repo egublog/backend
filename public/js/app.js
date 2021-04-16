@@ -2033,6 +2033,9 @@ __webpack_require__.r(__webpack_exports__);
         user_id: userId
       }).then(function (response) {
         _this.followCheck = true; // console.log(response);
+
+        var url = "/login";
+        window.location.href = url;
       })["catch"](function (error) {
         alert(error);
       });
@@ -2141,8 +2144,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var unfollow = "/follows/".concat(userId);
-      axios["delete"](unfollow, {
-        userId: userId
+      axios["delete"](unfollow, {// userId: userId,多分要らないこれ
       }).then(function (response) {
         _this2.followCheck = false;
       })["catch"](function (error) {
@@ -2168,6 +2170,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { defineComponent } from '@vue/composition-api'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {},
+  data: function data() {
+    return {
+      userName: null,
+      // 後でここのfollowCheckを変えるそもそものもらう値を変える。
+      ifShow: false
+    };
+  },
+  computed: {},
+  created: function created() {
+    var _this = this;
+
+    var url = "/axios/userName";
+    axios.get(url).then(function (response) {
+      _this.userName = response.data.userName;
+    })["catch"](function (error) {
+      alert(error);
+    });
+  },
+  methods: {
+    logout: function logout() {
+      var url = "axios/logout"; // window.location.href = url;
+
+      axios.post(url).then(function (response) {
+        console.log('logout!');
+        window.location.href = '/';
+      })["catch"](function (error) {
+        alert(error);
+      }); //     this.$http.post('http://example.com/forPOST', this.newEvent, function (data, status, request) {
+      //       console.log("post success")
+      //       //status check
+      //       console.log(status)
+      //       }).error(function (data, status, request) {
+      //         console.log("post failed")
+      //  })
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TalkShowComponent.vue?vue&type=script&lang=js& ***!
@@ -2177,6 +2259,143 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2331,8 +2550,11 @@ __webpack_require__.r(__webpack_exports__);
       hisAccount: "",
       talkListsAccounts: "",
       myId: "",
-      talk: "",
-      baseDate: "aaaa"
+      message: "",
+      baseDate: "aaaa",
+      talkSendDatas: "",
+      errorExist: false,
+      errorMessages: ""
     };
   },
   filters: {
@@ -2351,18 +2573,42 @@ __webpack_require__.r(__webpack_exports__);
 
     var createdUrl = "/talk_users/".concat(this.initialUserId, "/contents/axios");
     axios.get(createdUrl).then(function (response) {
-      // console.log(response.data.talkArray);
+      console.log("createdと通りました");
       _this.talkDatas = response.data.talkArray.talkDatas;
       _this.hisAccount = response.data.talkArray.hisAccount;
       _this.myId = response.data.talkArray.myId;
       _this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-      _this.baseDate = 'a'; // これで初期値を設定できた
-
-      console.log(_this.baseDate);
-      console.log(response.data.talkArray.talkDatas[0].created_at);
+      _this.baseDate = "a"; // これで初期値を設定できた
+      // console.log(this.baseDate);
+      // console.log(response.data.talkArray.talkDatas[0].created_at);
     })["catch"](function (error) {
       alert(error);
     });
+  },
+  beforeMount: function beforeMount() {
+    // let talkInnerElement = this.$refs.talkInnerScroll;
+    // talkInnerElement.scrollTo({
+    //   top: talkInnerElement.scrollHeight,
+    //   behavior: "auto",
+    // });
+    console.log("mounted");
+  },
+  mounted: function mounted() {
+    console.log("beforeMounted");
+  },
+  beforeCreate: function beforeCreate() {
+    console.log("beforeCreated");
+  },
+  updated: function updated() {
+    console.log("updated");
+    var talkInnerElement = this.$refs.talkInnerScroll;
+    talkInnerElement.scrollTo({
+      top: talkInnerElement.scrollHeight + 10,
+      behavior: "auto"
+    });
+  },
+  beforeUpdate: function beforeUpdate() {
+    console.log("beforeUpdate");
   },
   methods: {
     userChange: function userChange(userId) {
@@ -2370,35 +2616,78 @@ __webpack_require__.r(__webpack_exports__);
 
       var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios");
       axios.get(userChangeUrl).then(function (response) {
-        console.log(response.data.talkArray.talkDatas);
+        //   console.log(response.data.talkArray.talkDatas);
         _this2.talkDatas = response.data.talkArray.talkDatas;
         _this2.hisAccount = response.data.talkArray.hisAccount;
-        _this2.baseDate = 'a'; // これで初期値を設定できた
+        _this2.baseDate = "a";
+        _this2.errorExist = false;
+        _this2.errorMessages = "";
+        _this2.message = ""; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+
+        var talkInnerElement = _this2.$refs.talkInnerScroll;
+        talkInnerElement.scrollTo({
+          top: talkInnerElement.scrollHeight + 10,
+          behavior: "auto"
+        }); //   console.log(talkInnerElement);
+        //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
+        // これで初期値を設定できた
       })["catch"](function (error) {
         alert(error);
       });
-      this.baseDate = 'a'; //   console.log(userId);
+      this.baseDate = "a"; //   console.log(userId);
     },
-    back: function back(userId) {
+    back: function back() {
       if (this.identifyId == "find") {
-        var url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + userId + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
+        var url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
         window.location.href = url;
       } else {
-        var _url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + userId;
+        var _url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id;
 
         window.location.href = _url;
       }
     },
-    send: function send(userId, content) {
+    talkSend: function talkSend() {
       var _this3 = this;
 
-      var url = "/talk_users/".concat(userId, "/contents");
-      axios.post(url, {
-        content: content
-      }).then(function (response) {
-        _this3.talk = "";
+      var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
+
+      if (this.identifyId == find) {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId,
+          era_id: this.eraId,
+          team_string: this.teamString
+        };
+      } else {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId
+        };
+      }
+
+      axios.post(url, this.talkSendDatas).then(function (response) {
+        console.log("then側！");
+        _this3.message = "";
+        _this3.talkDatas = response.data.talkArray.talkDatas;
+        _this3.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+        _this3.errorExist = false;
+        _this3.errorMessages = "";
+        var talkInnerElement = _this3.$refs.talkInnerScroll;
+        talkInnerElement.scrollTo({
+          top: talkInnerElement.scrollHeight + 10,
+          behavior: "auto"
+        });
       })["catch"](function (error) {
-        alert(error);
+        console.log(error.response);
+        _this3.errorExist = true;
+        _this3.errorMessages = error.response.data.errors.message; //   alert(error);
+        // console.log("エラー");
+
+        var talkInnerElement = _this3.$refs.talkInnerScroll;
+        talkInnerElement.scrollTo({
+          top: talkInnerElement.scrollHeight + 10,
+          behavior: "auto"
+        });
       });
     },
     console: function (_console) {
@@ -2421,13 +2710,32 @@ __webpack_require__.r(__webpack_exports__);
       return moment(date).format("d"); //   水
     },
     momentTime: function momentTime(date) {
-      return moment(date).format("kk:mm"); //   08:24
+      return moment(date).format("HH:mm"); //   08:24
     },
     setBaseDate: function setBaseDate(newDate) {
       if (this.baseDate != newDate) {
         this.baseDate = newDate;
       }
-    }
+    },
+    showDetail: function showDetail() {
+      if (this.identifyId == "find") {
+        var url = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
+        window.location.href = url;
+      } else {
+        var _url2 = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId;
+
+        window.location.href = _url2;
+      }
+    } // window: (onload = function () {
+    //   //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+    //   //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
+    //   let talkInnerElement = this.$refs.talkInnerScroll;
+    //   talkInnerElement.scrollTo({
+    //     top: talkInnerElement.scrollHeight + 10,
+    //     behavior: "auto",
+    //   });
+    // }),
+
   }
 });
 
@@ -6887,7 +7195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
 
 // exports
 
@@ -6907,6 +7215,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
 
 // exports
 
@@ -38132,6 +38459,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -38888,6 +39245,65 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "toggle" }, [
+    _c(
+      "button",
+      {
+        staticClass: "toggle-button dropdown-toggle",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            _vm.ifShow = !_vm.ifShow
+          }
+        }
+      },
+      [_vm._v("\n         " + _vm._s(_vm.userName) + "\n     ")]
+    ),
+    _vm._v(" "),
+    _vm.ifShow
+      ? _c(
+          "div",
+          { staticClass: "toggle-show dropdown-menu dropdown-menu-right" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "logout-button dropdown-item",
+                on: {
+                  click: function($event) {
+                    return _vm.logout()
+                  }
+                }
+              },
+              [_vm._v("\n             Logout\n         ")]
+            )
+          ]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TalkShowComponent.vue?vue&type=template&id=c431174e& ***!
@@ -39012,11 +39428,15 @@ var render = function() {
               {
                 on: {
                   click: function($event) {
-                    return _vm.back(_vm.hisAccount.id)
+                    return _vm.back()
                   }
                 }
               },
-              [_c("button", [_vm._v("<")])]
+              [
+                _c("button", { staticClass: "top-inner-back-button" }, [
+                  _vm._v("<")
+                ])
+              ]
             )
           ]),
           _vm._v(" "),
@@ -39027,7 +39447,7 @@ var render = function() {
       _c("section", { staticClass: "talk" }, [
         _c(
           "div",
-          { staticClass: "talk-inner", attrs: { id: "talk-inner-scroll" } },
+          { ref: "talkInnerScroll", staticClass: "talk-inner" },
           [
             _vm.talkDatas !== []
               ? [
@@ -39037,7 +39457,7 @@ var render = function() {
                         "div",
                         { key: talkData.id },
                         [
-                          _vm.baseDate != _vm.momentDate(talkData.created_at)
+                          talkData.talkCheck === 1
                             ? [
                                 _c("p", { staticClass: "talk-date" }, [
                                   _vm._v(
@@ -39047,30 +39467,309 @@ var render = function() {
                                       ) +
                                       "\n                  "
                                   ),
-                                  _c("span", {}, [
-                                    _vm._v(
-                                      "\n                      " +
-                                        _vm._s(
-                                          _vm.momentDayOfTheWeek(
-                                            talkData.created_at
-                                          )
-                                        ) +
-                                        "\n                  "
-                                    )
-                                  ])
+                                  _vm.momentDayOfTheWeek(talkData.created_at) ==
+                                  0
+                                    ? _c("span", {}, [
+                                        _vm._v(
+                                          "\n                    (日)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 1
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (月)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 2
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (火)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 3
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (水)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 4
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (木)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 5
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (金)\n                  "
+                                        )
+                                      ])
+                                    : _vm.momentDayOfTheWeek(
+                                        talkData.created_at
+                                      ) == 6
+                                    ? _c("span", [
+                                        _vm._v(
+                                          "\n                    (土)\n                  "
+                                        )
+                                      ])
+                                    : _vm._e()
                                 ])
                               ]
-                            : _vm._e()
+                            : _vm._e(),
+                          _vm._v(" "),
+                          talkData.from == _vm.myId
+                            ? [
+                                _c("div", { staticClass: "talk-own" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "talk-own-content" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "talk-own-content-head"
+                                        },
+                                        [
+                                          talkData.yet
+                                            ? _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "talk-own-content-head-yet"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        既読\n                      "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "talk-own-content-head-time"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(
+                                                    _vm.momentTime(
+                                                      talkData.created_at
+                                                    )
+                                                  ) +
+                                                  "\n                      "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "talk-own-content-body"
+                                        },
+                                        [
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "talk-own-content-body-txt"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(talkData.talk_data) +
+                                                  "\n                      "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            : [
+                                _c("div", { staticClass: "talk-opponent" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "talk-opponent-content",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.showDetail()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "talk-opponent-content-img"
+                                        },
+                                        [
+                                          _c("label", [
+                                            talkData.user.image == null
+                                              ? _c("img", {
+                                                  attrs: {
+                                                    src:
+                                                      "https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg",
+                                                    alt: ""
+                                                  }
+                                                })
+                                              : _c("img", {
+                                                  attrs: {
+                                                    src: talkData.user.image
+                                                  }
+                                                }),
+                                            _vm._v(" "),
+                                            _c("button", {
+                                              staticClass: "button"
+                                            })
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "talk-opponent-content-body"
+                                        },
+                                        [
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "talk-opponent-content-body-txt"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(talkData.talk_data) +
+                                                  "\n                        "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "talk-opponent-content-footer"
+                                        },
+                                        [
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "talk-opponent-content-footer-time"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(
+                                                    _vm.momentTime(
+                                                      talkData.created_at
+                                                    )
+                                                  ) +
+                                                  "\n                      "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
                         ],
                         2
                       )
                     ]
                   })
                 ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errorExist
+              ? _c("div", { staticClass: "alert alert-danger error-message" }, [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.errorMessages, function(errorMessage) {
+                      return _c("li", { key: errorMessage }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(errorMessage) +
+                            "\n            "
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
               : _vm._e()
           ],
           2
-        )
+        ),
+        _vm._v(" "),
+        _c("div", [
+          _c("div", { staticClass: "talk-send" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.message,
+                  expression: "message"
+                }
+              ],
+              attrs: {
+                name: "message",
+                id: "message",
+                placeholder: "メッセージを入力"
+              },
+              domProps: { value: _vm.message },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.message = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "talk-send-button" }, [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.talkSend()
+                    }
+                  }
+                },
+                [_vm._v("送信")]
+              )
+            ])
+          ])
+        ])
       ])
     ])
   ])
@@ -51288,6 +51987,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('follow-details-button', __webpack_require__(/*! ./components/FollowDetailsButtonComponent.vue */ "./resources/js/components/FollowDetailsButtonComponent.vue")["default"]);
 Vue.component('follow-button', __webpack_require__(/*! ./components/FollowButtonComponent.vue */ "./resources/js/components/FollowButtonComponent.vue")["default"]);
 Vue.component('talk-show', __webpack_require__(/*! ./components/TalkShowComponent.vue */ "./resources/js/components/TalkShowComponent.vue")["default"]);
+Vue.component('log-out-toggle', __webpack_require__(/*! ./components/LogOutToggleComponent.vue */ "./resources/js/components/LogOutToggleComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51583,6 +52283,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowDetailsButtonComponent_vue_vue_type_template_id_3a0f1545_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FollowDetailsButtonComponent_vue_vue_type_template_id_3a0f1545_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/LogOutToggleComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/LogOutToggleComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true& */ "./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true&");
+/* harmony import */ var _LogOutToggleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LogOutToggleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& */ "./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _LogOutToggleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "43c76064",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/LogOutToggleComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LogOutToggleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=style&index=0&id=43c76064&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_style_index_0_id_43c76064_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LogOutToggleComponent.vue?vue&type=template&id=43c76064&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LogOutToggleComponent_vue_vue_type_template_id_43c76064_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
