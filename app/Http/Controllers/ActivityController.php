@@ -65,8 +65,6 @@ class ActivityController extends Controller
         $hisAccount = User::find($user_id);
 
 
-       
-
         return view('myService.details')->with([
             'identify_id' => $identify_id,
             'hisAccount' => $hisAccount,
