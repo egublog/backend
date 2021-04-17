@@ -66,7 +66,6 @@ class ActivityController extends Controller
 
 
        
-
         return view('myService.details')->with([
             'identify_id' => $identify_id,
             'hisAccount' => $hisAccount,
