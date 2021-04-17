@@ -318,7 +318,7 @@ class Talk_userContentController extends Controller
 
             $limitNumber = $request->pageNumber * 20;
 
-        $talkDatasDesc = Talk::where('from', 1)->where('to', 2)->orWhere('from', 2)->where('to', 1)->orderBy('created_at', 'desc')->limit($limitNumber)->with('user')->get();
+        $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit($limitNumber)->with('user')->get();
 
         $talkDatas = $talkDatasDesc->reverse()->values();
 

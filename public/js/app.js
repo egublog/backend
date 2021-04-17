@@ -2599,10 +2599,10 @@ __webpack_require__.r(__webpack_exports__);
     //   top: talkInnerElement.scrollHeight,
     //   behavior: "auto",
     // });
-    console.log("mounted");
+    console.log("beforeMounted");
   },
   mounted: function mounted() {
-    console.log("beforeMounted");
+    console.log("mounted");
     var talkInnerElement = this.$refs.talkInnerScroll;
     talkInnerElement.addEventListener('scroll', this.scroll); //   this.scroll();
   },
@@ -2705,6 +2705,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.talkListsAccounts = response.data.talkArray.talkListsAccounts;
         _this3.errorExist = false;
         _this3.errorMessages = "";
+        console.log(_this3.talkDatas);
         var talkInnerElement = _this3.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
           top: talkInnerElement.scrollHeight,

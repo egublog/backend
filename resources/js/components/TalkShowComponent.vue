@@ -348,11 +348,11 @@ export default {
     //   top: talkInnerElement.scrollHeight,
     //   behavior: "auto",
     // });
-    console.log("mounted");
+      console.log("beforeMounted");
   },
   mounted() {
       
-      console.log("beforeMounted");
+      console.log("mounted");
       let talkInnerElement = this.$refs.talkInnerScroll;
       talkInnerElement.addEventListener('scroll', this.scroll);
     //   this.scroll();
@@ -492,6 +492,8 @@ export default {
           this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
           this.errorExist = false;
           this.errorMessages = "";
+
+          console.log(this.talkDatas);
 
 
 
