@@ -82,8 +82,6 @@ Route::resource('results', 'ResultController')->only([
 ]);
 
 
-
-
 // ActivityController
 Route::resource('activities', 'ActivityController')->only([
   'index', 'show'
