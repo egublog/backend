@@ -145,8 +145,9 @@ Route::resource('talk_users', 'Talk_userController')->only([
     
     
     // Talk_userContentController
-    Route::get('/talk_users/{user}/contents/axios', 'Talk_userContentController@axios_get')->name('talk_users.contents.axios_get');
-
+    Route::get('/talk_users/{user}/contents/axios/userChange', 'Talk_userContentController@axios_userChange')->name('talk_users.contents.axios_userChange');
+    
+    Route::get('/talk_users/{user}/contents/axios/talkUpdate', 'Talk_userContentController@axios_talkUpdate')->name('talk_users.contents.axios_talkUpdate');
 
     Route::resource('talk_users.contents', 'Talk_userContentController')->only([
       'index', 'store'

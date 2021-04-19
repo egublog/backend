@@ -284,6 +284,18 @@ export default {
     teamString: {
       required: false,
     },
+    initialTalkDatas: {
+        required: true,
+    },
+    initialTalkListsAccounts: {
+        required: true,
+    },
+    initialHisAccount: {
+        required: true,
+    },
+    initialMyId: {
+        required: true,
+    },
   },
   data: function () {
     return {
@@ -322,27 +334,33 @@ export default {
     },
   },
   created() {
-    let createdUrl = `/talk_users/${this.initialUserId}/contents/axios?pageNumber=1`;
-    axios
-      .get(createdUrl)
-      .then((response) => {
-        console.log("createdと通りました");
-        this.talkDatas = response.data.talkArray.talkDatas;
-        this.hisAccount = response.data.talkArray.hisAccount;
-        this.myId = response.data.talkArray.myId;
-        this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-        this.baseDate = "a";
+    // let createdUrl = `/talk_users/${this.initialUserId}/contents/axios?pageNumber=1`;
+    // axios
+    //   .get(createdUrl)
+    //   .then((response) => {
+        console.log("createdを通りました");
+
+         this.talkDatas = this.initialTalkDatas;
+        this.hisAccount = this.initialHisAccount;
+        this.myId = this.initialMyId;
+        this.talkListsAccounts = this.initialTalkListsAccounts;
+
+
+        
+        
+        // this.baseDate = "a";
         // これで初期値を設定できた
         // console.log(this.baseDate);
         // console.log(response.data.talkArray.talkDatas[0].created_at);
        
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
   },
   beforeMount() {
     // let talkInnerElement = this.$refs.talkInnerScroll;
+    
 
     // talkInnerElement.scrollTo({
     //   top: talkInnerElement.scrollHeight,
@@ -351,9 +369,17 @@ export default {
       console.log("beforeMounted");
   },
   mounted() {
+
+      let talkInnerElement = this.$refs.talkInnerScroll;
+        talkInnerElement.scrollTo({
+            top: talkInnerElement.scrollHeight,
+          behavior: "auto",
+        });
+
+     
       
       console.log("mounted");
-      let talkInnerElement = this.$refs.talkInnerScroll;
+     talkInnerElement = this.$refs.talkInnerScroll;
       talkInnerElement.addEventListener('scroll', this.scroll);
     //   this.scroll();
 
@@ -382,7 +408,7 @@ export default {
         let talkInnerElementNew = this.$refs.talkInnerScroll;
           this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
         
-                let differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
+        let differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
 
         talkInnerElementNew.scrollTo({
             top: differrenceTalkInnerScrollHeight,
@@ -406,7 +432,7 @@ export default {
   },
   methods: {
     userChange(userId) {
-      let userChangeUrl = `/talk_users/${userId}/contents/axios?pageNumber=1`;
+      let userChangeUrl = `/talk_users/${userId}/contents/axios/userChange`;
       axios
         .get(userChangeUrl)
         .then((response) => {
@@ -590,7 +616,7 @@ export default {
         //   });
             this.pageNumber++;
 
-            let url = `/talk_users/${this.hisAccount.id}/contents/axios?pageNumber=${this.pageNumber}`;
+            let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
       axios
         .get(url)
         .then((response) => {

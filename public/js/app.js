@@ -2542,6 +2542,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     teamString: {
       required: false
+    },
+    initialTalkDatas: {
+      required: true
+    },
+    initialTalkListsAccounts: {
+      required: true
+    },
+    initialHisAccount: {
+      required: true
+    },
+    initialMyId: {
+      required: true
     }
   },
   data: function data() {
@@ -2577,21 +2589,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this = this;
-
-    var createdUrl = "/talk_users/".concat(this.initialUserId, "/contents/axios?pageNumber=1");
-    axios.get(createdUrl).then(function (response) {
-      console.log("createdと通りました");
-      _this.talkDatas = response.data.talkArray.talkDatas;
-      _this.hisAccount = response.data.talkArray.hisAccount;
-      _this.myId = response.data.talkArray.myId;
-      _this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-      _this.baseDate = "a"; // これで初期値を設定できた
-      // console.log(this.baseDate);
-      // console.log(response.data.talkArray.talkDatas[0].created_at);
-    })["catch"](function (error) {
-      alert(error);
-    });
+    // let createdUrl = `/talk_users/${this.initialUserId}/contents/axios?pageNumber=1`;
+    // axios
+    //   .get(createdUrl)
+    //   .then((response) => {
+    console.log("createdを通りました");
+    this.talkDatas = this.initialTalkDatas;
+    this.hisAccount = this.initialHisAccount;
+    this.myId = this.initialMyId;
+    this.talkListsAccounts = this.initialTalkListsAccounts; // this.baseDate = "a";
+    // これで初期値を設定できた
+    // console.log(this.baseDate);
+    // console.log(response.data.talkArray.talkDatas[0].created_at);
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
   },
   beforeMount: function beforeMount() {
     // let talkInnerElement = this.$refs.talkInnerScroll;
@@ -2602,8 +2615,13 @@ __webpack_require__.r(__webpack_exports__);
     console.log("beforeMounted");
   },
   mounted: function mounted() {
-    console.log("mounted");
     var talkInnerElement = this.$refs.talkInnerScroll;
+    talkInnerElement.scrollTo({
+      top: talkInnerElement.scrollHeight,
+      behavior: "auto"
+    });
+    console.log("mounted");
+    talkInnerElement = this.$refs.talkInnerScroll;
     talkInnerElement.addEventListener('scroll', this.scroll); //   this.scroll();
   },
   beforeCreate: function beforeCreate() {
@@ -2641,20 +2659,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     userChange: function userChange(userId) {
-      var _this2 = this;
+      var _this = this;
 
-      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios?pageNumber=1");
+      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios/userChange");
       axios.get(userChangeUrl).then(function (response) {
         //   console.log(response.data.talkArray.talkDatas);
-        _this2.talkDatas = response.data.talkArray.talkDatas;
-        _this2.hisAccount = response.data.talkArray.hisAccount;
-        _this2.baseDate = "a";
-        _this2.errorExist = false;
-        _this2.errorMessages = "";
-        _this2.message = "";
-        _this2.pageNumber = 1; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
+        _this.talkDatas = response.data.talkArray.talkDatas;
+        _this.hisAccount = response.data.talkArray.hisAccount;
+        _this.baseDate = "a";
+        _this.errorExist = false;
+        _this.errorMessages = "";
+        _this.message = "";
+        _this.pageNumber = 1; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
 
-        var talkInnerElement = _this2.$refs.talkInnerScroll;
+        var talkInnerElement = _this.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
           top: talkInnerElement.scrollHeight,
           behavior: "auto"
@@ -2677,7 +2695,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     talkSend: function talkSend() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.pageNumber = 1;
       var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
@@ -2700,24 +2718,24 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(url, this.talkSendDatas).then(function (response) {
         console.log("then側！");
-        _this3.message = "";
-        _this3.talkDatas = response.data.talkArray.talkDatas;
-        _this3.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-        _this3.errorExist = false;
-        _this3.errorMessages = "";
-        console.log(_this3.talkDatas);
-        var talkInnerElement = _this3.$refs.talkInnerScroll;
+        _this2.message = "";
+        _this2.talkDatas = response.data.talkArray.talkDatas;
+        _this2.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+        _this2.errorExist = false;
+        _this2.errorMessages = "";
+        console.log(_this2.talkDatas);
+        var talkInnerElement = _this2.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
           top: talkInnerElement.scrollHeight,
           behavior: "auto"
         });
       })["catch"](function (error) {
         console.log(error.response);
-        _this3.errorExist = true;
-        _this3.errorMessages = error.response.data.errors.message; //   alert(error);
+        _this2.errorExist = true;
+        _this2.errorMessages = error.response.data.errors.message; //   alert(error);
         // console.log("エラー");
 
-        var talkInnerElement = _this3.$refs.talkInnerScroll;
+        var talkInnerElement = _this2.$refs.talkInnerScroll;
         talkInnerElement.scrollTo({
           top: talkInnerElement.scrollHeight,
           behavior: "auto"
@@ -2773,7 +2791,7 @@ __webpack_require__.r(__webpack_exports__);
     // this.scroll();
     // }),
     scroll: function scroll() {
-      var _this4 = this;
+      var _this3 = this;
 
       var talkInnerElement = this.$refs.talkInnerScroll; // this.console(talkInnerElement.scrollTop);
       // this.console('スクロールされてるよ！');
@@ -2789,10 +2807,10 @@ __webpack_require__.r(__webpack_exports__);
         //   });
 
         this.pageNumber++;
-        var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios?pageNumber=").concat(this.pageNumber);
+        var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios/talkUpdate?pageNumber=").concat(this.pageNumber);
         axios.get(url).then(function (response) {
           //   console.log(response.data.talkArray.talkDatas);
-          _this4.talkDatas = response.data.talkArray.talkDatas; //   talkInnerElement = this.$refs.talkInnerScroll;
+          _this3.talkDatas = response.data.talkArray.talkDatas; //   talkInnerElement = this.$refs.talkInnerScroll;
           //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
           //   this.hisAccount = response.data.talkArray.hisAccount;
           //   this.baseDate = "a";
