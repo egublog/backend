@@ -129,25 +129,6 @@ class Talk_userContentController extends Controller
         $myId = Auth::id();
         $user_id = $user->id;
 
-        // 自分が関係しているtalk_listsテーブルを新しい順で全て撮ってくる 尚、上の処理のおかげで被っている事は無い
-        // $talk_lists = Talk_list::where('from', $myId)->orWhere('to', $myId)->orderBy('created_at', 'desc')->get();
-
-        // その中で自分のidじゃ無いidだけ撮って来て配列$account_idsに入れる
-        // $account_ids = array();
-        // foreach ($talk_lists as $talk_list) {
-        //     if ($talk_list->to != $myId) {
-        //         $account_ids[] = $talk_list->to;
-        //     }
-        //     if ($talk_list->from != $myId) {
-        //         $account_ids[] = $talk_list->from;
-        //     }
-        // }
-        //    そのidをもとにfindでuser取ってきてアカウントのオブジェクトの配列を作る
-        // $talk_lists_accounts = array();
-        // foreach ($account_ids as $id) {
-        //     $talk_lists_accounts[] = User::find($id);
-        // }
-
 
         // ここで相手が自分に送信したtalkテーブルのレコードのyetカラムをtrueにする、よって既読になる
         $yetColumns = Talk::where('from', $user_id)->where('to', $myId)->get();
@@ -156,21 +137,10 @@ class Talk_userContentController extends Controller
                 $yetColumn->yet = true;
                 $yetColumn->save();
             }
-
-        // ここで自分と相手に関わるtalkテーブルのカラムを全て取得する。
-        // $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
-
-
-        // $limitNumber = $request->pageNumber * 20;
-
+     
         $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit(20)->with('user')->get();
 
         $talkDatas = $talkDatasDesc->reverse()->values();
-
-
-        // dd($talkDatas);
-
-
 
         $hisAccount = User::find($user_id);
 
@@ -178,24 +148,10 @@ class Talk_userContentController extends Controller
         $talkArray = [
             'talkDatas' => $talkDatas,
             'hisAccount' => $hisAccount,
-            // 'myId' => $myId,
-            // 'talkListsAccounts' => $talk_lists_accounts,
-            // 'userId' => $user_id,
-            // ↑ このuserIdは左側で変える時にだけ必要だけどvue側で更新するかを決めれば良いからここでも渡しておく
         ];
 
         return response()->json(['talkArray' => $talkArray]);
-
-
-        // return view('myService.talk_show')->with([
-        //     'talkDatas' => $talkDatas,
-        //     'hisAccount' => $hisAccount,
-        //     'myId' => $myId,
-        //     'user_id' => $user_id,
-        //     // 'identify_id' => $identify_id,
-
-        //     'talk_lists_accounts' => $talk_lists_accounts,
-        // ]);
+  
     }
 
 
@@ -207,37 +163,7 @@ class Talk_userContentController extends Controller
             $myId = Auth::id();
             $user_id = $user->id;
     
-            // 自分が関係しているtalk_listsテーブルを新しい順で全て撮ってくる 尚、上の処理のおかげで被っている事は無い
-            // $talk_lists = Talk_list::where('from', $myId)->orWhere('to', $myId)->orderBy('created_at', 'desc')->get();
-    
-            // その中で自分のidじゃ無いidだけ撮って来て配列$account_idsに入れる
-            // $account_ids = array();
-            // foreach ($talk_lists as $talk_list) {
-            //     if ($talk_list->to != $myId) {
-            //         $account_ids[] = $talk_list->to;
-            //     }
-            //     if ($talk_list->from != $myId) {
-            //         $account_ids[] = $talk_list->from;
-            //     }
-            // }
-            //    そのidをもとにfindでuser取ってきてアカウントのオブジェクトの配列を作る
-            // $talk_lists_accounts = array();
-            // foreach ($account_ids as $id) {
-            //     $talk_lists_accounts[] = User::find($id);
-            // }
-    
-    
-            // ここで相手が自分に送信したtalkテーブルのレコードのyetカラムをtrueにする、よって既読になる
-            // $yetColumns = Talk::where('from', $user_id)->where('to', $myId)->get();
-            // if (isset($yetColumns->first()->from))
-            //     foreach ($yetColumns as $yetColumn) {
-            //         $yetColumn->yet = true;
-            //         $yetColumn->save();
-            //     }
-    
-            // ここで自分と相手に関わるtalkテーブルのカラムを全て取得する。
-            // $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
-    
+     
     
             $limitNumber = $request->pageNumber * 20;
     
@@ -246,27 +172,11 @@ class Talk_userContentController extends Controller
             $talkDatas = $talkDatasDesc->reverse()->values();
     
     
-            // dd($talkDatas);
-    
-    
-    
-            // $hisAccount = User::find($user_id);
-    
-    
             $talkArray = [
                 'talkDatas' => $talkDatas,
-                // 'hisAccount' => $hisAccount,
-                // 'myId' => $myId,
-                // 'talkListsAccounts' => $talk_lists_accounts,
-                // 'userId' => $user_id,
-                // ↑ このuserIdは左側で変える時にだけ必要だけどvue側で更新するかを決めれば良いからここでも渡しておく
             ];
     
             return response()->json(['talkArray' => $talkArray]);
-
-
-
-
 
 
     }
@@ -304,40 +214,7 @@ class Talk_userContentController extends Controller
             $identify_id = $request->identify_id;
             $user_id = $user->id;
 
-
-
-            // $rules = [
-            //     'message' => 'string|max:200|nullable',
-            // ];
-
-            // $messages = [
-            //     'message.string' => '↓文字列で入力して下さい。',
-            //     'message.max' => '↓200文字以内で入力して下さい。',
-            // ];
-
-            // $validator = Validator::make($request->all(), $rules, $messages);
-
-            // if ($validator->fails()) {
-
-
-            //     if ($identify_id == 'find') {
-            //         $array = ['user' => $user_id, 'identify_id' => $identify_id, 'era_id' => $request->era_id, 'team_string' => $request->team_string];
-            //         return redirect()->route('talk_users.contents.index', $array)->withErrors($validator)->withInput();
-            //     }
-            //     return redirect()->route('talk_users.contents.index', ['user' => $user_id, 'identify_id' => $identify_id])->withErrors($validator)->withInput();
-            // }
-
-
-
-
-
-
-
-
             $myId = Auth::id();
-
-
-
 
             // トークを送信したタイミングで自分と相手のtalk_listを取ってくる
             $existing_talk_list =  Talk_list::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->first();
@@ -403,20 +280,10 @@ class Talk_userContentController extends Controller
                 }
             }
 
-
-            // 自分と相手のtalkデータを取ってくる
-            // $talkDatas = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'asc')->with('user')->get();
-
-
-            // $limitNumber = $request->pageNumber * 20;
-
+     
         $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit(1)->with('user')->get();
 
         $talkDatas = $talkDatasDesc->reverse()->values();
-
-
-        // dd($talkDatasAsc);
-
 
 
             $hisAccount = User::find($user_id);
@@ -428,14 +295,6 @@ class Talk_userContentController extends Controller
             if ($identify_id == 'find') {
                 $talkArray = [
                     'talkDatas' => $talkDatas,
-                    // 'hisAccount' => $hisAccount,
-                    // 'myId' => $myId,
-                    // 'userId' => $user_id,
-
-                    // 'identifyId' => $identify_id,
-
-                    // 'eraId' => $request->era_id,
-                    // 'teamString' => $request->team_string,
                     'talkListsAccounts' => $talk_lists_accounts,
                 ];
 
@@ -444,11 +303,6 @@ class Talk_userContentController extends Controller
 
             $talkArray = [
                 'talkDatas' => $talkDatas,
-                // 'hisAccount' => $hisAccount,
-                // 'myId' => $myId,
-                // 'userId' => $user_id,
-
-                // 'identifyId' => $identify_id,
                 'talkListsAccounts' => $talk_lists_accounts,
             ];
 
@@ -500,47 +354,6 @@ class Talk_userContentController extends Controller
     {
         //
     }
-
-
-
-
-
-    // public function user_show(Request $request)
-    // {
-    //     $identify_id = $request->identify_id;
-    //     $user_id = $request->user_id;
-
-    //     $myId = Auth::id();
-    //     $myAccount = User::find($myId);
-
-    //     // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
-    //     $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
-
-    //     // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-    //     $hisAccount = User::find($user_id);
-
-
-    //     // find系列だったら(era_id)($team_string)を渡す
-    //     // 尚detailsのみこのtalk_findとかがある
-    //     if ($identify_id == 'find' || $identify_id == 'talk_find') {
-    //         return view('myService.details')->with([
-    //             'identify_id' => $identify_id,
-    //             'hisAccount' => $hisAccount,
-    //             'follow_check' => $follow_check,
-    //             'era_id' => $request->era_id,
-    //             'team_string' => $request->team_string,
-    //         ]);
-    //     }
-
-    //     return view('myService.details')->with([
-    //         'identify_id' => $identify_id,
-    //         'hisAccount' => $hisAccount,
-    //         'follow_check' => $follow_check,
-    //     ]);
-    // }
-
-
-
 
 
 

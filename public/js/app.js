@@ -2259,6 +2259,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _talkShowParts_talkUsersComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./talkShowParts/talkUsersComponent.vue */ "./resources/js/components/talkShowParts/talkUsersComponent.vue");
+/* harmony import */ var _talkShowParts_talkTopsComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./talkShowParts/talkTopsComponent.vue */ "./resources/js/components/talkShowParts/talkTopsComponent.vue");
+/* harmony import */ var _talkShowParts_talkMessagesComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./talkShowParts/talkMessagesComponent.vue */ "./resources/js/components/talkShowParts/talkMessagesComponent.vue");
+/* harmony import */ var _talkShowParts_talkSendComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./talkShowParts/talkSendComponent.vue */ "./resources/js/components/talkShowParts/talkSendComponent.vue");
 //
 //
 //
@@ -2300,113 +2304,318 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// import { defineComponent } from '@vue/composition-api'
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    talkUsers: _talkShowParts_talkUsersComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    talkTops: _talkShowParts_talkTopsComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    talkMessages: _talkShowParts_talkMessagesComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    talkSend: _talkShowParts_talkSendComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  props: {
+    identifyId: {
+      required: true
+    },
+    initialUserId: {
+      required: true
+    },
+    eraId: {
+      required: false
+    },
+    teamString: {
+      required: false
+    },
+    initialTalkDatas: {
+      required: true
+    },
+    initialTalkListsAccounts: {
+      required: true
+    },
+    initialHisAccount: {
+      required: true
+    },
+    initialMyId: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      talkDatas: "",
+      hisAccount: "",
+      talkListsAccounts: "",
+      myId: "",
+      message: "",
+      //   talkSendDatas: "",
+      errorExist: false,
+      errorMessages: "",
+      pageNumber: 1 //   preTalkInnerScrollHeight: 0,
+      //   nowTalkInnerScrollHeight: 0,
+
+    };
+  },
+  computed: {
+    returnTalkDatas: function returnTalkDatas() {
+      return this.talkDatas;
+    }
+  },
+  filters: {
+    momentDate: function momentDate(date) {
+      return moment(date).format("M/D"); //   07/30
+    },
+    momentDayOfTheWeek: function momentDayOfTheWeek(date) {
+      return moment(date).format("dd"); //   水
+    },
+    momentTime: function momentTime(date) {
+      return moment(date).format("kk:mm"); //   08:24
+    }
+  },
+  created: function created() {
+    console.log("createdを通りました");
+    this.talkDatas = this.initialTalkDatas;
+    this.hisAccount = this.initialHisAccount;
+    this.myId = this.initialMyId;
+    this.talkListsAccounts = this.initialTalkListsAccounts;
+  },
+  beforeMount: function beforeMount() {
+    console.log("beforeMounted");
+  },
+  mounted: function mounted() {// let talkInnerElement = this.$refs.talkInnerScroll;
+    // talkInnerElement.scrollTo({
+    //   top: talkInnerElement.scrollHeight,
+    //   behavior: "auto",
+    // });
+    // console.log("mounted");
+    // talkInnerElement = this.$refs.talkInnerScroll;
+    // talkInnerElement.addEventListener("scroll", this.scroll);
+  },
+  beforeCreate: function beforeCreate() {// console.log("beforeCreated");
+  },
+  updated: function updated() {// console.log("updated");
+    // if (this.pageNumber == 1) {
+    //   let talkInnerElement = this.$refs.talkInnerScroll;
+    //   talkInnerElement.scrollTo({
+    //     top: talkInnerElement.scrollHeight,
+    //     behavior: "auto",
+    //   });
+    //   console.log(talkInnerElement.scrollHeight);
+    // } else {
+    //   let talkInnerElement = this.$refs.talkInnerScroll;
+    //   let talkInnerElementNew = this.$refs.talkInnerScroll;
+    //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+    //   let differrenceTalkInnerScrollHeight =
+    //     this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
+    //   talkInnerElementNew.scrollTo({
+    //     top: differrenceTalkInnerScrollHeight,
+    //     behavior: "auto",
+    //   });
+    //   console.log(2);
+    //   console.log(this.nowTalkInnerScrollHeight);
+    //   console.log(this.preTalkInnerScrollHeight);
+    //   console.log(differrenceTalkInnerScrollHeight);
+    // }
+  },
+  beforeUpdate: function beforeUpdate() {// console.log("beforeUpdate");
+  },
+  methods: {
+    userChangeParent: function userChangeParent(response) {
+      //   let userChangeUrl = `/talk_users/${userId}/contents/axios/userChange`;
+      //   axios
+      // .get(userChangeUrl)
+      // .then((response) => {
+      this.talkDatas = response.data.talkArray.talkDatas;
+      this.hisAccount = response.data.talkArray.hisAccount;
+      this.errorExist = false;
+      this.errorMessages = "";
+      this.message = "";
+      this.pageNumber = 1; // })
+      // .catch((error) => {
+      //   alert(error);
+      // });
+    },
+    // back() {
+    //   if (this.identifyId == "find") {
+    //     let url =
+    //       "/backs/from_talk_show?" +
+    //       "identify_id=" +
+    //       this.identifyId +
+    //       "&user_id=" +
+    //       this.hisAccount.id +
+    //       "&era_id=" +
+    //       this.eraId +
+    //       "&team_string=" +
+    //       this.teamString;
+    //     window.location.href = url;
+    //   } else {
+    //     let url =
+    //       "/backs/from_talk_show?" +
+    //       "identify_id=" +
+    //       this.identifyId +
+    //       "&user_id=" +
+    //       this.hisAccount.id;
+    //     window.location.href = url;
+    //   }
+    // },
+    talkSendParent: function talkSendParent(response) {
+      //   let url = `/talk_users/${this.hisAccount.id}/contents`;
+      //   if (this.identifyId == find) {
+      //     this.talkSendDatas = {
+      //       message: this.message,
+      //       identify_id: this.identifyId,
+      //       era_id: this.eraId,
+      //       team_string: this.teamString,
+      //     };
+      //   } else {
+      //     this.talkSendDatas = {
+      //       message: this.message,
+      //       identify_id: this.identifyId,
+      //     };
+      //   }
+      //   axios
+      // .post(url, this.talkSendDatas)
+      // .then((response) => {
+      console.log("then側！");
+      this.message = "";
+      this.talkDatas = response.data.talkArray.talkDatas;
+      this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+      this.errorExist = false;
+      this.errorMessages = "";
+      this.pageNumber = 1;
+      console.log(this.talkDatas); // })
+      // .catch((error) => {
+      //   console.log(error.response);
+      //   this.errorExist = true;
+      //   this.errorMessages = error.response.data.errors.message;
+      //   this.pageNumber = 1;
+      // });
+    },
+    talkSendParentError: function talkSendParentError(error) {
+      //   let url = `/talk_users/${this.hisAccount.id}/contents`;
+      //   if (this.identifyId == find) {
+      //     this.talkSendDatas = {
+      //       message: this.message,
+      //       identify_id: this.identifyId,
+      //       era_id: this.eraId,
+      //       team_string: this.teamString,
+      //     };
+      //   } else {
+      //     this.talkSendDatas = {
+      //       message: this.message,
+      //       identify_id: this.identifyId,
+      //     };
+      //   }
+      //   axios
+      //     .post(url, this.talkSendDatas)
+      //     .then((response) => {
+      //       console.log("then側！");
+      //       this.message = "";
+      //       this.talkDatas = response.data.talkArray.talkDatas;
+      //       this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+      //       this.errorExist = false;
+      //       this.errorMessages = "";
+      //       this.pageNumber = 1;
+      //       console.log(this.talkDatas);
+      //     })
+      //     .catch((error) => {
+      console.log("aiueo");
+      this.errorExist = true;
+      this.errorMessages = error.response.data.errors.message;
+      this.pageNumber = 1; // });
+    },
+    console: function (_console) {
+      function console(_x) {
+        return _console.apply(this, arguments);
+      }
+
+      console.toString = function () {
+        return _console.toString();
+      };
+
+      return console;
+    }(function (abc) {
+      console.log(abc);
+    }),
+    // momentDate(date) {
+    //   return moment(date).format("M/D");
+    //   //   07/30
+    // },
+    // momentDayOfTheWeek(date) {
+    //   return moment(date).format("d");
+    //   //   水
+    // },
+    // momentTime(date) {
+    //   return moment(date).format("HH:mm");
+    //   //   08:24
+    // },
+    // showDetail() {
+    //   if (this.identifyId == "find") {
+    //     let url =
+    //       `/talk_users/${this.hisAccount.id}?` +
+    //       "identify_id=" +
+    //       this.identifyId +
+    //       "&era_id=" +
+    //       this.eraId +
+    //       "&team_string=" +
+    //       this.teamString;
+    //     window.location.href = url;
+    //   } else {
+    //     let url =
+    //       `/talk_users/${this.hisAccount.id}?` +
+    //       "identify_id=" +
+    //       this.identifyId;
+    //     window.location.href = url;
+    //   }
+    // },
+    // scroll() {
+    //   let talkInnerElement = this.$refs.talkInnerScroll;
+    //   this.console(talkInnerElement.scrollTop);
+    //   if (talkInnerElement.scrollTop == 0) {
+    //     let talkInnerElement = this.$refs.talkInnerScroll;
+    //     this.preTalkInnerScrollHeight = talkInnerElement.scrollHeight;
+    //     this.pageNumber++;
+    //     let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
+    //     axios
+    //       .get(url)
+    //       .then((response) => {
+    //         this.talkDatas = response.data.talkArray.talkDatas;
+    //       })
+    //       .catch((error) => {
+    //         alert(error);
+    //       });
+    //   }
+    // },
+    scrollTalkUpdateParent: function scrollTalkUpdateParent() {
+      var _this = this;
+
+      // this.talkDatas = response.data.talkArray.talkDatas;
+      this.pageNumber++;
+      var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios/talkUpdate?pageNumber=").concat(this.pageNumber);
+      axios.get(url).then(function (response) {
+        _this.talkDatas = response.data.talkArray.talkDatas; // this.$emit("scroll-talk-update-parent", response);
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    textareaUpdate: function textareaUpdate(message) {
+      this.message = message;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2531,10 +2740,10 @@ __webpack_require__.r(__webpack_exports__);
 // import { defineComponent } from '@vue/composition-api'
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    identifyId: {
+    talkDatas: {
       required: true
     },
-    initialUserId: {
+    identifyId: {
       required: true
     },
     eraId: {
@@ -2543,31 +2752,24 @@ __webpack_require__.r(__webpack_exports__);
     teamString: {
       required: false
     },
-    initialTalkDatas: {
+    hisAccount: {
       required: true
     },
-    initialTalkListsAccounts: {
+    myId: {
       required: true
     },
-    initialHisAccount: {
+    errorMessages: {
       required: true
     },
-    initialMyId: {
+    errorExist: {
+      required: true
+    },
+    pageNumber: {
       required: true
     }
   },
   data: function data() {
     return {
-      talkDatas: "",
-      hisAccount: "",
-      talkListsAccounts: "",
-      myId: "",
-      message: "",
-      baseDate: "aaaa",
-      talkSendDatas: "",
-      errorExist: false,
-      errorMessages: "",
-      pageNumber: 1,
       preTalkInnerScrollHeight: 0,
       nowTalkInnerScrollHeight: 0
     };
@@ -2577,65 +2779,30 @@ __webpack_require__.r(__webpack_exports__);
       return this.talkDatas;
     }
   },
-  filters: {
-    momentDate: function momentDate(date) {
-      return moment(date).format("M/D"); //   07/30
-    },
-    momentDayOfTheWeek: function momentDayOfTheWeek(date) {
-      return moment(date).format("dd"); //   水
-    },
-    momentTime: function momentTime(date) {
-      return moment(date).format("kk:mm"); //   08:24
-    }
-  },
-  created: function created() {
-    // let createdUrl = `/talk_users/${this.initialUserId}/contents/axios?pageNumber=1`;
-    // axios
-    //   .get(createdUrl)
-    //   .then((response) => {
-    console.log("createdを通りました");
-    this.talkDatas = this.initialTalkDatas;
-    this.hisAccount = this.initialHisAccount;
-    this.myId = this.initialMyId;
-    this.talkListsAccounts = this.initialTalkListsAccounts; // this.baseDate = "a";
-    // これで初期値を設定できた
-    // console.log(this.baseDate);
-    // console.log(response.data.talkArray.talkDatas[0].created_at);
-    //   })
-    //   .catch((error) => {
-    //     alert(error);
-    //   });
-  },
-  beforeMount: function beforeMount() {
-    // let talkInnerElement = this.$refs.talkInnerScroll;
-    // talkInnerElement.scrollTo({
+  created: function created() {},
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {
+    var talkInnerElement = this.$refs.talkInnerScroll;
+    this.scrollToBottom(); // talkInnerElement.scrollTo({
     //   top: talkInnerElement.scrollHeight,
     //   behavior: "auto",
     // });
-    console.log("beforeMounted");
-  },
-  mounted: function mounted() {
-    var talkInnerElement = this.$refs.talkInnerScroll;
-    talkInnerElement.scrollTo({
-      top: talkInnerElement.scrollHeight,
-      behavior: "auto"
-    });
+
     console.log("mounted");
     talkInnerElement = this.$refs.talkInnerScroll;
-    talkInnerElement.addEventListener('scroll', this.scroll); //   this.scroll();
+    talkInnerElement.addEventListener("scroll", this.scrollTalkUpdate);
   },
-  beforeCreate: function beforeCreate() {
-    console.log("beforeCreated");
-  },
+  beforeCreate: function beforeCreate() {},
   updated: function updated() {
     console.log("updated");
 
     if (this.pageNumber == 1) {
-      var talkInnerElement = this.$refs.talkInnerScroll;
-      talkInnerElement.scrollTo({
-        top: talkInnerElement.scrollHeight,
-        behavior: "auto"
-      });
+      this.scrollToBottom();
+      var talkInnerElement = this.$refs.talkInnerScroll; // talkInnerElement.scrollTo({
+      //   top: talkInnerElement.scrollHeight,
+      //   behavior: "auto",
+      // });
+
       console.log(talkInnerElement.scrollHeight);
     } else {
       var _talkInnerElement = this.$refs.talkInnerScroll;
@@ -2645,114 +2812,25 @@ __webpack_require__.r(__webpack_exports__);
       talkInnerElementNew.scrollTo({
         top: differrenceTalkInnerScrollHeight,
         behavior: "auto"
-      });
-      console.log(2);
+      }); // console.log(2);
+
       console.log(this.nowTalkInnerScrollHeight);
       console.log(this.preTalkInnerScrollHeight);
       console.log(differrenceTalkInnerScrollHeight);
-    } //     window.addEventListener('scroll', this.console);
-    // this.console(window.scrollY);
-
+    }
   },
-  beforeUpdate: function beforeUpdate() {
-    console.log("beforeUpdate");
-  },
+  beforeUpdate: function beforeUpdate() {},
   methods: {
-    userChange: function userChange(userId) {
-      var _this = this;
-
-      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios/userChange");
-      axios.get(userChangeUrl).then(function (response) {
-        //   console.log(response.data.talkArray.talkDatas);
-        _this.talkDatas = response.data.talkArray.talkDatas;
-        _this.hisAccount = response.data.talkArray.hisAccount; //   this.baseDate = "a";
-
-        _this.errorExist = false;
-        _this.errorMessages = "";
-        _this.message = "";
-        _this.pageNumber = 1; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
-        //   let talkInnerElement = this.$refs.talkInnerScroll;
-        //   talkInnerElement.scrollTo({
-        //     top: talkInnerElement.scrollHeight,
-        //     behavior: "auto",
-        //   });
-        //   console.log(talkInnerElement);
-        //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
-        // これで初期値を設定できた
-      })["catch"](function (error) {
-        alert(error);
-      }); //   this.baseDate = "a";
-      //   console.log(userId);
-    },
-    back: function back() {
+    showDetail: function showDetail() {
       if (this.identifyId == "find") {
-        var url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
+        var url = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
         window.location.href = url;
       } else {
-        var _url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id;
+        var _url = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId;
 
         window.location.href = _url;
       }
     },
-    talkSend: function talkSend() {
-      var _this2 = this;
-
-      this.pageNumber = 1;
-      var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
-
-      if (this.identifyId == find) {
-        this.talkSendDatas = {
-          message: this.message,
-          identify_id: this.identifyId,
-          era_id: this.eraId,
-          team_string: this.teamString //   pageNumber: 1,
-
-        };
-      } else {
-        this.talkSendDatas = {
-          message: this.message,
-          identify_id: this.identifyId // pageNumber: 1,
-
-        };
-      }
-
-      axios.post(url, this.talkSendDatas).then(function (response) {
-        console.log("then側！");
-        _this2.message = "";
-        _this2.talkDatas = response.data.talkArray.talkDatas;
-        _this2.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-        _this2.errorExist = false;
-        _this2.errorMessages = "";
-        console.log(_this2.talkDatas); //   let talkInnerElement = this.$refs.talkInnerScroll;
-        //   talkInnerElement.scrollTo({
-        //     top: talkInnerElement.scrollHeight,
-        //     behavior: "auto",
-        //   });
-      })["catch"](function (error) {
-        console.log(error.response);
-        _this2.errorExist = true;
-        _this2.errorMessages = error.response.data.errors.message; //   alert(error);
-        // console.log("エラー");
-        //   let talkInnerElement = this.$refs.talkInnerScroll;
-        //   talkInnerElement.scrollTo({
-        //     top: talkInnerElement.scrollHeight,
-        //     behavior: "auto",
-        //   });
-      });
-    },
-    console: function (_console) {
-      function console(_x) {
-        return _console.apply(this, arguments);
-      }
-
-      console.toString = function () {
-        return _console.toString();
-      };
-
-      return console;
-    }(function (abc) {
-      console.log(abc);
-    }),
     momentDate: function momentDate(date) {
       return moment(date).format("M/D"); //   07/30
     },
@@ -2762,73 +2840,353 @@ __webpack_require__.r(__webpack_exports__);
     momentTime: function momentTime(date) {
       return moment(date).format("HH:mm"); //   08:24
     },
-    setBaseDate: function setBaseDate(newDate) {
-      if (this.baseDate != newDate) {
-        this.baseDate = newDate;
-      }
-    },
-    showDetail: function showDetail() {
-      if (this.identifyId == "find") {
-        var url = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
-        window.location.href = url;
-      } else {
-        var _url2 = "/talk_users/".concat(this.hisAccount.id, "?") + "identify_id=" + this.identifyId;
-
-        window.location.href = _url2;
-      }
-    },
-    // window: (scroll = function () {
-    //   //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
-    //   //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
-    //   let talkInnerElement = this.$refs.talkInnerScroll;
-    //   talkInnerElement.scrollTo({
-    //     top: talkInnerElement.scrollHeight,
-    //     behavior: "auto",
-    //   });
-    // window.addEventListener('scroll', this.console);
-    // this.scroll();
-    // }),
-    scroll: function scroll() {
-      var _this3 = this;
-
+    scrollTalkUpdate: function scrollTalkUpdate() {
       var talkInnerElement = this.$refs.talkInnerScroll; // this.console(talkInnerElement.scrollTop);
-      // this.console('スクロールされてるよ！');
-
-      this.console(talkInnerElement.scrollTop);
 
       if (talkInnerElement.scrollTop == 0) {
-        // console.log('oioiooiooiooi');
         var _talkInnerElement2 = this.$refs.talkInnerScroll;
-        this.preTalkInnerScrollHeight = _talkInnerElement2.scrollHeight; //   talkInnerElement.scrollTo({
-        //     top: talkInnerElement.scrollHeight,
-        //     behavior: "auto",
+        this.preTalkInnerScrollHeight = _talkInnerElement2.scrollHeight;
+        this.$emit("scroll-talk-update-parent"); // this.pageNumber++;
+        // let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
+        // axios
+        //   .get(url)
+        //   .then((response) => {
+        //     this.talkDatas = response.data.talkArray.talkDatas;
+        //     // this.$emit("scroll-talk-update-parent", response);
+        //   })
+        //   .catch((error) => {
+        //     alert(error);
         //   });
-
-        this.pageNumber++;
-        var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios/talkUpdate?pageNumber=").concat(this.pageNumber);
-        axios.get(url).then(function (response) {
-          //   console.log(response.data.talkArray.talkDatas);
-          _this3.talkDatas = response.data.talkArray.talkDatas; //   talkInnerElement = this.$refs.talkInnerScroll;
-          //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
-          //   this.hisAccount = response.data.talkArray.hisAccount;
-          //   this.baseDate = "a";
-          //   this.errorExist = false;
-          //   this.errorMessages = "";
-          //   this.message = "";
-          //   this.pageNumber = 1;
-          //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
-          //   let talkInnerElement = this.$refs.talkInnerScroll;
-          //   talkInnerElement.scrollTo({
-          //     top: talkInnerElement.scrollHeight,
-          //     behavior: "auto",
-          //   });
-          //   console.log(talkInnerElement);
-          //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
-          // これで初期値を設定できた
-        })["catch"](function (error) {
-          alert(error);
-        });
       }
+    },
+    scrollToBottom: function scrollToBottom() {
+      var talkInnerElement = this.$refs.talkInnerScroll;
+      talkInnerElement.scrollTo({
+        top: talkInnerElement.scrollHeight,
+        behavior: "auto"
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { defineComponent } from '@vue/composition-api'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    message: {
+      required: true
+    },
+    hisAccount: {
+      required: true
+    },
+    identifyId: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      talkSendDatas: ""
+    };
+  },
+  computed: {
+    returnTalkDatas: function returnTalkDatas() {
+      return this.talkDatas;
+    } // inputMessage: {
+    //   get() {
+    //     return this.message;
+    //   },
+    //   set(message) {
+    //     this.$emit('textarea-update', message);
+    //   }
+    // },
+
+  },
+  created: function created() {},
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {},
+  beforeCreate: function beforeCreate() {},
+  updated: function updated() {},
+  beforeUpdate: function beforeUpdate() {},
+  methods: {
+    talkSend: function talkSend() {
+      var _this = this;
+
+      var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
+      console.log(this.message);
+
+      if (this.identifyId == find) {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId // era_id: this.eraId,
+          // team_string: this.teamString,
+
+        };
+      } else {
+        this.talkSendDatas = {
+          message: this.message,
+          identify_id: this.identifyId
+        };
+      }
+
+      axios.post(url, this.talkSendDatas).then(function (response) {
+        // console.log("then側！");
+        // this.message = "";
+        // this.talkDatas = response.data.talkArray.talkDatas;
+        // this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
+        // this.errorExist = false;
+        // this.errorMessages = "";
+        // this.pageNumber = 1;
+        // console.log(this.talkDatas);
+        _this.$emit("talk-send-parent", response);
+      })["catch"](function (error) {
+        // console.log(error.response);
+        // this.errorExist = true;
+        // this.errorMessages = error.response.data.errors.message;
+        // this.pageNumber = 1;
+        _this.$emit("talk-send-parent-error", error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { defineComponent } from '@vue/composition-api'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    hisAccount: {
+      required: true
+    },
+    identifyId: {
+      required: true
+    },
+    eraId: {
+      required: false
+    },
+    teamString: {
+      required: false
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {
+    returnTalkDatas: function returnTalkDatas() {
+      return this.talkDatas;
+    }
+  },
+  created: function created() {},
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {},
+  beforeCreate: function beforeCreate() {},
+  updated: function updated() {},
+  beforeUpdate: function beforeUpdate() {},
+  methods: {
+    back: function back() {
+      if (this.identifyId == "find") {
+        var url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id + "&era_id=" + this.eraId + "&team_string=" + this.teamString;
+        window.location.href = url;
+      } else {
+        var _url = "/backs/from_talk_show?" + "identify_id=" + this.identifyId + "&user_id=" + this.hisAccount.id;
+
+        window.location.href = _url;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { defineComponent } from '@vue/composition-api'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    talkListsAccounts: {
+      required: true
+    },
+    identifyId: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {
+    returnTalkDatas: function returnTalkDatas() {
+      return this.talkDatas;
+    }
+  },
+  created: function created() {},
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {},
+  beforeCreate: function beforeCreate() {},
+  updated: function updated() {},
+  beforeUpdate: function beforeUpdate() {},
+  methods: {
+    userChange: function userChange(userId) {
+      var _this = this;
+
+      var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios/userChange");
+      axios.get(userChangeUrl).then(function (response) {
+        // this.talkDatas = response.data.talkArray.talkDatas;
+        // this.hisAccount = response.data.talkArray.hisAccount;
+        // this.errorExist = false;
+        // this.errorMessages = "";
+        // this.message = "";
+        // this.pageNumber = 1;
+        _this.$emit("usesr-change-parent", response);
+      })["catch"](function (error) {
+        alert(error);
+      });
     }
   }
 });
@@ -39413,35 +39771,224 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "pc-wrap" }, [
-    _vm.identifyId == "talk_list"
-      ? _c("section", { staticClass: "results" }, [
-          _c("div", { staticClass: "results-inner" }, [
-            _c(
-              "ul",
-              { staticClass: "results-list" },
-              [
-                _vm.talkListsAccounts !== null
-                  ? [
-                      _vm._l(_vm.talkListsAccounts, function(account) {
-                        return [
-                          _c(
-                            "div",
-                            {
-                              key: account.id,
-                              staticClass: "results-wrap",
-                              on: {
-                                click: function($event) {
-                                  return _vm.userChange(account.id)
+  return _c(
+    "div",
+    { staticClass: "pc-wrap" },
+    [
+      _c("talkUsers", {
+        attrs: {
+          talkListsAccounts: _vm.talkListsAccounts,
+          identifyId: _vm.identifyId
+        },
+        on: { "usesr-change-parent": _vm.userChangeParent }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "topTalk-wrap" },
+        [
+          _c("talkTops", {
+            attrs: { hisAccount: _vm.hisAccount, identifyId: _vm.identifyId }
+          }),
+          _vm._v(" "),
+          _c(
+            "section",
+            { staticClass: "talk" },
+            [
+              _c("talkMessages", {
+                attrs: {
+                  talkDatas: _vm.talkDatas,
+                  errorMessages: _vm.errorMessages,
+                  errorExist: _vm.errorExist,
+                  identifyId: _vm.identifyId,
+                  eraId: _vm.eraId,
+                  teamString: _vm.teamString,
+                  hisAccount: _vm.hisAccount,
+                  myId: _vm.myId,
+                  pageNumber: _vm.pageNumber
+                },
+                on: { "scroll-talk-update-parent": _vm.scrollTalkUpdateParent }
+              }),
+              _vm._v(" "),
+              _c("talkSend", {
+                attrs: {
+                  message: _vm.message,
+                  hisAccount: _vm.hisAccount,
+                  identifyId: _vm.identifyId
+                },
+                on: {
+                  "talk-send-parent": _vm.talkSendParent,
+                  "talk-send-parent-error": _vm.talkSendParentError,
+                  "textarea-update": _vm.textareaUpdate
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { ref: "talkInnerScroll", staticClass: "talk-inner" },
+    [
+      _vm.talkDatas !== []
+        ? [
+            _vm._l(_vm.returnTalkDatas, function(talkData) {
+              return [
+                _c(
+                  "div",
+                  { key: talkData.id },
+                  [
+                    talkData.talkCheck === 1
+                      ? [
+                          _c("p", { staticClass: "talk-date" }, [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(_vm.momentDate(talkData.created_at)) +
+                                "\n            "
+                            ),
+                            _vm.momentDayOfTheWeek(talkData.created_at) == 0
+                              ? _c("span", {}, [
+                                  _vm._v("\n              (日)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 1
+                              ? _c("span", [
+                                  _vm._v("\n              (月)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 2
+                              ? _c("span", [
+                                  _vm._v("\n              (火)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 3
+                              ? _c("span", [
+                                  _vm._v("\n              (水)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 4
+                              ? _c("span", [
+                                  _vm._v("\n              (木)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 5
+                              ? _c("span", [
+                                  _vm._v("\n              (金)\n            ")
+                                ])
+                              : _vm.momentDayOfTheWeek(talkData.created_at) == 6
+                              ? _c("span", [
+                                  _vm._v("\n              (土)\n            ")
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
+                    talkData.from == _vm.myId
+                      ? [
+                          _c("div", { staticClass: "talk-own" }, [
+                            _c("div", { staticClass: "talk-own-content" }, [
+                              _c(
+                                "div",
+                                { staticClass: "talk-own-content-head" },
+                                [
+                                  talkData.yet
+                                    ? _c(
+                                        "p",
+                                        {
+                                          staticClass:
+                                            "talk-own-content-head-yet"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                  既読\n                "
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "talk-own-content-head-time"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(
+                                            _vm.momentTime(talkData.created_at)
+                                          ) +
+                                          "\n                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "talk-own-content-body" },
+                                [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "talk-own-content-body-txt"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(talkData.talk_data) +
+                                          "\n                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        ]
+                      : [
+                          _c("div", { staticClass: "talk-opponent" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "talk-opponent-content",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDetail()
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c("label", { attrs: { for: "" } }, [
-                                _c("li", { staticClass: "results-item" }, [
-                                  _c("div", { staticClass: "results-head" }, [
-                                    _c("div", { staticClass: "results-img" }, [
-                                      account.image === null
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "talk-opponent-content-img" },
+                                  [
+                                    _c("label", [
+                                      talkData.user.image == null
                                         ? _c("img", {
                                             attrs: {
                                               src:
@@ -39450,423 +39997,309 @@ var render = function() {
                                             }
                                           })
                                         : _c("img", {
-                                            attrs: { src: account.image }
-                                          })
+                                            attrs: { src: talkData.user.image }
+                                          }),
+                                      _vm._v(" "),
+                                      _c("button", { staticClass: "button" })
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "results-body" }, [
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "talk-opponent-content-body" },
+                                  [
                                     _c(
-                                      "div",
-                                      { staticClass: "results-body-first" },
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "talk-opponent-content-body-txt"
+                                      },
                                       [
-                                        _c(
-                                          "p",
-                                          {
-                                            staticClass:
-                                              "results-body-first-name"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                        " +
-                                                _vm._s(account.name) +
-                                                "\n                      "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        account.user_name
-                                          ? _c(
-                                              "p",
-                                              {
-                                                staticClass:
-                                                  "results-body-first-truename"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                        " +
-                                                    _vm._s(account.user_name) +
-                                                    "\n                      "
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e()
+                                        _vm._v(
+                                          "\n                  " +
+                                            _vm._s(talkData.talk_data) +
+                                            "\n                  "
+                                        )
                                       ]
                                     )
-                                  ])
-                                ])
-                              ])
-                            ]
-                          )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "talk-opponent-content-footer"
+                                  },
+                                  [
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "talk-opponent-content-footer-time"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                  " +
+                                            _vm._s(
+                                              _vm.momentTime(
+                                                talkData.created_at
+                                              )
+                                            ) +
+                                            "\n                "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
                         ]
-                      }),
-                      _vm._v(" "),
-                      _c("h1", [_vm._v("成功中！！")])
-                    ]
-                  : _c("p", { staticClass: "results-nohit" }, [
-                      _vm._v("見つかりませんでした")
-                    ])
-              ],
-              2
-            )
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "topTalk-wrap" }, [
-      _c("section", { staticClass: "top" }, [
-        _c("div", { staticClass: "top-inner" }, [
-          _c("div", { staticClass: "top-inner-back" }, [
-            _c(
-              "div",
-              {
-                on: {
-                  click: function($event) {
-                    return _vm.back()
-                  }
-                }
-              },
-              [
-                _c("button", { staticClass: "top-inner-back-button" }, [
-                  _vm._v("<")
-                ])
+                  ],
+                  2
+                )
               ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.hisAccount.name) + "とのトーク")])
-        ])
-      ]),
+            })
+          ]
+        : _vm._e(),
       _vm._v(" "),
-      _c("section", { staticClass: "talk" }, [
-        _c(
-          "div",
-          { ref: "talkInnerScroll", staticClass: "talk-inner" },
-          [
-            _vm.talkDatas !== []
-              ? [
-                  _vm._l(_vm.returnTalkDatas, function(talkData) {
-                    return [
-                      _c(
-                        "div",
-                        { key: talkData.id },
-                        [
-                          talkData.talkCheck === 1
-                            ? [
-                                _c("p", { staticClass: "talk-date" }, [
-                                  _vm._v(
-                                    "\n                  " +
-                                      _vm._s(
-                                        _vm.momentDate(talkData.created_at)
-                                      ) +
-                                      "\n                  "
-                                  ),
-                                  _vm.momentDayOfTheWeek(talkData.created_at) ==
-                                  0
-                                    ? _c("span", {}, [
-                                        _vm._v(
-                                          "\n                    (日)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 1
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (月)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 2
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (火)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 3
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (水)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 4
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (木)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 5
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (金)\n                  "
-                                        )
-                                      ])
-                                    : _vm.momentDayOfTheWeek(
-                                        talkData.created_at
-                                      ) == 6
-                                    ? _c("span", [
-                                        _vm._v(
-                                          "\n                    (土)\n                  "
-                                        )
-                                      ])
-                                    : _vm._e()
-                                ])
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          talkData.from == _vm.myId
-                            ? [
-                                _c("div", { staticClass: "talk-own" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "talk-own-content" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "talk-own-content-head"
-                                        },
-                                        [
-                                          talkData.yet
-                                            ? _c(
-                                                "p",
-                                                {
-                                                  staticClass:
-                                                    "talk-own-content-head-yet"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                        既読\n                      "
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "talk-own-content-head-time"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                        " +
-                                                  _vm._s(
-                                                    _vm.momentTime(
-                                                      talkData.created_at
-                                                    )
-                                                  ) +
-                                                  "\n                      "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "talk-own-content-body"
-                                        },
-                                        [
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "talk-own-content-body-txt"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                        " +
-                                                  _vm._s(talkData.talk_data) +
-                                                  "\n                      "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            : [
-                                _c("div", { staticClass: "talk-opponent" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "talk-opponent-content",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.showDetail()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "talk-opponent-content-img"
-                                        },
-                                        [
-                                          _c("label", [
-                                            talkData.user.image == null
-                                              ? _c("img", {
-                                                  attrs: {
-                                                    src:
-                                                      "https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg",
-                                                    alt: ""
-                                                  }
-                                                })
-                                              : _c("img", {
-                                                  attrs: {
-                                                    src: talkData.user.image
-                                                  }
-                                                }),
-                                            _vm._v(" "),
-                                            _c("button", {
-                                              staticClass: "button"
-                                            })
-                                          ])
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "talk-opponent-content-body"
-                                        },
-                                        [
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "talk-opponent-content-body-txt"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                        " +
-                                                  _vm._s(talkData.talk_data) +
-                                                  "\n                        "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "talk-opponent-content-footer"
-                                        },
-                                        [
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                "talk-opponent-content-footer-time"
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                        " +
-                                                  _vm._s(
-                                                    _vm.momentTime(
-                                                      talkData.created_at
-                                                    )
-                                                  ) +
-                                                  "\n                      "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                        ],
-                        2
-                      )
-                    ]
-                  })
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.errorExist
-              ? _c("div", { staticClass: "alert alert-danger error-message" }, [
-                  _c(
-                    "ul",
-                    _vm._l(_vm.errorMessages, function(errorMessage) {
-                      return _c("li", { key: errorMessage }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(errorMessage) +
-                            "\n            "
-                        )
-                      ])
-                    }),
-                    0
-                  )
+      _vm.errorExist
+        ? _c("div", { staticClass: "alert alert-danger error-message" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.errorMessages, function(errorMessage) {
+                return _c("li", { key: errorMessage }, [
+                  _vm._v("\n        " + _vm._s(errorMessage) + "\n      ")
                 ])
-              : _vm._e()
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("div", [
-          _c("div", { staticClass: "talk-send" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.message,
-                  expression: "message"
-                }
-              ],
-              attrs: {
-                name: "message",
-                id: "message",
-                placeholder: "メッセージを入力"
-              },
-              domProps: { value: _vm.message },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.message = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "talk-send-button" }, [
-              _c(
-                "button",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.talkSend()
-                    }
-                  }
-                },
-                [_vm._v("送信")]
-              )
-            ])
+              }),
+              0
+            )
           ])
-        ])
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "talk-send" }, [
+      _c("textarea", {
+        attrs: {
+          name: "inputMessage",
+          id: "message",
+          placeholder: "メッセージを入力"
+        },
+        domProps: { value: _vm.message },
+        on: {
+          input: function($event) {
+            return _vm.$emit("textarea-update", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "talk-send-button" }, [
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.talkSend()
+              }
+            }
+          },
+          [_vm._v("送信")]
+        )
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "top" }, [
+    _c("div", { staticClass: "top-inner" }, [
+      _c("div", { staticClass: "top-inner-back" }, [
+        _c(
+          "div",
+          {
+            on: {
+              click: function($event) {
+                return _vm.back()
+              }
+            }
+          },
+          [
+            _c("button", { staticClass: "top-inner-back-button" }, [
+              _vm._v("<")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.hisAccount.name) + "とのトーク")])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.identifyId == "talk_list"
+    ? _c("section", { staticClass: "results" }, [
+        _c("div", { staticClass: "results-inner" }, [
+          _c(
+            "ul",
+            { staticClass: "results-list" },
+            [
+              _vm.talkListsAccounts !== null
+                ? [
+                    _vm._l(_vm.talkListsAccounts, function(account) {
+                      return [
+                        _c(
+                          "div",
+                          {
+                            key: account.id,
+                            staticClass: "results-wrap",
+                            on: {
+                              click: function($event) {
+                                return _vm.userChange(account.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("label", { attrs: { for: "" } }, [
+                              _c("li", { staticClass: "results-item" }, [
+                                _c("div", { staticClass: "results-head" }, [
+                                  _c("div", { staticClass: "results-img" }, [
+                                    account.image === null
+                                      ? _c("img", {
+                                          attrs: {
+                                            src:
+                                              "https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _c("img", {
+                                          attrs: { src: account.image }
+                                        })
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "results-body" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "results-body-first" },
+                                    [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "results-body-first-name"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                         " +
+                                              _vm._s(account.name) +
+                                              "\n                       "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      account.user_name
+                                        ? _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "results-body-first-truename"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                         " +
+                                                  _vm._s(account.user_name) +
+                                                  "\n                       "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]
+                        )
+                      ]
+                    }),
+                    _vm._v(" "),
+                    _c("h1", [_vm._v("成功中！！")])
+                  ]
+                : _c("p", { staticClass: "results-nohit" }, [
+                    _vm._v("見つかりませんでした")
+                  ])
+            ],
+            2
+          )
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52533,6 +52966,282 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TalkShowComponent_vue_vue_type_template_id_c431174e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkMessagesComponent.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkMessagesComponent.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./talkMessagesComponent.vue?vue&type=template&id=02c67c5c& */ "./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c&");
+/* harmony import */ var _talkMessagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./talkMessagesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _talkMessagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/talkShowParts/talkMessagesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkMessagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkMessagesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkMessagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkMessagesComponent.vue?vue&type=template&id=02c67c5c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkMessagesComponent.vue?vue&type=template&id=02c67c5c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkMessagesComponent_vue_vue_type_template_id_02c67c5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkSendComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkSendComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./talkSendComponent.vue?vue&type=template&id=409c9cd4& */ "./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4&");
+/* harmony import */ var _talkSendComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./talkSendComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _talkSendComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/talkShowParts/talkSendComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkSendComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkSendComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkSendComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkSendComponent.vue?vue&type=template&id=409c9cd4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkSendComponent.vue?vue&type=template&id=409c9cd4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkSendComponent_vue_vue_type_template_id_409c9cd4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkTopsComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkTopsComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./talkTopsComponent.vue?vue&type=template&id=207841c0& */ "./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0&");
+/* harmony import */ var _talkTopsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./talkTopsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _talkTopsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/talkShowParts/talkTopsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkTopsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkTopsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkTopsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkTopsComponent.vue?vue&type=template&id=207841c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkTopsComponent.vue?vue&type=template&id=207841c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkTopsComponent_vue_vue_type_template_id_207841c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkUsersComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkUsersComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./talkUsersComponent.vue?vue&type=template&id=05175c38& */ "./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38&");
+/* harmony import */ var _talkUsersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./talkUsersComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _talkUsersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/talkShowParts/talkUsersComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkUsersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkUsersComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_talkUsersComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./talkUsersComponent.vue?vue&type=template&id=05175c38& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/talkShowParts/talkUsersComponent.vue?vue&type=template&id=05175c38&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_talkUsersComponent_vue_vue_type_template_id_05175c38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
