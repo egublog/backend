@@ -439,19 +439,19 @@ export default {
           //   console.log(response.data.talkArray.talkDatas);
           this.talkDatas = response.data.talkArray.talkDatas;
           this.hisAccount = response.data.talkArray.hisAccount;
-          this.baseDate = "a";
+        //   this.baseDate = "a";
           this.errorExist = false;
           this.errorMessages = "";
           this.message = "";
           this.pageNumber = 1;
 
           //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
-          let talkInnerElement = this.$refs.talkInnerScroll;
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
 
-          talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight,
-            behavior: "auto",
-          });
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
           //   console.log(talkInnerElement);
 
           //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
@@ -460,7 +460,7 @@ export default {
         .catch((error) => {
           alert(error);
         });
-      this.baseDate = "a";
+    //   this.baseDate = "a";
       //   console.log(userId);
     },
     back() {
@@ -499,13 +499,13 @@ export default {
           identify_id: this.identifyId,
           era_id: this.eraId,
           team_string: this.teamString,
-          pageNumber: 1,
+        //   pageNumber: 1,
         };
       } else {
           this.talkSendDatas = {
               message: this.message,
           identify_id: this.identifyId,
-            pageNumber: 1,
+            // pageNumber: 1,
         };
       }
 
@@ -523,12 +523,12 @@ export default {
 
 
 
-          let talkInnerElement = this.$refs.talkInnerScroll;
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
 
-          talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight,
-            behavior: "auto",
-          });
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
 
         })
         .catch((error) => {
@@ -537,12 +537,12 @@ export default {
           this.errorMessages = error.response.data.errors.message;
           //   alert(error);
           // console.log("エラー");
-          let talkInnerElement = this.$refs.talkInnerScroll;
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
 
-          talkInnerElement.scrollTo({
-            top: talkInnerElement.scrollHeight,
-            behavior: "auto",
-          });
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
         });
     },
     console(abc) {

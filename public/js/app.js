@@ -2665,24 +2665,24 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(userChangeUrl).then(function (response) {
         //   console.log(response.data.talkArray.talkDatas);
         _this.talkDatas = response.data.talkArray.talkDatas;
-        _this.hisAccount = response.data.talkArray.hisAccount;
-        _this.baseDate = "a";
+        _this.hisAccount = response.data.talkArray.hisAccount; //   this.baseDate = "a";
+
         _this.errorExist = false;
         _this.errorMessages = "";
         _this.message = "";
         _this.pageNumber = 1; //   let talkInnerElement = document.getElementById("#talk-inner-scroll");
-
-        var talkInnerElement = _this.$refs.talkInnerScroll;
-        talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight,
-          behavior: "auto"
-        }); //   console.log(talkInnerElement);
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
+        //   console.log(talkInnerElement);
         //   talkInnerElement.scrollTop = talkInnerElement.scrollHeight;
         // これで初期値を設定できた
       })["catch"](function (error) {
         alert(error);
-      });
-      this.baseDate = "a"; //   console.log(userId);
+      }); //   this.baseDate = "a";
+      //   console.log(userId);
     },
     back: function back() {
       if (this.identifyId == "find") {
@@ -2705,14 +2705,14 @@ __webpack_require__.r(__webpack_exports__);
           message: this.message,
           identify_id: this.identifyId,
           era_id: this.eraId,
-          team_string: this.teamString,
-          pageNumber: 1
+          team_string: this.teamString //   pageNumber: 1,
+
         };
       } else {
         this.talkSendDatas = {
           message: this.message,
-          identify_id: this.identifyId,
-          pageNumber: 1
+          identify_id: this.identifyId // pageNumber: 1,
+
         };
       }
 
@@ -2723,23 +2723,21 @@ __webpack_require__.r(__webpack_exports__);
         _this2.talkListsAccounts = response.data.talkArray.talkListsAccounts;
         _this2.errorExist = false;
         _this2.errorMessages = "";
-        console.log(_this2.talkDatas);
-        var talkInnerElement = _this2.$refs.talkInnerScroll;
-        talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight,
-          behavior: "auto"
-        });
+        console.log(_this2.talkDatas); //   let talkInnerElement = this.$refs.talkInnerScroll;
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
       })["catch"](function (error) {
         console.log(error.response);
         _this2.errorExist = true;
         _this2.errorMessages = error.response.data.errors.message; //   alert(error);
         // console.log("エラー");
-
-        var talkInnerElement = _this2.$refs.talkInnerScroll;
-        talkInnerElement.scrollTo({
-          top: talkInnerElement.scrollHeight,
-          behavior: "auto"
-        });
+        //   let talkInnerElement = this.$refs.talkInnerScroll;
+        //   talkInnerElement.scrollTo({
+        //     top: talkInnerElement.scrollHeight,
+        //     behavior: "auto",
+        //   });
       });
     },
     console: function (_console) {
