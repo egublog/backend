@@ -66,31 +66,26 @@ export default {
   },
   data: function () {
     return {
-     
+
     };
   },
   computed: {
-    // returnTalkDatas: function () {
-    //   return this.talkDatas;
-    // },
+
   },
   created() {
-    console.log("TalkUsersのcreatedを通りました");
     
   },
   beforeMount() {
 
   },
   mounted() {
-    console.log("TalkUsersのmountedを通りました");
     
   },
   beforeCreate() {
    
   },
   updated() {
-    console.log("talkUsersのupdated");
-    
+   
   },
   beforeUpdate() {
 
@@ -101,12 +96,6 @@ export default {
       axios
         .get(userChangeUrl)
         .then((response) => {
-          // this.talkDatas = response.data.talkArray.talkDatas;
-          // this.hisAccount = response.data.talkArray.hisAccount;
-          // this.errorExist = false;
-          // this.errorMessages = "";
-          // this.message = "";
-          // this.pageNumber = 1;
           this.$emit("usesr-change-parent", response);
         })
         .catch((error) => {

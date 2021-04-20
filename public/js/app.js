@@ -2352,253 +2352,52 @@ __webpack_require__.r(__webpack_exports__);
       talkListsAccounts: "",
       myId: "",
       message: "",
-      //   talkSendDatas: "",
       errorExist: false,
       errorMessages: "",
-      pageNumber: 1 //   preTalkInnerScrollHeight: 0,
-      //   nowTalkInnerScrollHeight: 0,
-
+      pageNumber: 1
     };
   },
-  computed: {
-    returnTalkDatas: function returnTalkDatas() {
-      return this.talkDatas;
-    }
-  },
-  filters: {
-    momentDate: function momentDate(date) {
-      return moment(date).format("M/D"); //   07/30
-    },
-    momentDayOfTheWeek: function momentDayOfTheWeek(date) {
-      return moment(date).format("dd"); //   水
-    },
-    momentTime: function momentTime(date) {
-      return moment(date).format("kk:mm"); //   08:24
-    }
-  },
+  computed: {},
   created: function created() {
-    console.log("TalkShowのcreatedを通りました");
     this.talkDatas = this.initialTalkDatas;
     this.hisAccount = this.initialHisAccount;
     this.myId = this.initialMyId;
     this.talkListsAccounts = this.initialTalkListsAccounts;
   },
-  beforeMount: function beforeMount() {// console.log("beforeMounted");
-  },
-  mounted: function mounted() {
-    console.log("TalkShowのmountedを通りました"); // let talkInnerElement = this.$refs.talkInnerScroll;
-    // talkInnerElement.scrollTo({
-    //   top: talkInnerElement.scrollHeight,
-    //   behavior: "auto",
-    // });
-    // console.log("mounted");
-    // talkInnerElement = this.$refs.talkInnerScroll;
-    // talkInnerElement.addEventListener("scroll", this.scroll);
-  },
-  beforeCreate: function beforeCreate() {// console.log("beforeCreated");
-  },
-  updated: function updated() {
-    console.log("親のupdated");
-    console.log(this.talkDatas); // if (this.pageNumber == 1) {
-    //   let talkInnerElement = this.$refs.talkInnerScroll;
-    //   talkInnerElement.scrollTo({
-    //     top: talkInnerElement.scrollHeight,
-    //     behavior: "auto",
-    //   });
-    //   console.log(talkInnerElement.scrollHeight);
-    // } else {
-    //   let talkInnerElement = this.$refs.talkInnerScroll;
-    //   let talkInnerElementNew = this.$refs.talkInnerScroll;
-    //   this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
-    //   let differrenceTalkInnerScrollHeight =
-    //     this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
-    //   talkInnerElementNew.scrollTo({
-    //     top: differrenceTalkInnerScrollHeight,
-    //     behavior: "auto",
-    //   });
-    //   console.log(2);
-    //   console.log(this.nowTalkInnerScrollHeight);
-    //   console.log(this.preTalkInnerScrollHeight);
-    //   console.log(differrenceTalkInnerScrollHeight);
-    // }
-  },
-  beforeUpdate: function beforeUpdate() {// console.log("beforeUpdate");
-  },
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {},
+  beforeCreate: function beforeCreate() {},
+  updated: function updated() {},
+  beforeUpdate: function beforeUpdate() {},
   methods: {
     userChangeParent: function userChangeParent(response) {
-      //   let userChangeUrl = `/talk_users/${userId}/contents/axios/userChange`;
-      //   axios
-      // .get(userChangeUrl)
-      // .then((response) => {
       this.talkDatas = response.data.talkArray.talkDatas;
       this.hisAccount = response.data.talkArray.hisAccount;
       this.errorExist = false;
       this.errorMessages = "";
       this.message = "";
-      this.pageNumber = 1; // })
-      // .catch((error) => {
-      //   alert(error);
-      // });
+      this.pageNumber = 1;
     },
-    // back() {
-    //   if (this.identifyId == "find") {
-    //     let url =
-    //       "/backs/from_talk_show?" +
-    //       "identify_id=" +
-    //       this.identifyId +
-    //       "&user_id=" +
-    //       this.hisAccount.id +
-    //       "&era_id=" +
-    //       this.eraId +
-    //       "&team_string=" +
-    //       this.teamString;
-    //     window.location.href = url;
-    //   } else {
-    //     let url =
-    //       "/backs/from_talk_show?" +
-    //       "identify_id=" +
-    //       this.identifyId +
-    //       "&user_id=" +
-    //       this.hisAccount.id;
-    //     window.location.href = url;
-    //   }
-    // },
     talkSendParent: function talkSendParent(response) {
-      //   let url = `/talk_users/${this.hisAccount.id}/contents`;
-      //   if (this.identifyId == find) {
-      //     this.talkSendDatas = {
-      //       message: this.message,
-      //       identify_id: this.identifyId,
-      //       era_id: this.eraId,
-      //       team_string: this.teamString,
-      //     };
-      //   } else {
-      //     this.talkSendDatas = {
-      //       message: this.message,
-      //       identify_id: this.identifyId,
-      //     };
-      //   }
-      //   axios
-      // .post(url, this.talkSendDatas)
-      // .then((response) => {
-      console.log("then側！");
       this.message = "";
       this.talkDatas = response.data.talkArray.talkDatas;
       this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
       this.errorExist = false;
       this.errorMessages = "";
       this.pageNumber = 1;
-      console.log(this.talkDatas); // })
-      // .catch((error) => {
-      //   console.log(error.response);
-      //   this.errorExist = true;
-      //   this.errorMessages = error.response.data.errors.message;
-      //   this.pageNumber = 1;
-      // });
     },
     talkSendParentError: function talkSendParentError(error) {
-      //   let url = `/talk_users/${this.hisAccount.id}/contents`;
-      //   if (this.identifyId == find) {
-      //     this.talkSendDatas = {
-      //       message: this.message,
-      //       identify_id: this.identifyId,
-      //       era_id: this.eraId,
-      //       team_string: this.teamString,
-      //     };
-      //   } else {
-      //     this.talkSendDatas = {
-      //       message: this.message,
-      //       identify_id: this.identifyId,
-      //     };
-      //   }
-      //   axios
-      //     .post(url, this.talkSendDatas)
-      //     .then((response) => {
-      //       console.log("then側！");
-      //       this.message = "";
-      //       this.talkDatas = response.data.talkArray.talkDatas;
-      //       this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-      //       this.errorExist = false;
-      //       this.errorMessages = "";
-      //       this.pageNumber = 1;
-      //       console.log(this.talkDatas);
-      //     })
-      //     .catch((error) => {
-      console.log("aiueo");
       this.errorExist = true;
       this.errorMessages = error.response.data.errors.message;
-      this.pageNumber = 1; // });
+      this.pageNumber = 1;
     },
-    console: function (_console) {
-      function console(_x) {
-        return _console.apply(this, arguments);
-      }
-
-      console.toString = function () {
-        return _console.toString();
-      };
-
-      return console;
-    }(function (abc) {
-      console.log(abc);
-    }),
-    // momentDate(date) {
-    //   return moment(date).format("M/D");
-    //   //   07/30
-    // },
-    // momentDayOfTheWeek(date) {
-    //   return moment(date).format("d");
-    //   //   水
-    // },
-    // momentTime(date) {
-    //   return moment(date).format("HH:mm");
-    //   //   08:24
-    // },
-    // showDetail() {
-    //   if (this.identifyId == "find") {
-    //     let url =
-    //       `/talk_users/${this.hisAccount.id}?` +
-    //       "identify_id=" +
-    //       this.identifyId +
-    //       "&era_id=" +
-    //       this.eraId +
-    //       "&team_string=" +
-    //       this.teamString;
-    //     window.location.href = url;
-    //   } else {
-    //     let url =
-    //       `/talk_users/${this.hisAccount.id}?` +
-    //       "identify_id=" +
-    //       this.identifyId;
-    //     window.location.href = url;
-    //   }
-    // },
-    // scroll() {
-    //   let talkInnerElement = this.$refs.talkInnerScroll;
-    //   this.console(talkInnerElement.scrollTop);
-    //   if (talkInnerElement.scrollTop == 0) {
-    //     let talkInnerElement = this.$refs.talkInnerScroll;
-    //     this.preTalkInnerScrollHeight = talkInnerElement.scrollHeight;
-    //     this.pageNumber++;
-    //     let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
-    //     axios
-    //       .get(url)
-    //       .then((response) => {
-    //         this.talkDatas = response.data.talkArray.talkDatas;
-    //       })
-    //       .catch((error) => {
-    //         alert(error);
-    //       });
-    //   }
-    // },
     scrollTalkUpdateParent: function scrollTalkUpdateParent() {
       var _this = this;
 
-      // this.talkDatas = response.data.talkArray.talkDatas;
       this.pageNumber++;
       var url = "/talk_users/".concat(this.hisAccount.id, "/contents/axios/talkUpdate?pageNumber=").concat(this.pageNumber);
       axios.get(url).then(function (response) {
-        _this.talkDatas = response.data.talkArray.talkDatas; // this.$emit("scroll-talk-update-parent", response);
+        _this.talkDatas = response.data.talkArray.talkDatas;
       })["catch"](function (error) {
         alert(error);
       });
@@ -2783,49 +2582,26 @@ __webpack_require__.r(__webpack_exports__);
       return this.talkDatas;
     }
   },
-  created: function created() {
-    console.log("talkMessagesのcreatedを通りました");
-  },
+  created: function created() {},
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
-    console.log("talkMessagesのmountedを通りました");
     var talkInnerElement = this.$refs.talkInnerScroll;
-    this.scrollToBottom(); // talkInnerElement.scrollTo({
-    //   top: talkInnerElement.scrollHeight,
-    //   behavior: "auto",
-    // });
-
-    console.log("mounted");
+    this.scrollToBottom();
     talkInnerElement = this.$refs.talkInnerScroll;
     talkInnerElement.addEventListener("scroll", this.scrollTalkUpdate);
   },
   beforeCreate: function beforeCreate() {},
   updated: function updated() {
-    console.log("talkMessageのupdated");
-    console.log(this.talkDatas);
-
     if (this.pageNumber == 1) {
       this.scrollToBottom();
-      var talkInnerElement = this.$refs.talkInnerScroll; // talkInnerElement.scrollTo({
-      //   top: talkInnerElement.scrollHeight,
-      //   behavior: "auto",
-      // });
-
-      console.log(talkInnerElement.scrollHeight);
     } else {
-      var _talkInnerElement = this.$refs.talkInnerScroll; // let talkInnerElementNew = this.$refs.talkInnerScroll;
-
-      this.nowTalkInnerScrollHeight = _talkInnerElement.scrollHeight;
+      var talkInnerElement = this.$refs.talkInnerScroll;
+      this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
       var differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
-
-      _talkInnerElement.scrollTo({
+      talkInnerElement.scrollTo({
         top: differrenceTalkInnerScrollHeight,
         behavior: "auto"
-      }); // console.log(2);
-      // console.log(this.nowTalkInnerScrollHeight);
-      // console.log(this.preTalkInnerScrollHeight);
-      // console.log(differrenceTalkInnerScrollHeight);
-
+      });
     }
   },
   beforeUpdate: function beforeUpdate() {},
@@ -2850,22 +2626,12 @@ __webpack_require__.r(__webpack_exports__);
       return moment(date).format("HH:mm"); //   08:24
     },
     scrollTalkUpdate: function scrollTalkUpdate() {
-      var talkInnerElement = this.$refs.talkInnerScroll; // this.console(talkInnerElement.scrollTop);
+      var talkInnerElement = this.$refs.talkInnerScroll;
 
       if (talkInnerElement.scrollTop == 0) {
-        var _talkInnerElement2 = this.$refs.talkInnerScroll;
-        this.preTalkInnerScrollHeight = _talkInnerElement2.scrollHeight;
-        this.$emit("scroll-talk-update-parent"); // this.pageNumber++;
-        // let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
-        // axios
-        //   .get(url)
-        //   .then((response) => {
-        //     this.talkDatas = response.data.talkArray.talkDatas;
-        //     // this.$emit("scroll-talk-update-parent", response);
-        //   })
-        //   .catch((error) => {
-        //     alert(error);
-        //   });
+        var _talkInnerElement = this.$refs.talkInnerScroll;
+        this.preTalkInnerScrollHeight = _talkInnerElement.scrollHeight;
+        this.$emit("scroll-talk-update-parent");
       }
     },
     scrollToBottom: function scrollToBottom() {
@@ -2932,64 +2698,25 @@ __webpack_require__.r(__webpack_exports__);
       talkSendDatas: ""
     };
   },
-  computed: {// returnTalkDatas: function () {
-    //   return this.talkDatas;
-    // },
-    // inputMessage: {
-    //   get() {
-    //     return this.message;
-    //   },
-    //   set(message) {
-    //     this.$emit('textarea-update', message);
-    //   }
-    // },
-  },
-  created: function created() {
-    console.log("talkSendのcreatedを通りました");
-  },
+  computed: {},
+  created: function created() {},
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {
-    console.log("talkSendのmountedを通りました");
-  },
+  mounted: function mounted() {},
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {
-    console.log("talkSendのupdated"); // console.log(this.talkDat);
-  },
+  updated: function updated() {},
   beforeUpdate: function beforeUpdate() {},
   methods: {
     talkSend: function talkSend() {
       var _this = this;
 
-      var url = "/talk_users/".concat(this.hisAccount.id, "/contents"); // console.log(this.message);
-      // if (this.identifyId == find) {
-
+      var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
       this.talkSendDatas = {
         message: this.message,
-        identify_id: this.identifyId // era_id: this.eraId,
-        // team_string: this.teamString,
-
-      }; // } else {
-      //   this.talkSendDatas = {
-      //     message: this.message,
-      //     identify_id: this.identifyId,
-      //   };
-      // }
-
+        identify_id: this.identifyId
+      };
       axios.post(url, this.talkSendDatas).then(function (response) {
-        // console.log("then側！");
-        // this.message = "";
-        // this.talkDatas = response.data.talkArray.talkDatas;
-        // this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-        // this.errorExist = false;
-        // this.errorMessages = "";
-        // this.pageNumber = 1;
-        // console.log(this.talkDatas);
         _this.$emit("talk-send-parent", response);
       })["catch"](function (error) {
-        // console.log(error.response);
-        // this.errorExist = true;
-        // this.errorMessages = error.response.data.errors.message;
-        // this.pageNumber = 1;
         _this.$emit("talk-send-parent-error", error);
       });
     }
@@ -3069,21 +2796,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {// returnTalkDatas: function () {
-    //   return this.talkDatas;
-    // },
-  },
-  created: function created() {
-    console.log("TalkTopのcreatedを通りました");
-  },
+  computed: {},
+  created: function created() {},
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {
-    console.log("TalkTopのmountedを通りました");
-  },
+  mounted: function mounted() {},
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {
-    console.log("TalkTopsのupdated");
-  },
+  updated: function updated() {},
   beforeUpdate: function beforeUpdate() {},
   methods: {
     back: function back() {
@@ -3177,21 +2895,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {// returnTalkDatas: function () {
-    //   return this.talkDatas;
-    // },
-  },
-  created: function created() {
-    console.log("TalkUsersのcreatedを通りました");
-  },
+  computed: {},
+  created: function created() {},
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {
-    console.log("TalkUsersのmountedを通りました");
-  },
+  mounted: function mounted() {},
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {
-    console.log("talkUsersのupdated");
-  },
+  updated: function updated() {},
   beforeUpdate: function beforeUpdate() {},
   methods: {
     userChange: function userChange(userId) {
@@ -3199,12 +2908,6 @@ __webpack_require__.r(__webpack_exports__);
 
       var userChangeUrl = "/talk_users/".concat(userId, "/contents/axios/userChange");
       axios.get(userChangeUrl).then(function (response) {
-        // this.talkDatas = response.data.talkArray.talkDatas;
-        // this.hisAccount = response.data.talkArray.hisAccount;
-        // this.errorExist = false;
-        // this.errorMessages = "";
-        // this.message = "";
-        // this.pageNumber = 1;
         _this.$emit("usesr-change-parent", response);
       })["catch"](function (error) {
         alert(error);

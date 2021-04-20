@@ -164,44 +164,26 @@ export default {
     },
   },
   created() {
-    console.log("talkMessagesのcreatedを通りました");
 
   },
   beforeMount() {},
   mounted() {
-    console.log("talkMessagesのmountedを通りました");
 
     let talkInnerElement = this.$refs.talkInnerScroll;
 
       this.scrollToBottom();
 
-    // talkInnerElement.scrollTo({
-    //   top: talkInnerElement.scrollHeight,
-    //   behavior: "auto",
-    // });
-    console.log("mounted");
     talkInnerElement = this.$refs.talkInnerScroll;
     talkInnerElement.addEventListener("scroll", this.scrollTalkUpdate);
   },
   beforeCreate() {},
   updated() {
-    console.log("talkMessageのupdated");
-    console.log(this.talkDatas);
 
     if (this.pageNumber == 1) {
       this.scrollToBottom();
-
-      let talkInnerElement = this.$refs.talkInnerScroll;
-      // talkInnerElement.scrollTo({
-      //   top: talkInnerElement.scrollHeight,
-      //   behavior: "auto",
-      // });
-
-      console.log(talkInnerElement.scrollHeight);
     } else {
       let talkInnerElement = this.$refs.talkInnerScroll;
 
-      // let talkInnerElementNew = this.$refs.talkInnerScroll;
       this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
 
       let differrenceTalkInnerScrollHeight =
@@ -211,10 +193,6 @@ export default {
         top: differrenceTalkInnerScrollHeight,
         behavior: "auto",
       });
-      // console.log(2);
-      // console.log(this.nowTalkInnerScrollHeight);
-      // console.log(this.preTalkInnerScrollHeight);
-      // console.log(differrenceTalkInnerScrollHeight);
     }
   },
   beforeUpdate() {},
@@ -252,26 +230,12 @@ export default {
     },
     scrollTalkUpdate() {
       let talkInnerElement = this.$refs.talkInnerScroll;
-      // this.console(talkInnerElement.scrollTop);
 
       if (talkInnerElement.scrollTop == 0) {
         let talkInnerElement = this.$refs.talkInnerScroll;
         this.preTalkInnerScrollHeight = talkInnerElement.scrollHeight;
 
         this.$emit("scroll-talk-update-parent");
-
-        // this.pageNumber++;
-
-        // let url = `/talk_users/${this.hisAccount.id}/contents/axios/talkUpdate?pageNumber=${this.pageNumber}`;
-        // axios
-        //   .get(url)
-        //   .then((response) => {
-        //     this.talkDatas = response.data.talkArray.talkDatas;
-        //     // this.$emit("scroll-talk-update-parent", response);
-        //   })
-        //   .catch((error) => {
-        //     alert(error);
-        //   });
       }
     },
     scrollToBottom() {

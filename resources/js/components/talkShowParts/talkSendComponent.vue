@@ -44,36 +44,22 @@ export default {
     };
   },
   computed: {
-    // returnTalkDatas: function () {
-    //   return this.talkDatas;
-    // },
-    // inputMessage: {
-    //   get() {
-    //     return this.message;
-    //   },
-    //   set(message) {
-    //     this.$emit('textarea-update', message);
-    //   }
-    // },
+
   },
   created() {
-    console.log("talkSendのcreatedを通りました");
-    
+   
   },
   beforeMount() {
 
   },
   mounted() {
-    console.log("talkSendのmountedを通りました");
     
   },
   beforeCreate() {
    
   },
   updated() {
-    console.log("talkSendのupdated");
-    // console.log(this.talkDat);
-    
+
   },
   beforeUpdate() {
 
@@ -82,42 +68,17 @@ export default {
    talkSend() {
       let url = `/talk_users/${this.hisAccount.id}/contents`;
 
-      // console.log(this.message);
-
-      // if (this.identifyId == find) {
         this.talkSendDatas = {
           message: this.message,
           identify_id: this.identifyId,
-          // era_id: this.eraId,
-          // team_string: this.teamString,
         };
-      // } else {
-      //   this.talkSendDatas = {
-      //     message: this.message,
-      //     identify_id: this.identifyId,
-      //   };
-      // }
-
+  
       axios
         .post(url, this.talkSendDatas)
         .then((response) => {
-          // console.log("then側！");
-          // this.message = "";
-          // this.talkDatas = response.data.talkArray.talkDatas;
-          // this.talkListsAccounts = response.data.talkArray.talkListsAccounts;
-          // this.errorExist = false;
-          // this.errorMessages = "";
-          // this.pageNumber = 1;
-
-          // console.log(this.talkDatas);
           this.$emit("talk-send-parent", response);
-
         })
         .catch((error) => {
-          // console.log(error.response);
-          // this.errorExist = true;
-          // this.errorMessages = error.response.data.errors.message;
-          // this.pageNumber = 1;
           this.$emit("talk-send-parent-error", error);
         });
     },
