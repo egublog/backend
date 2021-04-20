@@ -44,9 +44,9 @@ export default {
     };
   },
   computed: {
-    returnTalkDatas: function () {
-      return this.talkDatas;
-    },
+    // returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
     // inputMessage: {
     //   get() {
     //     return this.message;
@@ -57,18 +57,22 @@ export default {
     // },
   },
   created() {
+    console.log("talkSendのcreatedを通りました");
     
   },
   beforeMount() {
 
   },
   mounted() {
+    console.log("talkSendのmountedを通りました");
     
   },
   beforeCreate() {
    
   },
   updated() {
+    console.log("talkSendのupdated");
+    // console.log(this.talkDat);
     
   },
   beforeUpdate() {
@@ -78,21 +82,21 @@ export default {
    talkSend() {
       let url = `/talk_users/${this.hisAccount.id}/contents`;
 
-      console.log(this.message);
+      // console.log(this.message);
 
-      if (this.identifyId == find) {
+      // if (this.identifyId == find) {
         this.talkSendDatas = {
           message: this.message,
           identify_id: this.identifyId,
           // era_id: this.eraId,
           // team_string: this.teamString,
         };
-      } else {
-        this.talkSendDatas = {
-          message: this.message,
-          identify_id: this.identifyId,
-        };
-      }
+      // } else {
+      //   this.talkSendDatas = {
+      //     message: this.message,
+      //     identify_id: this.identifyId,
+      //   };
+      // }
 
       axios
         .post(url, this.talkSendDatas)

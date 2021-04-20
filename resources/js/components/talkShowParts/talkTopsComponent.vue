@@ -66,23 +66,26 @@ export default {
     };
   },
   computed: {
-    returnTalkDatas: function () {
-      return this.talkDatas;
-    },
+    // returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
   },
   created() {
+    console.log("TalkTopのcreatedを通りました");
     
   },
   beforeMount() {
 
   },
   mounted() {
+    console.log("TalkTopのmountedを通りました");
     
   },
   beforeCreate() {
    
   },
   updated() {
+    console.log("TalkTopsのupdated");
     
   },
   beforeUpdate() {

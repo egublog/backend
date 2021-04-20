@@ -70,23 +70,26 @@ export default {
     };
   },
   computed: {
-    returnTalkDatas: function () {
-      return this.talkDatas;
-    },
+    // returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
   },
   created() {
+    console.log("TalkUsersのcreatedを通りました");
     
   },
   beforeMount() {
 
   },
   mounted() {
+    console.log("TalkUsersのmountedを通りました");
     
   },
   beforeCreate() {
    
   },
   updated() {
+    console.log("talkUsersのupdated");
     
   },
   beforeUpdate() {

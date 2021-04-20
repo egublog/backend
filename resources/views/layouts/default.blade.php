@@ -81,7 +81,7 @@
                         
                     </div>
                 </div> -->
-                <log-out-toggle></log-out-toggle>
+                <log-out-toggle :user-name="{{ json_encode(Auth::user()->name) }}"></log-out-toggle>
 
                 <!-- ログインのtoggle -->
 

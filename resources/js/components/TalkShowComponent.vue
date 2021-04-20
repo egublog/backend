@@ -13,7 +13,7 @@
     <div class="topTalk-wrap">
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<talkTop> -->
-      <talkTops :hisAccount="hisAccount" :identifyId="identifyId"></talkTops>
+      <talkTops :hisAccount="hisAccount" :identifyId="identifyId" :eraId="eraId" :teamString="teamString"></talkTops>
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</talkTop> -->
 
       <!-- /.top -->
@@ -116,7 +116,7 @@ export default {
     },
   },
   created() {
-    console.log("createdを通りました");
+    console.log("TalkShowのcreatedを通りました");
 
     this.talkDatas = this.initialTalkDatas;
     this.hisAccount = this.initialHisAccount;
@@ -124,9 +124,11 @@ export default {
     this.talkListsAccounts = this.initialTalkListsAccounts;
   },
   beforeMount() {
-    console.log("beforeMounted");
+    // console.log("beforeMounted");
   },
   mounted() {
+    console.log("TalkShowのmountedを通りました");
+
     // let talkInnerElement = this.$refs.talkInnerScroll;
     // talkInnerElement.scrollTo({
     //   top: talkInnerElement.scrollHeight,
@@ -140,7 +142,9 @@ export default {
     // console.log("beforeCreated");
   },
   updated() {
-    // console.log("updated");
+    console.log("親のupdated");
+    console.log(this.talkDatas);
+
 
     // if (this.pageNumber == 1) {
     //   let talkInnerElement = this.$refs.talkInnerScroll;

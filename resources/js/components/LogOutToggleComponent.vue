@@ -33,11 +33,12 @@
 
 export default {
   props: {
-    
+    userName: {
+      required: true,
+    },
   },
   data() {
     return {
-      userName: null,
       // 後でここのfollowCheckを変えるそもそものもらう値を変える。
       ifShow: false,
     };

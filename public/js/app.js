@@ -2209,10 +2209,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 // import { defineComponent } from '@vue/composition-api'
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {},
+  props: {
+    userName: {
+      required: true
+    }
+  },
   data: function data() {
     return {
-      userName: null,
       // 後でここのfollowCheckを変えるそもそものもらう値を変える。
       ifShow: false
     };
@@ -2374,16 +2377,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    console.log("createdを通りました");
+    console.log("TalkShowのcreatedを通りました");
     this.talkDatas = this.initialTalkDatas;
     this.hisAccount = this.initialHisAccount;
     this.myId = this.initialMyId;
     this.talkListsAccounts = this.initialTalkListsAccounts;
   },
-  beforeMount: function beforeMount() {
-    console.log("beforeMounted");
+  beforeMount: function beforeMount() {// console.log("beforeMounted");
   },
-  mounted: function mounted() {// let talkInnerElement = this.$refs.talkInnerScroll;
+  mounted: function mounted() {
+    console.log("TalkShowのmountedを通りました"); // let talkInnerElement = this.$refs.talkInnerScroll;
     // talkInnerElement.scrollTo({
     //   top: talkInnerElement.scrollHeight,
     //   behavior: "auto",
@@ -2394,8 +2397,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeCreate: function beforeCreate() {// console.log("beforeCreated");
   },
-  updated: function updated() {// console.log("updated");
-    // if (this.pageNumber == 1) {
+  updated: function updated() {
+    console.log("親のupdated");
+    console.log(this.talkDatas); // if (this.pageNumber == 1) {
     //   let talkInnerElement = this.$refs.talkInnerScroll;
     //   talkInnerElement.scrollTo({
     //     top: talkInnerElement.scrollHeight,
@@ -2779,9 +2783,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.talkDatas;
     }
   },
-  created: function created() {},
+  created: function created() {
+    console.log("talkMessagesのcreatedを通りました");
+  },
   beforeMount: function beforeMount() {},
   mounted: function mounted() {
+    console.log("talkMessagesのmountedを通りました");
     var talkInnerElement = this.$refs.talkInnerScroll;
     this.scrollToBottom(); // talkInnerElement.scrollTo({
     //   top: talkInnerElement.scrollHeight,
@@ -2794,7 +2801,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeCreate: function beforeCreate() {},
   updated: function updated() {
-    console.log("updated");
+    console.log("talkMessageのupdated");
+    console.log(this.talkDatas);
 
     if (this.pageNumber == 1) {
       this.scrollToBottom();
@@ -2805,18 +2813,19 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(talkInnerElement.scrollHeight);
     } else {
-      var _talkInnerElement = this.$refs.talkInnerScroll;
-      var talkInnerElementNew = this.$refs.talkInnerScroll;
+      var _talkInnerElement = this.$refs.talkInnerScroll; // let talkInnerElementNew = this.$refs.talkInnerScroll;
+
       this.nowTalkInnerScrollHeight = _talkInnerElement.scrollHeight;
       var differrenceTalkInnerScrollHeight = this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
-      talkInnerElementNew.scrollTo({
+
+      _talkInnerElement.scrollTo({
         top: differrenceTalkInnerScrollHeight,
         behavior: "auto"
       }); // console.log(2);
+      // console.log(this.nowTalkInnerScrollHeight);
+      // console.log(this.preTalkInnerScrollHeight);
+      // console.log(differrenceTalkInnerScrollHeight);
 
-      console.log(this.nowTalkInnerScrollHeight);
-      console.log(this.preTalkInnerScrollHeight);
-      console.log(differrenceTalkInnerScrollHeight);
     }
   },
   beforeUpdate: function beforeUpdate() {},
@@ -2923,10 +2932,10 @@ __webpack_require__.r(__webpack_exports__);
       talkSendDatas: ""
     };
   },
-  computed: {
-    returnTalkDatas: function returnTalkDatas() {
-      return this.talkDatas;
-    } // inputMessage: {
+  computed: {// returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
+    // inputMessage: {
     //   get() {
     //     return this.message;
     //   },
@@ -2934,34 +2943,37 @@ __webpack_require__.r(__webpack_exports__);
     //     this.$emit('textarea-update', message);
     //   }
     // },
-
   },
-  created: function created() {},
+  created: function created() {
+    console.log("talkSendのcreatedを通りました");
+  },
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log("talkSendのmountedを通りました");
+  },
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {},
+  updated: function updated() {
+    console.log("talkSendのupdated"); // console.log(this.talkDat);
+  },
   beforeUpdate: function beforeUpdate() {},
   methods: {
     talkSend: function talkSend() {
       var _this = this;
 
-      var url = "/talk_users/".concat(this.hisAccount.id, "/contents");
-      console.log(this.message);
+      var url = "/talk_users/".concat(this.hisAccount.id, "/contents"); // console.log(this.message);
+      // if (this.identifyId == find) {
 
-      if (this.identifyId == find) {
-        this.talkSendDatas = {
-          message: this.message,
-          identify_id: this.identifyId // era_id: this.eraId,
-          // team_string: this.teamString,
+      this.talkSendDatas = {
+        message: this.message,
+        identify_id: this.identifyId // era_id: this.eraId,
+        // team_string: this.teamString,
 
-        };
-      } else {
-        this.talkSendDatas = {
-          message: this.message,
-          identify_id: this.identifyId
-        };
-      }
+      }; // } else {
+      //   this.talkSendDatas = {
+      //     message: this.message,
+      //     identify_id: this.identifyId,
+      //   };
+      // }
 
       axios.post(url, this.talkSendDatas).then(function (response) {
         // console.log("then側！");
@@ -3057,16 +3069,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {
-    returnTalkDatas: function returnTalkDatas() {
-      return this.talkDatas;
-    }
+  computed: {// returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
   },
-  created: function created() {},
+  created: function created() {
+    console.log("TalkTopのcreatedを通りました");
+  },
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log("TalkTopのmountedを通りました");
+  },
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {},
+  updated: function updated() {
+    console.log("TalkTopsのupdated");
+  },
   beforeUpdate: function beforeUpdate() {},
   methods: {
     back: function back() {
@@ -3160,16 +3177,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {
-    returnTalkDatas: function returnTalkDatas() {
-      return this.talkDatas;
-    }
+  computed: {// returnTalkDatas: function () {
+    //   return this.talkDatas;
+    // },
   },
-  created: function created() {},
+  created: function created() {
+    console.log("TalkUsersのcreatedを通りました");
+  },
   beforeMount: function beforeMount() {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log("TalkUsersのmountedを通りました");
+  },
   beforeCreate: function beforeCreate() {},
-  updated: function updated() {},
+  updated: function updated() {
+    console.log("talkUsersのupdated");
+  },
   beforeUpdate: function beforeUpdate() {},
   methods: {
     userChange: function userChange(userId) {
@@ -7685,7 +7707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
 
 // exports
 
@@ -39788,7 +39810,12 @@ var render = function() {
         { staticClass: "topTalk-wrap" },
         [
           _c("talkTops", {
-            attrs: { hisAccount: _vm.hisAccount, identifyId: _vm.identifyId }
+            attrs: {
+              hisAccount: _vm.hisAccount,
+              identifyId: _vm.identifyId,
+              eraId: _vm.eraId,
+              teamString: _vm.teamString
+            }
           }),
           _vm._v(" "),
           _c(

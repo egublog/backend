@@ -163,9 +163,14 @@ export default {
       return this.talkDatas;
     },
   },
-  created() {},
+  created() {
+    console.log("talkMessagesのcreatedを通りました");
+
+  },
   beforeMount() {},
   mounted() {
+    console.log("talkMessagesのmountedを通りました");
+
     let talkInnerElement = this.$refs.talkInnerScroll;
 
       this.scrollToBottom();
@@ -180,7 +185,8 @@ export default {
   },
   beforeCreate() {},
   updated() {
-    console.log("updated");
+    console.log("talkMessageのupdated");
+    console.log(this.talkDatas);
 
     if (this.pageNumber == 1) {
       this.scrollToBottom();
@@ -195,20 +201,20 @@ export default {
     } else {
       let talkInnerElement = this.$refs.talkInnerScroll;
 
-      let talkInnerElementNew = this.$refs.talkInnerScroll;
+      // let talkInnerElementNew = this.$refs.talkInnerScroll;
       this.nowTalkInnerScrollHeight = talkInnerElement.scrollHeight;
 
       let differrenceTalkInnerScrollHeight =
         this.nowTalkInnerScrollHeight - this.preTalkInnerScrollHeight;
 
-      talkInnerElementNew.scrollTo({
+      talkInnerElement.scrollTo({
         top: differrenceTalkInnerScrollHeight,
         behavior: "auto",
       });
       // console.log(2);
-      console.log(this.nowTalkInnerScrollHeight);
-      console.log(this.preTalkInnerScrollHeight);
-      console.log(differrenceTalkInnerScrollHeight);
+      // console.log(this.nowTalkInnerScrollHeight);
+      // console.log(this.preTalkInnerScrollHeight);
+      // console.log(differrenceTalkInnerScrollHeight);
     }
   },
   beforeUpdate() {},

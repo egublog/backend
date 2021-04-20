@@ -281,7 +281,7 @@ class Talk_userContentController extends Controller
             }
 
      
-        $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit(1)->with('user')->get();
+        $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit(20)->with('user')->get();
 
         $talkDatas = $talkDatasDesc->reverse()->values();
 
