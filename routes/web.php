@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AxiosController;
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Talk_peopleController;
@@ -29,6 +30,15 @@ Route::post('signup','Auth\RegisterController@register')->name('signup.post');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// AxiosController
+// Route::get('axios/userName', 'AxiosController@userName')
+// ->name('backs.userName');
+Route::post('/axios/logout', 'AxiosController@logout')
+->name('axios.logout');
+
+
 
 
 
@@ -179,12 +189,6 @@ Route::get('backs/from_details', 'BackController@fromDetails')
 
 Route::get('backs/from_talk_show', 'BackController@fromTalk_show')
 ->name('backs.from_talk_show');
-
-
-Route::get('axios/userName', 'AxiosController@userName')
-->name('backs.userName');
-Route::post('axios/logout', 'AxiosController@logout')
-->name('axios.logout');
 
 
 

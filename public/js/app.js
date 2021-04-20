@@ -2012,7 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     initialFollowCheck: {
-      type: '',
+      // type: '',
       required: true
     }
   },
@@ -2099,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     initialFollowCheck: {
-      type: Boolean,
+      // type: Boolean,
       required: true
     },
     identifyId: {
@@ -2221,32 +2221,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {},
-  created: function created() {
-    var _this = this;
-
-    var url = "/axios/userName";
-    axios.get(url).then(function (response) {
-      _this.userName = response.data.userName;
-    })["catch"](function (error) {
-      alert(error);
-    });
+  created: function created() {// let url = `/axios/userName`;
+    //   axios
+    //     .get(url)
+    //     .then((response) => {
+    //       this.userName = response.data.userName;
+    //     })
+    //     .catch((error) => {
+    //       alert(error);
+    //     });
   },
   methods: {
     logout: function logout() {
-      var url = "axios/logout"; // window.location.href = url;
-
+      var url = '/axios/logout';
+      console.log(url);
       axios.post(url).then(function (response) {
         console.log('logout!');
         window.location.href = '/';
       })["catch"](function (error) {
         alert(error);
-      }); //     this.$http.post('http://example.com/forPOST', this.newEvent, function (data, status, request) {
-      //       console.log("post success")
-      //       //status check
-      //       console.log(status)
-      //       }).error(function (data, status, request) {
-      //         console.log("post failed")
-      //  })
+        console.log(url);
+      });
     }
   }
 });
@@ -2828,7 +2823,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -7410,7 +7404,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .notfollow {\n   background-color: red;\n\n } */\n", ""]);
 
 // exports
 
@@ -40017,9 +40011,7 @@ var render = function() {
                           ]
                         )
                       ]
-                    }),
-                    _vm._v(" "),
-                    _c("h1", [_vm._v("成功中！！")])
+                    })
                   ]
                 : _c("p", { staticClass: "results-nohit" }, [
                     _vm._v("見つかりませんでした")

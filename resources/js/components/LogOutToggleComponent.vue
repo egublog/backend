@@ -47,24 +47,23 @@ export default {
     
   },
   created() {
-    let url = `/axios/userName`;
-      axios
-        .get(url)
-        .then((response) => {
-          this.userName = response.data.userName;
-        })
-        .catch((error) => {
-          alert(error);
-        });
+    // let url = `/axios/userName`;
+    //   axios
+    //     .get(url)
+    //     .then((response) => {
+    //       this.userName = response.data.userName;
+    //     })
+    //     .catch((error) => {
+    //       alert(error);
+    //     });
   },
   methods: {
-    
-    
      logout() {
      
-        let url = `axios/logout`
-        // window.location.href = url;
+        let url = '/axios/logout';
 
+        console.log(url);
+  
         axios
         .post(url)
         .then((response) => {
@@ -73,17 +72,8 @@ export default {
         })
         .catch((error) => {
           alert(error);
+          console.log(url);
         });
-
-    //     this.$http.post('http://example.com/forPOST', this.newEvent, function (data, status, request) {
-    //       console.log("post success")
-    //       //status check
-    //       console.log(status)
-
-    //       }).error(function (data, status, request) {
-    //         console.log("post failed")
-    //  })
-    
     },
     
   },

@@ -24,7 +24,7 @@ export default {
       required: true,
     },
     initialFollowCheck: {
-      type: '',
+      // type: '',
       required: true,
     },
   },

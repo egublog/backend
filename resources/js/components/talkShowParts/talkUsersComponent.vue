@@ -43,7 +43,6 @@
                 </label>
               </div>
             </template>
-            <h1>成功中！！</h1>
           </template>
           <!-- @empty -->
           <p v-else class="results-nohit">見つかりませんでした</p>

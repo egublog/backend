@@ -35,7 +35,7 @@ export default {
       required: true,
     },
     initialFollowCheck: {
-      type: Boolean,
+      // type: Boolean,
       required: true,
     },
     identifyId: {
