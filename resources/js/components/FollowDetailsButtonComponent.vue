@@ -35,7 +35,7 @@ export default {
       required: true,
     },
     initialFollowCheck: {
-      type: Boolean,
+      // type: Boolean,
       required: true,
     },
     identifyId: {
@@ -82,7 +82,7 @@ export default {
       let unfollow = `/follows/${userId}`;
       axios
         .delete(unfollow, {
-          userId: userId,
+          // userId: userId,多分要らないこれ
         })
         .then((response) => {
           this.followCheck = false;

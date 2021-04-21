@@ -25,6 +25,8 @@ class PeopleController extends Controller
     {
         $myId = Auth::id();
 
+         Auth::logout();
+
         // ここは登録して初めてのユーザーがきた時にusersテーブルのimageカラムに0を入れる
         // そうしないと確かエラーがでてしまう  (そのユーザが画像を登録してたら1が入る様になっている、登録していなっかったら0を入れる)
         $myAccount = User::find($myId);

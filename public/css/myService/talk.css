@@ -79,7 +79,7 @@ a {
   font-size: 1.1em;
 }
 
-input, textarea {
+input, textarea, button {
   resize: none;
   appearance: none;
   -webkit-appearance: none;
@@ -155,10 +155,12 @@ header
   color: gray;
   height: 30px;
   padding: 5px 0;
+  background-color: transparent;
+  outline: none;
 }
 
 .header .toggle-show {
-  display: none;
+  display: block;
   position: absolute;
   top: 30px;
   right: 40px;

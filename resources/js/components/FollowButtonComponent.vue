@@ -1,12 +1,17 @@
 <template>
-    <div>
-      <button type="button" v-if="followCheck" class="onfollow" @click="unfollow(userId)">
-        フォロー中
-      </button>
-      <button v-else type="button" class="notfollow" @click="follow(userId)">
-        フォローする
-      </button>
-    </div>
+  <div>
+    <button
+      type="button"
+      v-if="followCheck"
+      class="onfollow"
+      @click="unfollow(userId)"
+    >
+      フォロー中
+    </button>
+    <button v-else type="button" class="notfollow" @click="follow(userId)">
+      フォローする
+    </button>
+  </div>
 </template>
 
 
@@ -19,13 +24,13 @@ export default {
       required: true,
     },
     initialFollowCheck: {
-      type: Boolean,
+      // type: '',
       required: true,
     },
   },
   data() {
     return {
-      followCheck: false
+      followCheck: false,
     };
   },
   created() {
@@ -39,13 +44,19 @@ export default {
         .post(follow, {
           user_id: userId,
         })
-        .then(response => {
+        .then((response) => {
           this.followCheck = true;
+          // console.log(response);
+         
+        let url = `/login`;
+       
+        window.location.href = url;
+ 
+      
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error);
         });
-        
     },
     unfollow(userId) {
       let unfollow = `/follows/${userId}`;
@@ -53,10 +64,10 @@ export default {
         .delete(unfollow, {
           userId: userId,
         })
-        .then(response => {
+        .then((response) => {
           this.followCheck = false;
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error);
         });
     },
@@ -65,7 +76,7 @@ export default {
 </script>
 
 <style scoped>
- /* .notfollow {
+/* .notfollow {
    background-color: red;
 
  } */

@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class FollowController extends Controller
+class AxiosController extends Controller
 {
+
+    public function userName() {
+        $myAccount = Auth::user();
+        $userName = $myAccount->name;
+
+        return response()->json(['userName' => $userName]);
+    }
+
+    public function logout() {
+        Auth::logout();
+    }
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +31,9 @@ class FollowController extends Controller
     public function index()
     {
         //
+        
+
+
     }
 
     /**
@@ -37,26 +55,6 @@ class FollowController extends Controller
     public function store(Request $request)
     {
         //
-        $myAccount = Auth::user();
-
-        // フォローする
-        $myAccount->show_follow()->attach($request->user_id);
-        
-        $myAccount = Auth::user();
-        // if ($myAccount->image == null) {
-        //     $myAccount->image = 0;
-        //     $myAccount->save();
-        // }
-
-        
-
-
-        // 自分のプロフィール表示用に自分のアカウント情報を付ける (myAccount)
-        // 自分の画像表示用にmyIdを付ける (myId)
-        return view('myService.home')->with([
-            'myAccount' => $myAccount,
-            // 'myId' => $myId,
-        ]);
     }
 
     /**
@@ -99,12 +97,8 @@ class FollowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($user_id)
+    public function destroy($id)
     {
         //
-        $myAccount = Auth::user();
-
-        // フォローしていたら外す、してなかったらフォローする
-        $myAccount->show_follow()->detach($user_id);
     }
 }

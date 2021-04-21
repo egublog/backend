@@ -23,6 +23,7 @@ class CreateTalksTable extends Migration
             $table->unsignedBigInteger('from');
             $table->unsignedBigInteger('to');
             $table->boolean('yet');
+            $table->boolean('talkCheck');
             $table->timestamps();
 
             $table->foreign('from')->references('id')->on('users')->onDelete('cascade');

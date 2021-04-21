@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class Talk_storeRequest extends FormRequest
 {
     /**
@@ -25,7 +28,7 @@ class Talk_storeRequest extends FormRequest
     {
         return [
             //
-            'message' => 'alpha|max:250|nullable',
+            'message' => 'string|max:250',
         ];
     }
 
@@ -37,4 +40,27 @@ class Talk_storeRequest extends FormRequest
            'message.max' => '↓250文字以内で入力して下さい。',
         ];
     }
+
+
+
+
+    protected function failedValidation(Validator $validator) {
+        $response = response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+            'statusText' => 'Failed validation.',
+        ], 400);
+        throw new HttpResponseException($response);
+    }
+
+    // protected function failedValidation(Validator $validator) {
+    //     $response['status']  = 400;
+    //     $response['statusText'] = 'Failed validation.';
+    //     $response['errors']  = $validator->errors();
+    //     throw new HttpResponseException(
+    //         response()->json( $response, 400 )
+    //     );
+    // }
+
+
 }
