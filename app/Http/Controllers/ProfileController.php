@@ -88,20 +88,13 @@ class ProfileController extends Controller
     {
         //
         {
-
             $areas = Area::all();
-
 
             // $myId = Auth::id();
             // $myAccount = User::find($myId);
             $myAccount = Auth::user();
 
-
-
-
             $area_id = $myAccount->area_id;
-
-
 
             $allEra1 = $myAccount->alls()->where('era_id', 1)->first();
             $allEra2 = $myAccount->alls()->where('era_id', 2)->first();

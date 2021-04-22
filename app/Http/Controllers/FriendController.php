@@ -17,7 +17,7 @@ class FriendController extends Controller
     public function index(Request $request)
     {
         //
-        $myId = Auth::id();
+        // $myId = Auth::id();
         // $myAccount = User::find($myId);
         $myAccount = Auth::user();
 
