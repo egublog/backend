@@ -153,6 +153,16 @@ class User extends Authenticatable
 
 
 
+    // ↓ データベース保存、削除系
+    public function followAttach($user_id)
+    {
+        $this->show_follow()->attach($user_id);
+    }
+
+    public function followDetach($user_id)
+    {
+        $this->show_follow()->detach($user_id);
+    }
 
 
 

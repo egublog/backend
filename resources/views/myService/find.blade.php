@@ -78,7 +78,8 @@
                             <span class="results-body-first-age">age: {{ $searchAll->user->age }} </span>
                             @endif
                             <?php
-                            $follow_check = $myAccount->show_follow()->where('receive_user_id', $searchAll->user->id)->first();
+                            // $follow_check = $myAccount->show_follow()->where('receive_user_id', $searchAll->user->id)->first();
+                            $follow_check = $myAccount->followCheck($searchAll->user->id);
                             ?>
                             <div class="results-body-first-follow">
                                 <follow-button :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($searchAll->user->id) }}"></follow-button>

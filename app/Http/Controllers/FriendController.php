@@ -65,7 +65,7 @@ class FriendController extends Controller
         $identify_id = $request->identify_id;
         $user_id = $user->id;
 
-        $myId = Auth::id();
+        // $myId = Auth::id();
         // $myAccount = User::find($myId);
         $myAccount = Auth::user();
 

@@ -43,7 +43,8 @@
                             <span class="results-body-second-age">age: {{ $account->age }} </span>
                             @endif
                             <?php
-                            $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
+                            // $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
+                            $follow_check = $myAccount->followCheck($account->id);
                             ?>
                             <div class="results-body-second-follow">
 

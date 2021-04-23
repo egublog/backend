@@ -40,9 +40,10 @@ class FollowController extends Controller
         $myAccount = Auth::user();
 
         // フォローする
-        $myAccount->show_follow()->attach($request->user_id);
+        // $myAccount->show_follow()->attach($request->user_id);
+        $myAccount->followAttach($request->user_id);
         
-        $myAccount = Auth::user();
+        // $myAccount = Auth::user();
         // if ($myAccount->image == null) {
         //     $myAccount->image = 0;
         //     $myAccount->save();
@@ -105,6 +106,7 @@ class FollowController extends Controller
         $myAccount = Auth::user();
 
         // フォローしていたら外す、してなかったらフォローする
-        $myAccount->show_follow()->detach($user_id);
+        // $myAccount->show_follow()->detach($user_id);
+        $myAccount->followDetach($user_id);
     }
 }

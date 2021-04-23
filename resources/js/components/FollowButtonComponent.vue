@@ -48,9 +48,9 @@ export default {
           this.followCheck = true;
           // console.log(response);
          
-        let url = `/login`;
+        // let url = `/login`;
        
-        window.location.href = url;
+        // window.location.href = url;
  
       
         })

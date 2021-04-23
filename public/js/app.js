@@ -2033,9 +2033,8 @@ __webpack_require__.r(__webpack_exports__);
         user_id: userId
       }).then(function (response) {
         _this.followCheck = true; // console.log(response);
-
-        var url = "/login";
-        window.location.href = url;
+        // let url = `/login`;
+        // window.location.href = url;
       })["catch"](function (error) {
         alert(error);
       });
