@@ -37,22 +37,36 @@ class ResultController extends Controller
   
   
           // まず検索で入力された文字列からワイルドカードで検索、合致したteamsテーブルのオブジェクトを取得(レコードの配列を)
-          $teamsResults = Team::where('team_name', 'like', '%' . $request->team_string . '%')->get();
+          // $teamsResults = Team::where('team_name', 'like', '%' . $request->team_string . '%')->get();
   
-          if (isset($teamsResults)) {
-              // 検索結果が帰ってくればそのオブジェクトからteamのidを取り出す なければからの配列にする。
-              $team_ids = array();
-              foreach ($teamsResults as $teamsResult) {
-                  $team_ids[] = $teamsResult->id;
-              }
-              // 検索結果のera_id(年代)とそのteam_id達からallテーブルのレコードの配列を取得(allのオブジェクトの配列)
+          // if (isset($teamsResults)) {
+          //     // 検索結果が帰ってくればそのオブジェクトからteamのidを取り出す なければからの配列にする。
+          //     $team_ids = array();
+          //     foreach ($teamsResults as $teamsResult) {
+          //         $team_ids[] = $teamsResult->id;
+          //     }
+          //     // 検索結果のera_id(年代)とそのteam_id達からallテーブルのレコードの配列を取得(allのオブジェクトの配列)
+          //     $searchAllses = array();
+          //     foreach ($team_ids as $team_id) {
+          //         $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
+          //     }
+          // } else {
+          //     $searchAllses = '';
+          // }
+          $team_ids = Team::where('team_name', 'like', '%' . $request->team_string . '%')->pluck('id')->all();
+
+  
+          if (isset($team_ids)) 
+          {
               $searchAllses = array();
               foreach ($team_ids as $team_id) {
-                  $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
+                $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
               }
           } else {
               $searchAllses = '';
           }
+
+          // dd($searchAllses);
   
           return view('myService.find')->with([
               'searchAllses' => $searchAllses,

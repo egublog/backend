@@ -24,7 +24,7 @@ class FriendController extends Controller
 
         // でここにidentify_id と言う名前でクエリ文字列が送られてくるから
         // 　それがfollowかfollowerかで処理を分ければ良い。。
-        $identify_id = $request->identify_id;
+        // $identify_id = $request->identify_id;
 
         // if ($identify_id == 'friend_follow') {
         //     // 自分がフォローしている人を取得
@@ -49,7 +49,7 @@ class FriendController extends Controller
             'myAccount' => $myAccount,
             // ↓ ここではdetails.blade.phpへ行く時に使う、多分back用  ,,全てdetailsから帰る時に使う、
             // 、後detailsでのトークへを表示させるかどうか、←これは副次元的に、でもどこから来たか分かっていたらめっちゃ楽
-            'identify_id' => $identify_id,
+            'identify_id' => $request->identify_id,
         ]);
     }
 
@@ -62,28 +62,28 @@ class FriendController extends Controller
      */
     public function show(User $user, Request $request)
     {
-        $identify_id = $request->identify_id;
-        $user_id = $user->id;
-
+        // $identify_id = $request->identify_id;
+        
         // $myId = Auth::id();
         // $myAccount = User::find($myId);
-        $myAccount = Auth::user();
-
-
+        
+        
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
         // $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
-
+        
         // $hisObject = $myAccount->firstFollowHim($user_id);
-
+        
+        $user_id = $user->id;
+        $myAccount = Auth::user();
         $follow_check = $myAccount->followCheck($user_id);
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        $hisAccount = User::find($user_id);
+        // $hisAccount = User::find($user_id);
 
 
         return view('myService.details')->with([
-            'identify_id' => $identify_id,
-            'hisAccount' => $hisAccount,
+            'identify_id' => $request->identify_id,
+            'hisAccount' => User::find($user_id),
             'follow_check' => $follow_check,
         ]);
     }
