@@ -10,7 +10,7 @@ use App\Talk;
 use App\Http\Requests\Talk_storeRequest;
 use GuzzleHttp\Psr7\LimitStream;
 use Validator;
-
+use App\Facades\IdentifyId;
 
 
 class Talk_userContentController extends Controller
@@ -80,19 +80,19 @@ class Talk_userContentController extends Controller
 
 
         // ここでtalk_〇〇の値の talk_ を取る！  つまりtalk_〇〇があるのはdetails.blade.phpだけ
-        if ($identify_id == 'talk_find') {
+        if (IdentifyId::talkFind($identify_id)) {
             $identify_id = 'find';
-        } elseif ($identify_id == 'talk_activity') {
+        } elseif (IdentifyId::talkActivity($identify_id)) {
             $identify_id = 'activity';
-        } elseif ($identify_id == 'talk_friend_follow') {
+        } elseif (IdentifyId::talkFriendFollow($identify_id)) {
             $identify_id = 'friend_follow';
-        } elseif ($identify_id == 'talk_friend_follower') {
+        } elseif (IdentifyId::talkFriendFollower($identify_id)) {
             $identify_id = 'friend_follower';
         }
 
 
         // findだったら(era_id) (team_string)を付ける
-        if ($identify_id == 'find') {
+        if (IdentifyId::find($identify_id)) {
             return view('myService.talk_show')->with([
                 'talkDatas' => $talkDatas,
                 'hisAccount' => $hisAccount,
@@ -292,7 +292,7 @@ class Talk_userContentController extends Controller
 
 
             // findだったらera_id, team_stringを付ける
-            if ($identify_id == 'find') {
+            if (IdentifyId::find($identify_id)) {
                 $talkArray = [
                     'talkDatas' => $talkDatas,
                     'talkListsAccounts' => $talk_lists_accounts,

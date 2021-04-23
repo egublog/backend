@@ -95,6 +95,65 @@ class User extends Authenticatable
 
 
 
+    // ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
+
+
+    // ↓ get()系
+
+    public function getFollow()
+    {
+        // return self::find($myId)->show_follow()->get();
+
+        return $this->show_follow()->get();
+    }
+    
+    public function getFollower()
+    {
+        return $this->show_follower()->get();
+    }
+
+
+
+
+    public function firstFollowHim($his_id) 
+    {
+        return $this->show_follow()->where('receive_user_id', $his_id)->first();
+    }
+
+
+    
+
+
+
+
+
+
+    // ↓ scope系
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ↓ 真偽値系
+    
+    public function followCheck($his_id)
+    {
+        return $this->firstFollowHim($his_id) === null ? false : true;
+    }
+
+
+
+
+
 
 
 }

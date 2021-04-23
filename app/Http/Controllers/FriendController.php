@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Facades\IdentifyId;
 
 
 class FriendController extends Controller
@@ -25,12 +26,20 @@ class FriendController extends Controller
         // 　それがfollowかfollowerかで処理を分ければ良い。。
         $identify_id = $request->identify_id;
 
-        if ($identify_id == 'friend_follow') {
+        // if ($identify_id == 'friend_follow') {
+        //     // 自分がフォローしている人を取得
+        //     $accounts = $myAccount->show_follow()->get();
+        // } elseif ($identify_id == 'friend_follower') {
+        //     // 自分をフォローしている人を取得
+        //     $accounts = $myAccount->show_follower()->get();
+        // }
+
+        if (IdentifyId::friendFollow($identify_id)) {
             // 自分がフォローしている人を取得
-            $accounts = $myAccount->show_follow()->get();
-        } elseif ($identify_id == 'friend_follower') {
+            $accounts = $myAccount->getFollow();
+        } elseif (IdentifyId::friendFollower($identify_id)) {
             // 自分をフォローしている人を取得
-            $accounts = $myAccount->show_follower()->get();
+            $accounts = $myAccount->getFollower();
         }
 
 
@@ -62,7 +71,11 @@ class FriendController extends Controller
 
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
-        $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
+        // $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
+
+        // $hisObject = $myAccount->firstFollowHim($user_id);
+
+        $follow_check = $myAccount->followCheck($user_id);
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
         $hisAccount = User::find($user_id);
@@ -75,3 +88,4 @@ class FriendController extends Controller
         ]);
     }
 }
+

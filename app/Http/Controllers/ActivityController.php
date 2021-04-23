@@ -26,13 +26,14 @@ class ActivityController extends Controller
 
         // ここのidentify_idはdetails.blade.phpに移動した時のbackとかに必要　⇦　これはもう要らないコントローラを細かく分けたから
         // 　　でもまだ identify_idは必要である、follow_lists.invokeで必要だから。
-        $identify_id = 'activity';
+        // $identify_id = 'activity';
+            // ↑ フォローボタンを非同期にしたから必要なくなった
 
         return view('myService.activity')->with([
             'accounts_follower' => $accounts_follower,
             // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
             'myAccount' => $myAccount,
-            'identify_id' => $identify_id,
+            // 'identify_id' => $identify_id,
             // ↓ フォローされた時間を表示する時にfollowテーブルの自分と相手のレコードを指定する時に使う
             // created_atを取得
             // 'myId' => $myId,

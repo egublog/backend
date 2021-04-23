@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Talk_list;
+use App\Facades\IdentifyId;
 
 
 class Talk_userController extends Controller
@@ -84,7 +85,7 @@ class Talk_userController extends Controller
          // find系列だったら(era_id)($team_id)を渡す
         // 尚detailsのみこのtalk_findとかがある
         // if ($identify_id == 'find' || $identify_id == 'talk_find') {
-        if (in_array($identify_id, ['find', 'talk_find'])) {
+        if (IdentifyId::find($identify_id) || IdentifyId::talkFind($identify_id)) {
             return view('myService.details')->with([
                 'identify_id' => $identify_id,
                 'hisAccount' => $hisAccount,
@@ -93,6 +94,15 @@ class Talk_userController extends Controller
                 'team_string' => $request->team_string,
             ]);
         }
+        // if (in_array($identify_id, ['find', 'talk_find'])) {
+        //     return view('myService.details')->with([
+        //         'identify_id' => $identify_id,
+        //         'hisAccount' => $hisAccount,
+        //         'follow_check' => $follow_check,
+        //         'era_id' => $request->era_id,
+        //         'team_string' => $request->team_string,
+        //     ]);
+        // }
 
 
 

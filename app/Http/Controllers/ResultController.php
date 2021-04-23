@@ -87,7 +87,8 @@ class ResultController extends Controller
 
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
-        $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
+        // $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
+        $follow_check = $myAccount->followCheck($user_id);
         
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
         $hisAccount = User::find($user_id);
