@@ -26,4 +26,17 @@ class All extends Model
     public function area() {
         return $this->belongsTo('App\Area');
     }
+
+
+    // ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
+
+
+    // ↓ get()系
+
+    public static function getSearchAll($era_id, $team_id)
+    {
+        return self::where('era_id', $era_id)->where('team_id', $team_id)->get();
+    }
+
+
 }

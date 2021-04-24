@@ -7,6 +7,9 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Team;
 use App\All;
+use App\Queries\SearchTeams;
+use App\Facades\SearchAllses;
+
 
 class ResultController extends Controller
 {
@@ -53,23 +56,36 @@ class ResultController extends Controller
           // } else {
           //     $searchAllses = '';
           // }
-          $team_ids = Team::where('team_name', 'like', '%' . $request->team_string . '%')->pluck('id')->all();
+        //   $team_ids = Team::where('team_name', 'like', '%' . $request->team_string . '%')->pluck('id')->all();
+        $team_ids = SearchTeams::get($request->team_string);
 
+        // dd($team_ids);
+
+        // foreeach($team_ids as $team_id) {
+//            
+        // }
+        // 
+
+        // if (isset($team_ids)) 
+        //   {
+        //       $searchAllses = array();
+        //       foreach ($team_ids as $team_id) {
+        //         $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
+        //       }
+        //   } else {
+        //       $searchAllses = '';
+        //   }
+
+        $searchAlls = SearchAllses::getAllArray($request->era_id, $team_ids);
   
-          if (isset($team_ids)) 
-          {
-              $searchAllses = array();
-              foreach ($team_ids as $team_id) {
-                $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
-              }
-          } else {
-              $searchAllses = '';
-          }
+        
 
-          // dd($searchAllses);
+
+        // dd($searchAllses);
+
   
           return view('myService.find')->with([
-              'searchAllses' => $searchAllses,
+              'searchAlls' => $searchAlls,
               // ↓ 検索内容のvalue用と検索結果のdetails.blade.phpのback用(team_string)(era_id)
               'team_string' => $request->team_string,
               'era_id' => $request->era_id,

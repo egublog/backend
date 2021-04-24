@@ -47,9 +47,9 @@
     <section class="results">
         <div class="results-inner">
             <ul class="results-list">
-                @if(isset($searchAllses))
-                @forelse($searchAllses as $searchAlls)
-                @foreach($searchAlls as $searchAll)
+            
+                @if($searchAlls)
+                @forelse($searchAlls as $searchAll)
                 @if($searchAll->user->id != $myAccount->id)
 
                 <li class="results-item">
@@ -103,7 +103,6 @@
                     </div>
                 </li>
                 @endif
-                @endforeach
                 @empty
                 <p class="results-nohit">見つかりませんでした</p>
                 @endforelse

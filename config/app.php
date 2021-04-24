@@ -230,6 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'identifyid' => App\Facades\IdentifyId::class,
+        'searchallses' => App\Facades\SearchAllses::class,
+        'talklist' => App\Facades\TalkList::class,
 
     ],
 
