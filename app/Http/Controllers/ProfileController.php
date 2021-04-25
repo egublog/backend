@@ -25,41 +25,47 @@ class ProfileController extends Controller
         // selectボタン用にareaテーブルから全てを取ってくる (areas)
         $areas = Area::all();
 
-
         // $myId = Auth::id();
         // $myAccount = User::find($myId);
         $myAccount = Auth::user();
-
-
-
-
-
 
         $area_id = $myAccount->area_id;
 
 
         // 自分のアカウントのallを年代別に取得、、こうやってわざわざ先にfirst()で取っときて
         // 変数に代入しないと、その先のリレーションがカラムを取得と勘違いされてしまう。
-        $allEra1 = $myAccount->alls()->where('era_id', 1)->first();
-        $allEra2 = $myAccount->alls()->where('era_id', 2)->first();
-        $allEra3 = $myAccount->alls()->where('era_id', 3)->first();
-        $allEra4 = $myAccount->alls()->where('era_id', 4)->first();
+        // $allEra1 = $myAccount->alls()->where('era_id', 1)->first();
+        // $allEra2 = $myAccount->alls()->where('era_id', 2)->first();
+        // $allEra3 = $myAccount->alls()->where('era_id', 3)->first();
+        // $allEra4 = $myAccount->alls()->where('era_id', 4)->first();
 
 
 
         // allのチームidがある → つまりチームが登録されていたらそのチーム名を代入して、ポジションも代入する
         // 無かったら空と1を代入する
-        $elementaryTeam = $allEra1->team->team_name;
-        $elementaryPosition = $allEra1->position_id;
+        // $elementaryTeam = $myAccount->alls()->where('era_id', 1)->first()->team->team_name;
+        // $elementaryPosition = $myAccount->alls()->where('era_id', 1)->first()->position_id;
 
-        $juniorHighTeam = $allEra2->team->team_name;
-        $juniorHighPosition = $allEra2->position_id;
+        // $juniorHighTeam = $allEra2->team->team_name;
+        // $juniorHighPosition = $allEra2->position_id;
 
-        $highTeam = $allEra3->team->team_name;
-        $highPosition = $allEra3->position_id;
+        // $highTeam = $allEra3->team->team_name;
+        // $highPosition = $allEra3->position_id;
 
-        $universityTeam = $allEra4->team->team_name;
-        $universityPosition = $allEra4->position_id;
+        // $universityTeam = $allEra4->team->team_name;
+        // $universityPosition = $allEra4->position_id;
+
+        $elementaryTeam = $myAccount->returnTeamName(1);
+        $elementaryPosition = $myAccount->returnPositionId(1);
+
+        $juniorHighTeam = $myAccount->returnTeamName(2);
+        $juniorHighPosition = $myAccount->returnPositionId(2);
+
+        $highTeam = $myAccount->returnTeamName(3);
+        $highPosition = $myAccount->returnPositionId(3);
+
+        $universityTeam = $myAccount->returnTeamName(4);
+        $universityPosition = $myAccount->returnPositionId(4);
 
         //    これはprofile.blade.php側で使うやつbladeで定義はいけてないからここで作る。
         $schools = array(

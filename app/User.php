@@ -98,7 +98,17 @@ class User extends Authenticatable
     // ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
 
 
-    // ↓ get()系
+    // ↓ get()系　　（主にリレーションを含む時）
+
+    public function returnTeamName($era_id)
+    {
+        return $this->alls()->where('era_id', $era_id)->first()->team->team_name;
+    }
+
+    public function returnPositionId($era_id)
+    {
+        return $this->alls()->where('era_id', $era_id)->first()->position_id;
+    }
 
     public function getFollow()
     {
@@ -135,7 +145,7 @@ class User extends Authenticatable
 
     // ↓ scope系
 
-    
+
 
 
 
