@@ -232,6 +232,7 @@ return [
         'identifyid' => App\Facades\IdentifyId::class,
         'searchallses' => App\Facades\SearchAllses::class,
         'talklist' => App\Facades\TalkList::class,
+        'commonservice' => App\Facades\CommonService::class,
 
     ],
 

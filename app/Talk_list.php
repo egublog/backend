@@ -24,6 +24,20 @@ class Talk_list extends Model
 
 
 
+    public function scopeOurTalkList($query, $myId, $user_id)
+    {
+        return $query->where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId);
+    }
+
+
+        // ↓ データベース保存、削除系
+
+    public function saveNewTalkList($myId, $user_id)
+    {
+        $this->from = $myId;
+        $this->to = $user_id;
+        $this->save();
+    }
 
 
 
