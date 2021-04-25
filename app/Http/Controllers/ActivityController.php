@@ -20,9 +20,14 @@ class ActivityController extends Controller
         // $myAccount = User::find($myId);
         $myAccount = Auth::user();
 
+        // dd(User::where('id', 1)->first()->alls()->where('team_id', 3)->get());
+
+
 
         // 一覧表示用にフォローワーを自分をフォローしてくれた順で表示
-        $accounts_follower = User::find($myId)->show_follower_activity()->get();
+        // $accounts_follower = User::find($myId)->show_follower_activity()->get();
+        $accounts_follower = $myAccount->getFollowerActivity();
+        
 
         // ここのidentify_idはdetails.blade.phpに移動した時のbackとかに必要　⇦　これはもう要らないコントローラを細かく分けたから
         // 　　でもまだ identify_idは必要である、follow_lists.invokeで必要だから。
@@ -57,6 +62,7 @@ class ActivityController extends Controller
         $myId = Auth::id();
         // $myAccount = User::find($myId);
         $myAccount = Auth::user();
+
 
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを

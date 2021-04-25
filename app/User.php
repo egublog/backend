@@ -113,6 +113,11 @@ class User extends Authenticatable
     }
 
 
+    public function getFollowerActivity() 
+    {
+        return $this->show_follower_activity()->get();
+    }
+
 
 
     public function firstFollowHim($his_id) 
@@ -129,6 +134,8 @@ class User extends Authenticatable
 
 
     // ↓ scope系
+
+    
 
 
 
