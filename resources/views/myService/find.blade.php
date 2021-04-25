@@ -48,7 +48,7 @@
         <div class="results-inner">
             <ul class="results-list">
             
-                @if($searchAlls)
+                @if(isset($searchAlls))
                 @forelse($searchAlls as $searchAll)
                 @if($searchAll->user->id != $myAccount->id)
 

@@ -81,7 +81,7 @@ class ResultController extends Controller
         
 
 
-        // dd($searchAllses);
+        // dd($searchAlls);
 
   
           return view('myService.find')->with([

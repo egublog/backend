@@ -12,15 +12,15 @@ class SearchAllses
 
 // dd($era_id);
     // dd($team_ids);
-
     // $searchAllses = [];
     $searchAlls = collect([]);
     if ($team_ids) {
-
+      
       // dd($collection);
-
+      
       // $searchAllses = array();
       foreach ($team_ids as $team_id) {
+        // dd(All::getSearchAll($era_id, $team_id));
         // $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
         $searchAlls = $searchAlls->merge(All::getSearchAll($era_id, $team_id));
       }

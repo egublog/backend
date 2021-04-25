@@ -88,7 +88,10 @@ class Talk_userController extends Controller
         $hisAccount = User::find($user_id);
 
         // つまりここから出るidentify_idは全て talk_〇〇 になる。。それがtalk_から来ましたよって事になる。
-        if($identify_id !== 'talk_list') {
+        // if($identify_id !== 'talk_list') {
+        //     $identify_id = 'talk_'.$identify_id;
+        // }
+        if(!IdentifyId::talkList($identify_id)) {
             $identify_id = 'talk_'.$identify_id;
         }
 
