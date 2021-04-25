@@ -39,4 +39,21 @@ class All extends Model
     }
 
 
+
+        // ↓ scope系
+    public function scopeMyIdEraEqual($query, $myId, $era_id)
+    {
+        return $query->where('user_id', $myId)->where('era_id', $era_id);
+    }
+
+
+        // ↓ データベース保存、削除系
+    public function saveTeamIdAndPositionId($team_id, $position_id)
+    {
+        $this->team_id = $team_id;
+        $this->position_id = $position_id;
+        $this->save();
+    }
+
+
 }

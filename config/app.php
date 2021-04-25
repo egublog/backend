@@ -233,6 +233,7 @@ return [
         'searchallses' => App\Facades\SearchAllses::class,
         'talklist' => App\Facades\TalkList::class,
         'commonservice' => App\Facades\CommonService::class,
+        'profile' => App\Facades\Profile::class,
 
     ],
 

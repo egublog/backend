@@ -181,6 +181,12 @@ class User extends Authenticatable
         $this->show_follow()->detach($user_id);
     }
 
+    public function saveColumn($request ,$column_name)
+    {
+        $this->$column_name = $request->$column_name;
+        $this->save();
+    }
+
 
 
 }

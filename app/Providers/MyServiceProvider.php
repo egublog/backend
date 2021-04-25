@@ -18,6 +18,7 @@ class MyServiceProvider extends ServiceProvider
         app()->singleton('searchallses', 'App\MyClasses\SearchAllses');
         app()->singleton('talklist', 'App\MyClasses\TalkList');
         app()->singleton('commonservice', 'App\MyClasses\CommonService');
+        app()->singleton('profile', 'App\MyClasses\Profile');
 
     }
 
