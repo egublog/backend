@@ -163,10 +163,8 @@
                                 <dt class="profile-dtit">住んでいる地域</dt>
                                 <dd class="profile-data">
                                     <select class="col-8" id="area" name="area_id">
-                                        <?php $i = 1; ?>
-                                        @foreach($areas as $area)
-                                        <option value="<?php echo $i ?>" @if($area_id==$i) selected @endif>{{ $area->area_name }}</option>
-                                        <?php $i++ ?>
+                                        @foreach($areas as $key => $area)
+                                        <option value="<?php echo $key ?>" @if($area_id==$area) selected @endif>{{ $area }}</option>
                                         @endforeach
                                     </select>
                                 </dd>
