@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+
 
 class All extends Model
 {
     //
+
+    // リレーション ↓↓
     public function position() {
         return $this->belongsTo('App\Position');
     }
@@ -27,6 +31,35 @@ class All extends Model
         return $this->belongsTo('App\Area');
     }
 
+    // アクセサ ↓↓
+
+    public function getEraIdAttribute($value)
+    {
+        $eras = [
+            '1' => '小学校',
+            '2' => '中学校',
+            '3' => '高校',
+            '4' => '大学',
+        ];
+
+        return Arr::get($eras, $value);
+    }
+    
+    public function getPositionIdAttribute($value)
+    {
+        $eras = [
+            '1' => 'GK',
+            '2' => 'DF',
+            '3' => 'MF',
+            '4' => 'FW',
+        ];
+
+        return Arr::get($eras, $value);
+    }
+
+
+
+
 
     // ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
 
@@ -35,7 +68,7 @@ class All extends Model
 
     public static function getSearchAll($era_id, $team_id)
     {
-        return self::where('era_id', $era_id)->where('team_id', $team_id)->get();
+        return self::where('era_id', $era_id)->where('team_id', $team_id)->with('user')->get();
     }
 
 

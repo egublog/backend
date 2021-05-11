@@ -54,10 +54,11 @@
                             <dd class="profile-data">{{ $hisAccount->age }}</dd>
                         </div>
                         @endif
-                        <!-- @if(isset($hisAccount->alls()->first()->era->era_name)) -->
+                        <!-- @if(isset($hisAccount->alls()->first()->era_id)) -->
                         @foreach($hisAccount->alls as $all)
+                        
                         <div class="profile-def-box">
-                            <dt class="profile-dtit">{{ $all->era->era_name }} : </dt>
+                            <dt class="profile-dtit">{{ $all->era_id }} : </dt>
                             <!-- @if($all->team->team_name) -->
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
                             <!-- @else -->
@@ -66,10 +67,10 @@
                         </div>
                         @endforeach
                         <!-- @endif -->
-                        @if($hisAccount->area->area_name != '未設定です')
+                        @if($hisAccount->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $hisAccount->area->area_name }}</dd>
+                            <dd class="profile-data"> {{ $hisAccount->area_id }}</dd>
                         </div>
                         @endif
                     </dl>

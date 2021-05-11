@@ -52,10 +52,10 @@
                             <dd class="profile-data">{{ $myAccount->age }}</dd>
                         </div>
                         @endif
-                        @if(isset($myAccount->alls()->first()->era->era_name))
+                        @if(isset($myAccount->alls()->first()->era_id))
                         @foreach($myAccount->alls as $all)
                         <div class="profile-def-box">
-                            <dt class="profile-dtit">{{ $all->era->era_name }} : </dt>
+                            <dt class="profile-dtit">{{ $all->era_id }} : </dt>
                             <!-- @if($all->team->team_name) -->
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
                             <!-- @else -->
