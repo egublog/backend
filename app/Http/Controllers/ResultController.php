@@ -20,24 +20,10 @@ class ResultController extends Controller
      */
     public function index(Request $request)
     {
-        //
-          // $teams = Team::all();
-
-        //   $myId = Auth::id();
-        //   $myAccount = User::find($myId);
         $myAccount = Auth::user();
 
-  
-          // 最初のfindではidentify_idはどうやっても必要ないのでここで初めて定義
-        //   ここはdetail.blade.phpだら<backボタンで戻って来た時に必要では無いかも
-        //   $identify_id = 'find';
-  
           // ここではまず検索して出てくるユーザーのusersテーブルを配列で取ってくるのが目的　↓
-  
-          //↓ ここでの一連の作業での目的はそのチーム名からワイルドカードでその文字が入っているteamsテーブルのidをもらって
-          // そのteamテーブルのidと入力された年代idからallsテーブルのレコード達を取得する事
-          // そのall達があればfind.blade.phpで$searchAll->user->;とか、でそのuserの詳細を表示できる
-  
+
   
           // まず検索で入力された文字列からワイルドカードで検索、合致したteamsテーブルのオブジェクトを取得(レコードの配列を)
           // $teamsResults = Team::where('team_name', 'like', '%' . $request->team_string . '%')->get();
@@ -58,13 +44,6 @@ class ResultController extends Controller
           // }
         //   $team_ids = Team::where('team_name', 'like', '%' . $request->team_string . '%')->pluck('id')->all();
         $team_ids = SearchTeams::get($request->team_string);
-
-        // dd($team_ids);
-
-        // foreeach($team_ids as $team_id) {
-//            
-        // }
-        // 
 
         // if (isset($team_ids)) 
         //   {

@@ -44,45 +44,20 @@ class Profile
     );
 
     foreach ($schools as $school) {
-
       // まずprofileでユーザーがチーム名を入力したかを年代別に確かめる、入力してたら次の処理をする
       if ($school[1]) {
 
-        // 入力したチーム名のteamsテーブルのカラム一つ
-        // $teamAlready = Team::where('team_name', $school[1])->first();
         $teamAlready = Team::TeamNameEqual($school[1])->first();
 
-        // 既にteamsテーブルに入力されたチーム名があるかを確認する、なかったらそのチーム名をteamsテーブル新規追加する。
-        // そしてそのidを取ってくる
-        // あったら既存のそのidを取ってくる
         if ($teamAlready) {
           $team_id = $teamAlready->id;
         } else {
           $team = new Team();
-          // $team->team_name = $school[1];
-          // $team->save();
           $team->saveTeam($school[1]);
-
-          // $theTeam = Team::where('team_name', $school[1])->first();
-          // $team_id = $theTeam->id;
-          // $theTeam = Team::where('team_name', $school[1])->first();
-          $team_id = Team::where('team_name', $school[1])->first()->id;
-          // ここではどっちにしろデフォルトの 1 か今teamsテーブルに入れたチームのidかが$team_idに入っている。
+          $team_id = Team::TeamNameEqual($school[1])->first()->id;
         }
-        // 上↑はteamsテーブルへのチームの登録処理、、とそのidの取得（そのidを自分をallsテーブルに入れるから）
-
-
-
-        // そいつがもう既にチームを登録しているかを確認（年代別に確認）
-        //  既に登録していたら上書き していなかったら新しく作って保存  →どっちみち上書き
-        // $all = All::where('user_id', $myId)->where('era_id', $school[0])->first();
+    
         $all = All::myIdEraEqual($myId, $school[0])->first();
-        // era_idだけだと、チーム名が入力されていなくても登録されるためちゃんとチームidで調べ
-        // $all->team_id = $team_id;
-
-        // $all->position_id = $school[2];
-
-        // $all->save();
         $all->saveTeamIdAndPositionId($team_id, $school[2]);
       } // if ($school[1])
 
@@ -102,4 +77,20 @@ class Profile
       }
     }
   }
+
+
+
+
+  public function saveImageToDatabaseAndReturnThePath($request)
+  {
+    $image = $request->file('image');
+    $path = Storage::disk('s3')->putFile('test', $image, 'public');
+    return $path;
+  }
+
+
+
+
+
+
 }

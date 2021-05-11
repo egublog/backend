@@ -29,6 +29,7 @@ class Talk extends Model
     public function scopeTalkDataOneBefore($query, $myId, $user_id)
     {
         return $query->where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->offset(1)->limit(1);
+        // ->skip(1)でいけるし、、後でfirst()で取得しているから->limit(1)は要らない
     }
     
     public function scopeTalkDataNow($query, $myId, $user_id)

@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            // 'area_id' => 13,
+            // 'area_id' => 50,
             // ↑ここではこんな感じでUserテーブルに値を使いできないの？
         ]);
     }

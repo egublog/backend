@@ -61,6 +61,8 @@ class Talk_userContentController extends Controller
         //     $talk_lists_accounts[] = User::find($id);
         // }
         $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
+        // $talk_lists_accounts = User::find($opponent_ids);
+        // dd($talk_lists_accounts);
 
 
         // ここで相手が自分に送信したtalkテーブルのレコードのyetカラムをtrueにする、よって既読になる
@@ -282,6 +284,7 @@ class Talk_userContentController extends Controller
             //     }
             // }
             $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
+            // ↑　参画　これはカスタムCollectionを使えばわざわざファサードからやらなくても$talk_list->で実行できる
 
             //    そのidをもとにfindでuser取ってきてアカウントのオブジェクトの配列を作る
             // $talk_lists_accounts = array();

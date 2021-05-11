@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('area_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            // $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
         });
     }
 

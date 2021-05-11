@@ -24,7 +24,7 @@ class FriendController extends Controller
 
         // でここにidentify_id と言う名前でクエリ文字列が送られてくるから
         // 　それがfollowかfollowerかで処理を分ければ良い。。
-        // $identify_id = $request->identify_id;
+        $identify_id = $request->identify_id;
 
         // if ($identify_id == 'friend_follow') {
         //     // 自分がフォローしている人を取得

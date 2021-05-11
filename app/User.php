@@ -59,9 +59,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Talk_list');
     }
 
-    public function area() {
-        return $this->belongsTo('App\Area');
-    }
+    // public function area() {
+    //     return $this->belongsTo('App\Area');
+    // }
     
     public function getData() {
         return '名前'. ':'. $this->name. '年齢'. ':'. $this->age.'自己紹介'. ':'. $this->introduction;
