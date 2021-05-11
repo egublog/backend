@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Queries;
 
 use App\Team;
