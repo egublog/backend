@@ -70,7 +70,7 @@
                         @if($hisAccount->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $hisAccount->area_id }}</dd>
+                            <dd class="profile-data"> {{ $hisAccount->changeAreaIdToPrefecturesName($hisAccount->area_id) }}</dd>
                         </div>
                         @endif
                     </dl>
