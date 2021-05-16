@@ -8,7 +8,7 @@ class Talk_list extends Model
 {
     //
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'from');
     }
 
 

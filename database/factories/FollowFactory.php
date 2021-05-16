@@ -4,9 +4,13 @@
 
 use App\Model;
 use Faker\Generator as Faker;
+use App\User;
+use App\Follow;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Follow::class, function (Faker $faker) {
     return [
         //
+        'send_user_id' => factory(User::class),
+        'receive_user_id' => factory(User::class),
     ];
 });

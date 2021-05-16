@@ -95,6 +95,7 @@ class ProfileController extends Controller
     {
         //
         {
+            // dd($request->age);
             $myId = Auth::id();
             // $myAccount = User::find($myId);
             $myAccount = Auth::user();
