@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
   // ->name('profiles.profile_update');
 
   // ImageController
-  Route::resource('images', 'ImagesController')->only([
+  Route::resource('images', 'ImageController')->only([
     'update', 'show'
   ])->parameters([
     'images' => 'user'
