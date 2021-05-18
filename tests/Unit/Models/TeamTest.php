@@ -35,10 +35,45 @@ class TeamTest extends TestCase
              'team_id' => $team->id,
          ]);
 
-
          $this->assertInstanceOf(All::class, $team->alls()->first());
- 
+
      }
+
+
+     /** @test scopeTeamNameEqual */
+    function scopeTeamNameEqualスコープで引数のチーム名のデータを取れる()
+    {
+        $this->seed(DatabaseSeeder::class);
+
+        $team1 = factory(team::class)->create();
+        $team2 = factory(team::class)->create();
+        $team3 = factory(team::class)->create();
+        $team4 = factory(team::class)->create();
+
+        $teamCollection = Team::teamNameEqual($team1->team_name)->get();
+
+        $this->assertTrue($teamCollection->contains($team1));
+        $this->assertFalse($teamCollection->contains($team2));
+        $this->assertFalse($teamCollection->contains($team3));
+        $this->assertFalse($teamCollection->contains($team4));
+    }
+
+    /** @test saveTeam */
+    function saveTeamメソッドで引数に渡したトークデータをtalkテーブルに保存する()
+    {
+        $this->seed(DatabaseSeeder::class);
+        
+        $team = factory(team::class)->make();
+        
+
+        $new_talk_list = new Team();
+        $new_talk_list->saveTeam($team->team_name);
+
+        $this->assertDatabaseHas('teams', [
+            'team_name' => $team->team_name,
+        ]);
+    }
+
 
 
 
