@@ -4,6 +4,7 @@ namespace App\MyClasses;
 
 use App\Team;
 use App\All;
+use Illuminate\Support\Facades\Storage;
 
 
 class Profile
