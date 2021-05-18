@@ -111,6 +111,17 @@ class ProfileControllerTest extends TestCase
         //  でチームとかも登録出来ているかをリレーションで確認する。
 
         $this->assertEquals('Takahashi', $user->fresh()->user_name);
+        $this->assertEquals('44', $user->fresh()->age);
+        $this->assertEquals('鹿島アントラーズ', $user->fresh()->returnTeamName(1));
+        $this->assertEquals('1', $user->fresh()->returnPositionId(1));
+        $this->assertEquals('川崎フロンターレ', $user->fresh()->returnTeamName(2));
+        $this->assertEquals('2', $user->fresh()->returnPositionId(2));
+        $this->assertEquals('大宮アルディージャ', $user->fresh()->returnTeamName(3));
+        $this->assertEquals('3', $user->fresh()->returnPositionId(3));
+        $this->assertEquals('横浜Fマリノス', $user->fresh()->returnTeamName(4));
+        $this->assertEquals('4', $user->fresh()->returnPositionId(4));
+        $this->assertEquals('こんにちはよろしくお願いします', $user->fresh()->introduction);
+        $this->assertEquals('30', $user->fresh()->area_id);
 
     }
 
