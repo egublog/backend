@@ -19,6 +19,9 @@ class MyhomeController extends Controller
     public function index()
     {
 
+        // $talkDataNow = Talk::TalkDataNow(1, 2)->first();
+
+        //     dd($talkDataNow);
         // $prefs = [
         //     '1' => '北海道',
         //     '2' => '青森県',

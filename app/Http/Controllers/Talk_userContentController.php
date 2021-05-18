@@ -318,6 +318,8 @@ class Talk_userContentController extends Controller
             // $talkDataNow = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->first();
             $talkDataNow = Talk::TalkDataNow($myId, $user_id)->first();
 
+            // dd($talkDataNow);
+
 
 
             // if ($talkDataOneBefore == null) {

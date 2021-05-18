@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Talk_list;
+use App\Talk;
 use App\Facades\IdentifyId;
 use App\Facades\TalkList;
 
@@ -24,6 +25,7 @@ class Talk_userController extends Controller
         // だってトークを始める時は多分　detailsからいくから！
         $myId = Auth::id();
 
+        
         // $identify_id = 'talk_list';
 
         // Talk_listテーブルは左側の一覧を最近のトーク順にするためにわざわざ作ったやつ
