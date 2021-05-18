@@ -16,6 +16,13 @@ class FindControllerTest extends TestCase
     function ゲストはページを表示出来ない()
     {
         
+        $url = 'login';
+
+        $this->seed(DatabaseSeeder::class);
+
+        $user = $this->notLoginUser();
+
+        $this->get(route('finds.index'))->assertRedirect($url);
     }
 
 
@@ -23,6 +30,14 @@ class FindControllerTest extends TestCase
     function findsのindexを表示できる()
     {
 
+        $this->seed(DatabaseSeeder::class);
+
+        $user = $this->loginUser();
+        
+        $this->get(route('finds.index'))
+            ->assertOk()
+            ->assertSee('年代')
+            ->assertSee('所属チーム');
     }
 
 
