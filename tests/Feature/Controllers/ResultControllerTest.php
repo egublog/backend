@@ -14,6 +14,9 @@ class ResultControllerTest extends TestCase
 {
 
 
+    use RefreshDatabase;
+
+
     /** @test index */
     function ゲストはページを表示出来ない()
     {

@@ -11,6 +11,8 @@ use DatabaseSeeder;
 class FindControllerTest extends TestCase
 {
 
+    use RefreshDatabase;
+    
     
     /** @test index */
     function ゲストはページを表示出来ない()
