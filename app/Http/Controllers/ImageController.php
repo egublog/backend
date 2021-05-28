@@ -133,7 +133,5 @@ class ImageController extends Controller
 
         return $prefs;
     }
-
-
     
 }

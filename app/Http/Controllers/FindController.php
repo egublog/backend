@@ -12,11 +12,7 @@ class FindController extends Controller
      */
     public function index()
     {
-        //
         // 検索の変数が空だとエラーになるから入れる(era_id team_id)
-        // $era_id = 1;
-        // $team_string = '';
-
         return view('myService.find')->with([
             'era_id' => 1,
             'team_string' => '',
