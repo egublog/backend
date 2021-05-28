@@ -24,13 +24,13 @@ class TalkListFacadeTest extends TestCase
 
 
 
-    // /**
-    //  * A basic unit test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testExample()
-    // {
-    //     $this->assertTrue(true);
-    // }
+    /**
+     * A basic unit test example.
+     *
+     * @return void
+     */
+    public function testExample()
+    {
+        $this->assertTrue(true);
+    }
 }
