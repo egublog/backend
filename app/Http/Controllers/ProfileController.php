@@ -23,23 +23,14 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
         // selectボタン用にareaテーブルから全てを取ってくる (areas)
-        // $areas = Area::all();
         $areas = $this->areas();
 
-
-        // $myId = Auth::id();
-        // $myAccount = User::find($myId);
         $myAccount = Auth::user();
 
         $area_id = $myAccount->area_id;
 
-
-
-
         $schools = Profile::returnSchoolsArrayes($myAccount);
-
 
         return view('myService.profile')->with([
             'areas' => $areas,
@@ -59,17 +50,12 @@ class ProfileController extends Controller
     {
         //
         {
-            // $areas = Area::all();
             $areas = $this->areas();
 
-
-            // $myId = Auth::id();
-            // $myAccount = User::find($myId);
             $myAccount = Auth::user();
 
             $area_id = $myAccount->area_id;
 
-    
 
             $schools = Profile::returnSchoolsArrayes($myAccount);
 
@@ -95,41 +81,21 @@ class ProfileController extends Controller
     {
         //
         {
-            // dd($request->age);
             $myId = Auth::id();
-            // $myAccount = User::find($myId);
             $myAccount = Auth::user();
 
 
-            // $areas = Area::all();
             $areas = $this->areas();
-            // $teams = Team::all();
 
-
-
+            // ここでチームとポジションを登録
             Profile::saveTeamAndPosition($request, $myId);
-
-            // ここからfindの新しい機能を追加 終了
-
-
-
 
             // ここでもしユーザーが入力してたら登録
             Profile::saveNameIntroductionAgeArea($request, $myAccount);
 
-
-
-
             $area_id = $myAccount->area_id;
 
-
-
             $schools = Profile::returnSchoolsArrayes($myAccount);
-
-
-
-
-
 
             return view('myService.profile')->with([
                 'areas' => $areas,
