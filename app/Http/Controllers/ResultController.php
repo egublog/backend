@@ -13,107 +13,57 @@ use App\Facades\SearchAllses;
 
 class ResultController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $myAccount = Auth::user();
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index(Request $request)
+  {
+    $myAccount = Auth::user();
 
-          // ここではまず検索して出てくるユーザーのusersテーブルを配列で取ってくるのが目的　↓
+    // 検索された文字列からワイルドカードでteamsテーブルから検索してそのteam_idを配列で取ってくる
+    $team_ids = SearchTeams::get($request->team_string);
 
-  
-          // まず検索で入力された文字列からワイルドカードで検索、合致したteamsテーブルのオブジェクトを取得(レコードの配列を)
-          // $teamsResults = Team::where('team_name', 'like', '%' . $request->team_string . '%')->get();
-  
-          // if (isset($teamsResults)) {
-          //     // 検索結果が帰ってくればそのオブジェクトからteamのidを取り出す なければからの配列にする。
-          //     $team_ids = array();
-          //     foreach ($teamsResults as $teamsResult) {
-          //         $team_ids[] = $teamsResult->id;
-          //     }
-          //     // 検索結果のera_id(年代)とそのteam_id達からallテーブルのレコードの配列を取得(allのオブジェクトの配列)
-          //     $searchAllses = array();
-          //     foreach ($team_ids as $team_id) {
-          //         $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
-          //     }
-          // } else {
-          //     $searchAllses = '';
-          // }
-        //   $team_ids = Team::where('team_name', 'like', '%' . $request->team_string . '%')->pluck('id')->all();
-        $team_ids = SearchTeams::get($request->team_string);
+    // $team_idsと検索されたera_idから適切なallsテーブルから該当するコレクションを取ってくる
+    $searchAlls = SearchAllses::getAllArray($request->era_id, $team_ids);
 
-        // if (isset($team_ids)) 
-        //   {
-        //       $searchAllses = array();
-        //       foreach ($team_ids as $team_id) {
-        //         $searchAllses[] = All::where('era_id', $request->era_id)->where('team_id', $team_id)->get();
-        //       }
-        //   } else {
-        //       $searchAllses = '';
-        //   }
-
-        $searchAlls = SearchAllses::getAllArray($request->era_id, $team_ids);
-  
-        
+    return view('myService.find')->with([
+      'searchAlls' => $searchAlls,
+      // ↓ 検索内容のvalue用と検索結果のdetails.blade.phpのback用(team_string)(era_id)
+      'team_string' => $request->team_string,
+      'era_id' => $request->era_id,
+      // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
+      'myAccount' => $myAccount,
+    ]);
+  }
 
 
-        // dd($searchAlls);
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show(User $user, Request $request)
+  {
+    $identify_id = 'find';
+    $user_id = $user->id;
 
-  
-          return view('myService.find')->with([
-              'searchAlls' => $searchAlls,
-              // ↓ 検索内容のvalue用と検索結果のdetails.blade.phpのback用(team_string)(era_id)
-              'team_string' => $request->team_string,
-              'era_id' => $request->era_id,
-              // 'teams' => $teams,
-              // ↓アカウント一覧の時に自分のアカウントは表示しない用に
-            //   'myId' => $myId,
-               // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
-              'myAccount' => $myAccount,
-            //   'identify_id' => $identify_id,
-          ]);
-    }
+    $myAccount = Auth::user();
 
+    // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで確認
+    $follow_check = $myAccount->followCheck($user_id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user, Request $request)
-    {
-        //
-        $identify_id = 'find';
-        $user_id = $user->id;
+    // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
+    $hisAccount = User::find($user_id);
 
-        // $myId = Auth::id();
-        // $myAccount = User::find($myId);
-        $myAccount = Auth::user();
-
-
-        // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
-        // $follow_check = $myAccount->show_follow()->where('receive_user_id', $user_id)->first();
-        $follow_check = $myAccount->followCheck($user_id);
-        
-        // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        $hisAccount = User::find($user_id);
-
-
-        // find系列だったら(era_id)($team_string)を渡す
-        // 尚detailsのみこのtalk_findとかがある
-            return view('myService.details')->with([
-                'identify_id' => $identify_id,
-                'hisAccount' => $hisAccount,
-                'follow_check' => $follow_check,
-                'era_id' => $request->era_id,
-                'team_string' => $request->team_string,
-            ]);
-
-    }
-
-
+    return view('myService.details')->with([
+      'identify_id' => $identify_id,
+      'hisAccount' => $hisAccount,
+      'follow_check' => $follow_check,
+      'era_id' => $request->era_id,
+      'team_string' => $request->team_string,
+    ]);
+  }
 }
