@@ -153,7 +153,7 @@ class UserTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals($user->returnPositionId(1), 'GK');
+        $this->assertEquals($user->returnPositionId(1), 1);
 
 
     }
