@@ -24,11 +24,8 @@ class ImageController extends Controller
     {
         //
         {
-            // $areas = Area::all();
             $areas = $this->areas();
     
-            // $myId = Auth::id();
-            // $myAccount = User::find($myId);
             $myAccount = Auth::user();
             
             $area_id = $myAccount->area_id;
@@ -56,31 +53,19 @@ class ImageController extends Controller
     public function update(ImageRequest $request, $id)
     {
         {
-
-
-            // $myAccount = User::find($myId);
             $myAccount = Auth::user();
             
-            //  // ↓　ここで画像のデータを表す意味わかんない長い文字列を$imageに入れる
-            // $image = $request->file('image');
-            // // ↓　ここで画像データをS3に保存(/testにpublicで).  そのS3の中での画像のパスを$pathに保存
-            // $path = Storage::disk('s3')->putFile('test', $image, 'public');
+            // // ↓ ここで画像データをS3に保存(/testにpublicで).  そのS3の中での画像のパスを$pathに保存
             $path = Profile::saveImageToDatabaseAndReturnThePath($request);
             
-            
             // こっち側からS3の中のそのファイルまでのフルパスをUserテーブルのimageカラムに保存
-            // $myAccount->image = Storage::disk('s3')->url($path);
-            // $myAccount->save();
             $myAccount->saveImagePathToUsersTable($path);
 
-
-            // $areas = Area::all();
             $areas = $this->areas();
             
             $area_id = $myAccount->area_id;
     
             $schools = Profile::returnSchoolsArrayes($myAccount);
-
 
             return view('myService.profile')->with([
                 'areas' => $areas,
