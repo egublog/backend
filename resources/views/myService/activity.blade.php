@@ -5,9 +5,7 @@
 @section('content')
 
 
-
 <main>
-
 
     <section class="results">
         <div class="results-inner">
@@ -28,7 +26,6 @@
                     <div class="results-body">
                         <div class="results-body-first">
                             <div class="results-body-first-name">
-                                <!-- ↓ ここに <input>と同じ様になる様にclassを当てる↑このdivは今追加した -->
                                 <a href="{{ route('activities.show', ['user' => $account->id]) }}">{{ $account->name }}さんにフォローされました</a>
                             </div>
                             <div class="results-body-first-time">
@@ -43,15 +40,11 @@
                             <span class="results-body-second-age">age: {{ $account->age }} </span>
                             @endif
                             <?php
-                            // $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             $follow_check = $myAccount->followCheck($account->id);
                             ?>
                             <div class="results-body-second-follow">
-
                                 <follow-button :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
                             </div>
-
-                            
                         </div>
                     </div>
                 </li>
