@@ -60,11 +60,30 @@
                     </ul>
                 </div>
                 <div class="header-overlay"></div>
-                <!-- /ハンバーガー -->
+                <!-- ハンバーガー -->
 
                 <!-- ログインのtoggle -->
+                <!-- <div class="toggle">
+
+                    <a class="toggle-button dropdown-toggle" href="#">
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="toggle-show dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="logout-button dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        
+                    </div>
+                </div> -->
                 <log-out-toggle :user-name="{{ json_encode(Auth::user()->name) }}"></log-out-toggle>
-                <!-- /ログインのtoggle -->
+
+                <!-- ログインのtoggle -->
 
             </div>
         </header>
