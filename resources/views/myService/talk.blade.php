@@ -42,18 +42,11 @@
                                     @endif
                                 </div>
                                 <div class="results-body-second">
-                                    <!-- @if(isset($account->alls()->first()->team_id)) -->
                                     @foreach($account->alls()->orderBy('id', 'desc')->get() as $all)
                                     <span class="results-body-second-team">
-                                        <!-- @if($all->team->team_name) -->
                                         {{ $all->team->team_name }}
-                                        <!-- @else -->
-                                        <!-- 未入力です。 -->
-                                        <!-- @endif -->
                                         /</span>
                                     @endforeach
-                                    <!-- <span></span> -->
-                                    <!-- @endif -->
                                 </div>
                             </div>
                         </li>
