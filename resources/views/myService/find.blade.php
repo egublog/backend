@@ -78,7 +78,6 @@
                             <span class="results-body-first-age">age: {{ $searchAll->user->age }} </span>
                             @endif
                             <?php
-                            // $follow_check = $myAccount->show_follow()->where('receive_user_id', $searchAll->user->id)->first();
                             $follow_check = $myAccount->followCheck($searchAll->user->id);
                             ?>
                             <div class="results-body-first-follow">
@@ -87,18 +86,11 @@
                             
                         </div>
                         <div class="results-body-second">
-                            <!-- @if($searchAll->user->alls()->first()->team_id) -->
                             @foreach($searchAll->user->alls()->orderBy('id', 'desc')->get() as $all)
                             <span class="results-body-second-team">
-                                <!-- @if($all->team->team_name) -->
                                 {{ $all->team->team_name }}
-                                <!-- @else -->
-                                <!-- 未入力です。 -->
-                                <!-- @endif -->
                                 <span class="hidden-sp">/</span></span>
                             @endforeach
-                            <!-- <span></span> -->
-                            <!-- @endif -->
                         </div>
                     </div>
                 </li>
@@ -111,9 +103,6 @@
         </div>
     </section>
     <!-- /.results -->
-
-
-
 
 </main>
 @endsection
