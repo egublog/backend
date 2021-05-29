@@ -35,7 +35,6 @@
                     <div class="results-body">
                         <div class="results-body-first">
                             <form action="{{ route('friends.show', ['user' => $account->id]) }}" method="get" class="results-body-first-name">
-                                <!-- ここの$account->idは$accountと省略できる                 ↑↑-->
                                 {{ csrf_field() }}
                                 <input name="identify_id" type="hidden" value="{{ $identify_id }}">
                                 <input class="" type="submit" value="{{ $account->name }}">
@@ -48,29 +47,21 @@
                             <span class="results-body-first-age">age: {{ $account->age }} </span>
                             @endif
                             <?php
-                            // $follow_check = $myAccount->show_follow()->where('receive_user_id', $account->id)->first();
                             $follow_check = $myAccount->followCheck($account->id);
                             ?>
                             <div class="results-body-first-follow">
                                 <follow-button :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
                             </div>
 
-
                         </div>
                         <div class="results-body-second">
-                            <!-- @if(isset($account->alls()->first()->team_id)) -->
                             @foreach($account->alls()->orderBy('id', 'desc')->get() as $all)
                             <span class="hidden-sp results-body-second-team">
-                                <!-- @if($all->team->team_name) -->
                                 {{ $all->team->team_name }}
-                                <!-- @else -->
-                                <!-- 未入力です。 -->
-                                <!-- @endif -->
                                 <span class="hidden-sp">/</span>
                             </span>
                             @endforeach
                             <span></span>
-                            <!-- @endif -->
                         </div>
                     </div>
                 </li>
