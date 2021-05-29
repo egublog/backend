@@ -21,27 +21,16 @@ class All extends Model
     ];
 
     // リレーション ↓↓
-    // public function position() {
-    //     return $this->belongsTo('App\Position');
-    // }
     
     public function team() {
         return $this->belongsTo('App\Team');
     }
     
-    // public function era() {
-    //     return $this->belongsTo('App\Era');
-    // }
-    
     public function user() {
         return $this->belongsTo('App\User');
     }
     
-    // public function area() {
-    //     return $this->belongsTo('App\Area');
-    // }
-
-    
+    // ただのメソッド
     public function changeEraIdToEraName($value)
     {
         $eras = [
@@ -67,55 +56,26 @@ class All extends Model
     }
 
 
-    // アクセサ ↓↓
-    // public function getEraIdAttribute($value)
-    // {
-        //     $eras = [
-            //         '1' => '小学校',
-    //         '2' => '中学校',
-    //         '3' => '高校',
-    //         '4' => '大学',
-    //     ];
-
-    //     return Arr::get($eras, $value);
-    // }
-    
-    // public function getPositionIdAttribute($value)
-    // {
-    //     $eras = [
-    //         '1' => 'GK',
-    //         '2' => 'DF',
-    //         '3' => 'MF',
-    //         '4' => 'FW',
-    //     ];
-
-    //     return Arr::get($eras, $value);
-    // }
 
 
+    // ↓↓ ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
 
 
-
-    // ↓↓  ここから下がふぁっとモデルスキニーコントローラで書いたところ
-
-
-    // ↓ get()系
-
+    // ↓↓ get()系
     public static function getSearchAll($era_id, $team_id)
     {
         return self::where('era_id', $era_id)->where('team_id', $team_id)->with('user')->get();
     }
 
 
-
-        // ↓ scope系
+    // ↓↓ scope系
     public function scopeMyIdEraEqual($query, $myId, $era_id)
     {
         return $query->where('user_id', $myId)->where('era_id', $era_id);
     }
 
 
-        // ↓ データベース保存、削除系
+    // ↓↓ データベース保存、削除系
     public function saveTeamIdAndPositionId($team_id, $position_id)
     {
         $this->team_id = $team_id;
