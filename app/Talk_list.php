@@ -6,23 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Talk_list extends Model
 {
-    //
+    // リレーション ↓↓
     public function user() {
         return $this->belongsTo('App\User', 'from');
     }
 
 
 
-
-
-    // ↓ scope系
-
+    // ↓↓ scope系
     public function scopeFromToEqual($query, $myId)
     {
         return $query->where('from', $myId)->orWhere('to', $myId)->orderBy('created_at', 'desc');
     }
-
-
 
     public function scopeOurTalkList($query, $myId, $user_id)
     {
@@ -30,15 +25,13 @@ class Talk_list extends Model
     }
 
 
-        // ↓ データベース保存、削除系
-
+    // ↓↓ データベース保存、削除系
     public function saveNewTalkList($myId, $user_id)
     {
         $this->from = $myId;
         $this->to = $user_id;
         $this->save();
     }
-
 
 
 }
