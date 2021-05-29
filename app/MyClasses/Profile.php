@@ -72,8 +72,6 @@ class Profile
     $columns = array('user_name', 'introduction', 'age', 'area_id');
     foreach ($columns as $column) {
       if ($request->$column) {
-        // $myAccount->$column = $request->$column;
-        // $myAccount->save();
         $myAccount->saveColumn($request, $column);
       }
     }
