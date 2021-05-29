@@ -11,7 +11,7 @@ class TalkList
 
   public function getOpponentIds($talk_lists, $myId)
   {
-
+    // 引数のtalk_listsレコード達から相手のidだけを抜き取って配列にしてreturnする
     $opponent_ids = array();
     foreach ($talk_lists as $talk_list) {
       if ($talk_list->to != $myId) {
@@ -44,22 +44,6 @@ class TalkList
       $talkData->save();
     }
   }
-
-  // public function reverseCollection($talkDatasDesc)
-  // {
-  //   return $talkDatasDesc->reverse()->values();
-  // }
-
-  // public function getTalkDatasLatestTwenty()
-  // {
-  //   $talkDatasDesc = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit(20)->with('user')->get();
-
-  //   // ↓ この処理をどっかのメソッド化するかどうか悩み中
-  //   return $talkDatasDesc->reverse()->values();
-  // }
-
-
-
 
 
 
