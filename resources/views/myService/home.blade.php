@@ -56,11 +56,7 @@
                         @foreach($myAccount->alls as $all)
                         <div class="profile-def-box">
                             <dt class="profile-dtit">{{ $all->changeEraIdToEraName($all->era_id) }} : </dt>
-                            <!-- @if($all->team->team_name) -->
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
-                            <!-- @else -->
-                            <!-- <dd class="profile-data">未設定です。</dd> -->
-                            <!-- @endif -->
                         </div>
                         @endforeach
                         @endif
