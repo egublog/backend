@@ -21,14 +21,14 @@
             </div>
             <div class="profile-button">
                 <div class="profile-button-follower">
-                    <form class="aタグに適用していた物をする下のinputのsubmitに" method="get" action="{{ route('friends.index') }}">
+                    <form class="" method="get" action="{{ route('friends.index') }}">
                         {{ csrf_field() }}
                         <input name="identify_id" type="hidden" value="friend_follower">
                         <input class="profile-button-follower-input" type="submit" value="フォローワー">
                     </form>
                 </div>
                 <div class="profile-button-follow">
-                    <form class="aタグに適用していた物をする下のinputのsubmitに" method="get" action="{{ route('friends.index') }}">
+                    <form class="" method="get" action="{{ route('friends.index') }}">
                         {{ csrf_field() }}
                         <input name="identify_id" type="hidden" value="friend_follow">
                         <input class="profile-button-follower-input" type="submit" value="フォロー中">

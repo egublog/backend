@@ -40,6 +40,7 @@ class ActivityController extends Controller
         $identify_id = 'activity';
         $user_id = $user->id;
 
+        
         $myAccount = Auth::user();
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを

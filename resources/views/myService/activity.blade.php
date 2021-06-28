@@ -6,6 +6,22 @@
 
 
 <main>
+    <div>
+        <header class='atitle'>Dogアプリ</header>
+
+        <div class="div1">
+
+            <p class='asubTitle'>犬の画像を表示させるサイトです。</p>
+
+            <div class="div2">
+
+            <img class='aimage' src='https://images.dog.ceo/breeds/terrier-american/n02093428_11793.jpg' />
+
+            <button class='abutton'>更新</button>
+            </div>
+            
+        </div>
+    </div>
 
     <section class="results">
         <div class="results-inner">
