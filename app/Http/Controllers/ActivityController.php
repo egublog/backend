@@ -39,7 +39,6 @@ class ActivityController extends Controller
     {
         $identify_id = 'activity';
         $user_id = $user->id;
-
         
         $myAccount = Auth::user();
 
