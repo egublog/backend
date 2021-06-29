@@ -14,7 +14,7 @@ use App\Repositories\User\Interfaces\UserDataAccessInterface;
 class MyhomeController extends Controller
 {
 
-    protected $UserDataAccess;
+    private $UserDataAccess;
 
 
     public function __construct(UserDataAccessInterface $UserDataAccess)
