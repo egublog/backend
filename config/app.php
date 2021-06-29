@@ -178,6 +178,8 @@ return [
 
 
         App\Providers\MyServiceProvider::class,
+
+        App\Providers\Repositories\UserServiceProvider::class
     ],
 
     /*
