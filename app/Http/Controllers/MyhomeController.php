@@ -14,12 +14,12 @@ use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 class MyhomeController extends Controller
 {
 
-    private $UserDataAccess;
+    private $UserDataAccessRepository;
 
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccess)
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository)
     {
-        $this->UserDataAccess = $UserDataAccess;
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
     }
 
 
@@ -33,7 +33,7 @@ class MyhomeController extends Controller
     public function index()
     {
         // $myAccount = Auth::user();
-        $myAccount = $this->UserDataAccess->getAuthUser();
+        $myAccount = $this->UserDataAccessRepository->getAuthUser();
        
         // 自分のプロフィール表示用に自分のアカウント情報を付ける (myAccount)
         return view('myService.home')->with([

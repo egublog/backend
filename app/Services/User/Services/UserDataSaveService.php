@@ -13,20 +13,20 @@ use App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface;
 
 class UserDataSaveService implements UserDataSaveServiceInterface
 {
-  private $UserDataAccess;
-  private $UserDataSave;
+  private $UserDataAccessRepository;
+  private $UserDataSaveRepository;
 
 
-  public function __construct(UserDataAccessRepositoryInterface $UserDataAccess, UserDataSaveRepositoryInterface $UserDataSave)
+  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataSaveRepositoryInterface $UserDataSaveRepository)
   {
-    $this->UserDataAccess = $UserDataAccess;
-    $this->UserDataSave = $UserDataSave;
+    $this->UserDataAccessRepository = $UserDataAccessRepository;
+    $this->UserDataSaveRepository = $UserDataSaveRepository;
   }
 
   public function saveAuthUserFirstAreaid()
   {
-    if($this->UserDataAccess->getAuthUserAreaid() === null) {
-      $this->UserDataSave->saveAuthUserAreaid(50);
+    if($this->UserDataAccessRepository->getAuthUserAreaid() === null) {
+      $this->UserDataSaveRepository->saveAuthUserAreaid(50);
   }
   }
 }

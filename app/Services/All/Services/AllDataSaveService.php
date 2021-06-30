@@ -14,16 +14,16 @@ use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
 class AllDataSaveService implements AllDataSaveServiceInterface
 {
   // protected $All;
-  private $AllDataAccess;
-  private $AllDataSave;
+  private $AllDataAccessRepository;
+  private $AllDataSaveRepository;
 
 
 
-  public function __construct(AllDataAccessRepositoryInterface $AllDataAccess, AllDataSaveRepositoryInterface $AllDataSave)
+  public function __construct(AllDataAccessRepositoryInterface $AllDataAccessRepository, AllDataSaveRepositoryInterface $AllDataSaveRepository)
   {
     //    $this->Auth = $Auth;
-    $this->AllDataAccess = $AllDataAccess;
-    $this->AllDataSave = $AllDataSave;
+    $this->AllDataAccessRepository = $AllDataAccessRepository;
+    $this->AllDataSaveRepository = $AllDataSaveRepository;
   }
 
   // private function getAllFirst()
@@ -33,7 +33,7 @@ class AllDataSaveService implements AllDataSaveServiceInterface
 
   public function saveAllFirstData($myId)
   {
-    $allEra = $this->AllDataAccess->getAllFirst($myId);
+    $allEra = $this->AllDataAccessRepository->getAllFirst($myId);
     if ($allEra === null) {
       // dd($allEra);
       // for ($i = 1; $i < 5; $i++) {
@@ -44,7 +44,7 @@ class AllDataSaveService implements AllDataSaveServiceInterface
       //   $all->era_id = $i;
       //   $all->save();
       // }
-        $this->AllDataSave->saveAllFirstData($myId);
+        $this->AllDataSaveRepository->saveAllFirstData($myId);
     }
   }
 }

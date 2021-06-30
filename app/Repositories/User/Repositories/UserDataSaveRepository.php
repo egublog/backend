@@ -12,19 +12,19 @@ use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 class UserDataSaveRepository implements UserDataSaveRepositoryInterface
 {
   // protected $Auth;
-  private $UserDataAccess;
+  private $UserDataAccessRepository;
 
 
-  public function __construct(UserDataAccessRepositoryInterface $UserDataAccess)
+  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository)
   {
     //    $this->Auth = $Auth;
-    $this->UserDataAccess = $UserDataAccess;
+    $this->UserDataAccessRepository = $UserDataAccessRepository;
   }
 
 
   public function saveAuthUserAreaid($area_id)
   {
-    $this->UserDataAccess->getAuthUser()->area_id = $area_id;
-    $this->UserDataAccess->getAuthUser()->save();
+    $this->UserDataAccessRepository->getAuthUser()->area_id = $area_id;
+    $this->UserDataAccessRepository->getAuthUser()->save();
   }
 }

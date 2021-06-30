@@ -18,10 +18,10 @@ use App\Services\User\Interfaces\UserDataSaveServiceInterface;
 class HomeController extends Controller
 {
 
-    private $UserDataAccess;
+    private $UserDataAccessRepository;
     // private $AllDataAccess;
-    private $AllDataSave;
-    private $UserDataSave;
+    private $AllDataSaveService;
+    private $UserDataSaveService;
 
 
     /**
@@ -29,13 +29,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccess, AllDataSaveServiceInterface $AllDataSave, UserDataSaveServiceInterface $UserDataSave)
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService)
     {
         $this->middleware('auth');
-        $this->UserDataAccess = $UserDataAccess;
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
         // $this->AllDataAccess = $AllDataAccess;
-        $this->AllDataSave = $AllDataSave;
-        $this->UserDataSave = $UserDataSave;
+        $this->AllDataSaveService = $AllDataSaveService;
+        $this->UserDataSaveService = $UserDataSaveService;
     }
 
     /**
@@ -49,8 +49,8 @@ class HomeController extends Controller
 
         // $myId = Auth::id();
         // $myAccount = User::find($myId);
-        $myId = $this->UserDataAccess->getAuthUserId();
-        $myAccount = $this->UserDataAccess->getAuthUser();
+        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        // $myAccount = $this->UserDataAccessRepository->getAuthUser();
 
         // $allEra = $myAccount->alls()->where('era_id', 1)->first();
         // $allEra = $this->AllDataAccess->getAllFirst($myId);
@@ -66,9 +66,9 @@ class HomeController extends Controller
         //         $all->save();
         //     }
         // }
-        $this->AllDataSave->saveAllFirstData($myId);
+        $this->AllDataSaveService->saveAllFirstData($myId);
 
-        $this->UserDataSave->saveAuthUserFirstAreaid();
+        $this->UserDataSaveService->saveAuthUserFirstAreaid();
 
         return redirect()->route('myhomes.index');
 
