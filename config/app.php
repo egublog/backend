@@ -179,7 +179,15 @@ return [
 
         App\Providers\MyServiceProvider::class,
 
-        App\Providers\Repositories\UserServiceProvider::class
+        // ↓ Repositories
+        App\Providers\Repositories\UserServiceProvider::class,
+        App\Providers\Repositories\AllServiceProvider::class,
+
+
+
+        // ↓ Services
+        App\Providers\Services\AllServiceProvider::class,
+        App\Providers\Services\UserServiceProvider::class,
     ],
 
     /*

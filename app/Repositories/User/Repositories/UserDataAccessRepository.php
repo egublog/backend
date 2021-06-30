@@ -2,12 +2,12 @@
 
 namespace App\Repositories\User\Repositories;
 
-use App\Repositories\User\Interfaces\UserDataAccessInterface;
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 
 
-class UserDataAccessRepository implements UserDataAccessInterface
+class UserDataAccessRepository implements UserDataAccessRepositoryInterface
 {
     // protected $Auth;
 
@@ -20,5 +20,15 @@ class UserDataAccessRepository implements UserDataAccessInterface
     public function getAuthUser()
     {
         return Auth::user();
+    }
+
+    public function getAuthUserId()
+    {
+        return Auth::id();
+    }
+
+    public function getAuthUserAreaid()
+    {
+        return $this->getAuthUser()->area_id;
     }
 }

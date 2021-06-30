@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Talk;
 use Illuminate\Support\Arr;
-use App\Repositories\User\Interfaces\UserDataAccessInterface;
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 
 
 
@@ -17,7 +17,7 @@ class MyhomeController extends Controller
     private $UserDataAccess;
 
 
-    public function __construct(UserDataAccessInterface $UserDataAccess)
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccess)
     {
         $this->UserDataAccess = $UserDataAccess;
     }

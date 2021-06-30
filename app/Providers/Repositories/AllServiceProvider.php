@@ -14,6 +14,14 @@ class AllServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        app()->bind(
+            \App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface::class,
+            \App\Repositories\All\Repositories\AllDataAccessRepository::class
+        );
+        app()->bind(
+            \App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface::class,
+            \App\Repositories\All\Repositories\AllDataSaveRepository::class
+        );
     }
 
     /**
