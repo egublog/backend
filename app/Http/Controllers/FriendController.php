@@ -7,9 +7,26 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Facades\IdentifyId;
 
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+
+
+
 
 class FriendController extends Controller
 {
+
+    private $UserDataAccessRepository;
+    private $UserDataAccessService;
+
+
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService)
+    {
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataAccessService = $UserDataAccessService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,20 +34,22 @@ class FriendController extends Controller
      */
     public function index(Request $request)
     {
-        $myAccount = Auth::user();
+        $myAccount = $this->UserDataAccessRepository->getAuthUser();
 
         // でここにidentify_id と言う名前でクエリ文字列が送られてくるから
         //  それがfollowかfollowerかで処理を分ければ良い。。
         $identify_id = $request->identify_id;
 
 
-        if (IdentifyId::friendFollow($identify_id)) {
-            // 自分がフォローしている人を取得
-            $accounts = $myAccount->getFollow();
-        } elseif (IdentifyId::friendFollower($identify_id)) {
-            // 自分をフォローしている人を取得
-            $accounts = $myAccount->getFollower();
-        }
+        // if (IdentifyId::friendFollow($identify_id)) {
+        //     // 自分がフォローしている人を取得
+        //     $accounts = $myAccount->getFollow();
+        // } elseif (IdentifyId::friendFollower($identify_id)) {
+        //     // 自分をフォローしている人を取得
+        //     $accounts = $myAccount->getFollower();
+        // }
+
+        $accounts = $this->UserDataAccessService->getAuthUserFriends($identify_id);
 
         return view('myService.friend')->with([
             'accounts' => $accounts,

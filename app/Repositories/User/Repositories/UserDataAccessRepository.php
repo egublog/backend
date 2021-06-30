@@ -31,4 +31,14 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
     {
         return $this->getAuthUser()->area_id;
     }
+
+    public function getFriendsFollow($user)
+    {
+        return $user->getFollow();
+    }
+
+    public function getFriendsFollower($user)
+    {
+        return $user->getFollower();
+    }
 }
