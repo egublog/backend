@@ -6,4 +6,6 @@ interface UserDataAccessServiceInterface
 {
     public function getAuthUserFriends($identify_id);
     public function AuthUserFollowCheck($his_id);
+
+    public function returnAuthUserSchoolsArrays();
 }

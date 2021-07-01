@@ -11,11 +11,27 @@ use App\All;
 use App\Http\Requests\ProfileRequest;
 use App\Facades\Profile;
 
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+
+
 
 
 
 class ProfileController extends Controller
 {
+
+    private $UserDataAccessRepository;
+    private $UserDataAccessService;
+
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService)
+    {
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataAccessService = $UserDataAccessService;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,13 +40,17 @@ class ProfileController extends Controller
     public function index()
     {
         // selectボタン用にareaテーブルから全てを取ってくる (areas)
-        $areas = $this->areas();
+        // $areas = $this->areas();
+        $areas = $this->UserDataAccessRepository->getAreaArray();
 
-        $myAccount = Auth::user();
+        // $myAccount = Auth::user();
+        $myAccount = $this->UserDataAccessRepository->getAuthUser();
 
-        $area_id = $myAccount->area_id;
+        // $area_id = $myAccount->area_id;
+        $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
 
-        $schools = Profile::returnSchoolsArrayes($myAccount);
+        // $schools = Profile::returnSchoolsArrayes($myAccount);
+        $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
 
         return view('myService.profile')->with([
             'areas' => $areas,
@@ -50,14 +70,17 @@ class ProfileController extends Controller
     {
         //
         {
-            $areas = $this->areas();
+            // $areas = $this->areas();
+            $areas = $this->UserDataAccessRepository->getAreaArray();
 
-            $myAccount = Auth::user();
+            // $myAccount = Auth::user();
+            $myAccount = $this->UserDataAccessRepository->getAuthUser();
 
-            $area_id = $myAccount->area_id;
+            // $area_id = $myAccount->area_id;
+            $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
 
-
-            $schools = Profile::returnSchoolsArrayes($myAccount);
+            // $schools = Profile::returnSchoolsArrayes($myAccount);
+            $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
 
 
             return view('myService.profile')->with([

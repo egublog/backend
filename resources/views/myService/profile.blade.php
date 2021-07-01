@@ -164,7 +164,7 @@
                                 <dd class="profile-data">
                                     <select class="col-8" id="area" name="area_id">
                                         @foreach($areas as $key => $area)
-                                        <option value="<?php echo $key ?>" @if($area_id==$area) selected @endif>{{ $area }}</option>
+                                        <option value="<?php echo $key ?>" @if($area_id==$key) selected @endif>{{ $area }}</option>
                                         @endforeach
                                     </select>
                                 </dd>

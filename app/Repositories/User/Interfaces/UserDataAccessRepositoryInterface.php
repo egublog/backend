@@ -12,4 +12,8 @@ interface UserDataAccessRepositoryInterface
     public function getFollowHimFirst($user, $his_id);
 
     public function getHisAccount($his_id);
+
+    public function getAreaArray();
+    public function getAuthUserTeamName($era_id);
+    public function getAuthUserPositionId($era_id);
 }
