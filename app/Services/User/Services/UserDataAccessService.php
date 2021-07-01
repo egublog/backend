@@ -33,4 +33,13 @@ class UserDataAccessService implements UserDataAccessServiceInterface
       return $this->UserDataAccessRepository->getFriendsFollower($user);
     }
   }
+
+
+  public function AuthUserFollowCheck($his_id)
+  {
+    $user = $this->UserDataAccessRepository->getAuthUser();
+    return $this->UserDataAccessRepository->getFollowHimFirst($user, $his_id) === null ? false : true;
+  }
+
+
 }

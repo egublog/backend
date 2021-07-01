@@ -9,5 +9,7 @@ interface UserDataAccessRepositoryInterface
     public function getAuthUserAreaid();
     public function getFriendsFollow($user);
     public function getFriendsFollower($user);
-    
+    public function getFollowHimFirst($user, $his_id);
+
+    public function getHisAccount($his_id);
 }

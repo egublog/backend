@@ -155,7 +155,7 @@ class User extends Authenticatable
 
 
 
-    // ↓↓ get()系　　（主にリレーションを含む時）
+    // ↓↓ get()系  （主にリレーションを含む時）
 
     public function returnTeamName($era_id)
     {
@@ -184,6 +184,7 @@ class User extends Authenticatable
     }
 
 
+    //↓ getFollowHimFirst($user, $his_id)  Repository
     public function firstFollowHim($his_id) 
     {
         return $this->show_follow()->where('receive_user_id', $his_id)->first();
@@ -193,7 +194,8 @@ class User extends Authenticatable
 
 
     // ↓↓ 真偽値系
-    
+
+    // ↓ AuthUserFollowCheck($his_id)  Service
     public function followCheck($his_id)
     {
         return $this->firstFollowHim($his_id) === null ? false : true;

@@ -51,6 +51,8 @@ class FriendController extends Controller
 
         $accounts = $this->UserDataAccessService->getAuthUserFriends($identify_id);
 
+        // dd($accounts);
+
         return view('myService.friend')->with([
             'accounts' => $accounts,
             // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
@@ -70,13 +72,15 @@ class FriendController extends Controller
      */
     public function show(User $user, Request $request)
     {
-        $user_id = $user->id;
-        $myAccount = Auth::user();
-        $follow_check = $myAccount->followCheck($user_id);
+        $his_id = $user->id;
+        // $myAccount = Auth::user();
+        // $follow_check = $myAccount->followCheck($his_id);
+        $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+        $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
 
         return view('myService.details')->with([
             'identify_id' => $request->identify_id,
-            'hisAccount' => User::find($user_id),
+            'hisAccount' => $his_account,
             'follow_check' => $follow_check,
         ]);
     }
