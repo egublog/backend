@@ -43,4 +43,16 @@ class UserDataSaveRepository implements UserDataSaveRepositoryInterface
     $myAccount->image = Storage::disk('s3')->url($path);
     $myAccount->save();
   }
+
+  public function saveAuthUserFollow($his_id)
+  {
+    $this->UserDataAccessRepository->getAuthUser()->followAttach($his_id);
+  }
+  
+  public function deleteAuthUserFollow($his_id)
+  {
+    $this->UserDataAccessRepository->getAuthUser()->followDetach($his_id);
+  }
+
+
 }
