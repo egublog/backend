@@ -16,4 +16,6 @@ interface UserDataAccessRepositoryInterface
     public function getAreaArray();
     public function getAuthUserTeamName($era_id);
     public function getAuthUserPositionId($era_id);
+
+    public function getAuthUserFollowerForActivity();
 }

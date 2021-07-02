@@ -14,8 +14,6 @@ use App\Services\All\Interfaces\AllDataAccessServiceInterface;
 
 use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 use App\Services\User\Interfaces\UserDataAccessServiceInterface;
-use App\Services\All\Interfaces\AllDataSaveServiceInterface;
-use App\Services\User\Interfaces\UserDataSaveServiceInterface;
 
 use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
 
@@ -28,17 +26,13 @@ class ResultController extends Controller
 
   private $UserDataAccessRepository;
   private $UserDataAccessService;
-  private $AllDataSaveService;
-  private $UserDataSaveService;
   private $AllDataAccessService;
   private $TeamDataAccessRepository;
 
-  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService, AllDataAccessServiceInterface $AllDataAccessService, TeamDataAccessRepositoryInterface $TeamDataAccessRepository)
+  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService,  AllDataAccessServiceInterface $AllDataAccessService, TeamDataAccessRepositoryInterface $TeamDataAccessRepository)
   {
     $this->UserDataAccessRepository = $UserDataAccessRepository;
     $this->UserDataAccessService = $UserDataAccessService;
-    $this->AllDataSaveService = $AllDataSaveService;
-    $this->UserDataSaveService = $UserDataSaveService;
     $this->AllDataAccessService = $AllDataAccessService;
     $this->TeamDataAccessRepository = $TeamDataAccessRepository;
   }

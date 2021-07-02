@@ -65,6 +65,12 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
         return $this->getAuthUser()->alls()->where('era_id', $era_id)->first()->position_id;
     }
 
+    public function getAuthUserFollowerForActivity()
+    {
+        return $this->getAuthUser()->show_follower_activity()->get();
+    }
+
+
     
 
 
