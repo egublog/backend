@@ -26,4 +26,10 @@ class AllDataAccessRepository implements AllDataAccessRepositoryInterface
   {
     return All::where('user_id', $myId)->where('era_id', $era_id)->first();
   }
+
+  public function getAllEqualEraidTeamid($era_id, $team_id)
+  {
+    return All::where('era_id', $era_id)->where('team_id', $team_id)->with('user')->get();
+  }
+
 }

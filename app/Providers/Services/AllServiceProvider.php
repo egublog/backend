@@ -18,6 +18,10 @@ class AllServiceProvider extends ServiceProvider
             \App\Services\All\Interfaces\AllDataSaveServiceInterface::class,
             \App\Services\All\Services\AllDataSaveService::class
         );
+        app()->bind(
+            \App\Services\All\Interfaces\AllDataAccessServiceInterface::class,
+            \App\Services\All\Services\AllDataAccessService::class
+        );
     }
 
     /**
