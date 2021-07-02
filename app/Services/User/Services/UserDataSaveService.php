@@ -25,8 +25,20 @@ class UserDataSaveService implements UserDataSaveServiceInterface
 
   public function saveAuthUserFirstAreaid()
   {
-    if($this->UserDataAccessRepository->getAuthUserAreaid() === null) {
+    if ($this->UserDataAccessRepository->getAuthUserAreaid() === null) {
       $this->UserDataSaveRepository->saveAuthUserAreaid(50);
+    }
   }
+
+  public function saveAuthUserDataNameIntroductionAgeArea($request)
+  {
+    $columns = array('user_name', 'introduction', 'age', 'area_id');
+    foreach ($columns as $column_name) {
+      if ($request->$column_name) {
+        // $myAccount->saveColumn($request, $column);
+        $this->UserDataSaveRepository->saveAuthUserDataColumn($request, $column_name);
+      }
+    }
   }
+
 }

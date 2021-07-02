@@ -29,4 +29,11 @@ class AllDataSaveRepository implements AllDataSaveRepositoryInterface
       $all->save();
     }
   }
+
+  public function  saveAllDataTeamidPositionid($allInstance, $team_id, $position_id)
+  {
+    $allInstance->team_id = $team_id;
+    $allInstance->position_id = $position_id;
+    $allInstance->save();
+  }
 }

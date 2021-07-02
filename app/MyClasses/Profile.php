@@ -50,6 +50,8 @@ class Profile
 
         $teamAlready = Team::TeamNameEqual($school[1])->first();
 
+        // そのユーザーが入力していたチーム名と全く同じチームがデータベースに登録されていたらそのteam_idを$team_idに代入
+        //           されていなかったら新しく今回入力されたチーム名をデータベースに登録してそのteam_idを$team_idに代入
         if ($teamAlready) {
           $team_id = $teamAlready->id;
         } else {
@@ -58,6 +60,7 @@ class Profile
           $team_id = Team::TeamNameEqual($school[1])->first()->id;
         }
     
+        // で年代毎に入力されたポディションidをAllテーブルに保存する
         $all = All::myIdEraEqual($myId, $school[0])->first();
         $all->saveTeamIdAndPositionId($team_id, $school[2]);
       } // if ($school[1])

@@ -24,7 +24,15 @@ class UserDataSaveRepository implements UserDataSaveRepositoryInterface
 
   public function saveAuthUserAreaid($area_id)
   {
-    $this->UserDataAccessRepository->getAuthUser()->area_id = $area_id;
-    $this->UserDataAccessRepository->getAuthUser()->save();
+    $myAccount = $this->UserDataAccessRepository->getAuthUser();
+    $myAccount->area_id = $area_id;
+    $myAccount->save();
+  }
+
+  public function saveAuthUserDataColumn($request, $column_name)
+  {
+    $myAccount = $this->UserDataAccessRepository->getAuthUser();
+    $myAccount->$column_name = $request->$column_name;
+    $myAccount->save();
   }
 }

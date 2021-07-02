@@ -182,6 +182,7 @@ return [
         // ↓ Repositories
         App\Providers\Repositories\UserServiceProvider::class,
         App\Providers\Repositories\AllServiceProvider::class,
+        App\Providers\Repositories\TeamServiceProvider::class,
 
 
 

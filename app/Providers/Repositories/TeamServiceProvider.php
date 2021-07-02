@@ -14,6 +14,14 @@ class TeamServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        app()->bind(
+            \App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface::class,
+            \App\Repositories\Team\Repositories\TeamDataAccessRepository::class
+        );
+        app()->bind(
+            \App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface::class,
+            \App\Repositories\Team\Repositories\TeamDataSaveRepository::class
+        );
     }
 
     /**
