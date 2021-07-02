@@ -27,21 +27,21 @@ class ResultController extends Controller
 
 
   private $UserDataAccessRepository;
-    private $UserDataAccessService;
-    private $AllDataSaveService;
-    private $UserDataSaveService;
-    private $AllDataAccessService;
-    private $TeamDataAccessRepository;
+  private $UserDataAccessService;
+  private $AllDataSaveService;
+  private $UserDataSaveService;
+  private $AllDataAccessService;
+  private $TeamDataAccessRepository;
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService, AllDataAccessServiceInterface $AllDataAccessService, TeamDataAccessRepositoryInterface $TeamDataAccessRepository)
-    {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
-        $this->AllDataSaveService = $AllDataSaveService;
-        $this->UserDataSaveService = $UserDataSaveService;
-        $this->AllDataAccessService = $AllDataAccessService;
-        $this->TeamDataAccessRepository = $TeamDataAccessRepository;
-    }
+  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService, AllDataAccessServiceInterface $AllDataAccessService, TeamDataAccessRepositoryInterface $TeamDataAccessRepository)
+  {
+    $this->UserDataAccessRepository = $UserDataAccessRepository;
+    $this->UserDataAccessService = $UserDataAccessService;
+    $this->AllDataSaveService = $AllDataSaveService;
+    $this->UserDataSaveService = $UserDataSaveService;
+    $this->AllDataAccessService = $AllDataAccessService;
+    $this->TeamDataAccessRepository = $TeamDataAccessRepository;
+  }
 
 
 
@@ -85,19 +85,25 @@ class ResultController extends Controller
   public function show(User $user, Request $request)
   {
     $identify_id = 'find';
-    $user_id = $user->id;
+    $his_id = $user->id;
 
-    $myAccount = Auth::user();
+    // $myAccount = Auth::user();
+    $myAccount = $this->UserDataAccessRepository->getAuthUser();
+
 
     // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで確認
-    $follow_check = $myAccount->followCheck($user_id);
+    // $follow_check = $myAccount->followCheck($user_id);
+    $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+
 
     // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-    $hisAccount = User::find($user_id);
+    // $hisAccount = User::find($user_id);
+    $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+
 
     return view('myService.details')->with([
       'identify_id' => $identify_id,
-      'hisAccount' => $hisAccount,
+      'hisAccount' => $his_account,
       'follow_check' => $follow_check,
       'era_id' => $request->era_id,
       'team_string' => $request->team_string,
