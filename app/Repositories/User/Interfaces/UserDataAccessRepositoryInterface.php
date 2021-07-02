@@ -18,4 +18,5 @@ interface UserDataAccessRepositoryInterface
     public function getAuthUserPositionId($era_id);
 
     public function getAuthUserFollowerForActivity();
+    
 }

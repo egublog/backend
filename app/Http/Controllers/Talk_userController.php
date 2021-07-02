@@ -10,9 +10,28 @@ use App\Talk;
 use App\Facades\IdentifyId;
 use App\Facades\TalkList;
 
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
+
+
 
 class Talk_userController extends Controller
 {
+
+    private $UserDataAccessRepository;
+    private $UserDataAccessService;
+    private $TalkListDataAccessService;
+
+
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, TalkListDataAccessServiceInterface $TalkListDataAccessService)
+    {
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataAccessService = $UserDataAccessService;
+        $this->TalkListDataAccessService = $TalkListDataAccessService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -21,20 +40,23 @@ class Talk_userController extends Controller
     public function index()
     {
         // 前提としてこのtalkにはトークをした事がある人だけを入れる
-        $myId = Auth::id();
+        // $myId = Auth::id();
+        $myId = $this->UserDataAccessRepository->getAuthUserId();
 
         // Talk_listテーブルは左側の一覧を最近のトーク順にするためにわざわざ作ったやつ
         // （尚自分と相手のペアは一つしか出来ないようになている）
         // ↓ここではfrom to どっちもから自分に関係があるレコードを全て取得する。
-        $talk_lists = Talk_list::fromToEqual($myId)->get();
+        // $talk_lists = Talk_list::fromToEqual($myId)->get();
 
 
         // その中で自分のidじゃ無いidだけ撮って来て配列$account_idsに入れる （相手のidだけが欲しいから）
-        $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
+        // $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
 
 
         //  そのidをもとにfindで相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
-        $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
+        // $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
+
+        $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
 
         return view('myService.talk')->with([
             'talk_lists_accounts' => $talk_lists_accounts,

@@ -14,6 +14,10 @@ class Talk_listServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        app()->bind(
+            \App\Repositories\Talk_list\Interfaces\TalkListDataAccessRepositoryInterface::class,
+            \App\Repositories\Talk_list\Repositories\TalkListDataAccessRepository::class
+        );
     }
 
     /**

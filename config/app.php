@@ -183,12 +183,14 @@ return [
         App\Providers\Repositories\UserServiceProvider::class,
         App\Providers\Repositories\AllServiceProvider::class,
         App\Providers\Repositories\TeamServiceProvider::class,
+        App\Providers\Repositories\Talk_listServiceProvider::class,
 
 
 
         // ↓ Services
         App\Providers\Services\AllServiceProvider::class,
         App\Providers\Services\UserServiceProvider::class,
+        App\Providers\Services\Talk_listServiceProvider::class,
     ],
 
     /*
