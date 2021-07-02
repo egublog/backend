@@ -72,41 +72,46 @@ class Talk_userController extends Controller
     public function show(User $user, Request $request)
     {
         $identify_id = $request->identify_id;
-        $user_id = $user->id;
+        // $user_id = $user->id;
+        $his_id = $user->id;
 
 
-        $myAccount = Auth::user();
+        // $myAccount = Auth::user();
+        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+
 
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで取得
-        $follow_check = $myAccount->followCheck($user_id);
+        // $follow_check = $myAccount->followCheck($user_id);
+        $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        $hisAccount = User::find($user_id);
+        // $hisAccount = User::find($user_id);
+        $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+
 
         // つまりここから出るidentify_idは全て talk_〇〇 になる。。それがtalk_から来ましたよって事になる。
-        if(!IdentifyId::talkList($identify_id)) {
-            $identify_id = 'talk_'.$identify_id;
+        if (!IdentifyId::talkList($identify_id)) {
+            $identify_id = 'talk_' . $identify_id;
         }
 
-         // find系列だったら(era_id)($team_id)を渡す
+        // find系列だったら(era_id)($team_id)を渡す
         // 尚detailsのみこのtalk_findとかがある
         if (IdentifyId::find($identify_id) || IdentifyId::talkFind($identify_id)) {
             return view('myService.details')->with([
                 'identify_id' => $identify_id,
-                'hisAccount' => $hisAccount,
+                'hisAccount' => $his_account,
                 'follow_check' => $follow_check,
                 'era_id' => $request->era_id,
                 'team_string' => $request->team_string,
             ]);
         }
-       
+
         return view('myService.details')->with([
             'identify_id' => $identify_id,
-            'hisAccount' => $hisAccount,
+            'hisAccount' => $his_account,
             'follow_check' => $follow_check,
         ]);
     }
-
-
 }
