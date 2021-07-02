@@ -6,6 +6,7 @@ use App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -33,6 +34,13 @@ class UserDataSaveRepository implements UserDataSaveRepositoryInterface
   {
     $myAccount = $this->UserDataAccessRepository->getAuthUser();
     $myAccount->$column_name = $request->$column_name;
+    $myAccount->save();
+  }
+
+  public function saveAuthUserImagePathToUsersTable($path)
+  {
+    $myAccount = $this->UserDataAccessRepository->getAuthUser();
+    $myAccount->image = Storage::disk('s3')->url($path);
     $myAccount->save();
   }
 }
