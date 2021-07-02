@@ -15,8 +15,37 @@ use App\Facades\TalkList;
 use App\Facades\CommonService;
 
 
+use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
+use App\Services\Talk\Interfaces\TalkDataSaveServiceInterface;
+use App\Repositories\Talk\Interfaces\TalkDataAccessRepositoryInterface;
+
+
+
+
 class Talk_userContentController extends Controller
 {
+
+
+    private $UserDataAccessRepository;
+    private $UserDataAccessService;
+    private $TalkListDataAccessService;
+    private $TalkDataSaveService;
+    private $TalkDataAccessRepository;
+
+
+    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, TalkListDataAccessServiceInterface $TalkListDataAccessService, TalkDataSaveServiceInterface $TalkDataSaveService, TalkDataAccessRepositoryInterface $TalkDataAccessRepository)
+    {
+        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataAccessService = $UserDataAccessService;
+        $this->TalkListDataAccessService = $TalkListDataAccessService;
+        $this->TalkDataSaveService = $TalkDataSaveService;
+        $this->TalkDataAccessRepository = $TalkDataAccessRepository;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -32,37 +61,50 @@ class Talk_userContentController extends Controller
         // て事はtalkSendクリックイベントで必要なのはここにある最低限のデータとユーザーが打ったトークデータだけか
 
 
-        $myId = Auth::id();
+        // $myId = Auth::id();
+        $myId = $this->UserDataAccessRepository->getAuthUserId();
+
         $user_id = $user->id;
 
         // 自分が関係しているtalk_listsテーブルを新しい順で全て撮ってくる 尚、Talk_listsテーブルへの保存方法のおかげで被っている事は無い
-        $talk_lists = Talk_list::fromToEqual($myId)->get();
+        // $talk_lists = Talk_list::fromToEqual($myId)->get();
 
         // その中で自分のidじゃ無いidだけ撮って来て配列$account_idsに入れる
-        $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
+        // $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
 
 
 
         //  そのidをもとにfindで相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
-        $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
+        // $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
+
+        $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
+        
+
+
 
 
         // ここで相手が自分に送ったトークデータでTalksテーブルのyetカラムがfalseのものを取ってくる
-        $talkDatas = Talk::yetColumnsFalse($myId, $user_id)->get();
+        // $talkDatas = Talk::yetColumnsFalse($myId, $user_id)->get();
 
         //   ここで$talkDatasがあればそのtalksテーブルのyetカラムをtrueにする
-        if ($talkDatas) {
-            TalkList::changeYetColumnsTrue($talkDatas);
-        }
+        // if ($talkDatas) {
+        //     TalkList::changeYetColumnsTrue($talkDatas);
+        // }
+
+        $this->TalkDataSaveService->saveYetColumnsTrue($myId, $user_id);
 
 
-        $hisAccount = User::find($user_id);
+
+        // $hisAccount = User::find($user_id);
+        $hisAccount = $this->UserDataAccessRepository->getHisAccount($user_id);
+
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
-        $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, 20)->with('user')->get();
+        // $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, 20)->with('user')->get();
 
         // トークは古いのが一番上でそこから新しくなるから最新のトークデータを古い順に並び変える
-        $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        // $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
         $identify_id = $request->identify_id;
 

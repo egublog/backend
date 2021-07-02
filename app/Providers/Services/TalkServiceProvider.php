@@ -14,6 +14,10 @@ class TalkServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        app()->bind(
+            \App\Services\Talk\Interfaces\TalkDataSaveServiceInterface::class,
+            \App\Services\Talk\Services\TalkDataSaveService::class
+        );
     }
 
     /**
