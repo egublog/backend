@@ -156,28 +156,36 @@ class Talk_userContentController extends Controller
     public function axios_userChange(User $user)
     {
         //                  ↑ ここはネストしたrouteだからパラメータを取れる。
-        $myId = Auth::id();
+        // $myId = Auth::id();
+        $myId = $this->UserDataAccessRepository->getAuthUserId();
+
         $user_id = $user->id;
 
 
        
 
         // ここで相手が自分に送ったトークデータでTalksテーブルのyetカラムがfalseのものを取ってくる
-        $talkDatas = Talk::yetColumnsFalse($myId, $user_id)->get();
+        // $talkDatas = Talk::yetColumnsFalse($myId, $user_id)->get();
 
         //   ここで$talkDatasがあればそのtalksテーブルのyetカラムをtrueにする
-        if ($talkDatas) {
-            TalkList::changeYetColumnsTrue($talkDatas);
-        }
+        // if ($talkDatas) {
+        //     TalkList::changeYetColumnsTrue($talkDatas);
+        // }
+        $this->TalkDataSaveService->saveYetColumnsTrue($myId, $user_id);
+
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
-        $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, 20)->with('user')->get();
+        // $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, 20)->with('user')->get();
 
         // トークは古いのが一番上でそこから新しくなるから最新のトークデータを古い順に並び帰る
-        $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        // $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
 
-        $hisAccount = User::find($user_id);
+
+        // $hisAccount = User::find($user_id);
+        $hisAccount = $this->UserDataAccessRepository->getHisAccount($user_id);
+
 
 
         $talkArray = [
