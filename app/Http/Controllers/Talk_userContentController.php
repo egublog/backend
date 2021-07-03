@@ -201,17 +201,20 @@ class Talk_userContentController extends Controller
     public function axios_talkUpdate(User $user, Request $request)
     {
         //                  ↑ ここはネストしたrouteだからパラメータを取れる。
-        $myId = Auth::id();
+        // $myId = Auth::id();
+        $myId = $this->UserDataAccessRepository->getAuthUserId();
+
         $user_id = $user->id;
 
         // 無限スクロールの為の番号(pageNumber)が送られてくるからそれに20を掛ける
         $limitNumber = $request->pageNumber * 20;
 
         // ここで自分と相手のトークデータの中で最新のレコードを$limitNumberの数だけ取ってくる
-        $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, $limitNumber)->with('user')->get();
+        // $talkDatasDesc = Talk::TalkDatasLatestLimit($myId, $user_id, $limitNumber)->with('user')->get();
 
         // トークは古いのが一番上でそこから新しくなるから最新のトークデータを古い順に並び帰る
-        $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        // $talkDatas = CommonService::reverseCollection($talkDatasDesc);
+        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, $limitNumber);
 
 
         $talkArray = [
