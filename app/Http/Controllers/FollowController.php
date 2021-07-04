@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface;
 
 
@@ -19,9 +18,6 @@ class FollowController extends Controller
     $this->UserDataSaveRepository = $UserDataSaveRepository;
   }
 
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -30,10 +26,7 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        // $myAccount = Auth::user();
-
         // フォローする followsテーブルに自分のidと相手のidを追加する
-        // $myAccount->followAttach($request->user_id);
         $this->UserDataSaveRepository->saveAuthUserFollow($request->user_id);
     }
 
@@ -46,10 +39,7 @@ class FollowController extends Controller
      */
     public function destroy($user_id)
     {
-        // $myAccount = Auth::user();
-
         // フォローを外す followsテーブルに自分のidと相手のidを削除する
-        // $myAccount->followDetach($user_id);
         $this->UserDataSaveRepository->deleteAuthUserFollow($user_id);
     }
 }

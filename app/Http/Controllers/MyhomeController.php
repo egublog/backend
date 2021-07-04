@@ -13,7 +13,6 @@ use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 
 class MyhomeController extends Controller
 {
-
     private $UserDataAccessRepository;
 
 
@@ -23,8 +22,6 @@ class MyhomeController extends Controller
     }
 
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -32,10 +29,8 @@ class MyhomeController extends Controller
      */
     public function index()
     {
-        // $myAccount = Auth::user();
         $myAccount = $this->UserDataAccessRepository->getAuthUser();
        
-        // 自分のプロフィール表示用に自分のアカウント情報を付ける (myAccount)
         return view('myService.home')->with([
             'myAccount' => $myAccount,
         ]);

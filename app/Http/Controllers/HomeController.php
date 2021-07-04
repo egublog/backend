@@ -17,12 +17,10 @@ use App\Services\User\Interfaces\UserDataSaveServiceInterface;
 
 class HomeController extends Controller
 {
-
     private $UserDataAccessRepository;
     // private $AllDataAccess;
     private $AllDataSaveService;
     private $UserDataSaveService;
-
 
     /**
      * Create a new controller instance.
@@ -45,33 +43,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-
-        // $myId = Auth::id();
-        // $myAccount = User::find($myId);
         $myId = $this->UserDataAccessRepository->getAuthUserId();
-        // $myAccount = $this->UserDataAccessRepository->getAuthUser();
-
-        // $allEra = $myAccount->alls()->where('era_id', 1)->first();
-        // $allEra = $this->AllDataAccess->getAllFirst($myId);
-
-        // if ($allEra === null) {
-        //     // dd($allEra);
-        //     for ($i = 1; $i < 5; $i++) {
-        //         $all = new All();
-        //         $all->user_id = $myId;
-        //         $all->team_id = 1;
-        //         $all->position_id = 1;
-        //         $all->era_id = $i;
-        //         $all->save();
-        //     }
-        // }
+        
         $this->AllDataSaveService->saveAllFirstData($myId);
 
         $this->UserDataSaveService->saveAuthUserFirstAreaid();
 
         return redirect()->route('myhomes.index');
 
-        // return view('home');
     }
 }

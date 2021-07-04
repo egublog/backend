@@ -18,7 +18,6 @@ use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
 
 class Talk_userController extends Controller
 {
-
     private $UserDataAccessRepository;
     private $UserDataAccessService;
     private $TalkListDataAccessService;
@@ -40,22 +39,9 @@ class Talk_userController extends Controller
     public function index()
     {
         // 前提としてこのtalkにはトークをした事がある人だけを入れる
-        // $myId = Auth::id();
         $myId = $this->UserDataAccessRepository->getAuthUserId();
 
-        // Talk_listテーブルは左側の一覧を最近のトーク順にするためにわざわざ作ったやつ
-        // （尚自分と相手のペアは一つしか出来ないようになている）
-        // ↓ここではfrom to どっちもから自分に関係があるレコードを全て取得する。
-        // $talk_lists = Talk_list::fromToEqual($myId)->get();
-
-
-        // その中で自分のidじゃ無いidだけ撮って来て配列$account_idsに入れる （相手のidだけが欲しいから）
-        // $opponent_ids = TalkList::getOpponentIds($talk_lists, $myId);
-
-
-        //  そのidをもとにfindで相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
-        // $talk_lists_accounts = TalkList::getTalkListAccounts($opponent_ids);
-
+        //  相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
         $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
 
         return view('myService.talk')->with([
@@ -72,24 +58,13 @@ class Talk_userController extends Controller
     public function show(User $user, Request $request)
     {
         $identify_id = $request->identify_id;
-        // $user_id = $user->id;
         $his_id = $user->id;
 
-
-        // $myAccount = Auth::user();
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
-
-
-
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで取得
-        // $follow_check = $myAccount->followCheck($user_id);
         $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
 
-
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        // $hisAccount = User::find($user_id);
         $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
-
 
         // つまりここから出るidentify_idは全て talk_〇〇 になる。。それがtalk_から来ましたよって事になる。
         if (!IdentifyId::talkList($identify_id)) {

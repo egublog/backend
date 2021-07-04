@@ -15,10 +15,8 @@ use App\Services\User\Interfaces\UserDataAccessServiceInterface;
 
 class FriendController extends Controller
 {
-
     private $UserDataAccessRepository;
     private $UserDataAccessService;
-
 
     public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService)
     {
@@ -36,22 +34,10 @@ class FriendController extends Controller
     {
         $myAccount = $this->UserDataAccessRepository->getAuthUser();
 
-        // でここにidentify_id と言う名前でクエリ文字列が送られてくるから
-        //  それがfollowかfollowerかで処理を分ければ良い。。
         $identify_id = $request->identify_id;
 
-
-        // if (IdentifyId::friendFollow($identify_id)) {
-        //     // 自分がフォローしている人を取得
-        //     $accounts = $myAccount->getFollow();
-        // } elseif (IdentifyId::friendFollower($identify_id)) {
-        //     // 自分をフォローしている人を取得
-        //     $accounts = $myAccount->getFollower();
-        // }
-
+        // $identify_idによってフォローをgetするのかフォロワーを表示するのかを分ける    
         $accounts = $this->UserDataAccessService->getAuthUserFriends($identify_id);
-
-        // dd($accounts);
 
         return view('myService.friend')->with([
             'accounts' => $accounts,
@@ -73,15 +59,13 @@ class FriendController extends Controller
     public function show(User $user, Request $request)
     {
         $his_id = $user->id;
-        // $myAccount = Auth::user();
-        // $follow_check = $myAccount->followCheck($his_id);
         $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
         $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
 
         return view('myService.details')->with([
             'identify_id' => $request->identify_id,
-            'hisAccount' => $his_account,
             'follow_check' => $follow_check,
+            'hisAccount' => $his_account,
         ]);
     }
 }
