@@ -18,6 +18,11 @@ class TalkListDataAccessRepository implements TalkListDataAccessRepositoryInterf
   }
 
 
+  public function getOurTalkListFirst($myId, $user_id)
+  {
+    return Talk_list::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->first();
+  }
+
 
 
 }

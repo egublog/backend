@@ -50,6 +50,50 @@ class TalkDataSaveService implements TalkDataSaveServiceInterface
 
   }
 
+  public function saveOurTalkData($message, $myId, $user_id)
+  {
+    if ($message != "") {
+      // $talkData = new Talk();
+      // $talkData->saveNewTalk($message, $myId, $user_id);
+      $this->TalkDataSaveRepository->saveOurTalkData($message, $myId, $user_id);
+  }
+  }
+
+  public function updateOurTalkCheckColumn($myId, $user_id)
+  {
+    // ↓ ここからの処理は非同期でもその日,初めてのトークだったらその日の日付を表示すると言う機能の為の下処理
+
+    // ここでは自分と相手のトークデータの最新の一個前のレコードを取ってくる
+    // $talkDataOneBefore = Talk::TalkDataOneBefore($myId, $user_id)->first();
+    $talkDataOneBefore = $this->TalkDataAccessRepository->getOurTalkDataOneBeforeFirst($myId, $user_id);
+
+    // first()で取ってくると何もなかった時にnullが入ってくる。
+    // get()で取ってくると何もなかった時に collectionの{#items: []}が返ってくるからその違いに注意
+
+    // ここでは自分と相手のトークデータの最新のレコードを取ってくる
+    // $talkDataNow = Talk::TalkDataNow($myId, $user_id)->first();
+    $talkDataNow =  $this->TalkDataAccessRepository->getOurTalkDataLatest($myId, $user_id);
+
+
+    // $talkDataOneBeforeと$talkDataNowの日付を比較して同じだったらtalkCheckカラム(boolean型)にfalse違ったらtrueをいれる($talkDataOneBeforeが存在しなかった場合はtrueをいれる）
+    // $talkDataNow->saveTalkCheckColumn($talkDataOneBefore);
+    if ($talkDataOneBefore == null) {
+      // $this->talkCheck = true;
+      // $this->save();
+      $this->TalkDataSaveRepository->updateOurTalkCheckColumn($talkDataNow);
+  } else {
+      if ($talkDataOneBefore->created_at->format('n/j') != $talkDataNow->created_at->format('n/j')) {
+          // $this->talkCheck = true;
+          // $this->save();
+      $this->TalkDataSaveRepository->updateOurTalkCheckColumn($talkDataNow);
+
+      }
+  }
+    
+
+  }
+
+
 
 
 }

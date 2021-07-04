@@ -18,6 +18,10 @@ class Talk_listServiceProvider extends ServiceProvider
             \App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface::class,
             \App\Services\Talk_list\Services\TalkListDataAccessService::class
         );
+        app()->bind(
+            \App\Services\Talk_list\Interfaces\TalkListDataSaveServiceInterface::class,
+            \App\Services\Talk_list\Services\TalkListDataSaveService::class
+        );
     }
 
     /**
