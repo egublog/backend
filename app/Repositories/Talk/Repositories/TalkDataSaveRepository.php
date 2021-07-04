@@ -32,9 +32,4 @@ class TalkDataSaveRepository implements TalkDataSaveRepositoryInterface
     $talkInstance->save();
   }
 
-  // public function saveTalkCheckColumn()
-  // {
-
-  // }
-
 }

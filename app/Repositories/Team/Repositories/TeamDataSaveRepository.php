@@ -6,16 +6,8 @@ use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
 use App\Team;
 
 
-
-
 class TeamDataSaveRepository implements TeamDataSaveRepositoryInterface
 {
-
-
-
-  public function __construct()
-  {
-  }
 
   public function saveTeamName($team_string)
   {

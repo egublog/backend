@@ -11,12 +11,6 @@ use App\Talk;
 class TalkDataAccessRepository implements TalkDataAccessRepositoryInterface
 {
 
-
-
-  public function __construct()
-  {
-  }
-
   public function getOurTalkYetColumnFalse($myId, $user_id)
   {
     return Talk::where('from', $user_id)->where('to', $myId)->where('yet', false)->get();

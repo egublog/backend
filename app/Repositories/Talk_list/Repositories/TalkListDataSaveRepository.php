@@ -17,16 +17,11 @@ class TalkListDataSaveRepository implements TalkListDataSaveRepositoryInterface
     $new_talk_list->from = $myId;
     $new_talk_list->to = $user_id;
     $new_talk_list->save();
-
   }
 
   public function deleteTalkList($talkInstance)
   {
     $talkInstance->delete();
   }
-
-
-
-
 
 }

@@ -11,13 +11,6 @@ use App\User;
 
 class UserDataAccessRepository implements UserDataAccessRepositoryInterface
 {
-    // protected $Auth;
-
-
-    public function __construct()
-    {
-    //    $this->Auth = $Auth;
-    }
 
     public function getAuthUser()
     {
@@ -54,7 +47,6 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
         return User::find($his_id);
     }
 
-
     public function getAuthUserTeamName($era_id)
     {
         return $this->getAuthUser()->alls()->where('era_id', $era_id)->first()->team->team_name;
@@ -69,23 +61,6 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
     {
         return $this->getAuthUser()->show_follower_activity()->get();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function getAreaArray()
@@ -144,6 +119,5 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
         ];
 
     }
-
 
 }

@@ -11,12 +11,6 @@ use App\All;
 class AllDataAccessRepository implements AllDataAccessRepositoryInterface
 {
 
-
-
-  public function __construct()
-  {
-  }
-
   public function getAllFirst($myId)
   {
     return All::where('user_id', $myId)->where('era_id', 1)->first();

@@ -11,13 +11,6 @@ use App\Team;
 class TeamDataAccessRepository implements TeamDataAccessRepositoryInterface
 {
 
-
-
-    public function __construct()
-    {
-  
-    }
-
     public function getTeamNameEqual($team_string)
     {
       return Team::where('team_name', $team_string)->first();
@@ -32,7 +25,5 @@ class TeamDataAccessRepository implements TeamDataAccessRepositoryInterface
     {
       return Team::where('team_name', 'like', '%' . $team_string . '%')->pluck('id')->all();
     }
-
-
 
 }

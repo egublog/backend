@@ -6,18 +6,9 @@ use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
 use App\All;
 
 
-
-
 class AllDataSaveRepository implements AllDataSaveRepositoryInterface
 {
-  // protected $All;
-
-
-  public function __construct()
-  {
-    //    $this->Auth = $Auth;
-  }
-
+ 
   public function saveAllFirstData($myId)
   {
     for ($i = 1; $i < 5; $i++) {
