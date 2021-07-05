@@ -4,7 +4,6 @@ namespace App\Services\Talk_list\Services;
 
 use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
 use App\Talk_list;
-
 use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 use App\Repositories\Talk_list\Interfaces\TalkListDataAccessRepositoryInterface;
 
