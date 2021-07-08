@@ -14,13 +14,13 @@ class UserServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        // app()->bind(
+        //     \App\Services\User\Interfaces\UserDataSaveServiceInterface::class,
+        //     \App\Services\User\Services\UserDataSaveService::class
+        // );
         app()->bind(
-            \App\Services\User\Interfaces\UserDataSaveServiceInterface::class,
-            \App\Services\User\Services\UserDataSaveService::class
-        );
-        app()->bind(
-            \App\Services\User\Interfaces\UserDataAccessServiceInterface::class,
-            \App\Services\User\Services\UserDataAccessService::class
+            \App\Services\User\Interfaces\UserDataServiceInterface::class,
+            \App\Services\User\Services\UserDataService::class
         );
     }
 
