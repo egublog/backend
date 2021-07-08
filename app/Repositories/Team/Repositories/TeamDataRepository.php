@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Team\Repositories;
 
-use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
+use App\Repositories\Team\Interfaces\TeamDataRepositoryInterface;
 use App\Team;
 
 
 
 
-class TeamDataAccessRepository implements TeamDataAccessRepositoryInterface
+class TeamDataRepository implements TeamDataRepositoryInterface
 {
 
     public function getTeamNameEqual($team_string)
@@ -26,4 +26,11 @@ class TeamDataAccessRepository implements TeamDataAccessRepositoryInterface
       return Team::where('team_name', 'like', '%' . $team_string . '%')->pluck('id')->all();
     }
 
+//  ↓ saveから移動
+    public function saveTeamName($team_string)
+    {
+      $team = new Team();
+      $team->team_name = $team_string;
+      $team->save();
+    }
 }

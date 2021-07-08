@@ -15,13 +15,13 @@ class AllServiceProvider extends ServiceProvider
     {
         //
         app()->bind(
-            \App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface::class,
-            \App\Repositories\All\Repositories\AllDataAccessRepository::class
+            \App\Repositories\All\Interfaces\AllDataRepositoryInterface::class,
+            \App\Repositories\All\Repositories\AllDataRepository::class
         );
-        app()->bind(
-            \App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface::class,
-            \App\Repositories\All\Repositories\AllDataSaveRepository::class
-        );
+        // app()->bind(
+        //     \App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface::class,
+        //     \App\Repositories\All\Repositories\AllDataSaveRepository::class
+        // );
     }
 
     /**

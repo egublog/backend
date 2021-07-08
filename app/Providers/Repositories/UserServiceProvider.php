@@ -16,13 +16,13 @@ class UserServiceProvider extends ServiceProvider
     {
         //
         app()->bind(
-            \App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface::class,
-            \App\Repositories\User\Repositories\UserDataAccessRepository::class
+            \App\Repositories\User\Interfaces\UserDataRepositoryInterface::class,
+            \App\Repositories\User\Repositories\UserDataRepository::class
         );
-        app()->bind(
-            \App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface::class,
-            \App\Repositories\User\Repositories\UserDataSaveRepository::class
-        );
+        // app()->bind(
+        //     \App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface::class,
+        //     \App\Repositories\User\Repositories\UserDataSaveRepository::class
+        // );
     }
 
     /**

@@ -18,5 +18,15 @@ interface UserDataAccessRepositoryInterface
     public function getAuthUserPositionId($era_id);
 
     public function getAuthUserFollowerForActivity();
+
+//  ↓ saveから移動
+    
+
+    public function saveAuthUserAreaid($area_id);
+    public function saveAuthUserDataColumn($request, $column_name);
+    public function saveAuthUserImagePathToUsersTable($path);
+
+    public function saveAuthUserFollow($his_id);
+    public function deleteAuthUserFollow($his_id);
     
 }

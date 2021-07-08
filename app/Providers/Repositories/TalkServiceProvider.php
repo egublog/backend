@@ -15,13 +15,13 @@ class TalkServiceProvider extends ServiceProvider
     {
         //
         app()->bind(
-            \App\Repositories\Talk\Interfaces\TalkDataAccessRepositoryInterface::class,
-            \App\Repositories\Talk\Repositories\TalkDataAccessRepository::class
+            \App\Repositories\Talk\Interfaces\TalkDataRepositoryInterface::class,
+            \App\Repositories\Talk\Repositories\TalkDataRepository::class
         );
-        app()->bind(
-            \App\Repositories\Talk\Interfaces\TalkDataSaveRepositoryInterface::class,
-            \App\Repositories\Talk\Repositories\TalkDataSaveRepository::class
-        );
+        // app()->bind(
+        //     \App\Repositories\Talk\Interfaces\TalkDataSaveRepositoryInterface::class,
+        //     \App\Repositories\Talk\Repositories\TalkDataSaveRepository::class
+        // );
     }
 
     /**

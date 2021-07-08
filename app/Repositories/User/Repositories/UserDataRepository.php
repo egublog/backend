@@ -2,14 +2,14 @@
 
 namespace App\Repositories\User\Repositories;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
 
 
 
-class UserDataAccessRepository implements UserDataAccessRepositoryInterface
+class UserDataRepository implements UserDataRepositoryInterface
 {
 
     public function getAuthUser()
@@ -119,5 +119,44 @@ class UserDataAccessRepository implements UserDataAccessRepositoryInterface
         ];
 
     }
+
+
+
+
+
+
+
+
+  public function saveAuthUserAreaid($area_id)
+  {
+    $myAccount = $this->getAuthUser();
+    $myAccount->area_id = $area_id;
+    $myAccount->save();
+  }
+
+  public function saveAuthUserDataColumn($request, $column_name)
+  {
+    $myAccount = $this->getAuthUser();
+    $myAccount->$column_name = $request->$column_name;
+    $myAccount->save();
+  }
+
+  public function saveAuthUserImagePathToUsersTable($path)
+  {
+    $myAccount = $this->getAuthUser();
+    $myAccount->image = Storage::disk('s3')->url($path);
+    $myAccount->save();
+  }
+
+  public function saveAuthUserFollow($his_id)
+  {
+    $this->getAuthUser()->followAttach($his_id);
+  }
+  
+  public function deleteAuthUserFollow($his_id)
+  {
+    $this->getAuthUser()->followDetach($his_id);
+  }
+
 
 }

@@ -15,13 +15,13 @@ class TeamServiceProvider extends ServiceProvider
     {
         //
         app()->bind(
-            \App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface::class,
-            \App\Repositories\Team\Repositories\TeamDataAccessRepository::class
+            \App\Repositories\Team\Interfaces\TeamDataRepositoryInterface::class,
+            \App\Repositories\Team\Repositories\TeamDataRepository::class
         );
-        app()->bind(
-            \App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface::class,
-            \App\Repositories\Team\Repositories\TeamDataSaveRepository::class
-        );
+        // app()->bind(
+        //     \App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface::class,
+        //     \App\Repositories\Team\Repositories\TeamDataSaveRepository::class
+        // );
     }
 
     /**
