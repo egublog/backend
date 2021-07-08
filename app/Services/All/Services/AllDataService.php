@@ -4,18 +4,18 @@ namespace App\Services\All\Services;
 
 use App\Services\All\Interfaces\AllDataServiceInterface;
 
-use App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface;
-use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
-use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
-use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
+use App\Repositories\All\Interfaces\AllDataRepositoryInterface;
+// use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
+use App\Repositories\Team\Interfaces\TeamDataRepositoryInterface;
+// use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
 //  ↓ saveから移動
 
-use App\Services\All\Interfaces\AllDataSaveServiceInterface;
+// use App\Services\All\Interfaces\AllDataSaveServiceInterface;
 
-use App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface;
-use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
-use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
-use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
+// use App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface;
+// use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
+// use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
+// use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
 
 
 
@@ -26,19 +26,19 @@ use App\Repositories\Team\Interfaces\TeamDataSaveRepositoryInterface;
 class AllDataService implements AllDataServiceInterface
 {
   // protected $All;
-  private $AllDataAccessRepository;
+  private $AllDataRepository;
   // private $AllDataSaveRepository;
-  // private $TeamDataAccessRepository;
+  private $TeamDataRepository;
   // private $TeamDataSaveRepository;
 
 
 
-  public function __construct(AllDataAccessRepositoryInterface $AllDataAccessRepository, AllDataSaveRepositoryInterface $AllDataSaveRepository, TeamDataAccessRepositoryInterface $TeamDataAccessRepository, TeamDataSaveRepositoryInterface $TeamDataSaveRepository)
+  public function __construct(AllDataRepositoryInterface $AllDataRepository, TeamDataRepositoryInterface $TeamDataRepository)
   {
     //    $this->Auth = $Auth;
-    $this->AllDataAccessRepository = $AllDataAccessRepository;
+    $this->AllDataRepository = $AllDataRepository;
     // $this->AllDataSaveRepository = $AllDataSaveRepository;
-    // $this->TeamDataAccessRepository = $TeamDataAccessRepository;
+    $this->TeamDataRepository = $TeamDataRepository;
     // $this->TeamDataSaveRepository = $TeamDataSaveRepository;
   }
 
@@ -51,27 +51,27 @@ class AllDataService implements AllDataServiceInterface
     if ($team_ids) {
       foreach ($team_ids as $team_id) {
         // $searchAlls = $searchAlls->merge(All::getSearchAll($era_id, $team_id));
-        $searchAlls = $searchAlls->merge($this->AllDataAccessRepository->getAllEqualEraidTeamid($era_id, $team_id));
+        $searchAlls = $searchAlls->merge($this->AllDataRepository->getAllEqualEraidTeamid($era_id, $team_id));
       }
     }
     return $searchAlls;
   }
 //  ↓ saveから移動
-private $AllDataAccessRepository;
-  private $AllDataSaveRepository;
-  private $TeamDataAccessRepository;
-  private $TeamDataSaveRepository;
+// private $AllDataAccessRepository;
+//   private $AllDataSaveRepository;
+//   private $TeamDataAccessRepository;
+//   private $TeamDataSaveRepository;
 
 
 
-  public function __construct(AllDataAccessRepositoryInterface $AllDataAccessRepository, AllDataSaveRepositoryInterface $AllDataSaveRepository, TeamDataAccessRepositoryInterface $TeamDataAccessRepository, TeamDataSaveRepositoryInterface $TeamDataSaveRepository)
-  {
-    //    $this->Auth = $Auth;
-    $this->AllDataAccessRepository = $AllDataAccessRepository;
-    $this->AllDataSaveRepository = $AllDataSaveRepository;
-    $this->TeamDataAccessRepository = $TeamDataAccessRepository;
-    $this->TeamDataSaveRepository = $TeamDataSaveRepository;
-  }
+  // public function __construct(AllDataAccessRepositoryInterface $AllDataAccessRepository, AllDataSaveRepositoryInterface $AllDataSaveRepository, TeamDataAccessRepositoryInterface $TeamDataAccessRepository, TeamDataSaveRepositoryInterface $TeamDataSaveRepository)
+  // {
+  //   //    $this->Auth = $Auth;
+  //   $this->AllDataAccessRepository = $AllDataAccessRepository;
+  //   $this->AllDataSaveRepository = $AllDataSaveRepository;
+  //   $this->TeamDataAccessRepository = $TeamDataAccessRepository;
+  //   $this->TeamDataSaveRepository = $TeamDataSaveRepository;
+  // }
 
   // private function getAllFirst()
   // {
@@ -80,7 +80,7 @@ private $AllDataAccessRepository;
 
   public function saveAllFirstData($myId)
   {
-    $allEra = $this->AllDataAccessRepository->getAllFirst($myId);
+    $allEra = $this->AllDataRepository->getAllFirst($myId);
     if ($allEra === null) {
       // dd($allEra);
       // for ($i = 1; $i < 5; $i++) {
@@ -91,7 +91,7 @@ private $AllDataAccessRepository;
       //   $all->era_id = $i;
       //   $all->save();
       // }
-        $this->AllDataSaveRepository->saveAllFirstData($myId);
+        $this->AllDataRepository->saveAllFirstData($myId);
     }
   }
 
@@ -109,28 +109,28 @@ private $AllDataAccessRepository;
       if ($school[1]) {
 
         // $teamAlready = Team::TeamNameEqual($school[1])->first();
-        $teamAlready = $this->TeamDataAccessRepository->getTeamNameEqual($school[1]);
+        $teamAlready = $this->TeamDataRepository->getTeamNameEqual($school[1]);
 
         // そのユーザーが入力していたチーム名と全く同じチームがデータベースに登録されていたらそのteam_idを$team_idに代入
         //           されていなかったら新しく今回入力されたチーム名をデータベースに登録してそのteam_idを$team_idに代入
         if ($teamAlready) {
           // $team_id = $teamAlready->id;
-          $team_id = $this->TeamDataAccessRepository->getTeamNameEqualTeamid($school[1]);
+          $team_id = $this->TeamDataRepository->getTeamNameEqualTeamid($school[1]);
         } else {
           // $team = new Team();
           // $team->saveTeam($school[1]);
-          $this->TeamDataSaveRepository->saveTeamName($school[1]);
+          $this->TeamDataRepository->saveTeamName($school[1]);
 
           // $team_id = Team::TeamNameEqual($school[1])->first()->id;
-          $team_id = $this->TeamDataAccessRepository->getTeamNameEqualTeamid($school[1]);
+          $team_id = $this->TeamDataRepository->getTeamNameEqualTeamid($school[1]);
         }
     
         // で年代毎に入力されたポディションidをAllテーブルに保存する
         // $all = All::myIdEraEqual($myId, $school[0])->first();
         // $all->saveTeamIdAndPositionId($team_id, $school[2]);
 
-        $allInstance = $this->AllDataAccessRepository->getAllDataUseridEraidEqual($myId, $school[0]);
-        $this->AllDataSaveRepository->saveAllDataTeamidPositionid($allInstance, $team_id, $school[2]);
+        $allInstance = $this->AllDataRepository->getAllDataUseridEraidEqual($myId, $school[0]);
+        $this->AllDataRepository->saveAllDataTeamidPositionid($allInstance, $team_id, $school[2]);
       } // if ($school[1])
 
     } // foreach
