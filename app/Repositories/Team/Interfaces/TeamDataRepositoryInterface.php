@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Team\Interfaces;
 
-interface TeamDataAccessRepositoryInterface
+interface TeamDataRepositoryInterface
 {
     public function getTeamNameEqual($team_string);
     public function getTeamNameEqualTeamid($team_string);

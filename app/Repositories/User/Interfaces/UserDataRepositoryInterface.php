@@ -2,7 +2,7 @@
 
 namespace App\Repositories\User\Interfaces;
 
-interface UserDataAccessRepositoryInterface
+interface UserDataRepositoryInterface
 {
     public function getAuthUser();
     public function getAuthUserId();

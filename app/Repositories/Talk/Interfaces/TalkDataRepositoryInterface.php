@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Talk\Interfaces;
 
-interface TalkDataAccessRepositoryInterface
+interface TalkDataRepositoryInterface
 {
     public function getOurTalkYetColumnFalse($myId, $user_id);
     public function getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, $limit);

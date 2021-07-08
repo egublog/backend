@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Talk_list\Interfaces;
 
-interface TalkListDataAccessRepositoryInterface
+interface TalkListDataRepositoryInterface
 {
     public function getTalkListEqualMyid($myId);
     public function getOurTalkListFirst($myId, $user_id);
