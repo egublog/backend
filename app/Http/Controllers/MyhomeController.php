@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Talk;
 use Illuminate\Support\Arr;
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 
 
 
 class MyhomeController extends Controller
 {
-    private $UserDataAccessRepository;
+    private $UserDataRepository;
 
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataRepository = $UserDataRepository;
     }
 
 
@@ -29,7 +29,7 @@ class MyhomeController extends Controller
      */
     public function index()
     {
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
        
         return view('myService.home')->with([
             'myAccount' => $myAccount,

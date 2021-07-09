@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 
 
 
 class FollowController extends Controller
 {
-    private $UserDataSaveRepository;
+    private $UserDataRepository;
 
 
-  public function __construct(UserDataSaveRepositoryInterface $UserDataSaveRepository)
+  public function __construct(UserDataRepositoryInterface $UserDataRepository)
   {
-    $this->UserDataSaveRepository = $UserDataSaveRepository;
+    $this->UserDataRepository = $UserDataRepository;
   }
 
     /**
@@ -27,7 +27,7 @@ class FollowController extends Controller
     public function store(Request $request)
     {
         // フォローする followsテーブルに自分のidと相手のidを追加する
-        $this->UserDataSaveRepository->saveAuthUserFollow($request->user_id);
+        $this->UserDataRepository->saveAuthUserFollow($request->user_id);
     }
 
 
@@ -40,6 +40,6 @@ class FollowController extends Controller
     public function destroy($user_id)
     {
         // フォローを外す followsテーブルに自分のidと相手のidを削除する
-        $this->UserDataSaveRepository->deleteAuthUserFollow($user_id);
+        $this->UserDataRepository->deleteAuthUserFollow($user_id);
     }
 }

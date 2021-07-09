@@ -11,27 +11,27 @@ use App\All;
 use App\Http\Requests\ProfileRequest;
 use App\Facades\Profile;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
-use App\Services\All\Interfaces\AllDataSaveServiceInterface;
-use App\Services\User\Interfaces\UserDataSaveServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
+use App\Services\All\Interfaces\AllDataServiceInterface;
+// use App\Services\User\Interfaces\UserDataServiceInterface;
 
 
 
 
 class ProfileController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
-    private $AllDataSaveService;
-    private $UserDataSaveService;
+    private $UserDataRepository;
+    private $UserDataService;
+    private $AllDataService;
+    // private $UserDataService;
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService, AllDataServiceInterface $AllDataService)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
-        $this->AllDataSaveService = $AllDataSaveService;
-        $this->UserDataSaveService = $UserDataSaveService;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
+        $this->AllDataService = $AllDataService;
+        // $this->UserDataService = $UserDataService;
     }
 
 
@@ -44,13 +44,13 @@ class ProfileController extends Controller
     public function index()
     {
         // selectボタン用にareaデータを取ってくる
-        $areas = $this->UserDataAccessRepository->getAreaArray();
+        $areas = $this->UserDataRepository->getAreaArray();
 
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
-        $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
+        $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-        $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
+        $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
         return view('myService.profile')->with([
             'areas' => $areas,
@@ -69,13 +69,13 @@ class ProfileController extends Controller
     public function show($id)
     {
         // selectボタン用にareaデータを取ってくる
-        $areas = $this->UserDataAccessRepository->getAreaArray();
+        $areas = $this->UserDataRepository->getAreaArray();
 
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
-        $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
+        $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-        $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
+        $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
         return view('myService.profile')->with([
             'areas' => $areas,
@@ -95,22 +95,22 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, $id)
     {
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
         // selectボタン用にareaデータを取ってくる
-        $areas = $this->UserDataAccessRepository->getAreaArray();
+        $areas = $this->UserDataRepository->getAreaArray();
 
         // ここでチームとポジションを登録
-        $this->AllDataSaveService->saveTeamAndPosition($request, $myId);
+        $this->AllDataService->saveTeamAndPosition($request, $myId);
 
         // ここでもしユーザーが入力してたら登録
-        $this->UserDataSaveService->saveAuthUserDataNameIntroductionAgeArea($request);
+        $this->UserDataService->saveAuthUserDataNameIntroductionAgeArea($request);
 
-        $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
+        $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-        $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
+        $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
         return view('myService.profile')->with([
             'areas' => $areas,

@@ -15,12 +15,12 @@ use App\Facades\TalkList;
 use App\Facades\CommonService;
 
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
-use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
-use App\Services\Talk\Interfaces\TalkDataSaveServiceInterface;
-use App\Repositories\Talk\Interfaces\TalkDataAccessRepositoryInterface;
-use App\Services\Talk_list\Interfaces\TalkListDataSaveServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
+use App\Services\Talk_list\Interfaces\TalkListDataServiceInterface;
+use App\Services\Talk\Interfaces\TalkDataServiceInterface;
+use App\Repositories\Talk\Interfaces\TalkDataRepositoryInterface;
+// use App\Services\Talk_list\Interfaces\TalkListDataServiceInterface;
 
 
 
@@ -28,22 +28,22 @@ use App\Services\Talk_list\Interfaces\TalkListDataSaveServiceInterface;
 
 class Talk_userContentController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
-    private $TalkListDataAccessService;
-    private $TalkDataSaveService;
-    private $TalkDataAccessRepository;
-    private $TalkListDataSaveService;
+    private $UserDataRepository;
+    private $UserDataService;
+    private $TalkListDataService;
+    private $TalkDataService;
+    private $TalkDataRepository;
+    // private $TalkListDataService;
 
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, TalkListDataAccessServiceInterface $TalkListDataAccessService, TalkDataSaveServiceInterface $TalkDataSaveService, TalkDataAccessRepositoryInterface $TalkDataAccessRepository, TalkListDataSaveServiceInterface $TalkListDataSaveService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService, TalkListDataServiceInterface $TalkListDataService, TalkDataServiceInterface $TalkDataService, TalkDataRepositoryInterface $TalkDataRepository)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
-        $this->TalkListDataAccessService = $TalkListDataAccessService;
-        $this->TalkDataSaveService = $TalkDataSaveService;
-        $this->TalkDataAccessRepository = $TalkDataAccessRepository;
-        $this->TalkListDataSaveService = $TalkListDataSaveService;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
+        $this->TalkListDataService = $TalkListDataService;
+        $this->TalkDataService = $TalkDataService;
+        $this->TalkDataRepository = $TalkDataRepository;
+        // $this->TalkListDataService = $TalkListDataService;
     }
 
 
@@ -55,21 +55,21 @@ class Talk_userContentController extends Controller
      */
     public function index(User $user, Request $request)
     {
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
         $user_id = $user->id;
 
         //  相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
-        $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
+        $talk_lists_accounts = $this->TalkListDataService->getTalkListAccounts($myId);
 
         // ここで相手が自分に送ったトークデータでTalksテーブルのyetカラムがfalseのものを取ってくる
         //   ここで$talkDatasがあればそのtalksテーブルのyetカラムをtrueにする
-        $this->TalkDataSaveService->saveYetColumnsTrue($myId, $user_id);
+        $this->TalkDataService->saveYetColumnsTrue($myId, $user_id);
 
-        $hisAccount = $this->UserDataAccessRepository->getHisAccount($user_id);
+        $hisAccount = $this->UserDataRepository->getHisAccount($user_id);
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
-        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
+        $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
         $identify_id = $request->identify_id;
 
@@ -116,18 +116,18 @@ class Talk_userContentController extends Controller
 
     public function axios_userChange(User $user)
     {
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
         $user_id = $user->id;
 
         // ここで相手が自分に送ったトークデータでTalksテーブルのyetカラムがfalseのものを取ってくる
         //   ここで$talkDatasがあればそのtalksテーブルのyetカラムをtrueにする
-        $this->TalkDataSaveService->saveYetColumnsTrue($myId, $user_id);
+        $this->TalkDataService->saveYetColumnsTrue($myId, $user_id);
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
-        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
+        $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
-        $hisAccount = $this->UserDataAccessRepository->getHisAccount($user_id);
+        $hisAccount = $this->UserDataRepository->getHisAccount($user_id);
 
         $talkArray = [
             'talkDatas' => $talkDatas,
@@ -141,7 +141,7 @@ class Talk_userContentController extends Controller
 
     public function axios_talkUpdate(User $user, Request $request)
     {
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
         $user_id = $user->id;
 
@@ -149,7 +149,7 @@ class Talk_userContentController extends Controller
         $limitNumber = $request->pageNumber * 20;
 
         // ここで自分と相手のトークデータの中で最新のレコードを$limitNumberの数だけ取ってくる
-        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, $limitNumber);
+        $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, $limitNumber);
 
         $talkArray = [
             'talkDatas' => $talkDatas,
@@ -182,24 +182,24 @@ class Talk_userContentController extends Controller
         $identify_id = $request->identify_id;
         $user_id = $user->id;
 
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
         // 自分の相手のtalk_listテーブルのレコードを更新する
-        $this->TalkListDataSaveService->updateOurTalkList($myId, $user_id);
+        $this->TalkListDataService->updateOurTalkList($myId, $user_id);
 
         // 左側にトークリストを取ってくる（自分と過去にトークしたことがあるUserアカウントを）順番大事！
-        $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
+        $talk_lists_accounts = $this->TalkListDataService->getTalkListAccounts($myId);
 
         // 送信したトークデータを空のデータじゃ無かったら保存する、、 yetカラムは0を入れる
-        $this->TalkDataSaveService->saveOurTalkData($request->message, $myId, $user_id);
+        $this->TalkDataService->saveOurTalkData($request->message, $myId, $user_id);
 
         // ↓ ここからの処理は非同期でもその日,初めてのトークだったらその日の日付を表示すると言う機能の為の下処理
         // その日この相手と初めてのトークだったらTalkCheckColumnをtrueにする
-        $this->TalkDataSaveService->updateOurTalkCheckColumn($myId, $user_id);
+        $this->TalkDataService->updateOurTalkCheckColumn($myId, $user_id);
 
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
-        $talkDatas = $this->TalkDataAccessRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
+        $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
         // identify_idがfindだったらera_id, team_stringを付ける
         if (IdentifyId::find($identify_id)) {

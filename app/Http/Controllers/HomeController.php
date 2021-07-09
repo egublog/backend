@@ -6,34 +6,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\All;
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 // use App\Repositories\All\Interfaces\AllDataAccessRepositoryInterface;
 // use App\Repositories\All\Interfaces\AllDataSaveRepositoryInterface;
 
-use App\Services\All\Interfaces\AllDataSaveServiceInterface;
-use App\Services\User\Interfaces\UserDataSaveServiceInterface;
+use App\Services\All\Interfaces\AllDataServiceInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
 
 
 
 class HomeController extends Controller
 {
-    private $UserDataAccessRepository;
+    private $UserDataRepository;
     // private $AllDataAccess;
-    private $AllDataSaveService;
-    private $UserDataSaveService;
+    private $AllDataService;
+    private $UserDataService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, AllDataSaveServiceInterface $AllDataSaveService, UserDataSaveServiceInterface $UserDataSaveService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, AllDataServiceInterface $AllDataService, UserDataServiceInterface $UserDataService)
     {
         $this->middleware('auth');
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
+        $this->UserDataRepository = $UserDataRepository;
         // $this->AllDataAccess = $AllDataAccess;
-        $this->AllDataSaveService = $AllDataSaveService;
-        $this->UserDataSaveService = $UserDataSaveService;
+        $this->AllDataService = $AllDataService;
+        $this->UserDataService = $UserDataService;
     }
 
     /**
@@ -43,11 +43,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
         
-        $this->AllDataSaveService->saveAllFirstData($myId);
+        $this->AllDataService->saveAllFirstData($myId);
 
-        $this->UserDataSaveService->saveAuthUserFirstAreaid();
+        $this->UserDataService->saveAuthUserFirstAreaid();
 
         return redirect()->route('myhomes.index');
 

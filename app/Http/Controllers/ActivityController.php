@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
 
 
 class ActivityController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
+    private $UserDataRepository;
+    private $UserDataService;
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
     }
 
     /**
@@ -28,10 +28,10 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
         // 一覧表示用にフォローワーを自分をフォローしてくれた順で表示
-        $accounts_follower = $this->UserDataAccessRepository->getAuthUserFollowerForActivity();
+        $accounts_follower = $this->UserDataRepository->getAuthUserFollowerForActivity();
 
         return view('myService.activity')->with([
             'accounts_follower' => $accounts_follower,
@@ -54,10 +54,10 @@ class ActivityController extends Controller
         $his_id = $user->id;
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかを
-        $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+        $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+        $his_account = $this->UserDataRepository->getHisAccount($his_id);
 
         return view('myService.details')->with([
             'identify_id' => $identify_id,

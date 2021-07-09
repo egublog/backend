@@ -10,24 +10,24 @@ use App\Talk;
 use App\Facades\IdentifyId;
 use App\Facades\TalkList;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
-use App\Services\Talk_list\Interfaces\TalkListDataAccessServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
+use App\Services\Talk_list\Interfaces\TalkListDataServiceInterface;
 
 
 
 class Talk_userController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
-    private $TalkListDataAccessService;
+    private $UserDataRepository;
+    private $UserDataService;
+    private $TalkListDataService;
 
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, TalkListDataAccessServiceInterface $TalkListDataAccessService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService, TalkListDataServiceInterface $TalkListDataService)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
-        $this->TalkListDataAccessService = $TalkListDataAccessService;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
+        $this->TalkListDataService = $TalkListDataService;
     }
 
 
@@ -39,10 +39,10 @@ class Talk_userController extends Controller
     public function index()
     {
         // 前提としてこのtalkにはトークをした事がある人だけを入れる
-        $myId = $this->UserDataAccessRepository->getAuthUserId();
+        $myId = $this->UserDataRepository->getAuthUserId();
 
         //  相手のuserを取ってきてアカウントのオブジェクトの配列を作る 順番大事！
-        $talk_lists_accounts = $this->TalkListDataAccessService->getTalkListAccounts($myId);
+        $talk_lists_accounts = $this->TalkListDataService->getTalkListAccounts($myId);
 
         return view('myService.talk')->with([
             'talk_lists_accounts' => $talk_lists_accounts,
@@ -61,10 +61,10 @@ class Talk_userController extends Controller
         $his_id = $user->id;
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで取得
-        $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+        $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
 
         // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-        $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+        $his_account = $this->UserDataRepository->getHisAccount($his_id);
 
         // つまりここから出るidentify_idは全て talk_〇〇 になる。。それがtalk_から来ましたよって事になる。
         if (!IdentifyId::talkList($identify_id)) {

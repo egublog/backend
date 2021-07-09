@@ -8,8 +8,8 @@ use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 use App\Repositories\Talk_list\Interfaces\TalkListDataRepositoryInterface;
 //  ↓ saveから移動
 
-use App\Services\Talk_list\Interfaces\TalkListDataSaveServiceInterface;
-use App\Talk_list;
+// use App\Services\Talk_list\Interfaces\TalkListDataSaveServiceInterface;
+// use App\Talk_list;
 
 // use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
 // use App\Repositories\Talk_list\Interfaces\TalkListDataAccessRepositoryInterface;

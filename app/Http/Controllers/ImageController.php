@@ -9,24 +9,24 @@ use App\Area;
 use Illuminate\Support\Facades\Storage;
 use App\Facades\Profile;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
-use App\Repositories\User\Interfaces\UserDataSaveRepositoryInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
+// use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 
 
 
 
 class ImageController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
-    private $UserDataSaveRepository;
+    private $UserDataRepository;
+    private $UserDataService;
+    // private $UserDataRepository;
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService, UserDataSaveRepositoryInterface $UserDataSaveRepository)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
-        $this->UserDataSaveRepository = $UserDataSaveRepository;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
+        // $this->UserDataRepository = $UserDataRepository;
     }
 
     /**
@@ -38,13 +38,13 @@ class ImageController extends Controller
     public function show($id)
     {
         // selectボタン用にareaデータを取ってくる
-        $areas = $this->UserDataAccessRepository->getAreaArray();
+        $areas = $this->UserDataRepository->getAreaArray();
 
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
-        $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
+        $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-        $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
+        $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
         return view('myService.profile')->with([
             'areas' => $areas,
@@ -65,20 +65,20 @@ class ImageController extends Controller
 
     public function update(ImageRequest $request, $id)
     { {
-            $myAccount = $this->UserDataAccessRepository->getAuthUser();
+            $myAccount = $this->UserDataRepository->getAuthUser();
 
             // // ↓ ここで画像データをS3に保存(/testにpublicで).  そのS3の中での画像のパスを$pathに保存
             $path = Profile::saveImageToDatabaseAndReturnThePath($request);
 
             // こっち側からS3の中のそのファイルまでのフルパスをUserテーブルのimageカラムに保存
-            $this->UserDataSaveRepository->saveAuthUserImagePathToUsersTable($path);
+            $this->UserDataRepository->saveAuthUserImagePathToUsersTable($path);
 
             // selectボタン用にareaデータを取ってくる
-            $areas = $this->UserDataAccessRepository->getAreaArray();
+            $areas = $this->UserDataRepository->getAreaArray();
 
-            $area_id = $this->UserDataAccessRepository->getAuthUserAreaid();
+            $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-            $schools = $this->UserDataAccessService->returnAuthUserSchoolsArrays();
+            $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
             return view('myService.profile')->with([
                 'areas' => $areas,

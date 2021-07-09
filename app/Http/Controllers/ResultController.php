@@ -10,29 +10,29 @@ use App\All;
 use App\Queries\SearchTeams;
 use App\Facades\SearchAllses;
 
-use App\Services\All\Interfaces\AllDataAccessServiceInterface;
+use App\Services\All\Interfaces\AllDataServiceInterface;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
 
-use App\Repositories\Team\Interfaces\TeamDataAccessRepositoryInterface;
+use App\Repositories\Team\Interfaces\TeamDataRepositoryInterface;
 
 
 
 
 class ResultController extends Controller
 {
-  private $UserDataAccessRepository;
-  private $UserDataAccessService;
-  private $AllDataAccessService;
-  private $TeamDataAccessRepository;
+  private $UserDataRepository;
+  private $UserDataService;
+  private $AllDataService;
+  private $TeamDataRepository;
 
-  public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService,  AllDataAccessServiceInterface $AllDataAccessService, TeamDataAccessRepositoryInterface $TeamDataAccessRepository)
+  public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService,  AllDataServiceInterface $AllDataService, TeamDataRepositoryInterface $TeamDataRepository)
   {
-    $this->UserDataAccessRepository = $UserDataAccessRepository;
-    $this->UserDataAccessService = $UserDataAccessService;
-    $this->AllDataAccessService = $AllDataAccessService;
-    $this->TeamDataAccessRepository = $TeamDataAccessRepository;
+    $this->UserDataRepository = $UserDataRepository;
+    $this->UserDataService = $UserDataService;
+    $this->AllDataService = $AllDataService;
+    $this->TeamDataRepository = $TeamDataRepository;
   }
 
 
@@ -43,13 +43,13 @@ class ResultController extends Controller
    */
   public function index(Request $request)
   {
-    $myAccount = $this->UserDataAccessRepository->getAuthUser();
+    $myAccount = $this->UserDataRepository->getAuthUser();
 
     // 検索された文字列からワイルドカードでteamsテーブルから検索してそのteam_idを配列で取ってくる
-    $team_ids = $this->TeamDataAccessRepository->getTeamidsLikeTeamName($request->team_string);
+    $team_ids = $this->TeamDataRepository->getTeamidsLikeTeamName($request->team_string);
 
     // $team_idsと検索されたera_idから適切なallsテーブルから該当するコレクションを取ってくる
-    $searchAlls = $this->AllDataAccessService->getAllCollectionEqualEraidTeamids($request->era_id, $team_ids);
+    $searchAlls = $this->AllDataService->getAllCollectionEqualEraidTeamids($request->era_id, $team_ids);
 
     return view('myService.find')->with([
       'searchAlls' => $searchAlls,
@@ -74,10 +74,10 @@ class ResultController extends Controller
     $his_id = $user->id;
 
     // どの人の詳細を表示させるかをuser_idで受け取ってその人をフォローしているかをbooleanで確認
-    $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
+    $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
 
     // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
-    $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+    $his_account = $this->UserDataRepository->getHisAccount($his_id);
 
     return view('myService.details')->with([
       'identify_id' => $identify_id,

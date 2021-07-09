@@ -7,21 +7,21 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Facades\IdentifyId;
 
-use App\Repositories\User\Interfaces\UserDataAccessRepositoryInterface;
-use App\Services\User\Interfaces\UserDataAccessServiceInterface;
+use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use App\Services\User\Interfaces\UserDataServiceInterface;
 
 
 
 
 class FriendController extends Controller
 {
-    private $UserDataAccessRepository;
-    private $UserDataAccessService;
+    private $UserDataRepository;
+    private $UserDataService;
 
-    public function __construct(UserDataAccessRepositoryInterface $UserDataAccessRepository, UserDataAccessServiceInterface $UserDataAccessService)
+    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService)
     {
-        $this->UserDataAccessRepository = $UserDataAccessRepository;
-        $this->UserDataAccessService = $UserDataAccessService;
+        $this->UserDataRepository = $UserDataRepository;
+        $this->UserDataService = $UserDataService;
     }
 
 
@@ -32,12 +32,12 @@ class FriendController extends Controller
      */
     public function index(Request $request)
     {
-        $myAccount = $this->UserDataAccessRepository->getAuthUser();
+        $myAccount = $this->UserDataRepository->getAuthUser();
 
         $identify_id = $request->identify_id;
 
         // $identify_idによってフォローをgetするのかフォロワーを表示するのかを分ける    
-        $accounts = $this->UserDataAccessService->getAuthUserFriends($identify_id);
+        $accounts = $this->UserDataService->getAuthUserFriends($identify_id);
 
         return view('myService.friend')->with([
             'accounts' => $accounts,
@@ -59,8 +59,8 @@ class FriendController extends Controller
     public function show(User $user, Request $request)
     {
         $his_id = $user->id;
-        $follow_check = $this->UserDataAccessService->AuthUserFollowCheck($his_id);
-        $his_account = $this->UserDataAccessRepository->getHisAccount($his_id);
+        $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
+        $his_account = $this->UserDataRepository->getHisAccount($his_id);
 
         return view('myService.details')->with([
             'identify_id' => $request->identify_id,
