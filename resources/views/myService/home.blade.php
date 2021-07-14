@@ -52,7 +52,7 @@
                             <dd class="profile-data">{{ $myAccount->age }}</dd>
                         </div>
                         @endif
-                        @if(isset($myAccount->alls()->first()->era_id))
+                        @if(isset($myAccount->alls->first()->era_id))
                         @foreach($myAccount->alls as $all)
                         <div class="profile-def-box">
                             <dt class="profile-dtit">{{ $all->changeEraIdToEraName($all->era_id) }} : </dt>

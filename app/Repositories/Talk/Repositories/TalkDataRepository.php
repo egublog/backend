@@ -19,6 +19,8 @@ class TalkDataRepository implements TalkDataRepositoryInterface
   public function getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, $limit)
   {
     return Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit($limit)->with('user')->get()->reverse()->values();
+    // $a = Talk::where('from', $myId)->where('to', $user_id)->orWhere('from', $user_id)->where('to', $myId)->orderBy('created_at', 'desc')->limit($limit)->with('user')->get()->reverse()->values();
+    // dd($a);
   }
 
   public function getOurTalkDataOneBeforeFirst($myId, $user_id)

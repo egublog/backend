@@ -13,7 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        app()->bind(
+            \packages\UseCase\User\Get\GetAuthUseUseCaseInterface::class,
+            \packages\Domain\Application\User\GetAuthUserInteractor::class
+        );
+        app()->bind(
+            \packages\Domain\Domain\User\UserRepositoryInterface::class,
+            \packages\Infrastructure\User\UserRepository::class
+        );
     }
 
     /**

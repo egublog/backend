@@ -30,21 +30,31 @@ class UserDataService implements UserDataServiceInterface
 
   public function getAuthUserFriends($identify_id)
   {
-    $user = $this->UserDataRepository->getAuthUser();
+    // $user = $this->UserDataRepository->getAuthUser();
+    // if (IdentifyId::friendFollow($identify_id)) {
+    //   // 自分がフォローしている人を取得
+    //   return  $this->UserDataRepository->getFriendsFollow($user);
+    // } elseif (IdentifyId::friendFollower($identify_id)) {
+    //   // 自分をフォローしている人を取得
+    //   return $this->UserDataRepository->getFriendsFollower($user);
+    // }
+    // $user = $this->UserDataRepository->getAuthUser();
     if (IdentifyId::friendFollow($identify_id)) {
       // 自分がフォローしている人を取得
-      return  $this->UserDataRepository->getFriendsFollow($user);
+      return  $this->UserDataRepository->getAuthUserFriendsFollow();
     } elseif (IdentifyId::friendFollower($identify_id)) {
       // 自分をフォローしている人を取得
-      return $this->UserDataRepository->getFriendsFollower($user);
+      return $this->UserDataRepository->getAuthUserFriendsFollower();
     }
   }
 
 
   public function AuthUserFollowCheck($his_id)
   {
-    $user = $this->UserDataRepository->getAuthUser();
-    return $this->UserDataRepository->getFollowHimFirst($user, $his_id) === null ? false : true;
+    // $user = $this->UserDataRepository->getAuthUser();
+    // return $this->UserDataRepository->getFollowHimFirst($user, $his_id) === null ? false : true;
+    
+    return $this->UserDataRepository->getAuthUserFollowHimFirst($his_id) === null ? false : true;
   }
 
   public function returnAuthUserSchoolsArrays()

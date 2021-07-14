@@ -30,6 +30,12 @@ class MyhomeController extends Controller
     public function index()
     {
         $myAccount = $this->UserDataRepository->getAuthUser();
+        // dd($myAccount);
+        // dd(User::find(Auth::id()));
+        // dd(User::where('id', Auth::id())->first());
+        // dd(User::where('id', Auth::id())->get());
+        // dd(Auth::user());
+        // dd(User::where('id', 1000)->first());
        
         return view('myService.home')->with([
             'myAccount' => $myAccount,

@@ -24,6 +24,8 @@ class AllDataRepository implements AllDataRepositoryInterface
   public function getAllEqualEraidTeamid($era_id, $team_id)
   {
     return All::where('era_id', $era_id)->where('team_id', $team_id)->with('user')->get();
+    // ↑ ここでUserをとって来ちゃえばいい Allテーブルのuser_idを集めてuser_ids[]の配列にして、その配列からUserインスタンスのコレクションを作ってしまう！！
+    //      でそのUserインスタンスを集める時にwith(alls.team)でとってくる。
   }
 //  ↓ saveから移動
 

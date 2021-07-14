@@ -47,7 +47,7 @@ class HomeController extends Controller
         
         $this->AllDataService->saveAllFirstData($myId);
 
-        $this->UserDataService->saveAuthUserFirstAreaid();
+        // $this->UserDataService->saveAuthUserFirstAreaid();
 
         return redirect()->route('myhomes.index');
 
