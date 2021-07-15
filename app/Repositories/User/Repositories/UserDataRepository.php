@@ -5,6 +5,8 @@ namespace App\Repositories\User\Repositories;
 use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Storage;
+
 
 
 

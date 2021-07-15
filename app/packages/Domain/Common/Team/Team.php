@@ -11,21 +11,21 @@ class Team
     /**
      * @var int
      */
-    private $id;
+    public $id;
     /**
      * @var string
      */
-    private $team_name;
+    public $team_name;
 
     /**
      * @var DateTime
      */
-    private $created_at;
+    public $created_at;
 
     /**
      * @var DateTime
      */
-    private $updated_at;
+    public $updated_at;
     
 
     /**

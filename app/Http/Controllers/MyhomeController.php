@@ -47,11 +47,11 @@ class MyhomeController extends Controller
         // dd(User::where('id', 3)->with('alls.team')->first()->alls);
 
         // $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
-        // dd(new User::class);
+        // // dd(new User::class);
 
-        // $a = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
+        // $myAccount = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
 
-        // dd($a);
+        // dd($myAccount->name);
 
 
        
