@@ -15,7 +15,7 @@ use App\User as UserModel;
 // use packages\Domain\Domain\User\User;
 // use packages\Domain\Domain\User\User;
 use App\packages\Domain\Domain\User\User;
-
+use App\Http\Models\User\Get\MyHomesIndexViewModel;
 
 
 
@@ -60,7 +60,9 @@ class MyhomeController extends Controller
 
         // でここで$reponseを一般viewモデルに格納するけど今回はしない
 
-        $viewModel = new UserIndexViewModel($response);
+        $viewModel = new MyHomesIndexViewModel($response);
+
+        // dd($viewModel);
 
         $myAccount = $viewModel;
 

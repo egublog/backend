@@ -5,7 +5,7 @@ namespace App\Http\Models\User\Get;
 // use App\Http\Models\User\Commons\UserViewModel;
 use App\packages\UseCase\User\Get\GetAuthUserResponse;
 
-class myHomesIndexViewModel
+class MyHomesIndexViewModel
 {
     public $user;
 

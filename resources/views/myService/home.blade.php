@@ -10,10 +10,10 @@
     <section class="profile">
         <div class="profile-inner" id="app2">
             <div class="profile-top">
-                <p class="profile-top-tit">{{ $myAccount->name }}</p>
+                <p class="profile-top-tit">{{ $myAccount->user->user->name }}</p>
             </div>
             <div class="profile-img">
-                @if ($myAccount->image === null)
+                @if ($myAccount->user->user->image === null)
                 <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                 @else
                 <img src="{{ $myAccount->image }}">
@@ -37,8 +37,8 @@
             </div>
             <div class="profile-wrap">
                 <div class="profile-name">
-                    @if($myAccount->user_name)
-                    <p class="profile-name-txt">{{ $myAccount->user_name }}</p>
+                    @if($myAccount->user->user->user_name)
+                    <p class="profile-name-txt">{{ $myAccount->user->user->user_name }}</p>
                     @endif
                 </div>
                 <div class="profile-set">
@@ -46,29 +46,31 @@
                 </div>
                 <div class="profile-box">
                     <dl class="profile-def">
-                        @if(isset($myAccount->age))
+                        @if(isset($myAccount->user->user->age))
                         <div class="profile-def-box">
                             <dt class="profile-dtit">age : </dt>
-                            <dd class="profile-data">{{ $myAccount->age }}</dd>
+                            <dd class="profile-data">{{ $myAccount->user->user->age }}</dd>
                         </div>
                         @endif
                         <!-- @if(isset($myAccount->alls->first()->era_id)) -->
-                        @foreach($myAccount->alls as $all)
+                        @foreach($myAccount->user->user->alls as $all)
                         <div class="profile-def-box">
-                            <dt class="profile-dtit">{{ $all->changeEraIdToEraName($all->era_id) }} : </dt>
+                            <!-- <dt class="profile-dtit">{{ $all->changeEraIdToEraName($all->era_id) }} : </dt> -->
+                            <dt class="profile-dtit">{{ $all->era_id }} : </dt>
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
                         </div>
                         @endforeach
                         <!-- @endif -->
-                        @if($myAccount->area_id != '未設定です')
+                        @if($myAccount->user->user->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $myAccount->changeAreaIdToPrefecturesName($myAccount->area_id) }}</dd>
+                            <!-- <dd class="profile-data"> {{ $myAccount->changeAreaIdToPrefecturesName($myAccount->area_id) }}</dd> -->
+                            <dd class="profile-data"> {{ $myAccount->area_id }}</dd>
                         </div>
                         @endif
                     </dl>
-                    @if(isset($myAccount->introduction))
-                    <p class="profile-intro">{{ $myAccount->introduction }}</p>
+                    @if(isset($myAccount->user->user->introduction))
+                    <p class="profile-intro">{{ $myAccount->user->user->introduction }}</p>
                     @endif
                 </div>
             </div>
