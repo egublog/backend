@@ -38,5 +38,7 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         // return new UserCreateResponse($userId->getValue());
 
         $AuthUser = $this->userRepository->getAuthUser();
+
+        
     }
 }

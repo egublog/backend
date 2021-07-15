@@ -36,6 +36,8 @@ class MyhomeController extends Controller
         // dd(User::where('id', Auth::id())->get());
         // dd(Auth::user());
         // dd(User::where('id', 1000)->first());
+
+        // dd(User::where('id', Auth::id())->with('alls')->first()->alls()->get()->team();
        
         return view('myService.home')->with([
             'myAccount' => $myAccount,

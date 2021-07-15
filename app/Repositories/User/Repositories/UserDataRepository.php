@@ -25,6 +25,7 @@ class UserDataRepository implements UserDataRepositoryInterface
     //    dd($a);
     //    return response()->json([$a]);
         // dd($array);
+        return User::where('id', Auth::id())->with('alls.team')->first();
     }
 
     public function getAuthUserId()
