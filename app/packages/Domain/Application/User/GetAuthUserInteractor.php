@@ -8,6 +8,7 @@ use App\packages\Domain\Domain\User\UserId;
 use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
 use App\packages\UseCase\User\Create\UserCreateRequest;
 use App\packages\UseCase\User\Create\UserCreateResponse;
+use App\packages\UseCase\User\Commons\UserModel;
 
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 {
@@ -37,7 +38,9 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 
         // return new UserCreateResponse($userId->getValue());
 
-        $AuthUser = $this->userRepository->getAuthUser();
+        $AuthUserEntity = $this->userRepository->getAuthUser();
+
+        $AuthUserCommoModel = new UserModel();
 
         return new GetAuthUserResponse();
 

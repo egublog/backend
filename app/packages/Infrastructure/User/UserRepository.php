@@ -61,6 +61,7 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
 
+
         return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
     }
 }

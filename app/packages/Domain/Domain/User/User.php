@@ -51,7 +51,7 @@ class User
     private $introduction;
 
     /**
-     * @var int
+     * @var string
      */
     private $area_id;
 
@@ -118,6 +118,88 @@ class User
         return $this->name;
     }
 
+       
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+       
+    /**
+     * @return string
+     */
+    public function getUser_name(): string
+    {
+        return $this->user_name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge(): int
+    {
+        return $this->age;
+    }
+
+       
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+       
+    /**
+     * @return string
+     */
+    public function getIntroduction(): string
+    {
+        return $this->introduction;
+    }
+
+       
+    /**
+     * @return string
+     */
+    public function getArea_id(): string
+    {
+        return $this->area_id;
+    }
+
+       
+    /**
+     * @return string
+     */
+    public function getCreated_at(): string
+    {
+        return $this->created_at;
+    }
+
+       
+    /**
+     * @return string
+     */
+     public function getUpdated_at(): string
+     {
+         return $this->updated_at;
+     }
+ 
+       
+       
+    /**
+     * @return array
+     */
+    public function getAlls(): array
+    {
+        return $this->alls;
+    }
+
+        
        
     public function changeAreaIdToPrefecturesName($value)
     {
