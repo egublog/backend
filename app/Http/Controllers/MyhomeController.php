@@ -12,7 +12,7 @@ use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 use App\User as UserModel;
 // use packages\Domain\Domain\User\User;
 // use packages\Domain\Domain\User\User;
-use app\packages\Domain\Domain\User\User;
+use App\packages\Domain\Domain\User\User;
 
 
 
@@ -46,12 +46,12 @@ class MyhomeController extends Controller
         // dd(User::where('id', 3)->with('alls.team')->first()->alls->first()->team);
         // dd(User::where('id', 3)->with('alls.team')->first()->alls);
 
-        $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
+        // $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
         // dd(new User::class);
 
-        $a = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
+        // $a = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
 
-        dd($a);
+        // dd($a);
 
 
        

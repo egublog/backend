@@ -1,6 +1,6 @@
 <?php
 
-namespace app\packages\Domain\Common\Team;
+namespace App\packages\Domain\Common\Team;
 
 use DateTime;
 // use App\Team as TeamModel;

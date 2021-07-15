@@ -1,13 +1,13 @@
 <?php
 
-namespace app\packages\Domain\Application\User;
+namespace App\packages\Domain\Application\User;
 
-use app\packages\Domain\Domain\User\UserRepositoryInterface;
-use app\packages\Domain\Domain\User\User;
-use app\packages\Domain\Domain\User\UserId;
-use app\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
-use app\packages\UseCase\User\Create\UserCreateRequest;
-use app\packages\UseCase\User\Create\UserCreateResponse;
+use App\packages\Domain\Domain\User\UserRepositoryInterface;
+use App\packages\Domain\Domain\User\User;
+use App\packages\Domain\Domain\User\UserId;
+use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
+use App\packages\UseCase\User\Create\UserCreateRequest;
+use App\packages\UseCase\User\Create\UserCreateResponse;
 
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 {

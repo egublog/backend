@@ -1,10 +1,10 @@
 <?php
 
-namespace app\packages\Domain\Domain\User;
+namespace App\packages\Domain\Domain\User;
 
 use DateTime;
 use Illuminate\Support\Collection;
-use app\packages\Domain\Common\All\All;
+use App\packages\Domain\Common\All\All;
 
 class User
 {

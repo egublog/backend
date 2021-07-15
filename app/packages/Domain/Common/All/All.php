@@ -1,10 +1,10 @@
 <?php
 
-namespace app\packages\Domain\Common\All;
+namespace App\packages\Domain\Common\All;
 
 use DateTime;
 use App\Team as TeamModel;
-use app\packages\Domain\Common\Team\Team;
+use App\packages\Domain\Common\Team\Team;
 
 class All
 {

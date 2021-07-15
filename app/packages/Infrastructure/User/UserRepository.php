@@ -1,12 +1,12 @@
 <?php
 
-namespace app\packages\Infrastructure\User;
+namespace App\packages\Infrastructure\User;
 
 
 // use Illuminate\Support\Facades\DB;
-use app\packages\Domain\Domain\User\User;
+use App\packages\Domain\Domain\User\User;
 // use packages\Domain\Domain\User\UserId;
-use app\packages\Domain\Domain\User\UserRepositoryInterface;
+use App\packages\Domain\Domain\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use App\User as UserModel;
 
