@@ -40,9 +40,9 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 
         $AuthUserEntity = $this->userRepository->getAuthUser();
 
-        $AuthUserCommoModel = new UserModel();
+        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
 
-        return new GetAuthUserResponse();
+        return new GetAuthUserResponse($AuthUserCommoModel);
 
         
     }
