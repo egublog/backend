@@ -9,6 +9,7 @@ use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
 use App\packages\UseCase\User\Create\UserCreateRequest;
 use App\packages\UseCase\User\Create\UserCreateResponse;
 use App\packages\UseCase\User\Commons\UserModel;
+use App\packages\UseCase\User\Get\GetAuthUserResponse;
 
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 {

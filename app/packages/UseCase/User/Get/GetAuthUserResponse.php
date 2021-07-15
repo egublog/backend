@@ -3,7 +3,8 @@
 namespace App\packages\UseCase\User\Get;
 
 
-use packages\User\Commons\UserModel;
+// use packages\User\Commons\UserModel;
+use App\packages\UseCase\User\Commons\UserModel;
 
 class GetAuthUserResponse
 {

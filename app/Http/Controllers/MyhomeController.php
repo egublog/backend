@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 // use App\User;
 use App\Talk;
 use Illuminate\Support\Arr;
-use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+// use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+use \App\packages\UseCase\User\Get\GetAuthUseUseCaseInterface;
 
 use App\User as UserModel;
 // use packages\Domain\Domain\User\User;
@@ -19,12 +20,14 @@ use App\packages\Domain\Domain\User\User;
 
 class MyhomeController extends Controller
 {
-    private $UserDataRepository;
+    // private $UserDataRepository;
+    private $GetAuthUseUseCase
 
 
-    public function __construct(UserDataRepositoryInterface $UserDataRepository)
+    public function __construct(GetAuthUseUseCaseInterface $GetAuthUseUseCase)
     {
-        $this->UserDataRepository = $UserDataRepository;
+        // $this->UserDataRepository = $UserDataRepository;
+        $this->GetAuthUseUseCase = $GetAuthUseUseCase;
     }
 
 
@@ -35,7 +38,7 @@ class MyhomeController extends Controller
      */
     public function index()
     {
-        $myAccount = $this->UserDataRepository->getAuthUser();
+        // $myAccount = $this->UserDataRepository->getAuthUser();
         // dd($myAccount);
         // dd(User::find(Auth::id()));
         // dd(User::where('id', Auth::id())->first());
@@ -52,6 +55,11 @@ class MyhomeController extends Controller
         // $myAccount = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
 
         // dd($myAccount->name);
+        $response = $this->GetAuthUseUseCaseInterface->handle();
+
+        // でここで$reponseを一般viewモデルに格納するけど今回はしない
+
+        $viewModel = new UserIndexViewModel($response);
 
 
        
