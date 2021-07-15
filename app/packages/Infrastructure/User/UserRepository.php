@@ -9,7 +9,7 @@ use App\packages\Domain\Domain\User\User;
 use App\packages\Domain\Domain\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use App\User as UserModel;
-
+use Carbon\Carbon;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -61,7 +61,11 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
 
+        // dd($user->created_at);
 
-        return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
+        // dd((new Carbon($user->created_at))->toDateTimeString());
+
+
+        return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString(), $user->alls);
     }
 }

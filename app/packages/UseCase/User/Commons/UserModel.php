@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\packages\UseCase\User\Commons;
@@ -57,12 +56,12 @@ class UserModel
     public $area_id;
 
     /**
-     * @var DateTime
+     * @var string
      */
     public $created_at;
 
     /**
-     * @var DateTime
+     * @var string
      */
     public $updated_at;
     
@@ -80,12 +79,12 @@ class UserModel
      * @param int $age
      * @param string $image
      * @param string $introduction
-     * @param int $area_id
-     * @param DateTime $created_at
-     * @param DateTime $updated_at
+     * @param string $area_id
+     * @param string $created_at
+     * @param string $updated_at
      * @param array $alls
      */
-    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, DateTime $created_at, DateTime $updated_at, array $alls)
+    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, string $area_id, string $created_at, string $updated_at, array $alls)
     {
         $this->id = $id;
         $this->name = $name;

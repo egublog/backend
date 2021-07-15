@@ -56,12 +56,12 @@ class User
     private $area_id;
 
     /**
-     * @var DateTime
+     * @var string
      */
     private $created_at;
 
     /**
-     * @var DateTime
+     * @var string
      */
     private $updated_at;
     
@@ -80,11 +80,11 @@ class User
      * @param string $image
      * @param string $introduction
      * @param int $area_id
-     * @param DateTime $created_at
-     * @param DateTime $updated_at
+     * @param string $created_at
+     * @param string $updated_at
      * @param Collection $alls
      */
-    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, DateTime $created_at, DateTime $updated_at, Collection $alls)
+    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, string $created_at, string $updated_at, Collection $alls)
     {
         $this->id = $id;
         $this->name = $name;
@@ -131,7 +131,7 @@ class User
     /**
      * @return string
      */
-    public function getUser_name(): string
+    public function getUser_name(): ?string
     {
         return $this->user_name;
     }
@@ -139,7 +139,7 @@ class User
     /**
      * @return int
      */
-    public function getAge(): int
+    public function getAge(): ?int
     {
         return $this->age;
     }
@@ -148,7 +148,7 @@ class User
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->image;
     }
@@ -157,7 +157,7 @@ class User
     /**
      * @return string
      */
-    public function getIntroduction(): string
+    public function getIntroduction(): ?string
     {
         return $this->introduction;
     }
