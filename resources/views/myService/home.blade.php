@@ -52,20 +52,16 @@
                             <dd class="profile-data">{{ $myAccount->user->user->age }}</dd>
                         </div>
                         @endif
-                        <!-- @if(isset($myAccount->alls->first()->era_id)) -->
                         @foreach($myAccount->user->user->alls as $all)
                         <div class="profile-def-box">
-                            <!-- <dt class="profile-dtit">{{ $all->changeEraIdToEraName($all->era_id) }} : </dt> -->
                             <dt class="profile-dtit">{{ $all->era_id }} : </dt>
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
                         </div>
                         @endforeach
-                        <!-- @endif -->
                         @if($myAccount->user->user->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <!-- <dd class="profile-data"> {{ $myAccount->changeAreaIdToPrefecturesName($myAccount->area_id) }}</dd> -->
-                            <dd class="profile-data"> {{ $myAccount->area_id }}</dd>
+                            <dd class="profile-data"> {{ $myAccount->user->user->area_id }}</dd>
                         </div>
                         @endif
                     </dl>

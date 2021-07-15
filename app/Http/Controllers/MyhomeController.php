@@ -62,7 +62,7 @@ class MyhomeController extends Controller
 
         $viewModel = new MyHomesIndexViewModel($response);
 
-        // dd($viewModel);
+        dd($viewModel);
 
         $myAccount = $viewModel;
 

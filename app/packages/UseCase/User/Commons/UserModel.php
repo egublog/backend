@@ -51,7 +51,7 @@ class UserModel
     public $introduction;
 
     /**
-     * @var int
+     * @var string
      */
     public $area_id;
 
@@ -93,7 +93,7 @@ class UserModel
         $this->age = $age;
         $this->image = $image;
         $this->introduction = $introduction;
-        $this->area_id = $this->area_id;
+        $this->area_id = $area_id;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         $this->alls = $alls;
