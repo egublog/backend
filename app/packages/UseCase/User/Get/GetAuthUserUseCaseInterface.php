@@ -1,6 +1,6 @@
 <?php
 
-namespace packages\UseCase\User\Get;
+namespace app\packages\UseCase\User\Get;
 
 
 interface GetAuthUserUseCaseInterface

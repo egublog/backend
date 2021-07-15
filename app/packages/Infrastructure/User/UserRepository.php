@@ -1,13 +1,14 @@
 <?php
 
-namespace packages\Infrastructure\User;
+namespace app\packages\Infrastructure\User;
 
 
 // use Illuminate\Support\Facades\DB;
-use packages\Domain\Domain\User\User;
+use app\packages\Domain\Domain\User\User;
 // use packages\Domain\Domain\User\UserId;
-use packages\Domain\Domain\User\UserRepositoryInterface;
+use app\packages\Domain\Domain\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use App\User as UserModel;
 
 
 class UserRepository implements UserRepositoryInterface
@@ -58,8 +59,8 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getAuthUser()
     {
-        $user = Auth::user();
+        $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
 
-        return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at);
+        return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
     }
 }

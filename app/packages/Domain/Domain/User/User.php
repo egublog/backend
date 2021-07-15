@@ -1,8 +1,10 @@
 <?php
 
-namespace packages\Domain\Domain\User;
+namespace app\packages\Domain\Domain\User;
 
 use DateTime;
+use Illuminate\Support\Collection;
+use app\packages\Domain\Common\All\All;
 
 class User
 {
@@ -60,7 +62,11 @@ class User
      * @var DateTime
      */
     private $updated_at;
-
+    
+    /**
+     * @var array
+     */
+    private $alls = [];
 
     /**
      * User constructor.
@@ -75,7 +81,7 @@ class User
      * @param DateTime $created_at
      * @param DateTime $updated_at
      */
-    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, DateTime $created_at, DateTime $updated_at)
+    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, DateTime $created_at, DateTime $updated_at, Collection $alls)
     {
         $this->id = $id;
         $this->name = $name;
@@ -87,6 +93,14 @@ class User
         $this->area_id = $area_id;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
+
+        
+        // $this->alls = $alls;
+
+
+        foreach($alls as $all) {
+          $this->alls[] = new All($all->id, $all->user_id, $all->position_id, $all->team_id, $all->era_id, $all->created_at, $all->updated_at, $all->team);
+        }
     }
 
     /**
