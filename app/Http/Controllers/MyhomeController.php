@@ -71,7 +71,7 @@ class MyhomeController extends Controller
 
         // dd($viewModel);
 
-        $myAccount = $viewModel;
+        // $myAccount = $viewModel;
 
 
        
