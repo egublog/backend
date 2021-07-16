@@ -16,6 +16,7 @@ use App\User as UserModel;
 // use packages\Domain\Domain\User\User;
 use App\packages\Domain\Domain\User\User;
 use App\Http\Models\User\Get\MyHomesIndexViewModel;
+use App\Http\Models\User\Commons\UserViewModel;
 
 
 
@@ -58,9 +59,15 @@ class MyhomeController extends Controller
         // dd($myAccount->name);
         $response = $this->GetAuthUserUseCase->handle();
 
+        // dd($response);
+
         // でここで$reponseを一般viewモデルに格納するけど今回はしない
 
-        $viewModel = new MyHomesIndexViewModel($response);
+        $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->alls);
+        // ↑  ％％でここでの詰め替えはUseCase層用のインスタンスからViewModel層用のインスタンスに詰め替えている％％
+
+
+        $viewModel = new MyHomesIndexViewModel($user);
 
         // dd($viewModel);
 

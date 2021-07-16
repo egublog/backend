@@ -4,6 +4,7 @@ namespace App\Http\Models\User\Get;
 
 // use App\Http\Models\User\Commons\UserViewModel;
 use App\packages\UseCase\User\Get\GetAuthUserResponse;
+use App\Http\Models\User\Commons\UserViewModel;
 
 class MyHomesIndexViewModel
 {
@@ -11,9 +12,9 @@ class MyHomesIndexViewModel
 
     /**
      * UserIndexViewModel constructor.
-     * @param GetAuthUserResponse $users
+     * @param UserViewModel $users
      */
-    public function __construct(GetAuthUserResponse $user)
+    public function __construct(UserViewModel $user)
     {
         $this->user = $user;
     }
