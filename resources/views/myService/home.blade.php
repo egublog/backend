@@ -10,13 +10,13 @@
     <section class="profile">
         <div class="profile-inner" id="app2">
             <div class="profile-top">
-                <p class="profile-top-tit">{{ $myAccount->user->name }}</p>
+                <p class="profile-top-tit">{{ $viewModel->user->name }}</p>
             </div>
             <div class="profile-img">
-                @if ($myAccount->user->image === null)
+                @if ($viewModel->user->image === null)
                 <img src="https://banana2.s3-ap-northeast-1.amazonaws.com/test/E7F5CC7C-E1B0-4630-99B8-DDD050E8E99E_1_105_c.jpeg" alt="">
                 @else
-                <img src="{{ $myAccount->image }}">
+                <img src="{{ $viewModel->user->image }}">
                 @endif
             </div>
             <div class="profile-button">
@@ -37,8 +37,8 @@
             </div>
             <div class="profile-wrap">
                 <div class="profile-name">
-                    @if($myAccount->user->user_name)
-                    <p class="profile-name-txt">{{ $myAccount->user->user_name }}</p>
+                    @if($viewModel->user->user_name)
+                    <p class="profile-name-txt">{{ $viewModel->user->user_name }}</p>
                     @endif
                 </div>
                 <div class="profile-set">
@@ -46,27 +46,27 @@
                 </div>
                 <div class="profile-box">
                     <dl class="profile-def">
-                        @if(isset($myAccount->user->age))
+                        @if(isset($viewModel->user->age))
                         <div class="profile-def-box">
                             <dt class="profile-dtit">age : </dt>
-                            <dd class="profile-data">{{ $myAccount->user->age }}</dd>
+                            <dd class="profile-data">{{ $viewModel->user->age }}</dd>
                         </div>
                         @endif
-                        @foreach($myAccount->user->alls as $all)
+                        @foreach($viewModel->user->alls as $all)
                         <div class="profile-def-box">
                             <dt class="profile-dtit">{{ $all->era_id }} : </dt>
                             <dd class="profile-data">{{ $all->team->team_name }}</dd>
                         </div>
                         @endforeach
-                        @if($myAccount->user->area_id != '未設定です')
+                        @if($viewModel->user->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $myAccount->user->area_id }}</dd>
+                            <dd class="profile-data"> {{ $viewModel->user->area_id }}</dd>
                         </div>
                         @endif
                     </dl>
-                    @if(isset($myAccount->user->introduction))
-                    <p class="profile-intro">{{ $myAccount->user->introduction }}</p>
+                    @if(isset($viewModel->user->introduction))
+                    <p class="profile-intro">{{ $viewModel->user->introduction }}</p>
                     @endif
                 </div>
             </div>

@@ -75,9 +75,12 @@ class MyhomeController extends Controller
 
 
        
-        return view('myService.home')->with([
-            'myAccount' => $myAccount,
-        ]);
+        // return view('myService.home')->with([
+        //     'myAccount' => $myAccount,
+        // ]);
+        return view('myService.home', compact('viewModel'));
+        // return view('user.index', compact('viewModel'));
+
     }
 
 }
