@@ -26,6 +26,8 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+
+    // reportとrenderが独立して動いているというのがポイントでこのreportには返り値が無い！
     /**
      * Report or log an exception.
      *
