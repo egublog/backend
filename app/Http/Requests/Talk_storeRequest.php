@@ -43,7 +43,7 @@ class Talk_storeRequest extends FormRequest
 
 
 
-
+//  ↓  これでレスポンスを整形する
     protected function failedValidation(Validator $validator) {
         $response = response()->json([
             'status' => 400,
