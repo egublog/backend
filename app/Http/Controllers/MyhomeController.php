@@ -59,7 +59,6 @@ class MyhomeController extends Controller
         // dd($myAccount->name);
         $response = $this->GetAuthUserUseCase->handle();
 
-        // dd($response);
 
         // でここで$reponseを一般viewモデルに格納するけど今回はしない
 
