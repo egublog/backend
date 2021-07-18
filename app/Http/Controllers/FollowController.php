@@ -42,6 +42,9 @@ class FollowController extends Controller
      */
     public function destroy($user_id)
     {
+      //                   ↑ 多分ここも$user_idを取るだけだったらUser $userにしてインプリシットバインディングにした方がいい！
+
+
         // フォローを外す followsテーブルに自分のidと相手のidを削除する
         $this->UserDataRepository->deleteAuthUserFollow($user_id);
         // $this->getAuthUser()->show_follow()->detach($his_id);
