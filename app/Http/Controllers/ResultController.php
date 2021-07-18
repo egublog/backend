@@ -80,6 +80,12 @@ class ResultController extends Controller
 
     // どの人の詳細を表示させるかをuser_idで受け取ってその人のアカウントを取得
     $his_account = $this->UserDataRepository->getHisAccount($his_id);
+    // ↑ クリーンアーキテクチャの観点は無視するとLaravelのインプリシットバインディングをそのまま
+    // 使えばいいやん‼️
+    // $his_account = $user;
+
+    // dd($his_account, $user);
+    // dd($user);
 
     return view('myService.details')->with([
       'identify_id' => $identify_id,
