@@ -83,6 +83,7 @@ class TalkDataService implements TalkDataServiceInterface
     // ここでは自分と相手のトークデータの最新の一個前のレコードを取ってくる
     // $talkDataOneBefore = Talk::TalkDataOneBefore($myId, $user_id)->first();
     $talkDataOneBefore = $this->TalkDataRepository->getOurTalkDataOneBeforeFirst($myId, $user_id);
+    // ↑  nullでもオーケー
 
     // first()で取ってくると何もなかった時にnullが入ってくる。
     // get()で取ってくると何もなかった時に collectionの{#items: []}が返ってくるからその違いに注意
@@ -90,6 +91,7 @@ class TalkDataService implements TalkDataServiceInterface
     // ここでは自分と相手のトークデータの最新のレコードを取ってくる
     // $talkDataNow = Talk::TalkDataNow($myId, $user_id)->first();
     $talkDataNow =  $this->TalkDataRepository->getOurTalkDataLatest($myId, $user_id);
+    // ↑ nullの場合に(messageが' 'で保存されなかった場合にしたの処理をスキップする！)
 
 
     // $talkDataOneBeforeと$talkDataNowの日付を比較して同じだったらtalkCheckカラム(boolean型)にfalse違ったらtrueをいれる($talkDataOneBeforeが存在しなかった場合はtrueをいれる）
