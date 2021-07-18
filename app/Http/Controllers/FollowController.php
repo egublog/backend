@@ -26,8 +26,11 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
+      //                   ↑ 多分ここも$user_idを取るだけだったらUser $userにしてインプリシットバインディングにした方がいい！
+
         // フォローする followsテーブルに自分のidと相手のidを追加する
         $this->UserDataRepository->saveAuthUserFollow($request->user_id);
+        // $this->getAuthUser()->show_follow()->attach($his_id);
     }
 
 
@@ -41,5 +44,7 @@ class FollowController extends Controller
     {
         // フォローを外す followsテーブルに自分のidと相手のidを削除する
         $this->UserDataRepository->deleteAuthUserFollow($user_id);
+        // $this->getAuthUser()->show_follow()->detach($his_id);
+
     }
 }
