@@ -65,6 +65,7 @@ class Talk_userContentController extends Controller
         // ここで相手が自分に送ったトークデータでTalksテーブルのyetカラムがfalseのものを取ってくる
         //   ここで$talkDatasがあればそのtalksテーブルのyetカラムをtrueにする
         $this->TalkDataService->saveYetColumnsTrue($myId, $user_id);
+        //  ↑ これはデータの保存処理だからトランザクションを使ったりtry catchで囲んだりする
 
         $hisAccount = $this->UserDataRepository->getHisAccount($user_id);
 
