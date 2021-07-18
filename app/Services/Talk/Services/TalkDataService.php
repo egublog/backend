@@ -51,6 +51,9 @@ class TalkDataService implements TalkDataServiceInterface
   {
     // $talkDatas = Talk::yetColumnsFalse($myId, $user_id)->get();
     $talkDatas = $this->TalkDataRepository->getOurTalkYetColumnFalse($myId, $user_id);
+    // ↑  空のCollectionかもしれない
+    // return Talk::where('from', $user_id)->where('to', $myId)->where('yet', false)->get();
+
 
     if ($talkDatas) {
       // TalkList::changeYetColumnsTrue($talkDatas);
@@ -58,6 +61,7 @@ class TalkDataService implements TalkDataServiceInterface
         // $talkData->yet = true;
         // $talkData->save();
         $this->TalkDataRepository->saveYetColumnTure($talkData);
+        
       }
   }
 
