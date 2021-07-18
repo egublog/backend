@@ -17,6 +17,7 @@ class BackController extends Controller
     {
         // ここで受け取るidentify_idは9パターン
         $identify_id = $request->identify_id;
+        // ↑ ここでも$identify_idのエラー処理を書く！
 
         // identify_idがfindかtalk_findだったら下の配列を作る
         if (IdentifyId::find($identify_id) || IdentifyId::talkFind($identify_id)) {
