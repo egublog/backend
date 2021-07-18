@@ -61,7 +61,7 @@ class TalkDataService implements TalkDataServiceInterface
         // $talkData->yet = true;
         // $talkData->save();
         $this->TalkDataRepository->saveYetColumnTure($talkData);
-        
+        // ↑ こいう保存処理も全部try catchで囲んで（トランザクション？）例外処理を書く！
       }
   }
 
