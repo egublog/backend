@@ -40,9 +40,12 @@ class TalkListDataService implements TalkListDataServiceInterface
 
     // $talk_lists = Talk_list::fromToEqual($myId)->get();
     $talk_lists = $this->TalkListDataRepository->getTalkListEqualMyid($myId);
+    // return Talk_list::where('from', $myId)->orWhere('to', $myId)->orderBy('created_at', 'desc')->get();
+    // ↑ 空のCollectionかも
 
     $opponent_ids = $this->getOpponentIds($talk_lists, $myId);
-
+    // ↑  $talk_listsが空のCollectionだったら空の配列が帰ってくる。 
+    // ↓  空の配列をforeachで回しても何も起きないので空のまま！！
     $talk_lists_accounts = array();
     foreach ($opponent_ids as $id) {
       // $talk_lists_accounts[] = User::find($id);
