@@ -51,6 +51,7 @@ class ResultController extends Controller
     // $team_idsと検索されたera_idから適切なallsテーブルから該当するコレクションを取ってくる
     $searchAlls = $this->AllDataService->getAllCollectionEqualEraidTeamids($request->era_id, $team_ids);
     // ↑ バリデーションとかフロントとかで制御してもいいけどこの$request->era_idが変な値だったら例外を吐く処理を追加する！
+    //    ↑ いやでも変なの来たらただデータが見つからないだけだから大丈夫かも空のコレクションがくるだけ！
 
     return view('myService.find')->with([
       'searchAlls' => $searchAlls,
@@ -93,6 +94,7 @@ class ResultController extends Controller
       'hisAccount' => $his_account,
       'follow_check' => $follow_check,
       'era_id' => $request->era_id,
+      // ↑ 
       'team_string' => $request->team_string,
     ]);
   }
