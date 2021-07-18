@@ -91,7 +91,7 @@ class TalkDataService implements TalkDataServiceInterface
     // $talkDataNow = Talk::TalkDataNow($myId, $user_id)->first();
     $talkDataNow =  $this->TalkDataRepository->getOurTalkDataLatest($myId, $user_id);
     // ↑ nullの場合に(messageが' 'で保存されなかった場合にしたの処理をスキップする！)
-
+    //  ↓
     if ($talkDataNow) {
 
       // $talkDataOneBeforeと$talkDataNowの日付を比較して同じだったらtalkCheckカラム(boolean型)にfalse違ったらtrueをいれる($talkDataOneBeforeが存在しなかった場合はtrueをいれる）
@@ -100,16 +100,18 @@ class TalkDataService implements TalkDataServiceInterface
         // $this->talkCheck = true;
         // $this->save();
         $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
+        // ↑ ここも保存用のエラーハンドリングを書く！
       } else {
         if ($talkDataOneBefore->created_at->format('n/j') != $talkDataNow->created_at->format('n/j')) {
           // $this->talkCheck = true;
           // $this->save();
           $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
+          // ↑ ここも保存用のエラーハンドリングを書く！
         }
       }
     }
   }
 
 
-  
+
 }
