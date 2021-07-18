@@ -70,6 +70,8 @@ class ResultController extends Controller
    */
   public function show(User $user, Request $request)
   {
+    // ↑                 ↑ ここのurlは /results/{user} なので例えば現在いない /results/100 とかを
+    //                      入力されたら404エラーが返るし /results/aiu とかやっても 404が返る
     $identify_id = 'find';
     $his_id = $user->id;
 
