@@ -71,6 +71,7 @@ class Talk_userContentController extends Controller
 
         // ここで自分と相手のトークデータの中で最新のレコードを20個取ってくる
         $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
+        // ↑ 多分空のコレクションでもオーケー
 
         $identify_id = $request->identify_id;
         // ↑  例外処理の観点からするとここでgetで送信されたidentify_idはあの5種類のどれかである必要がある！
