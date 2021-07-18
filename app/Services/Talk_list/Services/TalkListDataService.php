@@ -92,6 +92,7 @@ class TalkListDataService implements TalkListDataServiceInterface
     // トークを送信したタイミングで自分と相手のtalk_listテーブルのレコードを取ってくる
     // $existing_talk_list =  Talk_list::ourTalkList($myId, $user_id)->first();
     $existing_talk_list = $this->TalkListDataRepository->getOurTalkListFirst($myId, $user_id);
+    // ↑  nullでもnullじゃなくてもオーケー
 
     // それがあればtalk_listsテーブルに$myId or $user_id が会ったら消す
     if (isset($existing_talk_list)) {
@@ -103,6 +104,7 @@ class TalkListDataService implements TalkListDataServiceInterface
     // $new_talk_list = new Talk_list();
     // $new_talk_list->saveNewTalkList($myId, $user_id);
       $this->TalkListDataRepository->saveOurTalkList($myId, $user_id);
+      // ↑ でここで新しく保存処理なのでトランザクションや例外処理を追加！！
   }
 
 
