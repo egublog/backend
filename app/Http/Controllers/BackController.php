@@ -23,6 +23,7 @@ class BackController extends Controller
         if (IdentifyId::find($identify_id) || IdentifyId::talkFind($identify_id)) {
             $array = array(
                 'user' => $request->user_id,
+                //          ↑ このuser_idもインプリシットで受け取った方がいいかも！
                 'team_string' => $request->team_string,
                 'era_id' => $request->era_id,
                 'identify_id' => $identify_id,
