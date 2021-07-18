@@ -28,7 +28,7 @@ use App\Repositories\Talk\Interfaces\TalkDataRepositoryInterface;
 class TalkDataService implements TalkDataServiceInterface
 {
 
-//  ↓ saveから移動
+  //  ↓ saveから移動
 
 
   // private $UserDataAccessRepository;
@@ -63,8 +63,7 @@ class TalkDataService implements TalkDataServiceInterface
         $this->TalkDataRepository->saveYetColumnTure($talkData);
         // ↑ こいう保存処理も全部try catchで囲んで（トランザクション？）例外処理を書く！
       }
-  }
-
+    }
   }
 
   public function saveOurTalkData($message, $myId, $user_id)
@@ -73,7 +72,7 @@ class TalkDataService implements TalkDataServiceInterface
       // $talkData = new Talk();
       // $talkData->saveNewTalk($message, $myId, $user_id);
       $this->TalkDataRepository->saveOurTalkData($message, $myId, $user_id);
-  }
+    }
   }
 
   public function updateOurTalkCheckColumn($myId, $user_id)
@@ -93,27 +92,24 @@ class TalkDataService implements TalkDataServiceInterface
     $talkDataNow =  $this->TalkDataRepository->getOurTalkDataLatest($myId, $user_id);
     // ↑ nullの場合に(messageが' 'で保存されなかった場合にしたの処理をスキップする！)
 
+    if ($talkDataNow) {
 
-    // $talkDataOneBeforeと$talkDataNowの日付を比較して同じだったらtalkCheckカラム(boolean型)にfalse違ったらtrueをいれる($talkDataOneBeforeが存在しなかった場合はtrueをいれる）
-    // $talkDataNow->saveTalkCheckColumn($talkDataOneBefore);
-    if ($talkDataOneBefore == null) {
-      // $this->talkCheck = true;
-      // $this->save();
-      $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
-  } else {
-      if ($talkDataOneBefore->created_at->format('n/j') != $talkDataNow->created_at->format('n/j')) {
+      // $talkDataOneBeforeと$talkDataNowの日付を比較して同じだったらtalkCheckカラム(boolean型)にfalse違ったらtrueをいれる($talkDataOneBeforeが存在しなかった場合はtrueをいれる）
+      // $talkDataNow->saveTalkCheckColumn($talkDataOneBefore);
+      if ($talkDataOneBefore == null) {
+        // $this->talkCheck = true;
+        // $this->save();
+        $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
+      } else {
+        if ($talkDataOneBefore->created_at->format('n/j') != $talkDataNow->created_at->format('n/j')) {
           // $this->talkCheck = true;
           // $this->save();
-      $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
-
+          $this->TalkDataRepository->updateOurTalkCheckColumn($talkDataNow);
+        }
       }
+    }
   }
-    
 
-  }
 
   
-
-
-
 }
