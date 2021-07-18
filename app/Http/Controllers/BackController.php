@@ -53,12 +53,16 @@ class BackController extends Controller
     {
         // ここで受け取るidentify_idは5パターン
         $identify_id = $request->identify_id;
+        // ↑ ここでも$identify_idのエラー処理を書く！
+
         $user_id = $request->user_id;
 
         // identify_idがfindかtalk_findだったら下の配列を作る
         if (IdentifyId::find($identify_id)) {
             $array = array(
                 'user' => $request->user_id,
+                //          ↑ このuser_idもインプリシットで受け取った方がいいかも！
+
                 'team_string' => $request->team_string,
                 'era_id' => $request->era_id,
             );
