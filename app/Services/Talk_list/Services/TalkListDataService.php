@@ -53,6 +53,7 @@ class TalkListDataService implements TalkListDataServiceInterface
     }
 
     return $talk_lists_accounts;
+    //     ↑ 空の配列の可能性あり！
   }
 
   public function getOpponentIds($talk_lists, $myId)

@@ -72,6 +72,8 @@ class Talk_userContentController extends Controller
         $talkDatas = $this->TalkDataRepository->getOurTalkDatasLatestLimitOrderByOldest($myId, $user_id, 20);
 
         $identify_id = $request->identify_id;
+        // ↑  例外処理の観点からするとここでgetで送信されたidentify_idはあの5種類のどれかである必要がある！
+        //    意図的にurlバーから変更されたら$identify_idを判定するところでエラーが起きてしまう！！
 
         // ここでidentify_idのtalk_〇〇の値の talk_ を取る！  つまりtalk_〇〇があるのはdetails.blade.phpだけ
         if (IdentifyId::talkFind($identify_id)) {
