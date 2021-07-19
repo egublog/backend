@@ -52,6 +52,9 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         //    場合があるからここは必要、例えば $talk_datas , $myAccount, $his_account とか多くのデータをコントローラに
         //    渡す時はここでまとめて一つのレスポンスとして返す！！
 
+
+        // ここのユースケース層でビジネスロジックを構成するとのこと、エンティティでは単純にデータベースを表現するだけ！
+
         
     }
 }
