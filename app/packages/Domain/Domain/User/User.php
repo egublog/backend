@@ -100,6 +100,7 @@ class User
         foreach($alls as $all) {
           $this->alls[] = new All($all->id, $all->user_id, $all->position_id, $all->team_id, $all->era_id, $all->created_at, $all->updated_at, $all->team);
         }
+        // ↑ ここにはロジックを書かない方がいい
     }
 
     /**

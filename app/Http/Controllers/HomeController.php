@@ -46,6 +46,7 @@ class HomeController extends Controller
         $myId = $this->UserDataRepository->getAuthUserId();
         
         $this->AllDataService->saveAllFirstData($myId);
+        
 
         // $this->UserDataService->saveAuthUserFirstAreaid();
 
