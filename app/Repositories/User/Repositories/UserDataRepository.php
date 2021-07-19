@@ -146,6 +146,7 @@ class UserDataRepository implements UserDataRepositoryInterface
         // $this->getAuthUser()->followAttach($his_id);
         $this->getAuthUser()->show_follow()->attach($his_id);
         // User::where('id', $this->getAuthUserId())->with('show_follow')->first()->show_follow->attach($his_id);
+        // ↑  基本的にリポジトリでは他のリポジトリを跨ぐ依存する様な書き方はしないと言われた
 
         // それぞれのクエリはどのタイミングで実行されるのか 
         // $this->getAuthUser()->alls() このタイミングでもうn+1問題になっているのか
