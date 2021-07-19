@@ -71,6 +71,8 @@ class MyhomeController extends Controller
 
         $viewModel = new MyHomesIndexViewModel($user);
 
+        // やはり格納し直すのはそこで使いやすい様にするから！！
+
         // dd($viewModel);
 
         // $myAccount = $viewModel;
