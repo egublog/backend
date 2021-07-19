@@ -19,6 +19,8 @@ class User
      * @var int
      */
     private $id;
+// ↑  本来は厳密にクリーンアーキテクチャをやろうとしたら、このカラムを全てエンティティしてやる
+
 
     /**
      * @var string
