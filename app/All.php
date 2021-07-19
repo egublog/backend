@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 
 class All extends Model
 {
+    // Allモデルとか命名の仕方がいけないよねって言われたからここら辺も改善する
     //
 
     
