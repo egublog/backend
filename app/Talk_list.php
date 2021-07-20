@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Talk_list extends Model
 {
+
+    // ↑ 多分ここの名前も変えた方がいい
+
     // リレーション ↓↓
     public function user() {
         return $this->belongsTo('App\User', 'from');
