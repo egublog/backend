@@ -65,7 +65,8 @@ class MyhomeController extends Controller
 
         // でここで$reponseを一般viewモデルに格納するけど今回はしない
 
-        $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->alls);
+        // $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->alls);
+        $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->eras);
         // ↑  ％％でここでの詰め替えはUseCase層用のインスタンスからViewModel層用のインスタンスに詰め替えている％％
 
 
