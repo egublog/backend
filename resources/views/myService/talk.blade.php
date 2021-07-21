@@ -42,9 +42,9 @@
                                     @endif
                                 </div>
                                 <div class="results-body-second">
-                                    @foreach($account->alls()->orderBy('id', 'desc')->get() as $all)
+                                    @foreach($account->eras()->orderBy('id', 'desc')->get() as $era)
                                     <span class="results-body-second-team">
-                                        {{ $all->team->team_name }}
+                                        {{ $era->team->team_name }}
                                         /</span>
                                     @endforeach
                                 </div>
