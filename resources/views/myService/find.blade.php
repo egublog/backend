@@ -86,9 +86,9 @@
                             
                         </div>
                         <div class="results-body-second">
-                            @foreach($searchAll->user->alls()->orderBy('id', 'desc')->get() as $all)
+                            @foreach($searchAll->user->eras()->orderBy('id', 'desc')->get() as $era)
                             <span class="results-body-second-team">
-                                {{ $all->team->team_name }}
+                                {{ $era->team->team_name }}
                                 <span class="hidden-sp">/</span></span>
                             @endforeach
                         </div>
