@@ -17,7 +17,7 @@
                 @error('image')
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors->all() as $error)
+                        @foreach ($errors->era() as $error)
                         <li>{{ $error }}</li>
                         @endforeach
                     </ul>
