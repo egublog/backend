@@ -2,7 +2,8 @@
 
 namespace App\MyClasses;
 
-use App\All;
+// use App\All;
+use App\Era;
 
 
 class SearchAllses
@@ -14,7 +15,7 @@ class SearchAllses
     // 引数で渡ってきた$era_idと$team_idsからそれにマッチしたAllコレクションを一つのコレクションに合体させてreturnする
     if ($team_ids) {
       foreach ($team_ids as $team_id) {
-        $searchAlls = $searchAlls->merge(All::getSearchAll($era_id, $team_id));
+        $searchAlls = $searchAlls->merge(Era::getSearchAll($era_id, $team_id));
       }
     }
     return $searchAlls;

@@ -3,7 +3,8 @@
 namespace App\MyClasses;
 
 use App\Team;
-use App\All;
+// use App\All;
+use App\Era;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -60,9 +61,9 @@ class Profile
           $team_id = Team::TeamNameEqual($school[1])->first()->id;
         }
     
-        // で年代毎に入力されたポディションidをAllテーブルに保存する
-        $all = All::myIdEraEqual($myId, $school[0])->first();
-        $all->saveTeamIdAndPositionId($team_id, $school[2]);
+        // で年代毎に入力されたポディションidをAllテーブルに保存する   Eraに変更
+        $era = Era::myIdEraEqual($myId, $school[0])->first();
+        $era->saveTeamIdAndPositionId($team_id, $school[2]);
       } // if ($school[1])
 
     } // foreach
