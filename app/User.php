@@ -57,8 +57,11 @@ class User extends Authenticatable
     // リレーション↓↓
 
 
-    public function alls() {
-        return $this->hasMany('App\All');
+    // public function alls() {
+    //     return $this->hasMany('App\All');
+    // }
+    public function eras() {
+        return $this->hasMany('App\Era');
     }
     
     public function follows() {
@@ -163,12 +166,14 @@ class User extends Authenticatable
 
     public function returnTeamName($era_id)
     {
-        return $this->alls()->where('era_id', $era_id)->first()->team->team_name;
+        // return $this->alls()->where('era_id', $era_id)->first()->team->team_name;
+        return $this->eras()->where('era_id', $era_id)->first()->team->team_name;
     }
 
     public function returnPositionId($era_id)
     {
-        return $this->alls()->where('era_id', $era_id)->first()->position_id;
+        // return $this->alls()->where('era_id', $era_id)->first()->position_id;
+        return $this->eras()->where('era_id', $era_id)->first()->position_id;
     }
 
     public function getFollow()
