@@ -25,7 +25,8 @@ class UserDataRepository implements UserDataRepositoryInterface
     //    dd($a);
     //    return response()->json([$a]);
         // dd($array);
-        return User::where('id', Auth::id())->with('alls.team')->first();
+        // return User::where('id', Auth::id())->with('alls.team')->first();
+        return User::where('id', Auth::id())->with('eras.team')->first();
     }
 
     public function getAuthUserId()
@@ -90,7 +91,8 @@ class UserDataRepository implements UserDataRepositoryInterface
         // return $this->getAuthUser()->alls()->where('era_id', $era_id)->first()->team->team_name;
         
         // return User::where('id', $this->getAuthUserId())->alls()->where('era_id', $era_id)->first()->team->team_name;
-        return User::where('id', $this->getAuthUserId())->with('alls.team')->first()->alls->where('era_id', $era_id)->first()->team->team_name;
+        // return User::where('id', $this->getAuthUserId())->with('alls.team')->first()->alls->where('era_id', $era_id)->first()->team->team_name;
+        return User::where('id', $this->getAuthUserId())->with('eras.team')->first()->eras->where('era_id', $era_id)->first()->team->team_name;
         // return User::where('id', $this->getAuthUserId())->with('alls')->first()->alls->where('era_id', $era_id)->with('team')->first()->team->team_name;
         // ↑↑ この上の二つは同じか?  でも最初にとっちゃった方が優しそう！  したのやり方じゃエラーになったから最初のでやるべし
 
@@ -103,7 +105,8 @@ class UserDataRepository implements UserDataRepositoryInterface
     {
         // return $this->getAuthUser()->alls()->where('era_id', $era_id)->first()->position_id;
         // return User::where('id', $this->getAuthUserId())->alls()->where('era_id', $era_id)->first()->position_id;
-        return User::where('id', $this->getAuthUserId())->with('alls')->first()->alls->where('era_id', $era_id)->first()->position_id;
+        // return User::where('id', $this->getAuthUserId())->with('alls')->first()->alls->where('era_id', $era_id)->first()->position_id;
+        return User::where('id', $this->getAuthUserId())->with('eras')->first()->eras->where('era_id', $era_id)->first()->position_id;
     }
 
     public function getAuthUserFollowerForActivity()
