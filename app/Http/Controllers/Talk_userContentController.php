@@ -183,6 +183,7 @@ class Talk_userContentController extends Controller
      */
     public function store(User $user, Talk_storeRequest $request)
     {
+            //                              ↑  こう言うバリデーションとかはクリーンアーキテクチャの観点からまあ使ってもいいらしい！
         $identify_id = $request->identify_id;
         // ↑  ここの$identify_idを取得するときお既定のやつ以外がくるかもだからエラー処理を書く（フロントのバリデーションと相談！！）
         $user_id = $user->id;
