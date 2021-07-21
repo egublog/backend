@@ -23,7 +23,8 @@ class TeamDataRepository implements TeamDataRepositoryInterface
     
     public function getTeamidsLikeTeamName($team_string)
     {
-      return Team::where('team_name', 'like', '%' . $team_string . '%')->pluck('id')->all();
+      // return Team::where('team_name', 'like', '%' . $team_string . '%')->pluck('id')->all();
+      return Team::where('team_name', 'like', '%' . $team_string . '%')->pluck('id')->era();
     }
 
 //  ↓ saveから移動
