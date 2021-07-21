@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     // リレーション ↓↓
-    public function alls()
+    // public function alls()
+    // {
+    //     return $this->hasMany('App\All');
+    // }
+    public function eras()
     {
-        return $this->hasMany('App\All');
+        return $this->hasMany('App\Era');
     }
 
 
