@@ -6,7 +6,7 @@ namespace App\packages\Domain\Domain\Talk;
 // use Illuminate\Support\Arr;
 
 
-class User
+class Talk
 {
 
     /**
