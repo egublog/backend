@@ -41,6 +41,7 @@ class MyhomeController extends Controller
     public function index()
     {
         // $myAccount = $this->UserDataRepository->getAuthUser();
+        
         // dd($myAccount);
         // dd(User::find(Auth::id()));
         // dd(User::where('id', Auth::id())->first());
@@ -57,7 +58,7 @@ class MyhomeController extends Controller
         // $myAccount = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
 
         // dd($myAccount->name);
-        $response = $this->GetAuthUserUseCase->handle();
+            //  $response = $this->GetAuthUserUseCase->handle();
 
         // dd(Auth::user()->show_follow()->attach(3));
 
@@ -66,7 +67,7 @@ class MyhomeController extends Controller
         // でここで$reponseを一般viewモデルに格納するけど今回はしない
 
         // $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->alls);
-        $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->eras);
+            //   $user = new UserViewModel($response->user->id, $response->user->name, $response->user->email, $response->user->user_name, $response->user->age, $response->user->image, $response->user->introduction, $response->user->area_id, $response->user->created_at, $response->user->updated_at, $response->user->eras);
         // ↑  ％％でここでの詰め替えはUseCase層用のインスタンスからViewModel層用のインスタンスに詰め替えている％％
 
 

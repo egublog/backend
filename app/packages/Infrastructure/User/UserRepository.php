@@ -59,7 +59,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getAuthUser()
     {
-        $user = UserModel::where('id', Auth::id())->with('alls.team')->first();
+        $user = UserModel::where('id', Auth::id())->with('eras.team')->first();
 
         // dd($user->created_at);
 
@@ -67,5 +67,6 @@ class UserRepository implements UserRepositoryInterface
 
 
         return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString(), $user->alls);
+        // return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
     }
 }
