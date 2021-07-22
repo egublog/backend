@@ -26,6 +26,6 @@ interface TeamRepositoryInterface
      * @param int $team_id
      * @return string
      */
-     public function getTeamNameEqualTeamId(int $team_id)
+     public function getTeamNameEqualTeamId(int $team_id);
 
 }

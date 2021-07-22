@@ -94,7 +94,7 @@ class User
         $this->image = $image;
         $this->introduction = $introduction;
         // $this->area_id = $this->changeAreaIdToPrefecturesName($area_id);
-        $this->area_id = $this->$area_id;
+        $this->area_id = $area_id;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
 

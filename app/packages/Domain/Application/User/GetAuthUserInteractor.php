@@ -12,7 +12,7 @@ use App\packages\UseCase\User\Commons\UserModel;
 use App\packages\UseCase\User\Get\GetAuthUserResponse;
 
 use App\packages\Domain\Domain\Era\EraRepositoryInterface;
-use App\packages\Domain\Domain\Era\TeamRepositoryInterface;
+use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
 
 
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
@@ -70,7 +70,7 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
         // $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
-        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id());
+        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $eraCommonModelArray);
         // ↑  このUserModelの中で詰め替えをしてしまうとネストして分かりにくくなるからここで作ってから入れる
         // ↑  ％％でここでの詰め替えはエンティティからUseCase層用のインスタンスに詰め替えている％％
 

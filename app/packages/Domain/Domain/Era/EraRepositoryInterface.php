@@ -21,6 +21,6 @@ interface EraRepositoryInterface
      * @param int $user_id
      * @return array
      */
-     public function getEraArrayEqualUserId(int $user_id)
+     public function getEraArrayEqualUserId(int $user_id);
 
 }

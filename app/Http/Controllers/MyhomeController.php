@@ -58,7 +58,7 @@ class MyhomeController extends Controller
         // $myAccount = new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, $user->created_at, $user->updated_at, $user->alls);
 
         // dd($myAccount->name);
-            //  $response = $this->GetAuthUserUseCase->handle();
+             $response = $this->GetAuthUserUseCase->handle();
 
         // dd(Auth::user()->show_follow()->attach(3));
 
@@ -71,7 +71,7 @@ class MyhomeController extends Controller
         // ↑  ％％でここでの詰め替えはUseCase層用のインスタンスからViewModel層用のインスタンスに詰め替えている％％
 
 
-        $viewModel = new MyHomesIndexViewModel($user);
+        $viewModel = new MyHomesIndexViewModel($response->user);
 
         // やはり格納し直すのはそこで使いやすい様にするから！！
 
