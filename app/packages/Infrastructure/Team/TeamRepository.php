@@ -45,7 +45,10 @@ class TeamRepository implements TeamRepositoryInterface
         // $user = UserModel::where('id', Auth::id())->first();
         $team = TeamModel::where('id', $team_id)->first();
 
-        return new Team($team->id, $team->team_name, (new Carbon($team->created_at))->toDateTimeString(), (new Carbon($team->updated_at))->toDateTimeString());
+        // return new Team($team->id, $team->team_name, (new Carbon($team->created_at))->toDateTimeString(), (new Carbon($team->updated_at))->toDateTimeString());
+        return $team->team_name;
+        // ↑  リポジトリ層だからって全部エンティティを返さなくていい。ただエロクエントを漏らさなきゃいい
+
         
 
         // return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
