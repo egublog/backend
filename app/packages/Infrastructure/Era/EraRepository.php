@@ -44,6 +44,7 @@ class EraRepository implements EraRepositoryInterface
     {
         // $user = UserModel::where('id', Auth::id())->first();
         $eras = EraModel::where('id', $user_id)->get();
+        // ↑  後でorderByを付け足す！
 
         // return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
         $eraEntityArray = [];
@@ -52,5 +53,5 @@ class EraRepository implements EraRepositoryInterface
           $eraEntityArray[] = new Era($era->id, $era->user_id, $era->position_id, $era->team_id, $era->era_id, (new Carbon($era->created_at))->toDateTimeString(), (new Carbon($era->updated_at))->toDateTimeString());
         }
     }
-    
+
 }
