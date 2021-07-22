@@ -11,6 +11,9 @@ use App\packages\UseCase\User\Create\UserCreateResponse;
 use App\packages\UseCase\User\Commons\UserModel;
 use App\packages\UseCase\User\Get\GetAuthUserResponse;
 
+use App\packages\Domain\Domain\Era\EraRepositoryInterface;
+
+
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 {
     /**
@@ -19,12 +22,18 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
     private $userRepository;
 
     /**
+     * @var EraRepositoryInterface
+     */
+    private $eraRepository;
+
+    /**
      * UserCreateInteractor constructor.
      * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, EraRepositoryInterface $eraRepository)
     {
         $this->userRepository = $userRepository;
+        $this->eraRepository = $eraRepository;
     }
 
     /**
@@ -42,13 +51,14 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 
         $AuthUserEntity = $this->userRepository->getAuthUser();
 
-        $eraEntityArray = $this->EraRepository->getEraArrayEqualUserId();
+        $eraEntityArray = $this->eraRepository->getEraArrayEqualUserId($AuthUserEntity->getId());
 
         
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
         // $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
         $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at());
+        // ↑  このUserModelの中で詰め替えをしてしまうと
         // ↑  ％％でここでの詰め替えはエンティティからUseCase層用のインスタンスに詰め替えている％％
 
         return new GetAuthUserResponse($AuthUserCommoModel);

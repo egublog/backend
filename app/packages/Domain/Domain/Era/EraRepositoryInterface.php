@@ -18,8 +18,9 @@ interface EraRepositoryInterface
     // public function find(UserId $id);
 
     /**
-     * @return User
+     * @param int $user_id
+     * @return array
      */
-    public function getAuthUser();
+     public function getEraArrayEqualUserId(int $user_id)
 
 }
