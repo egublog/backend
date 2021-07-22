@@ -42,6 +42,8 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 
         $AuthUserEntity = $this->userRepository->getAuthUser();
 
+        $eraEntityArray = $this->EraRepository->getEraArrayEqualUserId();
+
         
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
