@@ -45,7 +45,8 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
-        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
+        // $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
+        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at());
         // ↑  ％％でここでの詰め替えはエンティティからUseCase層用のインスタンスに詰め替えている％％
 
         return new GetAuthUserResponse($AuthUserCommoModel);
