@@ -2,10 +2,9 @@
 
 namespace App\packages\Domain\Domain\User;
 
-use DateTime;
-use Illuminate\Support\Collection;
-use App\packages\Domain\Common\All\All;
-use Illuminate\Support\Arr;
+// use DateTime;
+// use Illuminate\Support\Collection;
+// use App\packages\Domain\Common\All\All;
 
 
 class User
@@ -67,10 +66,10 @@ class User
      */
     private $updated_at;
     
-    /**
-     * @var array
-     */
-    private $alls = [];
+    // /**
+    //  * @var array
+    //  */
+    // private $alls = [];
 
     /**
      * User constructor.
@@ -94,7 +93,8 @@ class User
         $this->age = $age;
         $this->image = $image;
         $this->introduction = $introduction;
-        $this->area_id = $this->changeAreaIdToPrefecturesName($area_id);
+        // $this->area_id = $this->changeAreaIdToPrefecturesName($area_id);
+        $this->area_id = $this->$area_id;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
 
