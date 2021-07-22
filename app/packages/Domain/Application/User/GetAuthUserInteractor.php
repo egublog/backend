@@ -63,14 +63,14 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         $eraCommonModelArray = [];
         foreach($eraEntityArray as $eraEntity)
         {
-            $eraCommonModelArray = new EraModel($eraEntity->getId(), $eraEntity->getUser_id(), $eraEntity->getPosition_id(), $this->teamRepository->getTeamNameEqualTeamId($eraEntity->getTeam_id()), $eraEntity->getEra_id(), $eraEntity->getCreated_at(), $eraEntity->getUpdated_at());
+            $eraCommonModelArray[] = new EraModel($eraEntity->getId(), $eraEntity->getUser_id(), $eraEntity->getPosition_id(), $this->teamRepository->getTeamNameEqualTeamId($eraEntity->getTeam_id()), $eraEntity->getEra_id(), $eraEntity->getCreated_at(), $eraEntity->getUpdated_at());
         }
 
         
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
         // $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
-        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at());
+        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id());
         // ↑  このUserModelの中で詰め替えをしてしまうとネストして分かりにくくなるからここで作ってから入れる
         // ↑  ％％でここでの詰め替えはエンティティからUseCase層用のインスタンスに詰め替えている％％
 

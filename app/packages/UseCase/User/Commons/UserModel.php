@@ -2,7 +2,7 @@
 
 namespace App\packages\UseCase\User\Commons;
 
-use DateTime;
+// use DateTime;
 // use Illuminate\Support\Collection;
 // use App\packages\Domain\Common\All\All;
 // use Illuminate\Support\Arr;
@@ -51,24 +51,19 @@ class UserModel
     public $introduction;
 
     /**
-     * @var string
+     * @var int
      */
     public $area_id;
 
     /**
      * @var string
      */
-    public $created_at;
+    public $area_name;
 
-    /**
-     * @var string
-     */
-    public $updated_at;
-    
     /**
      * @var array
      */
-    public $alls;
+    public $eras;
 
     /**
      * User constructor.
@@ -79,12 +74,10 @@ class UserModel
      * @param int $age
      * @param string $image
      * @param string $introduction
-     * @param string $area_id
-     * @param string $created_at
-     * @param string $updated_at
-     * @param array $alls
+     * @param int $area_id
+     * @param array $eras
      */
-    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, string $area_id, string $created_at, string $updated_at, array $alls)
+    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, array $eras)
     {
         $this->id = $id;
         $this->name = $name;
@@ -94,9 +87,8 @@ class UserModel
         $this->image = $image;
         $this->introduction = $introduction;
         $this->area_id = $area_id;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
-        $this->alls = $alls;
+        $this->area_name = $this->changeAreaIdToPrefecturesName($area_id);
+        $this->eras = $eras;
 
         // foreach($alls as $all) {
         //   $this->alls[] = new All($all->id, $all->user_id, $all->position_id, $all->team_id, $all->era_id, $all->created_at, $all->updated_at, $all->team);
@@ -119,6 +111,70 @@ class UserModel
     //     return $this->name;
     // }
 
+
+    private function changeAreaIdToPrefecturesName($value)
+    {
+        $prefs = [
+            '1' => '北海道',
+            '2' => '青森県',
+            '3' => '岩手県',
+            '4' => '宮城県',
+            '5' => '秋田県',
+            '6' => '山形県',
+            '7' => '福島県',
+            '8' => '茨城県',
+            '9' => '栃木県',
+            '10' => '群馬県',
+            '11' => '埼玉県',
+            '12' => '千葉県',
+            '13' => '東京都',
+            '14' => '神奈川県',
+            '15' => '新潟県',
+            '16' => '富山県',
+            '17' => '石川県',
+            '18' => '福井県',
+            '19' => '山梨県',
+            '20' => '長野県',
+            '21' => '岐阜県',
+            '22' => '静岡県',
+            '23' => '愛知県',
+            '24' => '三重県',
+            '25' => '滋賀県',
+            '26' => '京都府',
+            '27' => '大阪府',
+            '28' => '兵庫県',
+            '29' => '奈良県',
+            '30' => '和歌山県',
+            '31' => '鳥取県',
+            '32' => '島根県',
+            '33' => '岡山県',
+            '34' => '広島県',
+            '35' => '山口県',
+            '36' => '徳島県',
+            '37' => '香川県',
+            '38' => '愛媛県',
+            '39' => '高知県',
+            '40' => '福岡県',
+            '41' => '佐賀県',
+            '42' => '長崎県',
+            '43' => '熊本県',
+            '44' => '大分県',
+            '45' => '宮崎県',
+            '46' => '鹿児島県',
+            '47' => '沖縄県',
+            '48' => '海外',
+            '49' => 'その他',
+            '50' => '未設定です',
+        ];
+
+        if($value === null)
+        {
+            return $value;
+        }
+
+        return Arr::get($prefs, $value);
+    }
+   
        
     
 }
