@@ -17,9 +17,15 @@ interface TeamRepositoryInterface
     //  */
     // public function find(UserId $id);
 
+    // /**
+    //  * @return User
+    //  */
+    // public function getAuthUser();
+
     /**
-     * @return User
+     * @param int $team_id
+     * @return string
      */
-    public function getAuthUser();
+     public function getTeamNameEqualTeamId(int $team_id)
 
 }
