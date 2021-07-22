@@ -58,7 +58,7 @@ class Era
         $this->user_id = $user_id;
         $this->position_id = $position_id;
         $this->team_id = $team_id;
-        $this->era_id = $this->era_id;
+        $this->era_id = $era_id;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
     }

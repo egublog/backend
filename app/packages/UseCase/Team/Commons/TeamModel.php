@@ -1,6 +1,6 @@
 <?php
 
-namespace App\packages\UseCase\User\Commons;
+namespace App\packages\UseCase\Team\Commons;
 
 
 // use DateTime;
