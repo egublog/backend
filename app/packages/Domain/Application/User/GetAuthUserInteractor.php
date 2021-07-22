@@ -28,8 +28,9 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
     }
 
     /**
-     * @param UserCreateRequest $request
-     * @return UserCreateResponse
+    //  * @param UserCreateRequest $request
+    //  * @return UserCreateResponse
+     * @return GetAuthUserResponse
      */
     public function handle()
     {
