@@ -12,6 +12,7 @@ use App\Facades\IdentifyId;
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
 
 use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
+use App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface;
 
 
 
@@ -28,11 +29,13 @@ class FriendController extends Controller
     //     $this->UserDataService = $UserDataService;
     // }
     private $GetAuthUserUseCase;
+    private $GetAuthUsersFriendsUseCase;
 
 
-    public function __construct(GetAuthUserUseCaseInterface $GetAuthUserUseCase)
+    public function __construct(GetAuthUserUseCaseInterface $GetAuthUserUseCase, GetAuthUsersFriendsUseCaseInterface $GetAuthUsersFriendsUseCase)
     {
         $this->GetAuthUserUseCase = $GetAuthUserUseCase;
+        $this->GetAuthUsersFriendsUseCase = $GetAuthUsersFriendsUseCase;
     }
 
 
@@ -45,12 +48,12 @@ class FriendController extends Controller
     {
         // ここはAPI開発じゃ無いから一つのアクションに複数のユースケースを使う事になると思う
         // ここで複数のユースケースからリターンを受け取ってviewで使いやすい様にビューモデルに詰め替える事になると思う！
-        $myAccount = $this->UserDataRepository->getAuthUser();
+        // $myAccount = $this->UserDataRepository->getAuthUser();
 
-        $identify_id = $request->identify_id;
+        // $identify_id = $request->identify_id;
 
         // $identify_idによってフォローをgetするのかフォロワーを表示するのかを分ける    
-        $accounts = $this->UserDataService->getAuthUserFriends($identify_id);
+        // $accounts = $this->UserDataService->getAuthUserFriends($identify_id);
 
 
         
@@ -60,7 +63,9 @@ class FriendController extends Controller
 
 
         $getAuthUsersFriendsRequest = new GetAuthUsersFriendsRequest($request->identify_id);
-        $accounts_response = $this->getAuthUsersFriendsUseCase->handle($getAuthUsersFriendsRequest);
+        $accounts_response = $this->GetAuthUsersFriendsUseCase->handle($getAuthUsersFriendsRequest);
+
+        dd($accounts_response);
 
 
 

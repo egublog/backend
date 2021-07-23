@@ -8,9 +8,9 @@ use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
 
 interface GetAuthUsersFriendsUseCaseInterface
 {
-    /**
+     /**
      * @param GetAuthUsersFriendsRequest $request
      * @return GetAuthUsersFriendsResponse
      */
-    public function handle($request);
+     public function handle(GetAuthUsersFriendsRequest $request);
 }

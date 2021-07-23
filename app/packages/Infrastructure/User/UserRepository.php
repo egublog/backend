@@ -78,4 +78,19 @@ class UserRepository implements UserRepositoryInterface
         // return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
         return $user->id;
     }
+
+
+    /**
+      * @param int
+      * @return User
+      */
+      public function getUserEqualToId($userId)
+      {
+        $user = UserModel::where('id', $userId)->first();
+
+        return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
+      }
+
+
+
 }

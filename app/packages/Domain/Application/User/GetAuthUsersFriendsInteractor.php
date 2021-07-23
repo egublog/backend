@@ -18,9 +18,10 @@ use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface;
 use App\Facades\IdentifyId;
 use App\packages\Domain\Domain\Follow\FollowRepositoryInterface;
-use App\packages\Domain\Domain\Era\EraRepositoryInterface;
-use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
+// use App\packages\Domain\Domain\Era\EraRepositoryInterface;
+// use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsResponse;
+use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
 
 
 class GetAuthUsersFriendsInteractor implements GetAuthUsersFriendsUseCaseInterface
@@ -94,9 +95,12 @@ class GetAuthUsersFriendsInteractor implements GetAuthUsersFriendsUseCaseInterfa
               $eraCommonModelArray[] = new EraModel($eraEntity->getId(), $eraEntity->getUser_id(), $eraEntity->getPosition_id(), $this->teamRepository->getTeamNameEqualTeamId($eraEntity->getTeam_id()), $eraEntity->getEra_id());
           }
 
-          $AuthUserCommonModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $eraCommonModelArray);
+          $userEntity = $this->userRepository->getUserEqualToId($userId);
 
-          $accounts[] = $AuthUserCommonModel;
+
+          $userCommonModel = new UserModel($userEntity->getId(), $userEntity->getName(), $userEntity->getEmail(), $userEntity->getUser_name(), $userEntity->getAge(), $userEntity->getImage(), $userEntity->getIntroduction(), $userEntity->getArea_id(), $eraCommonModelArray);
+
+          $accounts[] = $userCommonModel;
         }
       }
 

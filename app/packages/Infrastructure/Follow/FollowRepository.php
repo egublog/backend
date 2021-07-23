@@ -61,7 +61,7 @@ class FollowRepository implements FollowRepositoryInterface
      */
      public function getUserIdsArrayOfFollowOfParamUser($user_id)
      {
-       $followCollectionOfUserIds = Follow::where('send_user_id', $user_id)->pluck('receive_user_id');
+       $followCollectionOfUserIds = FollowModel::where('send_user_id', $user_id)->pluck('receive_user_id');
 
        $userIdsArray = [];
        foreach($followCollectionOfUserIds as $user_id)
@@ -78,7 +78,7 @@ class FollowRepository implements FollowRepositoryInterface
       */
       public function getUserIdsArrayOfFollowerOfParamUser($user_id)
       {
-        $followCollectionOfUserIds = Follow::where('receive_user_id', $user_id)->pluck('send_user_id');
+        $followCollectionOfUserIds = FollowModel::where('receive_user_id', $user_id)->pluck('send_user_id');
 
         $userIdsArray = [];
         foreach($followCollectionOfUserIds as $user_id)

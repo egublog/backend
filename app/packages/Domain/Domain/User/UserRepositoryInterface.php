@@ -2,6 +2,8 @@
 
 namespace App\packages\Domain\Domain\User;
 
+use packages\Domain\Domain\User\User;
+
 
 interface UserRepositoryInterface
 {
@@ -33,5 +35,10 @@ interface UserRepositoryInterface
      * @return int
      */
      public function getAuthUserId();
-
+     
+     /**
+      * @param int
+      * @return User
+      */
+      public function getUserEqualToId($userId);
 }

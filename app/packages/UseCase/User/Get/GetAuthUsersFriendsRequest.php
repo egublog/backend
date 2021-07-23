@@ -12,17 +12,17 @@ class GetAuthUsersFriendsRequest
 
     /**
      * UserGetListResponse constructor.
-     * @param int $user
+     * @param string $identify_id
      */
-    public function __construct(int $identify_id)
+    public function __construct(string $identify_id)
     {
         $this->identify_id = $identify_id;
     }
 
     /**
-     * @return int
+     * @return string
      */
-     public function getIdentify_id(): int
+     public function getIdentify_id(): string
      {
          return $this->identify_id;
      }
