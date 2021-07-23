@@ -26,11 +26,18 @@ interface FollowRepositoryInterface
      * @param int
      * @return array
      */
-    public function getUserIdsArrayOfFollowOfParamUser($user_id);
+    public function getUserIdsArrayOfFollowOfParamUser(int $user_id);
     
     /**
      * @param int
      * @return array
      */
-    public function getUserIdsArrayOfFollowerOfParamUser($user_id);
+    public function getUserIdsArrayOfFollowerOfParamUser(int $user_id);
+
+    /**
+     * @param int $authUserId
+     * @param int $userId
+     * @return bool
+     */
+    public function getBooleanUserfollowCheck(int $authUserId, int $userId);
 }
