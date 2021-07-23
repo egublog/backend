@@ -42,6 +42,8 @@ interface UserRepositoryInterface
       */
       public function getUserEqualToId($userId);
 
-
       
+
+
+
 }

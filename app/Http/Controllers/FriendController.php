@@ -47,22 +47,8 @@ class FriendController extends Controller
      */
     public function index(Request $request)
     {
-        // ここはAPI開発じゃ無いから一つのアクションに複数のユースケースを使う事になると思う
-        // ここで複数のユースケースからリターンを受け取ってviewで使いやすい様にビューモデルに詰め替える事になると思う！
-        // $myAccount = $this->UserDataRepository->getAuthUser();
-
-        // $identify_id = $request->identify_id;
-
-        // $identify_idによってフォローをgetするのかフォロワーを表示するのかを分ける    
-        // $accounts = $this->UserDataService->getAuthUserFriends($identify_id);
-
-
-        
-
         $myAccount_response = $this->GetAuthUserUseCase->handle();
         // dd($myAccount_response);
-
-
 
         $getAuthUsersFriendsRequest = new GetAuthUsersFriendsRequest($request->identify_id);
         // dd($getAuthUsersFriendsRequest);
