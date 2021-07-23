@@ -18,7 +18,7 @@ use App\packages\UseCase\User\Get\GetUserIdRequest;
 
 use App\packages\UseCase\User\Get\GetUserAccontEqualToParamRequest;
 use App\packages\UseCase\User\Get\GetUserAccontEqualToParamUseCaseInterface;
-
+use App\Http\Models\User\Get\FriendsShowViewModel;
 
 
 
@@ -105,15 +105,19 @@ class FriendController extends Controller
 
         $his_account_response = $this->GetUserAccontEqualToParamUseCase->handle($getUserAccontEqualToParamRequest);
 
-        dd($his_account_response);
+        // dd($his_account_response);
 
+        $viewModel = new FriendsShowViewModel($his_account_response->user, $request->identify_id);
 
+// dd($viewModel);
 
-        return view('myService.details')->with([
-            'identify_id' => $request->identify_id,
-            'follow_check' => $follow_check,
-            'hisAccount' => $his_account,
-        ]);
+        // return view('myService.details')->with([
+        //     'identify_id' => $request->identify_id,
+        //     'follow_check' => $follow_check,
+        //     'hisAccount' => $his_account,
+        // ]);
+        return view('myService.details', compact('viewModel'));
+
     }
 }
 
