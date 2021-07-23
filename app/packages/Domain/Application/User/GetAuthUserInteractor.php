@@ -9,6 +9,7 @@ use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
 use App\packages\UseCase\User\Create\UserCreateRequest;
 use App\packages\UseCase\User\Create\UserCreateResponse;
 use App\packages\UseCase\User\Commons\UserModel;
+use App\packages\UseCase\Era\Commons\EraModel;
 use App\packages\UseCase\User\Get\GetAuthUserResponse;
 
 use App\packages\Domain\Domain\Era\EraRepositoryInterface;
@@ -57,14 +58,19 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         // return new UserCreateResponse($userId->getValue());
 
         $AuthUserEntity = $this->userRepository->getAuthUser();
+        // dd($AuthUserEntity->getId());
 
         $eraEntityArray = $this->eraRepository->getEraArrayEqualUserId($AuthUserEntity->getId());
+
+        // dd($eraEntityArray);
 
         $eraCommonModelArray = [];
         foreach($eraEntityArray as $eraEntity)
         {
-            $eraCommonModelArray[] = new EraModel($eraEntity->getId(), $eraEntity->getUser_id(), $eraEntity->getPosition_id(), $this->teamRepository->getTeamNameEqualTeamId($eraEntity->getTeam_id()), $eraEntity->getEra_id(), $eraEntity->getCreated_at(), $eraEntity->getUpdated_at());
+            $eraCommonModelArray[] = new EraModel($eraEntity->getId(), $eraEntity->getUser_id(), $eraEntity->getPosition_id(), $this->teamRepository->getTeamNameEqualTeamId($eraEntity->getTeam_id()), $eraEntity->getEra_id());
         }
+
+        // dd($eraCommonModelArray);
 
         
         // dd($AuthUserEntity);

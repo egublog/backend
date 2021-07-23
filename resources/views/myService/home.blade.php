@@ -54,14 +54,14 @@
                         @endif
                         @foreach($viewModel->user->eras as $era)
                         <div class="profile-def-box">
-                            <dt class="profile-dtit">{{ $era->era_id }} : </dt>
-                            <dd class="profile-data">{{ $era->team->team_name }}</dd>
+                            <dt class="profile-dtit">{{ $era->era_name }} : </dt>
+                            <dd class="profile-data">{{ $era->team_name }}</dd>
                         </div>
                         @endforeach
                         @if($viewModel->user->area_id != '未設定です')
                         <div class="profile-def-box">
                             <dt class="profile-dtit profile-dtit-area">住んでいるところ : </dt>
-                            <dd class="profile-data"> {{ $viewModel->user->area_id }}</dd>
+                            <dd class="profile-data"> {{ $viewModel->user->area_name }}</dd>
                         </div>
                         @endif
                     </dl>
