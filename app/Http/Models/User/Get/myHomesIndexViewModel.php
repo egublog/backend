@@ -14,7 +14,7 @@ class MyHomesIndexViewModel
 
     /**
      * UserIndexViewModel constructor.
-     * @param UserModel $users
+     * @param UserModel $user
      */
     public function __construct(UserModel $user)
     {
