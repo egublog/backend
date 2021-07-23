@@ -20,7 +20,7 @@ use App\Facades\IdentifyId;
 use App\packages\Domain\Domain\Follow\FollowRepositoryInterface;
 use App\packages\Domain\Domain\Era\EraRepositoryInterface;
 use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
-
+use App\packages\UseCase\User\Get\GetAuthUsersFriendsResponse;
 
 
 class GetAuthUsersFriendsInteractor implements GetAuthUsersFriendsUseCaseInterface
