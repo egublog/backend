@@ -99,7 +99,7 @@ class FollowRepository implements FollowRepositoryInterface
     public function getBooleanUserfollowCheck(int $authUserId, int $userId)
     {
       // return $this->UserDataRepository->getAuthUserFollowHimFirst($his_id) === null ? false : true;
-      return FollowModel::where('receive_user_id', $authUserId)->where('send_user_id', $userId)->first() === null ? false : true;
+      return FollowModel::where('send_user_id', $authUserId)->where('receive_user_id', $userId)->first() === null ? false : true;
       
     }
 
