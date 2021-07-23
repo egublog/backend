@@ -59,7 +59,7 @@ class FollowRepository implements FollowRepositoryInterface
      * @param int
      * @return array
      */
-     public function getUserIdsArrayOfFollowOfParamUser($user_id)
+     public function getUserIdsArrayOfFollowOfParamUser(int $user_id)
      {
        $followCollectionOfUserIds = FollowModel::where('send_user_id', $user_id)->pluck('receive_user_id');
 
@@ -76,7 +76,7 @@ class FollowRepository implements FollowRepositoryInterface
       * @param int
       * @return array
       */
-      public function getUserIdsArrayOfFollowerOfParamUser($user_id)
+      public function getUserIdsArrayOfFollowerOfParamUser(int $user_id)
       {
         $followCollectionOfUserIds = FollowModel::where('receive_user_id', $user_id)->pluck('send_user_id');
 
@@ -89,4 +89,21 @@ class FollowRepository implements FollowRepositoryInterface
         return $userIdsArray;
       
       }
+
+
+       /**
+     * @param int $authUserId
+     * @param int $userId
+     * @return bool
+     */
+    public function getBooleanUserfollowCheck(int $authUserId, int $userId)
+    {
+      // return $this->UserDataRepository->getAuthUserFollowHimFirst($his_id) === null ? false : true;
+      return FollowModel::where('receive_user_id', $authUserId)->where('send_user_id', $userId)->first() === null ? false : true;
+      
+    }
+
+
+
+
 }
