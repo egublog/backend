@@ -11,7 +11,7 @@
 
     <section class="results">
         <div class="results-inner">
-            @if($identify_id == 'friend_follow')
+            @if($viewModel->identify_id == 'friend_follow')
             <p class="results-tit">フォロー</p>
             @else
             <p class="results-tit">フォローワー</p>
@@ -20,8 +20,8 @@
                 <a class="back" href="{{ route('myhomes.index') }}">&lt; back</a>
             </div>
             <ul class="results-list">
-                @if(isset($accounts))
-                @forelse($accounts as $account)
+                @if(isset($viewModel->accounts))
+                @forelse($viewModel->accounts as $account)
                 <li class="results-item">
                     <div class="results-head">
                         <div class="results-img">
@@ -36,7 +36,7 @@
                         <div class="results-body-first">
                             <form action="{{ route('friends.show', ['user' => $account->id]) }}" method="get" class="results-body-first-name">
                                 {{ csrf_field() }}
-                                <input name="identify_id" type="hidden" value="{{ $identify_id }}">
+                                <input name="identify_id" type="hidden" value="{{ $viewModel->identify_id }}">
                                 <input class="" type="submit" value="{{ $account->name }}">
                             </form>
 
@@ -46,18 +46,16 @@
                             @if($account->age)
                             <span class="results-body-first-age">age: {{ $account->age }} </span>
                             @endif
-                            <?php
-                            $follow_check = $myAccount->followCheck($account->id);
-                            ?>
+                            
                             <div class="results-body-first-follow">
-                                <follow-button :initial-follow-check="{{ json_encode($follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
+                                <follow-button :initial-follow-check="{{ json_encode($account->follow_check) }}" :user-id="{{ json_encode($account->id) }}"></follow-button>
                             </div>
 
                         </div>
                         <div class="results-body-second">
-                            @foreach($account->eras()->orderBy('id', 'desc')->get() as $era)
+                            @foreach($account->eras as $era)
                             <span class="hidden-sp results-body-second-team">
-                                {{ $era->team->team_name }}
+                                {{ $era->team_name }}
                                 <span class="hidden-sp">/</span>
                             </span>
                             @endforeach

@@ -100,6 +100,8 @@ class GetAuthUsersFriendsInteractor implements GetAuthUsersFriendsUseCaseInterfa
 
           $userCommonModel = new UserModel($userEntity->getId(), $userEntity->getName(), $userEntity->getEmail(), $userEntity->getUser_name(), $userEntity->getAge(), $userEntity->getImage(), $userEntity->getIntroduction(), $userEntity->getArea_id(), $eraCommonModelArray, $this->followRepository->getBooleanUserfollowCheck($authUserId, $userId));
 
+          // $this->followRepository->getBooleanUserfollowCheck($authUserId, $userId);
+
           $accounts[] = $userCommonModel;
         }
       }
