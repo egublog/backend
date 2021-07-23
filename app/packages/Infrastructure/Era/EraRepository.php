@@ -10,6 +10,7 @@ use App\packages\Domain\Domain\Era\EraRepositoryInterface;
 // use Illuminate\Support\Facades\Auth;
 // use App\User as UserModel;
 use App\Era as EraModel;
+use App\All as AllModel;
 use Carbon\Carbon;
 
 class EraRepository implements EraRepositoryInterface
@@ -43,7 +44,8 @@ class EraRepository implements EraRepositoryInterface
     public function getEraArrayEqualUserId(int $user_id)
     {
         // $user = UserModel::where('id', Auth::id())->first();
-        $eras = EraModel::where('user_id', $user_id)->get();
+        // $eras = EraModel::where('user_id', $user_id)->get();
+        $eras = AllModel::where('user_id', $user_id)->get();
         // ↑  後でorderByを付け足す！
 
         // dd($eras);
