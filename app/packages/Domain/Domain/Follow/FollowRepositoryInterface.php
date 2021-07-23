@@ -23,8 +23,14 @@ interface FollowRepositoryInterface
     // public function getAuthUser();
 
     /**
+     * @param int
      * @return array
      */
     public function getUserIdsArrayOfFollowOfParamUser($user_id);
-
+    
+    /**
+     * @param int
+     * @return array
+     */
+    public function getUserIdsArrayOfFollowerOfParamUser($user_id);
 }

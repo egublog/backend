@@ -56,12 +56,12 @@ class GetAuthUsersFriendsInteractor implements GetAuthUsersFriendsUseCaseInterfa
       if (IdentifyId::friendFollow($identify_id)) {
         // 自分がフォローしている人を取得
         // return  $this->UserDataRepository->getAuthUserFriendsFollow();
-        $userIds = $this->followRepository->getUserIdsOfFollowParamUser($user_id);
+        $userIds = $this->followRepository->getUserIdsArrayOfFollowOfParamUser($user_id);
         
       } elseif (IdentifyId::friendFollower($identify_id)) {
         // 自分をフォローしている人を取得
         // return $this->UserDataRepository->getAuthUserFriendsFollower();
-        $userIds = $this->followRepository->getUserIdsOfFollowerParamUser($user_id);
+        $userIds = $this->followRepository->getUserIdsArrayOfFollowerOfParamUser($user_id);
       }
      }
 }

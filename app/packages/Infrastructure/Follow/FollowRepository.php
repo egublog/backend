@@ -54,5 +54,39 @@ class FollowRepository implements FollowRepositoryInterface
         // return new User($user->id, $user->name, $user->email, $user->user_name, $user->age, $user->image, $user->introduction, $user->area_id, (new Carbon($user->created_at))->toDateTimeString(), (new Carbon($user->updated_at))->toDateTimeString());
         
     }
-    
+
+    /**
+     * @param int
+     * @return array
+     */
+     public function getUserIdsArrayOfFollowOfParamUser($user_id)
+     {
+       $followCollectionOfUserIds = Follow::where('send_user_id', $user_id)->pluck('receive_user_id');
+
+       $userIdsArray = [];
+       foreach($followCollectionOfUserIds as $user_id)
+       {
+         $userIdsArray[] = $user_id;
+       }
+
+       return $userIdsArray;
+     }
+     
+     /**
+      * @param int
+      * @return array
+      */
+      public function getUserIdsArrayOfFollowerOfParamUser($user_id)
+      {
+        $followCollectionOfUserIds = Follow::where('receive_user_id', $user_id)->pluck('send_user_id');
+
+        $userIdsArray = [];
+        foreach($followCollectionOfUserIds as $user_id)
+        {
+          $userIdsArray[] = $user_id;
+        }
+
+        return $userIdsArray;
+      
+      }
 }
