@@ -1,18 +1,18 @@
 <?php
 
-namespace App\packages\Infrastructure\Team;
+namespace App\packages\Infrastructure\Talk;
 
 
 // use Illuminate\Support\Facades\DB;
-use App\packages\Domain\Domain\Team\Team;
+use App\packages\Domain\Domain\Talk\Talk;
 // use packages\Domain\Domain\User\UserId;
-use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
+use App\packages\Domain\Domain\Talk\TalkRepositoryInterface;
 // use Illuminate\Support\Facades\Auth;
 // use App\User as UserModel;
-use App\Team as TeamModel;
+use App\Talk as TalkModel;
 use Carbon\Carbon;
 
-class TeamRepository implements TeamRepositoryInterface
+class TalkRepository implements TalkRepositoryInterface
 {
     // /**
     //  * @param UserId $id
