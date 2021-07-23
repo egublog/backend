@@ -5,7 +5,7 @@ namespace App\packages\UseCase\User\Commons;
 // use DateTime;
 // use Illuminate\Support\Collection;
 // use App\packages\Domain\Common\All\All;
-// use Illuminate\Support\Arr;
+use Illuminate\Support\Arr;
 
 
 class UserModel
