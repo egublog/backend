@@ -66,6 +66,11 @@ class UserModel
     public $eras;
 
     /**
+     * @var bool
+     */
+    public $follow_check;
+
+    /**
      * User constructor.
      * @param int $id
      * @param string $name
@@ -76,8 +81,9 @@ class UserModel
      * @param string $introduction
      * @param int $area_id
      * @param array $eras
+     * @param bool $follow_check
      */
-    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, array $eras)
+    public function __construct(int $id, string $name, string $email, ?string $user_name, ?int $age, ?string $image, ?string $introduction, int $area_id, array $eras, bool $follow_check)
     {
         $this->id = $id;
         $this->name = $name;
@@ -89,6 +95,7 @@ class UserModel
         $this->area_id = $area_id;
         $this->area_name = $this->changeAreaIdToPrefecturesName($area_id);
         $this->eras = $eras;
+        $this->follow_check = $follow_check;
 
         // foreach($alls as $all) {
         //   $this->alls[] = new All($all->id, $all->user_id, $all->position_id, $all->team_id, $all->era_id, $all->created_at, $all->updated_at, $all->team);
