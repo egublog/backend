@@ -9,6 +9,10 @@ use App\Facades\IdentifyId;
 
 // use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
 // use App\Services\User\Interfaces\UserDataServiceInterface;
+use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
+
+use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
+
 
 
 
@@ -23,9 +27,12 @@ class FriendController extends Controller
     //     $this->UserDataRepository = $UserDataRepository;
     //     $this->UserDataService = $UserDataService;
     // }
-    public function __construct()
+    private $GetAuthUserUseCase;
+
+
+    public function __construct(GetAuthUserUseCaseInterface $GetAuthUserUseCase)
     {
-        
+        $this->GetAuthUserUseCase = $GetAuthUserUseCase;
     }
 
 
@@ -44,6 +51,19 @@ class FriendController extends Controller
 
         // $identify_idによってフォローをgetするのかフォロワーを表示するのかを分ける    
         $accounts = $this->UserDataService->getAuthUserFriends($identify_id);
+
+
+        
+
+        $myAccount_response = $this->GetAuthUserUseCase->handle();
+
+
+
+        $getAuthUsersFriendsRequest = new GetAuthUsersFriendsRequest($request->identify_id);
+        $accounts_response = $this->getAuthUsersFriendsUseCase->handle($getAuthUsersFriendsRequest);
+
+
+
 
         return view('myService.friend')->with([
             'accounts' => $accounts,
