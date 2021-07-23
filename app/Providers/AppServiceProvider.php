@@ -68,6 +68,10 @@ class AppServiceProvider extends ServiceProvider
             \App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface::class,
             \App\packages\Domain\Application\User\GetAuthUserInteractor::class
         );
+        app()->bind(
+            \App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface::class,
+            \App\packages\Domain\Application\User\GetAuthUsersFriendsInteractor::class
+        );
         
     }
 }
