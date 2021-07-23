@@ -72,6 +72,10 @@ class AppServiceProvider extends ServiceProvider
             \App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface::class,
             \App\packages\Domain\Application\User\GetAuthUsersFriendsInteractor::class
         );
+        app()->bind(
+            \App\packages\UseCase\User\Get\GetUserAccontEqualToParamUseCaseInterface::class,
+            \App\packages\Domain\Application\User\GetUserAccontEqualToParamInteractor::class
+        );
         
     }
 }

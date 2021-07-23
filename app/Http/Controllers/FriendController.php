@@ -16,6 +16,9 @@ use App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface;
 use App\Http\Models\User\Get\FriendsIndexViewModel;
 use App\packages\UseCase\User\Get\GetUserIdRequest;
 
+use App\packages\UseCase\User\Get\GetUserAccontEqualToParamRequest;
+use App\packages\UseCase\User\Get\GetUserAccontEqualToParamUseCaseInterface;
+
 
 
 
@@ -32,12 +35,14 @@ class FriendController extends Controller
     // }
     private $GetAuthUserUseCase;
     private $GetAuthUsersFriendsUseCase;
+    private $GetUserAccontEqualToParamUseCase;
 
 
-    public function __construct(GetAuthUserUseCaseInterface $GetAuthUserUseCase, GetAuthUsersFriendsUseCaseInterface $GetAuthUsersFriendsUseCase)
+    public function __construct(GetAuthUserUseCaseInterface $GetAuthUserUseCase, GetAuthUsersFriendsUseCaseInterface $GetAuthUsersFriendsUseCase, GetUserAccontEqualToParamUseCaseInterface $GetUserAccontEqualToParamUseCase)
     {
         $this->GetAuthUserUseCase = $GetAuthUserUseCase;
         $this->GetAuthUsersFriendsUseCase = $GetAuthUsersFriendsUseCase;
+        $this->GetUserAccontEqualToParamUseCase = $GetUserAccontEqualToParamUseCase;
     }
 
 
@@ -87,17 +92,20 @@ class FriendController extends Controller
      */
     public function show(User $user, Request $request)
     {
-        $his_id = $user->id;
-        $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
-        $his_account = $this->UserDataRepository->getHisAccount($his_id);
-        // ↑ てかこれ別々にとってくる必要無いわ！！
+        // $his_id = $user->id;
+        // $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
+        // $his_account = $this->UserDataRepository->getHisAccount($his_id);
+        // ↑ てかこれ別々にとってくる必要無いわ！！クリーンにしたら限定で
 
-        $getUserIdRequest = new GetUserIdRequest($user->id);
-        $authUserFollowCheck_response = $this->getBooleanAuthUserFollow->handle($getUserIdRequest);
-        dd(authUserFollowCheck_response->follow_check);
-        // ↑ true or false
+        // $getUserIdRequest = new GetUserIdRequest($user->id);
+        // $authUserFollowCheck_response = $this->getBooleanAuthUserFollow->handle($getUserIdRequest);
+        // dd(authUserFollowCheck_response->follow_check);
+        // // ↑ true or false
+        $getUserAccontEqualToParamRequest = new GetUserAccontEqualToParamRequest($user->id);
 
-        $his_account_response = $this->getUserAccontEqualToParam->handle($getUserIdRequest);
+        $his_account_response = $this->GetUserAccontEqualToParamUseCase->handle($getUserAccontEqualToParamRequest);
+
+        dd($his_account_response);
 
 
 
