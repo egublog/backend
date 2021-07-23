@@ -29,4 +29,9 @@ interface UserRepositoryInterface
      */
     public function getAuthUser();
 
+    /**
+     * @return int
+     */
+     public function getAuthUserId();
+
 }

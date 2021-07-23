@@ -77,11 +77,11 @@ class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
         // dd($AuthUserEntity);
         // dd($AuthUserEntity->getArea_id());
         // $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $AuthUserEntity->getCreated_at(), $AuthUserEntity->getUpdated_at(), $AuthUserEntity->getAlls());
-        $AuthUserCommoModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $eraCommonModelArray);
+        $AuthUserCommonModel = new UserModel($AuthUserEntity->getId(), $AuthUserEntity->getName(), $AuthUserEntity->getEmail(), $AuthUserEntity->getUser_name(), $AuthUserEntity->getAge(), $AuthUserEntity->getImage(), $AuthUserEntity->getIntroduction(), $AuthUserEntity->getArea_id(), $eraCommonModelArray);
         // ↑  このUserModelの中で詰め替えをしてしまうとネストして分かりにくくなるからここで作ってから入れる
         // ↑  ％％でここでの詰め替えはエンティティからUseCase層用のインスタンスに詰め替えている％％
 
-        return new GetAuthUserResponse($AuthUserCommoModel);
+        return new GetAuthUserResponse($AuthUserCommonModel);
         // ↑ 今回はUserインスタンスだけだからただの詰め替え作業みたいになってるけど、ここのユースケースでUser以外のデータも渡す
         //    場合があるからここは必要、例えば $talk_datas , $myAccount, $his_account とか多くのデータをコントローラに
         //    渡す時はここでまとめて一つのレスポンスとして返す！！
