@@ -13,6 +13,7 @@ use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
 
 use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface;
+use App\Http\Models\User\Get\FriendsIndexViewModel;
 
 
 
@@ -59,25 +60,35 @@ class FriendController extends Controller
         
 
         $myAccount_response = $this->GetAuthUserUseCase->handle();
+        // dd($myAccount_response);
 
 
 
         $getAuthUsersFriendsRequest = new GetAuthUsersFriendsRequest($request->identify_id);
+        // dd($getAuthUsersFriendsRequest);
         $accounts_response = $this->GetAuthUsersFriendsUseCase->handle($getAuthUsersFriendsRequest);
+        // dd($accounts_response);
 
-        dd($accounts_response);
+        // dd($accounts_response->accounts);
+
+        $viewModel = new FriendsIndexViewModel($accounts_response->accounts, $myAccount_response->user, $getAuthUsersFriendsRequest->getIdentify_id());
+
+        // dd($viewModel);
 
 
 
 
-        return view('myService.friend')->with([
-            'accounts' => $accounts,
-            // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
-            'myAccount' => $myAccount,
-            // ↓ ここではdetails.blade.phpへ行く時に使う、多分back用  ,,全てdetailsから帰る時に使う、
-            // 、あとdetailsでのトークへを表示させるかどうか、←これは副次元的に、でもどこから来たか分かっていたらめっちゃ楽
-            'identify_id' => $request->identify_id,
-        ]);
+        // return view('myService.friend')->with([
+        //     'accounts' => $accounts,
+        //     // ↓ それぞれのアカウントが自分がフォローしているかどうかを調べるfollow_checkで使う
+        //     'myAccount' => $myAccount,
+        //     // ↓ ここではdetails.blade.phpへ行く時に使う、多分back用  ,,全てdetailsから帰る時に使う、
+        //     // 、あとdetailsでのトークへを表示させるかどうか、←これは副次元的に、でもどこから来たか分かっていたらめっちゃ楽
+        //     'identify_id' => $request->identify_id,
+        // ]);
+
+        return view('myService.friend', compact('viewModel'));
+
     }
 
 
