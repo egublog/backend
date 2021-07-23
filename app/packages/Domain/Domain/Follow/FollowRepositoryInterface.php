@@ -17,9 +17,14 @@ interface FollowRepositoryInterface
     //  */
     // public function find(UserId $id);
 
+    // /**
+    //  * @return User
+    //  */
+    // public function getAuthUser();
+
     /**
-     * @return User
+     * @return array
      */
-    public function getAuthUser();
+    public function getUserIdsArrayOfFollowOfParamUser($user_id);
 
 }
