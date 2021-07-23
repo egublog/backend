@@ -7,21 +7,25 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Facades\IdentifyId;
 
-use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
-use App\Services\User\Interfaces\UserDataServiceInterface;
+// use App\Repositories\User\Interfaces\UserDataRepositoryInterface;
+// use App\Services\User\Interfaces\UserDataServiceInterface;
 
 
 
 
 class FriendController extends Controller
 {
-    private $UserDataRepository;
-    private $UserDataService;
+    // private $UserDataRepository;
+    // private $UserDataService;
 
-    public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService)
+    // public function __construct(UserDataRepositoryInterface $UserDataRepository, UserDataServiceInterface $UserDataService)
+    // {
+    //     $this->UserDataRepository = $UserDataRepository;
+    //     $this->UserDataService = $UserDataService;
+    // }
+    public function __construct()
     {
-        $this->UserDataRepository = $UserDataRepository;
-        $this->UserDataService = $UserDataService;
+        
     }
 
 
