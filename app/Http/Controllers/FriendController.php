@@ -14,6 +14,7 @@ use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
 use App\packages\UseCase\User\Get\GetAuthUserUseCaseInterface;
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsUseCaseInterface;
 use App\Http\Models\User\Get\FriendsIndexViewModel;
+use App\packages\UseCase\User\Get\GetUserIdRequest;
 
 
 
@@ -89,6 +90,16 @@ class FriendController extends Controller
         $his_id = $user->id;
         $follow_check = $this->UserDataService->AuthUserFollowCheck($his_id);
         $his_account = $this->UserDataRepository->getHisAccount($his_id);
+        // ↑ てかこれ別々にとってくる必要無いわ！！
+
+        $getUserIdRequest = new GetUserIdRequest($user->id);
+        $authUserFollowCheck_response = $this->getBooleanAuthUserFollow->handle($getUserIdRequest);
+        dd(authUserFollowCheck_response->follow_check);
+        // ↑ true or false
+
+        $his_account_response = $this->getUserAccontEqualToParam->handle($getUserIdRequest);
+
+
 
         return view('myService.details')->with([
             'identify_id' => $request->identify_id,

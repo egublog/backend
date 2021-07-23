@@ -3,6 +3,7 @@
 namespace App\packages\UseCase\User\Get;
 
 use App\packages\UseCase\User\Get\GetAuthUsersFriendsRequest;
+use App\packages\UseCase\User\Get\GetAuthUsersFriendsResponse;
 
 
 
