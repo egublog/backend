@@ -16,6 +16,7 @@ use App\packages\Domain\Domain\Era\EraRepositoryInterface;
 use App\packages\Domain\Domain\Team\TeamRepositoryInterface;
 
 
+
 class GetAuthUserInteractor implements GetAuthUserUseCaseInterface
 {
     /**
