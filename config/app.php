@@ -249,6 +249,7 @@ return [
         'talklist' => App\Facades\TalkList::class,
         'commonservice' => App\Facades\CommonService::class,
         'profile' => App\Facades\Profile::class,
+        'area' => App\Facades\Area::class,
 
     ],
 
