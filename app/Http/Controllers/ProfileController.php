@@ -115,21 +115,38 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        // selectボタン用にareaデータを取ってくる
-        $areas = $this->UserDataRepository->getAreaArray();
+        // // selectボタン用にareaデータを取ってくる
+        // $areas = $this->UserDataRepository->getAreaArray();
 
-        $myAccount = $this->UserDataRepository->getAuthUser();
+        // $myAccount = $this->UserDataRepository->getAuthUser();
 
-        $area_id = $this->UserDataRepository->getAuthUserAreaid();
+        // $area_id = $this->UserDataRepository->getAuthUserAreaid();
 
-        $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
+        // $schools = $this->UserDataService->returnAuthUserSchoolsArrays();
 
-        return view('myService.profile')->with([
-            'areas' => $areas,
-            'myAccount' => $myAccount,
-            'area_id' => $area_id,
-            'schools' => $schools,
-        ]);
+        // return view('myService.profile')->with([
+        //     'areas' => $areas,
+        //     'myAccount' => $myAccount,
+        //     'area_id' => $area_id,
+        //     'schools' => $schools,
+        // ]);
+
+        $response = $this->GetAuthUserUseCase->handle();
+
+        $eraViewModelForProfileArray = [];
+        foreach($response->user->eras as $era)
+        {
+            $eraViewModelForProfileArray[] = new EraViewModelForProfile($era->id, $era->era_id, $era->team_name, $era->position_id);
+        }
+        $x = $response->user;
+
+        $userViewModel = new UserViewModel($x->id, $x->name, $x->email, $x->user_name, $x->age, $x->image, $x->introduction, $x->area_id, $x->area_name, $eraViewModelForProfileArray);
+
+        $areas = AreaFacade::getAreaArray();
+
+        $viewModel = new ProfilesIndexViewModel($userViewModel, $areas);
+
+        return view('myService.profile', compact('viewModel'));
     }
 
 
