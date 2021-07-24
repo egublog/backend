@@ -80,6 +80,7 @@ class UserModel
      * @param string $image
      * @param string $introduction
      * @param int $area_id
+     * @param string $area_name
      * @param array $eras
      * @param bool $follow_check
      */
